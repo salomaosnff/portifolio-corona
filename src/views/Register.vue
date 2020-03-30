@@ -12,7 +12,7 @@
     </div>
     <div class="container pt-lg-md">
       <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div v-show="card_visible == 1" class="col-lg-5">
           <card
             shadow
             header-classes="bg-white pb-5"
@@ -44,27 +44,27 @@
                 <base-checkbox class="mb-3" v-model="pessoa.colaborador">Colaborador</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.investidor">Investidor</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.cliente">Cliente</base-checkbox>
-                <base-input
-                  type="password"
-                  placeholder="Senha"
-                  addon-left-icon="ni ni-lock-circle-open"
-                  v-model="pessoa.senha"
-                ></base-input>
+                <base-input type="password" placeholder="Senha" v-model="pessoa.senha"></base-input>
                 <base-input
                   type="password"
                   placeholder="Confirmar Senha"
-                  addon-left-icon="ni ni-lock-circle-open"
                   v-model="confirmacao_senha"
+                  :valid="pessoa.senha == confirmacao_senha && pessoa.senha != ''"
                 ></base-input>
                 <div class="text-center">
-                  <base-button type="success" class="my-4">Cadastrar-me</base-button>
+                  <base-button
+                    type="success"
+                    class="my-4"
+                    icon="ni ni-bold-right"
+                    @click="card_visible = 2"
+                  >Próximo</base-button>
                 </div>
               </form>
             </template>
           </card>
         </div>
 
-        <div class="col-lg-5">
+        <div v-show="card_visible == 2" class="col-lg-5">
           <card
             shadow
             header-classes="bg-white pb-5"
@@ -87,7 +87,13 @@
                 <base-input class="mb-3" placeholder="Logradouro" v-model="endereco.logradouro"></base-input>
                 <base-input class="mb-3" placeholder="Número" v-model="endereco.numero"></base-input>
                 <div class="text-center">
-                  <base-button type="success" class="my-4">Cadastrar-me</base-button>
+                  <base-button
+                    class="my-4 text-success"
+                    type="secondary"
+                    icon="ni ni-bold-left"
+                    @click="card_visible = 1"
+                  >Anterior</base-button>
+                  <base-button class="my-4" type="success">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -122,7 +128,8 @@ export default {
         logradouro: "",
         numero: ""
       },
-      confirmacao_senha: ""
+      confirmacao_senha: "",
+      card_visible: 1
     };
   }
 };

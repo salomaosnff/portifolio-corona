@@ -2,7 +2,7 @@
   <div>
     <div class="position-relative">
       <section class="section-shaped my-0">
-        <div class="shape shape-style-1 shape-default shape-skew">
+        <div class="shape shape-style-1 bg-gradient-warning shape-skew">
           <span></span>
           <span></span>
           <span></span>
@@ -24,20 +24,6 @@
                   Cadastre suas iniciativas para oferecer soluções ou
                   suporte a todos que necessitam de algum apoio para vencer o Covid - 19.
                 </p>
-                <div class="btn-wrapper">
-                  <base-button
-                    tag="a"
-                    href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html"
-                    class="mb-3 mb-sm-0"
-                    type="info"
-                  >Aliste-se</base-button>
-                  <base-button
-                    tag="a"
-                    href="https://www.creative-tim.com/product/argon-design-system"
-                    class="mb-3 mb-sm-0"
-                    type="white"
-                  >Apresente suas armas</base-button>
-                </div>
               </div>
             </div>
           </div>
@@ -49,58 +35,60 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="row row-grid">
-              <div class="col-lg-4">
+              <div v-for="(solucao, index) in solucoes" :key="solucao" class="col-lg-4 mb-5">
                 <card class="border-0" hover shadow body-classes="py-5">
-                  <icon name="ni ni-check-bold" type="primary" rounded class="mb-4"></icon>
-                  <h6 class="text-primary text-uppercase">Download Argon</h6>
-                  <p class="description mt-3">
-                    Argon is a great free UI package based on Bootstrap 4
-                    that includes the most important components and features.
-                  </p>
+                  <h5 class="text-default">{{solucao.titulo}}</h5>
+                  <p class="description mt-3">{{solucao.descricao}}</p>
                   <div>
-                    <badge type="primary" rounded>design</badge>
-                    <badge type="primary" rounded>system</badge>
-                    <badge type="primary" rounded>creative</badge>
+                    <badge type="warning" rounded>Preço R$ {{solucao.preco}},00</badge>
                   </div>
-                  <base-button tag="a" href="#" type="primary" class="mt-4">Learn more</base-button>
-                </card>
-              </div>
-              <div class="col-lg-4">
-                <card class="border-0" hover shadow body-classes="py-5">
-                  <icon name="ni ni-istanbul" type="success" rounded class="mb-4"></icon>
-                  <h6 class="text-success text-uppercase">Build Something</h6>
-                  <p class="description mt-3">
-                    Argon is a great free UI package based on Bootstrap
-                    4 that includes the most important components and features.
-                  </p>
-                  <div>
-                    <badge type="success" rounded>business</badge>
-                    <badge type="success" rounded>vision</badge>
-                    <badge type="success" rounded>success</badge>
+                  <div class="btn-wrapper">
+                    <base-button
+                      class="my-4"
+                      type="warning text-capitalize"
+                      @click="modal(index)"
+                    >Mais</base-button>
+                    <base-button
+                      icon="fa fa-usd"
+                      class="my-4 text-warning text-capitalize"
+                      type="secondary"
+                    >Doar</base-button>
                   </div>
-                  <base-button tag="a" href="#" type="success" class="mt-4">Learn more</base-button>
-                </card>
-              </div>
-              <div class="col-lg-4">
-                <card class="border-0" hover shadow body-classes="py-5">
-                  <icon name="ni ni-planet" type="warning" rounded class="mb-4"></icon>
-                  <h6 class="text-warning text-uppercase">Prepare Launch</h6>
-                  <p class="description mt-3">
-                    Argon is a great free UI package based on Bootstrap
-                    4 that includes the most important components and features.
-                  </p>
-                  <div>
-                    <badge type="warning" rounded>marketing</badge>
-                    <badge type="warning" rounded>product</badge>
-                    <badge type="warning" rounded>launch</badge>
-                  </div>
-                  <base-button tag="a" href="#" type="warning" class="mt-4">Learn more</base-button>
                 </card>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <modal
+        :show.sync="modal_info"
+        gradient="warning"
+        modal-classes="modal-danger modal-dialog-centered"
+      >
+        <h4
+          slot="header"
+          class="modal-title"
+          id="modal-title-notification"
+        >{{solucoes[index_modal_info].titulo}}</h4>
+
+        <div>
+          <h1 class="heading text-capitalize">De quê se trata?</h1>
+          <p class="mt-4">{{solucoes[index_modal_info].descricao}}</p>
+
+          <h1 class="mt-4 heading text-capitalize">Como usar / adquirir?</h1>
+          <p class="mt-4">{{solucoes[index_modal_info].descricao}}</p>
+
+          <h1 class="mt-4 heading text-capitalize">Contactar proprietário</h1>
+          <p class="mt-4">Email: funlano@domain.com</p>
+          <p>Número: (88) 99861-2581</p>
+        </div>
+
+        <template slot="footer">
+          <base-button type="white">R$ {{solucoes[index_modal_info].preco}},00</base-button>
+          <base-button icon="fa fa-usd" type="link" text-color="white" class="ml-auto text-capitalize">Doar</base-button>
+        </template>
+      </modal>
     </section>
     <section class="section bg-secondary">
       <div class="container">
@@ -227,8 +215,61 @@
 </template>
 
 <script>
+import Modal from "@/components/Modal.vue";
 export default {
-  name: "home",
-  components: {}
+  components: {
+    Modal
+  },
+  data() {
+    return {
+      index_modal_info: 0,
+      modal_info: false,
+      solucoes: [
+        {
+          titulo: "Solução 1",
+          descricao:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra massa eros, quis pulvinar mi sollicitudin sit amet. Donec sed ante ornare, tempor tortor at, vulputate risus. Ut bibendum eros. ",
+          preco: 20
+        },
+        {
+          titulo: "Solução 2",
+          descricao:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor mauris nec urna malesuada, vitae sollicitudin arcu tincidunt. Sed cursus mi ut ligula posuere, ut rhoncus urna accumsan. Curabitur interdum. ",
+          preco: 0
+        },
+        {
+          titulo: "Solução 3",
+          descricao:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra nibh dolor, sit amet egestas dui iaculis finibus. Nam fermentum orci non mauris iaculis finibus. Morbi erat orci, venenatis sed.",
+          preco: 45
+        },
+        {
+          titulo: "Solução 4",
+          descricao:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut urna velit. Fusce at aliquam erat. Praesent a arcu eget elit porttitor lobortis. Sed aliquam ex non fringilla placerat. Nulla.",
+          preco: 450
+        },
+        {
+          titulo: "Solução 5",
+          descricao:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in imperdiet nunc. Etiam dapibus, risus fermentum ornare elementum, lacus eros dapibus ligula, a tincidunt nibh nunc at metus. Sed lacinia. ",
+          preco: 5
+        },
+        {
+          titulo: "Solução 6",
+          descricao:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel eleifend mi. Vivamus sollicitudin est ac odio sodales, vel pretium purus facilisis. Sed sed nisi sed turpis molestie auctor. Aliquam.",
+          preco: 0
+        }
+      ],
+      cores: ["default", "primary", "info", "success", "warning", "danger"]
+    };
+  },
+  methods: {
+    modal(i) {
+      this.index_modal_info = i;
+      this.modal_info = !this.modal_info;
+    }
+  }
 };
 </script>

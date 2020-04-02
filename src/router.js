@@ -10,6 +10,7 @@ import Profile from "./views/Profile.vue";
 import Home from "./views/Home.vue";
 import Item from "./views/Item.vue";
 import Colaborador from "./views/Colaborador.vue";
+import Investidor from "./views/Investidor.vue";
 
 Vue.use(Router);
 
@@ -40,6 +41,15 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Colaborador,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/investidor",
+      name: "investidor",
+      components: {
+        header: AppHeader,
+        default: Investidor,
         footer: AppFooter
       }
     },

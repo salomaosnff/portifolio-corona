@@ -86,7 +86,12 @@
 
         <template slot="footer">
           <base-button type="white">R$ {{solucoes[index_modal_info].preco}},00</base-button>
-          <base-button icon="fa fa-usd" type="link" text-color="white" class="ml-auto text-capitalize">Doar</base-button>
+          <base-button
+            icon="fa fa-usd"
+            type="link"
+            text-color="white"
+            class="ml-auto text-capitalize"
+          >Doar</base-button>
         </template>
       </modal>
     </section>

@@ -21,6 +21,9 @@
           <a class="nav-link" href="#/colaborador">Colaborador</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="#/investidor">Investidor</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#/profile">Perfil</a>
         </li>
         <li class="nav-item">

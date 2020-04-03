@@ -1,6 +1,6 @@
 <template>
   <section class="section section-shaped section-lg my-0">
-    <div class="shape shape-style-1 bg-gradient-success">
+    <div class="shape shape-style-1 bg-gradient-warning">
       <span></span>
       <span></span>
       <span></span>
@@ -19,7 +19,7 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-success font-weight-bold">Dados Pessoais</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">Dados Pessoais</h4>
             <template>
               <form role="form">
                 <base-input class="mb-3" placeholder="Nome" v-model="pessoa.nome"></base-input>
@@ -53,7 +53,7 @@
                 ></base-input>
                 <div class="text-center">
                   <base-button
-                    type="success"
+                    type="warning"
                     class="my-4"
                     icon="ni ni-bold-right"
                     @click="card_visible = 2"
@@ -71,7 +71,7 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-success font-weight-bold">Endereço</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">Endereço</h4>
             <template>
               <form role="form">
                 <base-input class="mb-3" placeholder="País" v-model="endereco.pais"></base-input>
@@ -88,12 +88,12 @@
                 <base-input class="mb-3" placeholder="Número" v-model="endereco.numero"></base-input>
                 <div class="text-center">
                   <base-button
-                    class="my-4 text-success"
+                    class="my-4 text-warning"
                     type="secondary"
                     icon="ni ni-bold-left"
                     @click="card_visible = 1"
                   >Anterior</base-button>
-                  <base-button class="my-4" type="success">Salvar</base-button>
+                  <base-button class="my-4" type="warning">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -134,5 +134,3 @@ export default {
   }
 };
 </script>
-<style>
-</style>

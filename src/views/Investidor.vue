@@ -1,6 +1,6 @@
 <template>
   <section class="section section-shaped section-lg my-0">
-    <div class="shape shape-style-1 bg-gradient-success">
+    <div class="shape shape-style-1 bg-gradient-warning">
       <span></span>
       <span></span>
       <span></span>

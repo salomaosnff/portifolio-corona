@@ -23,12 +23,12 @@
         <li class="nav-item">
           <a class="nav-link" href="#/investidor">Investidor</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#/profile">Perfil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#/components">Componentes</a>
-        </li>
+        </li> -->
       </ul>
 
       <!-- <ul class="navbar-nav navbar-nav-hover align-items-lg-center">

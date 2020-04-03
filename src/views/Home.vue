@@ -188,7 +188,7 @@
                   <h5 class="title text-warning">Incentivadores / investidores</h5>
                   <p>
                     para um mundo melhor, aqui é seu lugar.
-                    Nenhuma mudança acontece de forma espontanea. Por isso precisamos de incentivadores como você. Com sua contribuição, 
+                    Nenhuma mudança acontece de forma espontanea. Por isso precisamos de incentivadores como você. Com sua contribuição,
                     criaremos um mundo em que, unidos, somos maiores que a soma de nós todos. Venha, sua ajuda é fator exponencial!
                   </p>
                 </div>

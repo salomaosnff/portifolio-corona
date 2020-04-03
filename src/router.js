@@ -11,7 +11,7 @@ import Home from "./views/Home.vue";
 import Item from "./views/Item.vue";
 import Colaborador from "./views/Colaborador.vue";
 import Investidor from "./views/Investidor.vue";
-import SRegister from "./views/SRegister.vue";
+import Solucao from "./views/Solucao.vue";
 
 Vue.use(Router);
 
@@ -91,14 +91,14 @@ export default new Router({
       }
     },
     {
-      path: "/sregister",
-      name: "sregister",
+      path: "/solucao",
+      name: "solucao",
       components: {
         header: AppHeader,
-        default: SRegister,
+        default: Solucao,
         footer: AppFooter
       }
-    },  
+    },
     {
       path: "/profile",
       name: "profile",

@@ -1,6 +1,6 @@
 <template>
   <section class="section section-shaped section-lg my-0">
-    <div class="shape shape-style-1 bg-gradient-success">
+    <div class="shape shape-style-1 bg-gradient-warning">
       <span></span>
       <span></span>
       <span></span>
@@ -14,15 +14,15 @@
       <div class="row row-grid justify-content-center">
         <div class="col-lg-4">
           <card class="border-0" hover shadow body-classes="py-5">
-            <icon name="ni ni-badge" type="success " rounded class="mb-4" />
-            <h4 class="text-success">Deseja se alistar?</h4>
+            <icon name="ni ni-badge" type="warning " rounded class="mb-4" />
+            <h4 class="text-warning">Deseja se alistar?</h4>
             <p class="description mt-3">Texto motivacional ...</p>
             <div>
-              <badge type="success" rounded>#paz</badge>
-              <badge type="success" rounded>#amor</badge>
-              <badge type="success" rounded>#sucesso</badge>
+              <badge type="warning" rounded>#paz</badge>
+              <badge type="warning" rounded>#amor</badge>
+              <badge type="warning" rounded>#sucesso</badge>
             </div>
-            <base-button tag="a" href="#/register" type="success" class="mt-4">Alistar-me</base-button>
+            <base-button tag="a" href="#/register" type="warning" class="mt-4">Alistar-me</base-button>
           </card>
         </div>
         <div class="col-lg-4">

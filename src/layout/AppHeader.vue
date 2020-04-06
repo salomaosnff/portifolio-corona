@@ -18,17 +18,25 @@
 
       <ul class="navbar-nav ml-lg-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#/colaborador">Colaborador</a>
+          <a
+            class="nav-link text-weight"
+            style="font-size: 18px; font-weight: bold"
+            href="#/colaborador"
+          >Soluções</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/investidor">Investidor</a>
+          <a
+            class="nav-link"
+            style="font-size: 18px; font-weight: bold"
+            href="#/investidor"
+          >Investidor</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#/profile">Perfil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#/components">Componentes</a>
-        </li> -->
+        </li>-->
       </ul>
 
       <!-- <ul class="navbar-nav navbar-nav-hover align-items-lg-center">

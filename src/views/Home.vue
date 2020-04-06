@@ -25,7 +25,7 @@
           style="background-color: #fb8540; border-radius: 20px; 
             padding: 15px; opacity: .9; margin-left: 400px; margin-top: -200px"
           class="text-white"
-        >É tempo de recomeçar! Reconstruir o presente, olhando para o futuro. Somos uma plataforma integrada e colaborativa, com o objetivo de contribuir para a evolução individual e coletiva a fim de construir uma sociedade do compartilhamento.</h5>=
+        >É tempo de recomeçar! Reconstruir o presente, olhando para o futuro. Somos uma plataforma integrada e colaborativa, com o objetivo de contribuir para a evolução individual e coletiva a fim de construir uma sociedade do compartilhamento.</h5>
       </div>
     </section>
     <section gradient="warning" class="section section-lg pt-lg-0 mt--200">
@@ -116,7 +116,6 @@ export default {
           titulo: "Ideias",
           descricao:
             "Compartilhe soluções inovadoras e produtos para um mundo melhor. Sua ideia deve ser cadastrada aqui.",
-          // Lembre-se que para transformar o mundo precisamos dar o primeiro passo e sua contribuição é fundamental nesta jornada. Venha, acreditamos em você!",
           icone: "ni ni-bulb-61",
           botao: "Cadastrar"
         },

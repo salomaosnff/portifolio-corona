@@ -11,13 +11,32 @@ import Home from "./views/Home.vue";
 import Item from "./views/Item.vue";
 import Colaborador from "./views/Colaborador.vue";
 import Investidor from "./views/Investidor.vue";
-import Solucao from "./views/Solucao.vue";
+import SolucoesCadastro from "./views/solucoes/Cadastro.vue";
+import IdeiasLista from "./views/ideias/Lista.vue";
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/solucoes_cadastro",
+      name: "solucoes_cadastro",
+      components: {
+        header: AppHeader,
+        default: SolucoesCadastro,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/ideias_lista",
+      name: "ideias_lista",
+      components: {
+        header: AppHeader,
+        default: IdeiasLista,
+        footer: AppFooter
+      }
+    },
     {
       path: "/",
       name: "home",
@@ -87,15 +106,6 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Register,
-        footer: AppFooter
-      }
-    },
-    {
-      path: "/solucao",
-      name: "solucao",
-      components: {
-        header: AppHeader,
-        default: Solucao,
         footer: AppFooter
       }
     },

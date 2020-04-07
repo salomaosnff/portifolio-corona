@@ -38,20 +38,22 @@
                 :key="solucao + index"
                 class="col-lg-4 mb-5"
               >
-                <card class="border-0" hover shadow body-classes="py-5" style="border-radius: 20px">
+                <card class="border-0" shadow body-classes="py-5" style="border-radius: 20px">
                   <div class="row" style="margin-left: 1px">
                     <icon :name="solucao.icone" gradient="warning" color="white" shadow rounded></icon>
-                    <h5
+                    <h4
                       style="margin-top: 10px; margin-left: 20px"
                       class="text-default"
-                    >{{solucao.titulo}}</h5>
+                    >{{solucao.titulo}}</h4>
                   </div>
-                  <p class="description mt-3">{{solucao.descricao}}</p>
+                  <p class="mt-3">{{solucao.descricao}}</p>
                   <div class="text-center">
                     <base-button
+                      tag="a"
+                      :href="solucao.link"
                       class="my-4"
                       type="warning text-capitalize"
-                      @click="modal(index)"
+                      style="font-size: 16px"
                     >{{solucao.botao}}</base-button>
                   </div>
                 </card>
@@ -60,52 +62,30 @@
           </div>
         </div>
       </div>
-
-      <modal
-        :show.sync="modal_info"
-        gradient="warning"
-        modal-classes="modal-danger modal-dialog-centered"
-      >
-        <h4
-          slot="header"
-          class="modal-title"
-          id="modal-title-notification"
-        >{{solucoes[index_modal_info].titulo}}</h4>
-
-        <div>
-          <h1 class="heading text-capitalize">De quê se trata?</h1>
-          <p class="mt-4">{{solucoes[index_modal_info].descricao}}</p>
-
-          <h1 class="mt-4 heading text-capitalize">Como usar / adquirir?</h1>
-          <p class="mt-4">{{solucoes[index_modal_info].descricao}}</p>
-
-          <h1 class="mt-4 heading text-capitalize">Contactar proprietário</h1>
-          <p class="mt-4">Email: funlano@domain.com</p>
-          <p>Número: (88) 99861-2581</p>
-        </div>
-
-        <template slot="footer">
-          <base-button type="white">R$ {{solucoes[index_modal_info].preco}},00</base-button>
-          <base-button
-            tag="a"
-            icon="fa fa-usd"
-            type="link"
-            href="#/investidor"
-            text-color="white"
-            class="ml-auto text-capitalize"
-            @click="modal_info = false"
-          >Doar</base-button>
-        </template>
-      </modal>
     </section>
+    <!-- <section>
+      <h1>TEST Carousel</h1>
+      <div>
+        <b-carousel id="carousel1" controls indicators>
+          <b-carousel-slide img-src="/img/theme/img-1-1200x1000.jpg"></b-carousel-slide>
+          <b-carousel-slide img-src="/img/theme/img-2-1200x1000.jpg"></b-carousel-slide>
+        </b-carousel>
+      </div>
+    </section>-->
   </div>
 </template>
 
 <script>
 import Modal from "@/components/Modal.vue";
+// import BaseNav from "@/components/BaseNav.vue";
+// import { BCarousel } from "bootstrap-vue";
+// import { BCarouselSlide } from "bootstrap-vue";
 export default {
   components: {
     Modal
+    // BCarousel,
+    // BCarouselSlide,
+    // BaseNav
   },
   data() {
     return {
@@ -117,31 +97,29 @@ export default {
           descricao:
             "Compartilhe soluções inovadoras e produtos para um mundo melhor. Sua ideia deve ser cadastrada aqui.",
           icone: "ni ni-bulb-61",
-          botao: "Cadastrar"
+          botao: "Cadastrar",
+          link: "#/solucoes_cadastro"
         },
         {
           titulo: "Soluções",
           descricao:
             "Conheça as ideias inovadoras já cadastradas e encontre as soluções para tornar o mundo melhor.",
           icone: "ni ni-settings",
-          botao: "Buscar"
+          botao: "Buscar",
+          link: "#/ideias_lista"
         },
         {
           titulo: "Invista",
           descricao:
             "Nenhuma mudança acontece de forma espontânea. Por isso precisamos de incentivadores como você.",
           icone: "ni ni-money-coins",
-          botao: "Investir"
+          botao: "Investir",
+          link: "#/colaborador"
         }
       ],
       cores: ["default", "primary", "info", "success", "warning", "danger"]
     };
   },
-  methods: {
-    modal(i) {
-      this.index_modal_info = i;
-      this.modal_info = !this.modal_info;
-    }
-  }
+  methods: {}
 };
 </script>

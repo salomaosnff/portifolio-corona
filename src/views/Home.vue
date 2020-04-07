@@ -38,7 +38,7 @@
                 :key="solucao + index"
                 class="col-lg-4 mb-5"
               >
-                <card class="border-0" shadow body-classes="py-5" style="border-radius: 20px">
+                <card class="border-0" shadow body-classes="py-5">
                   <div class="row" style="margin-left: 1px">
                     <icon :name="solucao.icone" gradient="warning" color="white" shadow rounded></icon>
                     <h4

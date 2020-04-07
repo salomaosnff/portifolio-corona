@@ -154,23 +154,25 @@
         </div>
         <template slot="footer">
           <base-button
-            type="white"
-            text-color="warning"
+            :type="index_modal_info == 0? 'white' : 'link'"
+            :text-color="index_modal_info == 0? 'warning' : 'white'"
             class="text-capitalize"
             @click="index_modal_info = 0"
-          >1. Geral</base-button>
+          >Geral</base-button>
+
           <base-button
-            type="white"
-            text-color="warning"
+            :type="index_modal_info == 1? 'white' : 'link'"
+            :text-color="index_modal_info == 1? 'warning' : 'white'"
             class="ml-auto text-capitalize"
             @click="index_modal_info = 1"
-          >2. Endereço</base-button>
+          >Endereço</base-button>
+
           <base-button
-            type="white"
-            text-color="warning"
+            :type="index_modal_info == 2? 'white' : 'link'"
+            :text-color="index_modal_info == 2? 'warning' : 'white'"
             class="ml-auto text-capitalize"
             @click="index_modal_info = 2"
-          >3. Responsável</base-button>
+          >Responsável</base-button>
         </template>
       </modal>
     </div>

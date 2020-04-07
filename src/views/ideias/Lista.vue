@@ -100,30 +100,57 @@
               class="text-white text-capitalise"
             >De {{solucoes[index_modal].inicio}} a {{solucoes[index_modal].fim}}</h5>
           </div>
+
+          <div>
+            <p class="mt-4">Descrição</p>
+            <h5 class="text-white text-capitalise">{{solucoes[index_modal].descricao}}</h5>
+          </div>
+
+          <div>
+            <p class="mt-4">Status</p>
+            <h5 class="text-white text-capitalise">{{solucoes[index_modal].status}}</h5>
+          </div>
+
+          <div>
+            <p class="mt-4">Área de Aplicação</p>
+            <h5 class="text-white text-capitalise">{{solucoes[index_modal].area_aplicacao}}</h5>
+          </div>
+
+          <div>
+            <p class="mt-4">Negócio</p>
+            <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
+          </div>
         </div>
 
         <div v-if="index_modal_info == 1">
-          <h1 class="heading text-capitalize">De quê se trata?</h1>
-          <p class="mt-4">{{solucoes[index_modal].descricao}}</p>
+          <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
+            <p class="mt-4">Disponível em</p>
+            <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
+            <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_youtube}}</h5>
+          </div>
 
-          <h1 class="mt-4 heading text-capitalize">Como usar / adquirir?</h1>
-          <p class="mt-4">{{solucoes[index_modal].descricao}}</p>
-
-          <h1 class="mt-4 heading text-capitalize">Contactar proprietário</h1>
-          <p class="mt-4">Email: funlano@domain.com</p>
-          <p>Número: (88) 99861-2581</p>
+          <div>
+            <p class="mt-4">Endereço</p>
+            <h5
+              class="text-white text-lowercase"
+            >{{solucoes[index_modal].endereco.pais}}, {{solucoes[index_modal].endereco.estado}}, {{solucoes[index_modal].endereco.cidade}}</h5>
+            <h5
+              class="text-white text-lowercase"
+            >{{solucoes[index_modal].endereco.cep}}, {{solucoes[index_modal].endereco.bairro}}, {{solucoes[index_modal].endereco.logradouro}}, {{solucoes[index_modal].endereco.numero}},</h5>
+          </div>
         </div>
 
         <div v-if="index_modal_info == 2">
-          <h1 class="heading text-capitalize">De quê se trata?</h1>
-          <p class="mt-4">{{solucoes[index_modal].descricao}}</p>
+          <div>
+            <p class="mt-4">Nome</p>
+            <h5 class="text-white text-lowercase">{{solucoes[index_modal].responsavel.nome}}</h5>
+          </div>
 
-          <h1 class="mt-4 heading text-capitalize">Como usar / adquirir?</h1>
-          <p class="mt-4">{{solucoes[index_modal].descricao}}</p>
-
-          <h1 class="mt-4 heading text-capitalize">Contactar proprietário</h1>
-          <p class="mt-4">Email: funlano@domain.com</p>
-          <p>Número: (88) 99861-2581</p>
+          <div>
+            <p class="mt-4">Contato</p>
+            <h5 class="text-white text-lowercase">{{solucoes[index_modal].responsavel.email}}</h5>
+            <h5 class="text-white text-lowercase">{{solucoes[index_modal].responsavel.telefone}}</h5>
+          </div>
         </div>
         <template slot="footer">
           <base-button
@@ -165,7 +192,6 @@ export default {
       index_modal: 0,
       index_modal_info: 0,
       solucoes: []
-      //   cores: ["default", "primary", "info", "success", "warning", "danger"]
     };
   },
 
@@ -175,6 +201,7 @@ export default {
 
   methods: {
     modal(i) {
+      this.index_modal = i;
       this.index_modal_info = 0;
       this.modal_visible = !this.modal_visible;
     },

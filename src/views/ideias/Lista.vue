@@ -89,34 +89,34 @@
             <h5 class="text-white text-lowercase">#{{solucoes[index_modal].tipo}}</h5>
           </div>
 
-          <div>
+          <div v-if="solucoes[index_modal].instituicao">
             <p class="mt-4">Instituição</p>
             <h5 class="text-white text-capitalise">{{solucoes[index_modal].instituicao}}</h5>
           </div>
 
-          <div>
+          <div v-if="solucoes[index_modal].inicio">
             <p class="mt-4">Período</p>
             <h5
               class="text-white text-capitalise"
-            >De {{solucoes[index_modal].inicio}} a {{solucoes[index_modal].fim}}</h5>
+            >De {{converter_data(solucoes[index_modal].inicio)}} a {{converter_data(solucoes[index_modal].fim) || 'Indefinido'}}</h5>
           </div>
 
-          <div>
+          <div v-if="solucoes[index_modal].descricao">
             <p class="mt-4">Descrição</p>
-            <h5 class="text-white text-capitalise">{{solucoes[index_modal].descricao}}</h5>
+            <h5 class="text-white">{{solucoes[index_modal].descricao}}</h5>
           </div>
 
-          <div>
+          <div v-if="solucoes[index_modal].status">
             <p class="mt-4">Status</p>
             <h5 class="text-white text-capitalise">{{solucoes[index_modal].status}}</h5>
           </div>
 
-          <div>
+          <div v-if="solucoes[index_modal].area_aplicacao">
             <p class="mt-4">Área de Aplicação</p>
             <h5 class="text-white text-capitalise">{{solucoes[index_modal].area_aplicacao}}</h5>
           </div>
 
-          <div>
+          <div v-if="solucoes[index_modal].negocio">
             <p class="mt-4">Negócio</p>
             <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
           </div>
@@ -124,32 +124,49 @@
 
         <div v-if="index_modal_info == 1">
           <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
-            <p class="mt-4">Disponível em</p>
+            <p>Disponível em</p>
             <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
-            <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_youtube}}</h5>
+            <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
           </div>
 
-          <div>
+          <div
+            v-if="solucoes[index_modal].endereco.pais ||
+                  solucoes[index_modal].endereco.estado ||
+                  solucoes[index_modal].endereco.cidade ||
+                  solucoes[index_modal].endereco.cep ||
+                  solucoes[index_modal].endereco.bairro||
+                  solucoes[index_modal].endereco.logradouro||
+                  solucoes[index_modal].endereco.numero"
+          >
             <p class="mt-4">Endereço</p>
-            <h5
-              class="text-white text-lowercase"
-            >{{solucoes[index_modal].endereco.pais}}, {{solucoes[index_modal].endereco.estado}}, {{solucoes[index_modal].endereco.cidade}}</h5>
-            <h5
-              class="text-white text-lowercase"
-            >{{solucoes[index_modal].endereco.cep}}, {{solucoes[index_modal].endereco.bairro}}, {{solucoes[index_modal].endereco.logradouro}}, {{solucoes[index_modal].endereco.numero}},</h5>
+            <h5 class="text-white text">
+              {{solucoes[index_modal].endereco.pais}},
+              {{solucoes[index_modal].endereco.estado}},
+              {{solucoes[index_modal].endereco.cidade}},
+              {{solucoes[index_modal].endereco.cep}}
+            </h5>
+            <h5 class="text-white text mt-4">
+              {{solucoes[index_modal].endereco.bairro}},
+              {{solucoes[index_modal].endereco.logradouro}},
+              {{solucoes[index_modal].endereco.numero}}
+            </h5>
           </div>
         </div>
 
         <div v-if="index_modal_info == 2">
-          <div>
-            <p class="mt-4">Nome</p>
-            <h5 class="text-white text-lowercase">{{solucoes[index_modal].responsavel.nome}}</h5>
+          <div v-if="solucoes[index_modal].responsavel.nome">
+            <p>Nome</p>
+            <h5 class="text-white">{{solucoes[index_modal].responsavel.nome}}</h5>
           </div>
 
-          <div>
+          <div
+            v-if="solucoes[index_modal].responsavel.email || solucoes[index_modal].responsavel.telefone"
+          >
             <p class="mt-4">Contato</p>
-            <h5 class="text-white text-lowercase">{{solucoes[index_modal].responsavel.email}}</h5>
-            <h5 class="text-white text-lowercase">{{solucoes[index_modal].responsavel.telefone}}</h5>
+            <h5 class="text-white">{{solucoes[index_modal].responsavel.email}}</h5>
+            <h5
+              class="text-white text-lowercase mt-4"
+            >{{solucoes[index_modal].responsavel.telefone}}</h5>
           </div>
         </div>
         <template slot="footer">
@@ -202,6 +219,17 @@ export default {
   },
 
   methods: {
+    converter_data(data) {
+      if (data)
+        data =
+          data.substring(8, 10) +
+          "/" +
+          data.substring(5, 7) +
+          "/" +
+          data.substring(0, 4);
+      return data;
+    },
+
     modal(i) {
       this.index_modal = i;
       this.index_modal_info = 0;

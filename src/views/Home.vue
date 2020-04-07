@@ -1,14 +1,12 @@
 <template>
   <div>
     <section class="section-shaped my-0">
-      <base-nav class="navbar-main" transparent type effect="light" expand>
-        <img
-          style="width: 300px; margin-left: 30px; margin-top: 30px; background-color: #008ecd; opacity: .8;
-        border-radius: 20px; padding: 15px"
-          src="img/logo.png"
-          alt="logo"
-        />
-      </base-nav>
+      <img
+        style="width: 300px; margin-left: 30px; margin-top: 30px; background-color: #008ecd; opacity: .8;
+      border-radius: 20px; padding: 15px"
+        src="img/logo.png"
+        alt="logo"
+      />
       <div class="shape shape-style-1 bg-gradient-warning shape-skew">
         <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -200px" />
         <span></span>
@@ -77,15 +75,13 @@
 
 <script>
 import Modal from "@/components/Modal.vue";
-// import BaseNav from "@/components/BaseNav.vue";
 // import { BCarousel } from "bootstrap-vue";
 // import { BCarouselSlide } from "bootstrap-vue";
 export default {
   components: {
-    Modal
+    Modal,
     // BCarousel,
     // BCarouselSlide,
-    // BaseNav
   },
   data() {
     return {

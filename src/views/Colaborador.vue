@@ -35,7 +35,7 @@
               <badge type="primary" rounded>#amor</badge>
               <badge type="primary" rounded>#sucesso</badge>
             </div>
-            <base-button tag="a" href="#/solucao" type="primary" class="mt-4">Cadastrar solução</base-button>
+            <base-button tag="a" href="#/solucoes_cadastro" type="primary" class="mt-4">Cadastrar solução</base-button>
           </card>
         </div>
       </div>

@@ -114,7 +114,7 @@ export default {
             "Nenhuma mudança acontece de forma espontânea. Por isso precisamos de incentivadores como você.",
           icone: "ni ni-money-coins",
           botao: "Investir",
-          link: "#/colaborador"
+          link: "#/"
         }
       ],
       cores: ["default", "primary", "info", "success", "warning", "danger"]

@@ -12,9 +12,10 @@
           <span></span>
           <span></span>
         </div>
+
         <div class="container">
           <div class="row">
-            <div class="col-md-6" style="padding-left: 0">
+            <div class="col-md-2">
               <base-button
                 tag="a"
                 icon="ni ni-bold-left"
@@ -24,9 +25,31 @@
               >Voltar</base-button>
             </div>
 
-            <div class="col-md-6" style="padding-right: 0 !important">
+            <div class="col-md-4">
+              <dropdown>
+                <base-button
+                  slot="title"
+                  type="warning"
+                  class="dropdown-toggle text-capitalize mb-5"
+                >{{area_aplicacao || "Selecione a Área de Atuação"}}</base-button>
+                <a
+                  v-for="(area, index) in areas_aplicacao"
+                  :key="index"
+                  class="dropdown-item"
+                  @click="area_aplicacao = area; buscar()"
+                >{{area}}</a>
+              </dropdown>
+            </div>
+
+            <div class="col-md-6">
               <div class="input-group input-group-alternative mb-5 bg-gradient-warning">
-                <input class="form-control" placeholder="Buscar" type="text" />
+                <input
+                  @input="value => buscar()"
+                  v-model="busca"
+                  class="form-control"
+                  placeholder="Buscar"
+                  type="text"
+                />
                 <div class="input-group-append">
                   <span class="input-group-text">
                     <i class="ni ni-zoom-split-in"></i>
@@ -67,24 +90,32 @@
                   </card>
                 </div>
               </div>
+              <card v-if="busca_nao_encontrada" class="border-0 col-lg-6 my-5 py-5" shadow>
+                <div class="row" style="margin-left: 1px">
+                  <icon name="ni ni-planet" gradient="warning" color="white" shadow rounded></icon>
+                  <h4 style="margin-top: 10px; margin-left: 20px" class="text-default">Nada aqui</h4>
+                </div>
+              </card>
             </div>
           </div>
         </div>
       </section>
 
       <modal
+        v-if="solucoes[index_modal]"
         :show.sync="modal_visible"
         gradient="warning"
         modal-classes="modal-danger modal-dialog-centered"
       >
         <h4
+          v-if="solucoes[index_modal] && solucoes[index_modal].nome"
           slot="header"
           class="modal-title"
           id="modal-title-notification"
         >{{solucoes[index_modal].nome}}</h4>
 
         <div v-if="index_modal_info == 0">
-          <div>
+          <div v-if="solucoes[index_modal].tipo">
             <p>Palavra-chave</p>
             <h5 class="text-white text-lowercase">#{{solucoes[index_modal].tipo}}</h5>
           </div>
@@ -200,17 +231,30 @@
 <script>
 import Modal from "@/components/Modal.vue";
 import axios from "axios";
+import Dropdown from "../../components/BaseDropdown.vue";
 
 export default {
   components: {
-    Modal
+    Modal,
+    Dropdown
   },
   data() {
     return {
+      area_aplicacao: "",
+      busca: "",
+      areas_aplicacao: [
+        "Saúde",
+        "Economia",
+        "Educação",
+        "Comunicação",
+        "Social",
+        "Outros"
+      ],
       modal_visible: false,
       index_modal: 0,
       index_modal_info: 0,
-      solucoes: []
+      solucoes: [],
+      busca_nao_encontrada: false
     };
   },
 
@@ -219,6 +263,32 @@ export default {
   },
 
   methods: {
+    buscar() {
+      if (this.busca || this.area_aplicacao) {
+        let params = JSON.stringify({
+          busca: this.busca,
+          area_aplicacao: this.area_aplicacao
+        });
+
+        axios
+          .get(
+            "https://portifolio-corona-api.herokuapp.com/solucao/busca/" +
+              params
+          )
+          .then(response => {
+            this.solucoes = response.data.solucoes;
+            if (!this.solucoes[0]) this.busca_nao_encontrada = true;
+            else this.busca_nao_encontrada = false;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        this.busca_nao_encontrada = false;
+        this.get_solucoes();
+      }
+    },
+
     converter_data(data) {
       if (data)
         data =
@@ -240,7 +310,6 @@ export default {
       await axios
         .get("https://portifolio-corona-api.herokuapp.com/solucao")
         .then(response => {
-          console.log(response.data);
           this.solucoes = response.data;
         })
         .catch(error => {

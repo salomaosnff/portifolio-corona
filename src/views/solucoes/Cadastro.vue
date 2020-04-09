@@ -19,7 +19,7 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">Dados Pessoais</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">Cadastro de Ideias</h4>
             <template>
               <form role="form">
                 <base-input class="mb-3" placeholder="Nome do projeto" v-model="pessoa.nome_projeto"></base-input>

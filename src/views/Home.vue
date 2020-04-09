@@ -135,7 +135,8 @@ export default {
             "Compartilhe AQUI ações e produtos de combate ao COVID-19 para um mundo melhor.",
           icone: "ni ni-bulb-61",
           botao: "Cadastrar",
-          link: "#/solucoes_cadastro"
+          link: 'https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform'
+          // link: "#/solucoes_cadastro"
         },
         {
           titulo: "Soluções",

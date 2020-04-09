@@ -30,8 +30,8 @@
                 <base-button
                   slot="title"
                   type="warning"
-                  class="dropdown-toggle text-capitalize mb-5"
-                >{{area_aplicacao || "Selecione a Área de Atuação"}}</base-button>
+                  class="dropdown-toggle mb-5"
+                >{{area_aplicacao || "ÁREA DE ATUAÇÃO (ou use a Busca)"}}</base-button>
                 <a
                   v-for="(area, index) in areas_aplicacao"
                   :key="index"

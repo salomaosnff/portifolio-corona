@@ -23,7 +23,13 @@
           style="background-color: #fb8540; border-radius: 20px; 
             padding: 15px; opacity: .9; margin-left: 400px; margin-top: -200px"
           class="text-white"
-        >É tempo de recomeçar! Reconstruir o presente, olhando para o futuro. Somos uma plataforma integrada e colaborativa, com o objetivo de contribuir para a evolução individual e coletiva a fim de construir uma sociedade do compartilhamento.</h5>
+        >
+          É TEMPO DE RECOMEÇAR !
+          <h5 class="text-white text-justify mt-3">
+            Esse "VÍRUS Embriagado" não é mais forte do que um PaÍs sóbrio e solidário. Somos uma plataforma integrada e colaborativa de ACÕES e PROJETOS de combate ao COVID-19.
+            Cadastre aqui o seu projeto (IDEIAS). Conheça aqui os projetos existentes (SOLUÇÕES). Dê seu apoio (PARCERIA).
+          </h5>
+        </h5>
       </div>
     </section>
     <section gradient="warning" class="section section-lg pt-lg-0 mt--200">
@@ -60,6 +66,41 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-sm-4 text-right mt-5">
+          <img
+            alt="Rounded image"
+            class="img-fluid rounded ml-5"
+            style="width: 400px;"
+            src="img/iracema.jpg"
+            lazy="loaded"
+          />
+        </div>
+        <div class="col-sm-8 text-right mt-5 pt-5">
+          <img
+            class="img-fluid rounded"
+            style="width: 160px; margin: 30px"
+            src="img/lar.png"
+            lazy="loaded"
+          />
+
+          <img
+            class="img-fluid rounded"
+            style="width: 160px; margin: 30px"
+            src="img/ppgcc.png"
+            lazy="loaded"
+          />
+
+          <img
+            alt="Rounded image"
+            class="img-fluid rounded"
+            style="width: 160px; margin: 30px; margin-right: 90px"
+            src="img/ifce.png"
+            lazy="loaded"
+          />
+        </div>
+      </div>
     </section>
     <!-- <section>
       <h1>TEST Carousel</h1>
@@ -79,7 +120,7 @@ import Modal from "@/components/Modal.vue";
 // import { BCarouselSlide } from "bootstrap-vue";
 export default {
   components: {
-    Modal,
+    Modal
     // BCarousel,
     // BCarouselSlide,
   },
@@ -91,7 +132,7 @@ export default {
         {
           titulo: "Ideias",
           descricao:
-            "Compartilhe soluções inovadoras e produtos para um mundo melhor. Sua ideia deve ser cadastrada aqui.",
+            "Compartilhe AQUI ações e produtos de combate ao COVID-19 para um mundo melhor.",
           icone: "ni ni-bulb-61",
           botao: "Cadastrar",
           link: "#/solucoes_cadastro"
@@ -99,15 +140,15 @@ export default {
         {
           titulo: "Soluções",
           descricao:
-            "Conheça as ideias inovadoras já cadastradas e encontre as soluções para tornar o mundo melhor.",
+            "Conheça AQUI as ideias inovadoras que você procura para combater o COVID-19.",
           icone: "ni ni-settings",
           botao: "Buscar",
           link: "#/ideias_lista"
         },
         {
-          titulo: "Invista",
+          titulo: "Parceria",
           descricao:
-            "Nenhuma mudança acontece de forma espontânea. Por isso precisamos de incentivadores como você.",
+            "Dê seu apoio AQUI as soluções já existentes para combater o COVID-19",
           icone: "ni ni-money-coins",
           botao: "Investir",
           link: "#/"

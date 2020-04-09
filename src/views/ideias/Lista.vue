@@ -25,13 +25,13 @@
               >Voltar</base-button>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
               <dropdown>
                 <base-button
                   slot="title"
                   type="warning"
-                  class="dropdown-toggle mb-5"
-                >{{area_aplicacao || "ÁREA DE ATUAÇÃO (ou use a Busca)"}}</base-button>
+                  class="dropdown-toggle mb-5 text-capitalize"
+                >{{area_aplicacao || "Área de Atuação"}}</base-button>
                 <a
                   v-for="(area, index) in areas_aplicacao"
                   :key="index"
@@ -41,7 +41,18 @@
               </dropdown>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-3">
+              <dropdown>
+                <base-button
+                  slot="title"
+                  type="warning"
+                  class="dropdown-toggle mb-5 text-capitalize"
+                >Status da Ideia</base-button>
+                <a v-for="(status, index) in satuss" :key="index" class="dropdown-item">{{status}}</a>
+              </dropdown>
+            </div>
+
+            <div class="col-md-4">
               <div class="input-group input-group-alternative mb-5 bg-gradient-warning">
                 <input
                   @input="value => buscar()"
@@ -242,6 +253,14 @@ export default {
     return {
       area_aplicacao: "",
       busca: "",
+      satuss: [
+        "Produto Comercializado",
+        "Produto Lançado",
+        "Produto Testado",
+        "Produto Terminado",
+        "Produto em Desenvolvimento",
+        "Outros"
+      ],
       areas_aplicacao: [
         "Saúde",
         "Economia",

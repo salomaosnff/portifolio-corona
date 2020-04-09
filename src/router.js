@@ -13,12 +13,22 @@ import Colaborador from "./views/Colaborador.vue";
 import Investidor from "./views/Investidor.vue";
 import SolucoesCadastro from "./views/solucoes/Cadastro.vue";
 import IdeiasLista from "./views/ideias/Lista.vue";
+import Desenvolvimento from './views/genericas/Desenvolvimento.vue'
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/desenvolvimento",
+      name: "desenvolvimento",
+      components: {
+        header: AppHeader,
+        default: Desenvolvimento,
+        footer: AppFooter
+      }
+    },
     {
       path: "/solucoes_cadastro",
       name: "solucoes_cadastro",

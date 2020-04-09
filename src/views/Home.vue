@@ -26,8 +26,8 @@
         >
           É TEMPO DE RECOMEÇAR !
           <h5 class="text-white text-justify mt-3">
-            Esse "VÍRUS Embriagado" não é mais forte do que um PaÍs sóbrio e solidário. Somos uma plataforma integrada e colaborativa de ACÕES e PROJETOS de combate ao COVID-19.
-            Cadastre aqui o seu projeto (IDEIAS). Conheça aqui os projetos existentes (SOLUÇÕES). Dê seu apoio (PARCERIA).
+            Esse "VÍRUS Embriagado" não é mais forte do que um País sóbrio e solidário. Somos uma plataforma integrada e colaborativa de AÇÕES e PROJETOS de combate ao COVID-19.
+            Cadastre aqui o seu projeto (IDEIAS). Conheça aqui os projetos existentes (SOLUÇÕES). Dê seu apoio (APOIO).
           </h5>
         </h5>
       </div>
@@ -37,11 +37,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="row row-grid">
-              <div
-                v-for="(solucao, index) in solucoes"
-                :key="solucao + index"
-                class="col-lg-4 mb-5"
-              >
+              <div v-for="(solucao, index) in solucoes" :key="index" class="col-lg-4 mb-5">
                 <card class="border-0" shadow body-classes="py-5">
                   <div class="row" style="margin-left: 1px">
                     <icon :name="solucao.icone" gradient="warning" color="white" shadow rounded></icon>
@@ -59,6 +55,23 @@
                       type="warning text-capitalize"
                       style="font-size: 16px"
                     >{{solucao.botao}}</base-button>
+                  </div>
+                </card>
+              </div>
+              <div class="col-lg-4 mb-5">
+                <card class="border-0" shadow body-classes="py-5">
+                  <div class="row" style="margin-left: 1px">
+                    <icon name="ni ni-books" gradient="warning" color="white" shadow rounded></icon>
+                    <h4 style="margin-top: 10px; margin-left: 20px" class="text-default">Outros</h4>
+                  </div>
+                  <div v-for="(botao, index) in botoes" :key="index" class="text-center">
+                    <base-button
+                      tag="a"
+                      :href="botao.link"
+                      class="mt-4"
+                      type="warning text-capitalize"
+                      style="font-size: 16px"
+                    >{{botao.titulo}}</base-button>
                   </div>
                 </card>
               </div>
@@ -128,6 +141,11 @@ export default {
     return {
       index_modal_info: 0,
       modal_info: false,
+      botoes: [
+        { titulo: "Fórum", link: "#/desenvolvimento" },
+        { titulo: "Notícias", link: "#/desenvolvimento" },
+        { titulo: "Resultados", link: "#/desenvolvimento" }
+      ],
       solucoes: [
         {
           titulo: "Ideias",
@@ -135,7 +153,8 @@ export default {
             "Compartilhe AQUI ações e produtos de combate ao COVID-19 para um mundo melhor.",
           icone: "ni ni-bulb-61",
           botao: "Cadastrar",
-          link: 'https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform'
+          link:
+            "https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform"
           // link: "#/solucoes_cadastro"
         },
         {
@@ -147,15 +166,16 @@ export default {
           link: "#/ideias_lista"
         },
         {
-          titulo: "Parceria",
+          titulo: "Apoio",
           descricao:
-            "Dê seu apoio AQUI as soluções já existentes para combater o COVID-19",
+            "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19",
           icone: "ni ni-money-coins",
           botao: "Investir",
           link: "#/"
         }
-      ],
-      cores: ["default", "primary", "info", "success", "warning", "danger"]
+      ]
+      //Fórum, Notícias, Resultados
+      // cores: ["default", "primary", "info", "success", "warning", "danger"]
     };
   },
   methods: {}

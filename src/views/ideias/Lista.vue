@@ -125,7 +125,7 @@
           id="modal-title-notification"
         >{{solucoes[index_modal].nome}}</h4>
 
-        <div v-if="index_modal_info == 0">
+        <div v-if="pagina_modal == 'geral'">
           <div v-if="solucoes[index_modal].tipo">
             <p>Palavra-chave</p>
             <h5 class="text-white text-lowercase">#{{solucoes[index_modal].tipo}}</h5>
@@ -164,7 +164,7 @@
           </div>
         </div>
 
-        <div v-if="index_modal_info == 1">
+        <div v-if="pagina_modal == 'endereco'">
           <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
             <p>Disponível em</p>
             <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
@@ -172,13 +172,14 @@
           </div>
 
           <div
-            v-if="solucoes[index_modal].endereco.pais ||
+            v-if="solucoes[index_modal].endereco &&
+                  (solucoes[index_modal].endereco.pais ||
                   solucoes[index_modal].endereco.estado ||
                   solucoes[index_modal].endereco.cidade ||
                   solucoes[index_modal].endereco.cep ||
                   solucoes[index_modal].endereco.bairro||
                   solucoes[index_modal].endereco.logradouro||
-                  solucoes[index_modal].endereco.numero"
+                  solucoes[index_modal].endereco.numero)"
           >
             <p class="mt-4">Endereço</p>
             <h5 class="text-white text">
@@ -195,42 +196,49 @@
           </div>
         </div>
 
-        <div v-if="index_modal_info == 2">
-          <div v-if="solucoes[index_modal].responsavel.nome">
+        <div v-if="pagina_modal == 'responsavel'">
+          <div v-if="solucoes[index_modal].responsavel && !solucoes[index_modal].responsavel._id">
             <p>Nome</p>
-            <h5 class="text-white">{{solucoes[index_modal].responsavel.nome}}</h5>
+            <h5 class="text-white">{{solucoes[index_modal].responsavel}}</h5>
           </div>
 
-          <div
-            v-if="solucoes[index_modal].responsavel.email || solucoes[index_modal].responsavel.telefone"
-          >
-            <p class="mt-4">Contato</p>
-            <h5 class="text-white">{{solucoes[index_modal].responsavel.email}}</h5>
-            <h5
-              class="text-white text-lowercase mt-4"
-            >{{solucoes[index_modal].responsavel.telefone}}</h5>
+          <div v-else>
+            <div v-if="solucoes[index_modal].responsavel.nome">
+              <p>Nome</p>
+              <h5 class="text-white">{{solucoes[index_modal].responsavel.nome}}</h5>
+            </div>
+
+            <div
+              v-if="solucoes[index_modal].responsavel.email || solucoes[index_modal].responsavel.telefone"
+            >
+              <p class="mt-4">Contato</p>
+              <h5 class="text-white">{{solucoes[index_modal].responsavel.email}}</h5>
+              <h5
+                class="text-white text-lowercase mt-4"
+              >{{solucoes[index_modal].responsavel.telefone}}</h5>
+            </div>
           </div>
         </div>
         <template slot="footer">
           <base-button
-            :type="index_modal_info == 0? 'white' : 'link'"
-            :text-color="index_modal_info == 0? 'warning' : 'white'"
+            :type="pagina_modal == 'geral'? 'white' : 'link'"
+            :text-color="pagina_modal == 'geral'? 'warning' : 'white'"
             class="text-capitalize"
-            @click="index_modal_info = 0"
+            @click="pagina_modal = 'geral'"
           >Geral</base-button>
 
           <base-button
-            :type="index_modal_info == 1? 'white' : 'link'"
-            :text-color="index_modal_info == 1? 'warning' : 'white'"
+            :type="pagina_modal == 'endereco'? 'white' : 'link'"
+            :text-color="pagina_modal == 'endereco'? 'warning' : 'white'"
             class="ml-auto text-capitalize"
-            @click="index_modal_info = 1"
+            @click="pagina_modal = 'endereco'"
           >Endereço</base-button>
 
           <base-button
-            :type="index_modal_info == 2? 'white' : 'link'"
-            :text-color="index_modal_info == 2? 'warning' : 'white'"
+            :type="pagina_modal == 'responsavel'? 'white' : 'link'"
+            :text-color="pagina_modal == 'responsavel'? 'warning' : 'white'"
             class="ml-auto text-capitalize"
-            @click="index_modal_info = 2"
+            @click="pagina_modal = 'responsavel'"
           >Responsável</base-button>
         </template>
       </modal>
@@ -241,8 +249,9 @@
 
 <script>
 import Modal from "@/components/Modal.vue";
-import axios from "axios";
+import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -251,6 +260,7 @@ export default {
   },
   data() {
     return {
+      http: new http(),
       area_aplicacao: "",
       busca: "",
       satuss: [
@@ -271,7 +281,7 @@ export default {
       ],
       modal_visible: false,
       index_modal: 0,
-      index_modal_info: 0,
+      pagina_modal: "geral",
       solucoes: [],
       busca_nao_encontrada: false
     };
@@ -321,15 +331,15 @@ export default {
 
     modal(i) {
       this.index_modal = i;
-      this.index_modal_info = 0;
+      this.pagina_modal = "geral";
       this.modal_visible = !this.modal_visible;
     },
 
     async get_solucoes() {
-      await axios
-        .get("https://portifolio-corona-api.herokuapp.com/solucao")
-        .then(response => {
-          this.solucoes = response.data;
+      await this.http
+        .get("solucao")
+        .then(resp => {
+          this.solucoes = resp;
         })
         .catch(error => {
           console.log(error);

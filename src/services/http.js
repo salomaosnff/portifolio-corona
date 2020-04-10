@@ -1,16 +1,10 @@
 import axios from 'axios'
 
 const baseUrl = 'https://portifolio-corona-api.herokuapp.com/'
-// 'http://localhost:3000/'
+// const baseUrl = 'http://localhost:3000/'
 
 
 export default class Http {
-    // async logar(dados) {
-    //     return await axios
-    //         .get(baseUrl[0] + 'login/logar', { params: { login: dados.login, senha: dados.senha } })
-    //         .then((data) => { return data.data })
-    //         .catch(() => { return {} })
-    // }
 
     async get(entidade) {
         return await axios

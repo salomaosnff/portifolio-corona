@@ -25,7 +25,7 @@
                 <base-input class="mb-3" placeholder="Nome" v-model="solucao.nome"></base-input>
 
                 <div>
-                  <small class="d-block mb-3">Data de Início</small>
+                  <p class="d-block mb-2">Data de Início</p>
                   <base-input addon-left-icon="ni ni-calendar-grid-58">
                     <flat-picker
                       slot-scope="{focus, blur}"
@@ -39,7 +39,7 @@
                 </div>
 
                 <div>
-                  <small class="d-block mb-3">Data de Término</small>
+                  <p class="d-block mb-2">Data de Término</p>
                   <base-input addon-left-icon="ni ni-calendar-grid-58">
                     <flat-picker
                       slot-scope="{focus, blur}"

@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div v-show="card_visible == 1" class="col-lg-5">
+        <div v-show="card == 1" class="col-lg-5">
           <card
             shadow
             header-classes="bg-white pb-5"
@@ -67,7 +67,7 @@
                     type="warning"
                     class="my-4"
                     icon="ni ni-bold-right"
-                    @click="card_visible = 2"
+                    @click="card = 2"
                   >Próximo</base-button>
                 </div>
               </form>
@@ -75,7 +75,7 @@
           </card>
         </div>
 
-        <div v-show="card_visible == 2" class="col-lg-5">
+        <div v-show="card == 2" class="col-lg-5">
           <card
             shadow
             header-classes="bg-white pb-5"
@@ -85,9 +85,40 @@
             <h4 class="mb-4 text-warning font-weight-bold">Endereço</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="País" v-model="endereco.pais"></base-input>
-                <base-input class="mb-3" placeholder="Estado" v-model="endereco.estado"></base-input>
-                <base-input class="mb-3" placeholder="Cidade" v-model="endereco.cidade"></base-input>
+                <div class="mb-3">
+                  <p class="d-block mb-2">Estado</p>
+                  <dropdown>
+                    <base-button
+                      slot="title"
+                      type="warning"
+                      class="dropdown-toggle text-capitalize"
+                    >{{estado.nome || "Selecione seu Estado"}}</base-button>
+                    <a
+                      v-for="(item, index) in estados"
+                      :key="index"
+                      class="dropdown-item"
+                      @click="estado = item; buscar_cidades()"
+                    >{{item.nome}}</a>
+                  </dropdown>
+                </div>
+
+                <div class="mb-3" v-if="endereco.cidade && endereco.cidade._id">
+                  <p class="d-block mb-2">Cidade</p>
+                  <dropdown>
+                    <base-button
+                      slot="title"
+                      type="warning"
+                      class="dropdown-toggle text-capitalize"
+                    >{{endereco.cidade.nome || "Selecione sua Cidade"}}</base-button>
+                    <a
+                      v-for="(item, index) in cidades"
+                      :key="index"
+                      class="dropdown-item"
+                      @click="endereco.cidade = item"
+                    >{{item.nome}}</a>
+                  </dropdown>
+                </div>
+
                 <base-input
                   class="mb-3"
                   placeholder="CEP"
@@ -102,7 +133,7 @@
                     class="my-4 text-warning"
                     type="secondary"
                     icon="ni ni-bold-left"
-                    @click="card_visible = 1"
+                    @click="card = 1"
                   >Anterior</base-button>
                   <base-button class="my-4" type="warning">Salvar</base-button>
                 </div>
@@ -115,14 +146,20 @@
   </section>
 </template>
 <script>
+import http from "../../services/http";
+import Dropdown from "../../components/BaseDropdown.vue";
 export default {
+  components: {
+    Dropdown
+  },
   data() {
     return {
+      http: new http(),
       pessoa: {
         colaborador: Boolean,
         investidor: Boolean,
         cliente: Boolean,
-        tipo: "fisica", //Pode assumir os valores: "fisica" ou "juridica"
+        tipo: "fisica",
         cpf: "",
         cnpj: "",
         nome: "",
@@ -131,17 +168,40 @@ export default {
         senha: ""
       },
       endereco: {
-        pais: "",
-        estado: "",
         cidade: "",
         cep: "",
         bairro: "",
         logradouro: "",
         numero: ""
       },
+      estado: { _id: undefined },
+      estados: [],
+      cidades: [],
       confirmacao_senha: "",
-      card_visible: 1
+      card: 1
     };
+  },
+
+  async mounted() {
+    await this.buscar_estados();
+    await this.buscar_cidades();
+  },
+
+  methods: {
+    async buscar_estados() {
+      await this.http.get("estado", 0).then(async data => {
+        this.estados = await data;
+      });
+    },
+
+    async buscar_cidades() {
+      if (this.estado && this.estado._id)
+        await this.http.cidadesByEstado(this.estado._id).then(async data => {
+          this.cidades = await data.cidades;
+          if (this.cidades[0] && this.cidades[0]._id)
+            this.endereco.cidade = this.cidades[0];
+        });
+    }
   }
 };
 </script>

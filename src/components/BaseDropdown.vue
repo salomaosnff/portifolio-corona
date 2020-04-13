@@ -16,7 +16,8 @@
             </a>
         </slot>
         <ul class="dropdown-menu"
-            :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]">
+            :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]"
+            style="max-height: 300px; overflow: auto;">
             <slot></slot>
         </ul>
     </component>

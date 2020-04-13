@@ -36,8 +36,10 @@
                 <base-input class="mb-3" placeholder="Nome" v-model="pessoa.nome"></base-input>
                 <base-input class="mb-3" placeholder="Email" v-model="pessoa.email"></base-input>
                 <base-input class="mb-3" placeholder="Telefone" v-model="pessoa.telefone"></base-input>
+
                 <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>
                 <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">Pessoa Jurídica</base-radio>
+
                 <base-input
                   v-if="pessoa.tipo == 'fisica'"
                   class="mb-3"
@@ -52,9 +54,11 @@
                   v-mask="'##.###.###/####-##'"
                   v-model="pessoa.cnpj"
                 ></base-input>
+
                 <base-checkbox class="mb-3" v-model="pessoa.colaborador">Colaborador</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.investidor">Investidor</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.cliente">Cliente</base-checkbox>
+
                 <base-input type="password" placeholder="Senha" v-model="pessoa.senha"></base-input>
                 <base-input
                   type="password"
@@ -135,7 +139,7 @@
                     icon="ni ni-bold-left"
                     @click="card = 1"
                   >Anterior</base-button>
-                  <base-button class="my-4" type="warning">Salvar</base-button>
+                  <base-button class="my-4" type="warning" @click="salvar()">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -156,16 +160,17 @@ export default {
     return {
       http: new http(),
       pessoa: {
-        colaborador: Boolean,
-        investidor: Boolean,
-        cliente: Boolean,
+        colaborador: false,
+        investidor: false,
+        cliente: false,
         tipo: "fisica",
         cpf: "",
         cnpj: "",
         nome: "",
         email: "",
         telefone: "",
-        senha: ""
+        senha: "",
+        endereco: undefined
       },
       endereco: {
         cidade: "",
@@ -200,6 +205,32 @@ export default {
           this.cidades = await data.cidades;
           if (this.cidades[0] && this.cidades[0]._id)
             this.endereco.cidade = this.cidades[0];
+        });
+    },
+
+    async salvar() {
+      await this.http
+        .post("endereco", this.endereco)
+        .then(resp_endereco => {
+          console.log("resp_endereco");
+          console.log(resp_endereco);
+          if (resp_endereco._id) {
+            this.pessoa.endereco = resp_endereco._id;
+            this.http
+              .post("pessoa", this.pessoa)
+              .then(resp_pessoa => {
+                console.log("resp_pessoa");
+                console.log(resp_pessoa);
+              })
+              .catch(err => {
+                console.log("Erro ao Salvar a Pessoa");
+                console.error(err);
+              });
+          }
+        })
+        .catch(err => {
+          console.log("Erro ao Salvar o Endereço");
+          console.error(err);
         });
     }
   }

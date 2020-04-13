@@ -47,8 +47,13 @@
                   slot="title"
                   type="warning"
                   class="dropdown-toggle mb-5 text-capitalize"
-                >Status da Ideia</base-button>
-                <a v-for="(status, index) in satuss" :key="index" class="dropdown-item">{{status}}</a>
+                >{{status || 'Status da Ideia'}}</base-button>
+                <a
+                  v-for="(s, index) in satuss"
+                  :key="index"
+                  class="dropdown-item"
+                  @click="status = s; buscar()"
+                >{{s}}</a>
               </dropdown>
             </div>
 
@@ -261,8 +266,9 @@ export default {
   data() {
     return {
       http: new http(),
-      area_aplicacao: "",
       busca: "",
+      area_aplicacao: "",
+      status: "",
       satuss: [
         "Produto Comercializado",
         "Produto Lançado",
@@ -293,14 +299,15 @@ export default {
 
   methods: {
     buscar() {
-      if (this.busca || this.area_aplicacao) {
+      if (this.busca || this.area_aplicacao || this.status) {
         let params = JSON.stringify({
           busca: this.busca,
-          area_aplicacao: this.area_aplicacao
+          area_aplicacao: this.area_aplicacao,
+          status: this.status
         });
-
         axios
           .get(
+            // "http://localhost:3000/solucao/busca/" +
             "https://portifolio-corona-api.herokuapp.com/solucao/busca/" +
               params
           )

@@ -77,6 +77,40 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
+                <div class="mb-3">
+                  <p class="d-block mb-2">Estado</p>
+                  <dropdown>
+                    <base-button
+                      slot="title"
+                      type="warning"
+                      class="dropdown-toggle text-capitalize"
+                    >{{estado.nome || "Selecione seu Estado"}}</base-button>
+                    <a
+                      v-for="(item, index) in estados"
+                      :key="index"
+                      class="dropdown-item"
+                      @click="estado = item; buscar_cidades()"
+                    >{{item.nome}}</a>
+                  </dropdown>
+                </div>
+
+                <div class="mb-3" v-if="solucao.cidade && solucao.cidade._id">
+                  <p class="d-block mb-2">Cidade</p>
+                  <dropdown>
+                    <base-button
+                      slot="title"
+                      type="warning"
+                      class="dropdown-toggle text-capitalize"
+                    >{{solucao.cidade.nome || "Selecione sua Cidade"}}</base-button>
+                    <a
+                      v-for="(item, index) in cidades"
+                      :key="index"
+                      class="dropdown-item"
+                      @click="solucao.cidade = item"
+                    >{{item.nome}}</a>
+                  </dropdown>
+                </div>
+
                 <textarea
                   class="form-control mb-3"
                   placeholder="Descrição"
@@ -169,9 +203,11 @@
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import http from "../../services/http";
+import Dropdown from "../../components/BaseDropdown.vue";
 export default {
   components: {
-    flatPicker
+    flatPicker,
+    Dropdown
   },
   data() {
     return {
@@ -192,13 +228,37 @@ export default {
         status: "",
         negocio: "",
         observacoes: "",
-        responsavel: { _id: "" }
+        responsavel: { _id: "" },
+        cidade: { _id: "" }
       },
+      estado: { _id: undefined },
+      estados: [],
+      cidades: [],
       link_home: "#/"
     };
   },
 
+  async mounted() {
+    await this.buscar_estados();
+    await this.buscar_cidades();
+  },
+
   methods: {
+    async buscar_estados() {
+      await this.http.get("estado", 0).then(async data => {
+        this.estados = await data;
+      });
+    },
+
+    async buscar_cidades() {
+      if (this.estado && this.estado._id)
+        await this.http.cidadesByEstado(this.estado._id).then(async data => {
+          this.cidades = await data.cidades;
+          if (this.cidades[0] && this.cidades[0]._id)
+            this.solucao.cidade = this.cidades[0];
+        });
+    },
+
     converter_data(data) {
       data =
         data.substring(6, 10) +
@@ -216,8 +276,9 @@ export default {
 
       this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
       this.solucao.fim = Date.parse(this.converter_data(this.fim));
+
       this.http.post("solucao", this.solucao).then(resp => {
-        console.log(resp);
+        if (resp._id) this.$router.push("solucoes_lista");
       });
     }
   }

@@ -109,11 +109,13 @@ export default {
 
     async getLogin() {
       let pessoa = localStorage.getItem("pessoa");
-      if (pessoa) pessoa = JSON.parse(pessoa);
-      this.pessoa = pessoa;
-      this.login.login =
-        this.pessoa.email || this.pessoa.cpf || this.pessoa.cnpj;
-      this.login.senha = this.pessoa.senha;
+      if (pessoa) {
+        pessoa = JSON.parse(pessoa);
+        this.pessoa = pessoa;
+        this.login.login =
+          this.pessoa.email || this.pessoa.cpf || this.pessoa.cnpj;
+        this.login.senha = this.pessoa.senha;
+      }
     }
   }
 };

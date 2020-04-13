@@ -1,0 +1,349 @@
+<template>
+  <section class="section-shaped my-0">
+    <div class="shape shape-style-1 bg-gradient-warning">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="container pt-lg-md">
+      <div class="row">
+        <div class="col-md-2">
+          <base-button
+            tag="a"
+            icon="ni ni-bold-left"
+            class="mb-5 text-warning text-capitalize"
+            type="white"
+            href="#/"
+          >Voltar</base-button>
+        </div>
+
+        <div class="col-md-3">
+          <dropdown>
+            <base-button
+              slot="title"
+              type="warning"
+              class="dropdown-toggle mb-5 text-capitalize"
+            >{{area_aplicacao || "Área de Atuação"}}</base-button>
+            <a
+              v-for="(area, index) in areas_aplicacao"
+              :key="index"
+              class="dropdown-item"
+              @click="area_aplicacao = area; buscar()"
+            >{{area}}</a>
+          </dropdown>
+        </div>
+
+        <div class="col-md-3">
+          <dropdown>
+            <base-button
+              slot="title"
+              type="warning"
+              class="dropdown-toggle mb-5 text-capitalize"
+            >{{status || 'Status da Ideia'}}</base-button>
+            <a
+              v-for="(s, index) in satuss"
+              :key="index"
+              class="dropdown-item"
+              @click="status = s; buscar()"
+            >{{s}}</a>
+          </dropdown>
+        </div>
+
+        <div class="col-md-4">
+          <div class="input-group input-group-alternative mb-5 bg-gradient-warning">
+            <input
+              @input="value => buscar()"
+              v-model="busca"
+              class="form-control"
+              placeholder="Buscar"
+              type="text"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="ni ni-zoom-split-in"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row row-grid">
+            <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
+              <card class="border-0" shadow body-classes="py-5">
+                <h4 class="text-default">{{solucao.nome}}</h4>
+                <p class="description mt-3">{{solucao.descricao}}</p>
+                <div>
+                  <badge type="warning text-lowercase" rounded>#{{solucao.tipo}}</badge>
+                </div>
+                <div class="btn-wrapper">
+                  <base-button
+                    class="mt-4"
+                    type="warning text-capitalize"
+                    @click="modal(index)"
+                  >Mais</base-button>
+                  <base-button
+                    tag="a"
+                    icon="fa fa-usd"
+                    class="ml-auto mt-4 text-warning text-capitalize"
+                    type="secondary"
+                    href="#/"
+                  >Doar</base-button>
+                </div>
+              </card>
+            </div>
+          </div>
+          <card v-if="busca_nao_encontrada" class="border-0 col-lg-6 my-5 py-5" shadow>
+            <div class="row" style="margin-left: 1px">
+              <icon name="ni ni-planet" gradient="warning" color="white" shadow rounded></icon>
+              <h4 style="margin-top: 10px; margin-left: 20px" class="text-default">Nada aqui</h4>
+            </div>
+          </card>
+        </div>
+      </div>
+    </div>
+
+    <modal
+      v-if="solucoes[index_modal]"
+      :show.sync="modal_visible"
+      gradient="warning"
+      modal-classes="modal-danger modal-dialog-centered"
+    >
+      <h4
+        v-if="solucoes[index_modal] && solucoes[index_modal].nome"
+        slot="header"
+        class="modal-title"
+        id="modal-title-notification"
+      >{{solucoes[index_modal].nome}}</h4>
+
+      <div v-if="pagina_modal == 'geral'">
+        <div v-if="solucoes[index_modal].tipo">
+          <p>Palavra-chave</p>
+          <h5 class="text-white text-lowercase">#{{solucoes[index_modal].tipo}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].instituicao">
+          <p class="mt-4">Instituição</p>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].instituicao}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].inicio">
+          <p class="mt-4">Período</p>
+          <h5
+            class="text-white text-capitalise"
+          >De {{converter_data(solucoes[index_modal].inicio)}} a {{converter_data(solucoes[index_modal].fim) || 'Indefinido'}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].descricao">
+          <p class="mt-4">Descrição</p>
+          <h5 class="text-white">{{solucoes[index_modal].descricao}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].status">
+          <p class="mt-4">Status</p>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].status}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].area_aplicacao">
+          <p class="mt-4">Área de Aplicação</p>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].area_aplicacao}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].negocio">
+          <p class="mt-4">Negócio</p>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
+        </div>
+      </div>
+
+      <div v-if="pagina_modal == 'endereco'">
+        <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
+          <p>Disponível em</p>
+          <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
+          <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
+        </div>
+
+        <div
+          v-if="solucoes[index_modal].endereco &&
+                  (solucoes[index_modal].endereco.pais ||
+                  solucoes[index_modal].endereco.estado ||
+                  solucoes[index_modal].endereco.cidade ||
+                  solucoes[index_modal].endereco.cep ||
+                  solucoes[index_modal].endereco.bairro||
+                  solucoes[index_modal].endereco.logradouro||
+                  solucoes[index_modal].endereco.numero)"
+        >
+          <p class="mt-4">Endereço</p>
+          <h5 class="text-white text">
+            {{solucoes[index_modal].endereco.pais}},
+            {{solucoes[index_modal].endereco.estado}},
+            {{solucoes[index_modal].endereco.cidade}},
+            {{solucoes[index_modal].endereco.cep}}
+          </h5>
+          <h5 class="text-white text mt-4">
+            {{solucoes[index_modal].endereco.bairro}},
+            {{solucoes[index_modal].endereco.logradouro}},
+            {{solucoes[index_modal].endereco.numero}}
+          </h5>
+        </div>
+      </div>
+
+      <div v-if="pagina_modal == 'responsavel'">
+        <div v-if="solucoes[index_modal].responsavel && !solucoes[index_modal].responsavel._id">
+          <p>Nome</p>
+          <h5 class="text-white">{{solucoes[index_modal].responsavel}}</h5>
+        </div>
+
+        <div v-else>
+          <div v-if="solucoes[index_modal].responsavel.nome">
+            <p>Nome</p>
+            <h5 class="text-white">{{solucoes[index_modal].responsavel.nome}}</h5>
+          </div>
+
+          <div
+            v-if="solucoes[index_modal].responsavel.email || solucoes[index_modal].responsavel.telefone"
+          >
+            <p class="mt-4">Contato</p>
+            <h5 class="text-white">{{solucoes[index_modal].responsavel.email}}</h5>
+            <h5
+              class="text-white text-lowercase mt-4"
+            >{{solucoes[index_modal].responsavel.telefone}}</h5>
+          </div>
+        </div>
+      </div>
+      <template slot="footer">
+        <base-button
+          :type="pagina_modal == 'geral'? 'white' : 'link'"
+          :text-color="pagina_modal == 'geral'? 'warning' : 'white'"
+          class="text-capitalize"
+          @click="pagina_modal = 'geral'"
+        >Geral</base-button>
+
+        <base-button
+          :type="pagina_modal == 'endereco'? 'white' : 'link'"
+          :text-color="pagina_modal == 'endereco'? 'warning' : 'white'"
+          class="ml-auto text-capitalize"
+          @click="pagina_modal = 'endereco'"
+        >Endereço</base-button>
+
+        <base-button
+          :type="pagina_modal == 'responsavel'? 'white' : 'link'"
+          :text-color="pagina_modal == 'responsavel'? 'warning' : 'white'"
+          class="ml-auto text-capitalize"
+          @click="pagina_modal = 'responsavel'"
+        >Responsável</base-button>
+      </template>
+    </modal>
+  </section>
+</template>
+
+
+<script>
+import Modal from "@/components/Modal.vue";
+import http from "../../services/http";
+import Dropdown from "../../components/BaseDropdown.vue";
+import axios from "axios";
+
+export default {
+  components: {
+    Modal,
+    Dropdown
+  },
+  data() {
+    return {
+      http: new http(),
+      busca: "",
+      area_aplicacao: "",
+      status: "",
+      satuss: [
+        "Produto Comercializado",
+        "Produto Lançado",
+        "Produto Testado",
+        "Produto Terminado",
+        "Produto em Desenvolvimento",
+        "Outros"
+      ],
+      areas_aplicacao: [
+        "Saúde",
+        "Economia",
+        "Educação",
+        "Comunicação",
+        "Social",
+        "Outros"
+      ],
+      modal_visible: false,
+      index_modal: 0,
+      pagina_modal: "geral",
+      solucoes: [],
+      busca_nao_encontrada: false
+    };
+  },
+
+  async mounted() {
+    await this.get_solucoes();
+  },
+
+  methods: {
+    buscar() {
+      if (this.busca || this.area_aplicacao || this.status) {
+        let params = JSON.stringify({
+          busca: this.busca,
+          area_aplicacao: this.area_aplicacao,
+          status: this.status
+        });
+        axios
+          .get(
+            // "http://localhost:3000/solucao/busca/" +
+            "https://portifolio-corona-api.herokuapp.com/solucao/busca/" +
+              params
+          )
+          .then(response => {
+            this.solucoes = response.data.solucoes;
+            if (!this.solucoes[0]) this.busca_nao_encontrada = true;
+            else this.busca_nao_encontrada = false;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        this.busca_nao_encontrada = false;
+        this.get_solucoes();
+      }
+    },
+
+    converter_data(data) {
+      if (data)
+        data =
+          data.substring(8, 10) +
+          "/" +
+          data.substring(5, 7) +
+          "/" +
+          data.substring(0, 4);
+      return data;
+    },
+
+    modal(i) {
+      this.index_modal = i;
+      this.pagina_modal = "geral";
+      this.modal_visible = !this.modal_visible;
+    },
+
+    async get_solucoes() {
+      await this.http
+        .get("solucao")
+        .then(resp => {
+          this.solucoes = resp;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+};
+</script>

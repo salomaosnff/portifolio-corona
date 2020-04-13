@@ -153,9 +153,8 @@ export default {
             "Compartilhe AQUI ações e produtos de combate ao COVID-19 para um mundo melhor.",
           icone: "ni ni-bulb-61",
           botao: "Cadastrar",
-          link:
-            "https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform"
-          // link: "#/solucoes_cadastro"
+          // link: "https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform"
+          link: "#/login"
         },
         {
           titulo: "Soluções",
@@ -163,7 +162,7 @@ export default {
             "Conheça AQUI as ideias inovadoras que você procura para combater o COVID-19.",
           icone: "ni ni-settings",
           botao: "Buscar",
-          link: "#/ideias_lista"
+          link: "#/solucoes_lista"
         },
         {
           titulo: "Apoio",
@@ -171,11 +170,9 @@ export default {
             "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19",
           icone: "ni ni-money-coins",
           botao: "Investir",
-          link: "#/"
+          link: "#/desenvolvimento"
         }
       ]
-      //Fórum, Notícias, Resultados
-      // cores: ["default", "primary", "info", "success", "warning", "danger"]
     };
   },
   methods: {}

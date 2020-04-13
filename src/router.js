@@ -4,15 +4,15 @@ import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
 import Landing from "./views/Landing.vue";
-import Login from "./views/Login.vue";
-import Register from "./views/Register.vue";
+import Login from "./views/usuario/Login.vue";
+import Registrar from "./views/usuario/Registrar.vue";
 import Profile from "./views/Profile.vue";
 import Home from "./views/Home.vue";
 import Item from "./views/Item.vue";
 import Colaborador from "./views/Colaborador.vue";
 import Investidor from "./views/Investidor.vue";
 import SolucoesCadastro from "./views/solucoes/Cadastro.vue";
-import IdeiasLista from "./views/ideias/Lista.vue";
+import SucoesLista from "./views/solucoes/Lista.vue";
 import Desenvolvimento from './views/genericas/Desenvolvimento.vue'
 
 Vue.use(Router);
@@ -39,11 +39,11 @@ export default new Router({
       }
     },
     {
-      path: "/ideias_lista",
-      name: "ideias_lista",
+      path: "/solucoes_lista",
+      name: "solucoes_lista",
       components: {
         header: AppHeader,
-        default: IdeiasLista,
+        default: SucoesLista,
         footer: AppFooter
       }
     },
@@ -111,11 +111,11 @@ export default new Router({
       }
     },
     {
-      path: "/register",
-      name: "register",
+      path: "/registrar",
+      name: "registrar",
       components: {
         header: AppHeader,
-        default: Register,
+        default: Registrar,
         footer: AppFooter
       }
     },

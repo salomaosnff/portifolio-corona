@@ -1,5 +1,5 @@
 <template>
-  <section class="section section-shaped section-lg my-0">
+  <section class="section-shaped my-0">
     <div class="shape shape-style-1 bg-gradient-warning">
       <span></span>
       <span></span>
@@ -11,6 +11,17 @@
       <span></span>
     </div>
     <div class="container pt-lg-md">
+      <div class="row">
+        <div class="col-md-2">
+          <base-button
+            tag="a"
+            icon="ni ni-bold-left"
+            class="mb-5 text-warning text-capitalize"
+            type="white"
+            href="#/"
+          >Voltar</base-button>
+        </div>
+      </div>
       <div class="row justify-content-center">
         <div class="col-lg-5">
           <card
@@ -168,9 +179,7 @@ export default {
       inicio: "",
       fim: "",
       solucao: {
-        // endereco // -> Deve ser uma entidade, ou seja, você tem que massar o ID de ENDERECO para essa variável
         // palavra_chave // Em desenvolvimento na API ainda
-        // responsavel // -> Deve ser uma entidade, ou seja, você tem que massar o ID de PESSOA para essa variável
         inicio: "",
         fim: "",
         nome: "",
@@ -182,7 +191,8 @@ export default {
         tipo: "",
         status: "",
         negocio: "",
-        observacoes: ""
+        observacoes: "",
+        responsavel: { _id: "" }
       },
       link_home: "#/"
     };
@@ -200,6 +210,10 @@ export default {
     },
 
     async salvar() {
+      let pessoa = localStorage.getItem("pessoa");
+      if (pessoa) pessoa = JSON.parse(pessoa);
+      this.solucao.responsavel._id = pessoa._id;
+
       this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
       this.solucao.fim = Date.parse(this.converter_data(this.fim));
       this.http.post("solucao", this.solucao).then(resp => {

@@ -35,14 +35,15 @@
             <h4 class="mb-4 text-warning font-weight-bold">Entre no REVIVE</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Email" addon-left-icon="ni ni-email-83"></base-input>
+                <base-input class="mb-3" placeholder="Email, CPF ou CNPJ" v-model="login.login"></base-input>
                 <base-input
                   type="password"
                   placeholder="Senha"
                   addon-left-icon="ni ni-lock-circle-open"
+                  v-model="login.senha"
                 ></base-input>
                 <div class="text-center">
-                  <base-button type="warning" class="my-4">Entrar</base-button>
+                  <base-button type="warning" class="my-4" @click="entrar()">Entrar</base-button>
                 </div>
               </form>
             </template>
@@ -65,7 +66,55 @@
   </section>
 </template>
 <script>
-export default {};
+import http from "../../services/http";
+export default {
+  data() {
+    return {
+      http: new http(),
+      pessoa: {
+        colaborador: false,
+        investidor: false,
+        cliente: false,
+        tipo: "",
+        cpf: "",
+        cnpj: "",
+        nome: "",
+        email: "",
+        telefone: "",
+        senha: "",
+        endereco: undefined
+      },
+      login: {
+        login: "",
+        senha: ""
+      }
+    };
+  },
+
+  async mounted() {
+    await this.getLogin();
+  },
+
+  methods: {
+    async entrar() {
+      let pessoa = undefined;
+      if (this.login.login && this.login.senha) {
+        pessoa = await this.http.logar(this.login);
+        if (pessoa && pessoa._id) {
+          await localStorage.setItem("pessoa", JSON.stringify(pessoa));
+          this.$router.push("solucoes_cadastro");
+        } else console.log("Deu erro");
+      }
+    },
+
+    async getLogin() {
+      let pessoa = localStorage.getItem("pessoa");
+      if (pessoa) pessoa = JSON.parse(pessoa);
+      this.pessoa = pessoa;
+      this.login.login =
+        this.pessoa.email || this.pessoa.cpf || this.pessoa.cnpj;
+      this.login.senha = this.pessoa.senha;
+    }
+  }
+};
 </script>
-<style>
-</style>

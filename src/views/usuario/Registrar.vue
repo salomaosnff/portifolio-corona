@@ -220,7 +220,7 @@ export default {
                 if (resp_pessoa._id) {
                   this.pessoa._id = resp_pessoa._id;
                   await localStorage.setItem(
-                    "usuario",
+                    "pessoa",
                     JSON.stringify(this.pessoa)
                   );
                   this.$router.push("solucoes_cadastro");

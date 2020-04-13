@@ -211,16 +211,20 @@ export default {
     async salvar() {
       await this.http
         .post("endereco", this.endereco)
-        .then(resp_endereco => {
-          console.log("resp_endereco");
-          console.log(resp_endereco);
+        .then(async resp_endereco => {
           if (resp_endereco._id) {
             this.pessoa.endereco = resp_endereco._id;
-            this.http
+            await this.http
               .post("pessoa", this.pessoa)
-              .then(resp_pessoa => {
-                console.log("resp_pessoa");
-                console.log(resp_pessoa);
+              .then(async resp_pessoa => {
+                if (resp_pessoa._id) {
+                  this.pessoa._id = resp_pessoa._id;
+                  await localStorage.setItem(
+                    "usuario",
+                    JSON.stringify(this.pessoa)
+                  );
+                  this.$router.push("solucoes_cadastro");
+                }
               })
               .catch(err => {
                 console.log("Erro ao Salvar a Pessoa");

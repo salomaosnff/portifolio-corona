@@ -218,6 +218,8 @@ export default {
               .post("pessoa", this.pessoa)
               .then(async resp_pessoa => {
                 if (resp_pessoa._id) {
+                  this.pessoa.cpf = this.pessoa.cpf.replace(/\D+/g, "");
+                  this.pessoa.cnpj = this.pessoa.cnpj.replace(/\D+/g, "");
                   this.pessoa._id = resp_pessoa._id;
                   await localStorage.setItem(
                     "pessoa",

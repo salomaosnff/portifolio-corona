@@ -8,7 +8,7 @@ const baseUrl = [
 export default class Http {
     async logar(dados) {
         return await axios
-            .get(baseUrl[0] + 'pessoa/logar', { params: { login: dados.login, senha: dados.senha } })
+            .get(baseUrl[0] + 'pessoa/logar', { params: { nome_usuario: dados.nome_usuario, senha: dados.senha } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }

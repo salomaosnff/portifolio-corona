@@ -35,7 +35,12 @@
               <form role="form">
                 <base-input class="mb-3" placeholder="Nome" v-model="pessoa.nome"></base-input>
                 <base-input class="mb-3" placeholder="Email" v-model="pessoa.email"></base-input>
-                <base-input class="mb-3" placeholder="Telefone" v-model="pessoa.telefone"></base-input>
+                <base-input
+                  class="mb-3"
+                  placeholder="Telefone"
+                  v-model="pessoa.telefone"
+                  v-mask="['(##) #### - ####', '(##) ##### - ####']"
+                ></base-input>
 
                 <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>
                 <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">Pessoa Jurídica</base-radio>
@@ -59,6 +64,7 @@
                 <base-checkbox class="mb-3" v-model="pessoa.investidor">Investidor</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.cliente">Cliente</base-checkbox>
 
+                <base-input placeholder="Nome de Usuário" v-model="pessoa.nome_usuario"></base-input>
                 <base-input type="password" placeholder="Senha" v-model="pessoa.senha"></base-input>
                 <base-input
                   type="password"
@@ -169,17 +175,18 @@ export default {
         nome: "",
         email: "",
         telefone: "",
+        nome_usuario: "",
         senha: "",
-        endereco: undefined
+        endereco: { _id: "" }
       },
       endereco: {
-        cidade: "",
+        cidade: { _id: "" },
         cep: "",
         bairro: "",
         logradouro: "",
         numero: ""
       },
-      estado: { _id: undefined },
+      estado: { _id: "" },
       estados: [],
       cidades: [],
       confirmacao_senha: "",
@@ -209,6 +216,10 @@ export default {
     },
 
     async salvar() {
+      this.endereco.cep = await this.endereco.cep.replace(/\D+/g, "");
+      this.pessoa.cpf = await this.pessoa.cpf.replace(/\D+/g, "");
+      this.pessoa.cnpj = await this.pessoa.cnpj.replace(/\D+/g, "");
+      this.pessoa.telefone = await this.pessoa.telefone.replace(/\D+/g, "");
       await this.http
         .post("endereco", this.endereco)
         .then(async resp_endereco => {
@@ -218,8 +229,6 @@ export default {
               .post("pessoa", this.pessoa)
               .then(async resp_pessoa => {
                 if (resp_pessoa._id) {
-                  this.pessoa.cpf = this.pessoa.cpf.replace(/\D+/g, "");
-                  this.pessoa.cnpj = this.pessoa.cnpj.replace(/\D+/g, "");
                   this.pessoa._id = resp_pessoa._id;
                   await localStorage.setItem(
                     "pessoa",

@@ -35,7 +35,7 @@
             <h4 class="mb-4 text-warning font-weight-bold">Entre no REVIVE</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Email, CPF ou CNPJ" v-model="login.login"></base-input>
+                <base-input class="mb-3" placeholder="Nome de Usuário" v-model="login.nome_usuario"></base-input>
                 <base-input
                   type="password"
                   placeholder="Senha"
@@ -85,7 +85,7 @@ export default {
         endereco: undefined
       },
       login: {
-        login: "",
+        nome_usuario: "",
         senha: ""
       }
     };
@@ -98,12 +98,12 @@ export default {
   methods: {
     async entrar() {
       let pessoa = undefined;
-      if (this.login.login && this.login.senha) {
+      if (this.login.nome_usuario && this.login.senha) {
         pessoa = await this.http.logar(this.login);
         if (pessoa && pessoa._id) {
           await localStorage.setItem("pessoa", JSON.stringify(pessoa));
           this.$router.push("solucoes_cadastro");
-        } else console.log("Deu erro");
+        } else console.log("Credenciais Incorretas");
       }
     },
 
@@ -112,7 +112,7 @@ export default {
       if (pessoa) {
         pessoa = JSON.parse(pessoa);
         this.pessoa = pessoa;
-        this.login.login =
+        this.login.nome_usuario =
           this.pessoa.email || this.pessoa.cpf || this.pessoa.cnpj;
         this.login.senha = this.pessoa.senha;
       }

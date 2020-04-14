@@ -60,9 +60,9 @@
                   v-model="pessoa.cnpj"
                 ></base-input>
 
-                <base-checkbox class="mb-3" v-model="pessoa.colaborador">Colaborador</base-checkbox>
-                <base-checkbox class="mb-3" v-model="pessoa.investidor">Investidor</base-checkbox>
-                <base-checkbox class="mb-3" v-model="pessoa.cliente">Cliente</base-checkbox>
+                <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>
+                <base-checkbox class="mb-3" v-model="pessoa.cliente">Interessado em Soluções</base-checkbox>
+                <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
 
                 <base-input placeholder="Nome de Usuário" v-model="pessoa.nome_usuario"></base-input>
                 <base-input type="password" placeholder="Senha" v-model="pessoa.senha"></base-input>

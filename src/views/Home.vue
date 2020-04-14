@@ -165,7 +165,7 @@ export default {
           link: "#/solucoes_lista"
         },
         {
-          titulo: "Apoio",
+          titulo: "Contribuir",
           descricao:
             "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19",
           icone: "ni ni-money-coins",

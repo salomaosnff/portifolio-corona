@@ -79,7 +79,9 @@
             <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
                 <h4 class="text-default">{{solucao.nome}}</h4>
-                <p class="description mt-3">{{solucao.descricao}}</p>
+                <p
+                  class="description mt-3"
+                >{{solucao.descricao.slice(0,250)}} {{solucao.descricao.length > 250? '...' : ''}}</p>
                 <div>
                   <badge type="warning text-lowercase" rounded>#{{solucao.tipo}}</badge>
                 </div>
@@ -89,23 +91,17 @@
                     type="warning text-capitalize"
                     @click="modal(index)"
                   >Mais</base-button>
-                  <base-button
+                  <!-- <base-button
                     tag="a"
                     icon="fa fa-usd"
                     class="ml-auto mt-4 text-warning text-capitalize"
                     type="secondary"
                     href="#/"
-                  >Doar</base-button>
+                  >Doar</base-button>-->
                 </div>
               </card>
             </div>
           </div>
-          <card v-if="busca_nao_encontrada" class="border-0 col-lg-6 my-5 py-5" shadow>
-            <div class="row" style="margin-left: 1px">
-              <icon name="ni ni-planet" gradient="warning" color="white" shadow rounded></icon>
-              <h4 style="margin-top: 10px; margin-left: 20px" class="text-default">Nada aqui</h4>
-            </div>
-          </card>
         </div>
       </div>
     </div>
@@ -125,8 +121,8 @@
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
-          <p>Palavra-chave</p>
-          <h5 class="text-white text-lowercase">#{{solucoes[index_modal].tipo}}</h5>
+          <p>Tipo</p>
+          <h5 class="text-white text-lowercase">{{solucoes[index_modal].tipo}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].instituicao">
@@ -240,9 +236,44 @@
         >Responsável</base-button>
       </template>
     </modal>
+
+    <template v-show="busca_nao_encontrada">
+      <div class="container pt-5 pb-lg">
+        <div class="row justify-content-between align-items-center">
+          <div v-show="area_aplicacao || status || busca" class="col-lg-5 mb-5 mb-lg-0">
+            <div class="row ml-1">
+              <h1 class="text-white font-weight-light">Nada aqui</h1>
+              <base-button
+                class="ml-5 mb-4 mt-2 text-warning text-capitalize"
+                type="white"
+                @click="limpar_filtros()"
+              >Limpar filtros</base-button>
+            </div>
+            <div class="row ml-1" v-show="area_aplicacao">
+              <p class="lead text-white">Área de Atuação:</p>
+              <p class="lead text-white font-weight-bold ml-2">{{area_aplicacao}}</p>
+            </div>
+
+            <div class="row ml-1" v-show="status">
+              <p class="lead text-white">Status:</p>
+              <p class="lead text-white font-weight-bold ml-2">{{status}}</p>
+            </div>
+
+            <div class="row ml-1" v-show="busca">
+              <p class="lead text-white">Busca:</p>
+              <p class="lead text-white font-weight-bold ml-2">{{busca}}</p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="rounded overflow-hidden transform-perspective-right">
+              <i class="ni ni-planet" style="font-size: 350px; color: white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </section>
 </template>
-
 
 <script>
 import Modal from "@/components/Modal.vue";
@@ -290,6 +321,13 @@ export default {
   },
 
   methods: {
+    limpar_filtros() {
+      this.busca = "";
+      this.area_aplicacao = "";
+      this.status = "";
+      this.buscar();
+    },
+
     buscar() {
       if (this.busca || this.area_aplicacao || this.status) {
         let params = JSON.stringify({
@@ -347,3 +385,5 @@ export default {
   }
 };
 </script>
+
+mudar o que tem em Endereco para Geral

@@ -112,8 +112,7 @@ export default {
       if (pessoa) {
         pessoa = JSON.parse(pessoa);
         this.pessoa = pessoa;
-        this.login.nome_usuario =
-          this.pessoa.email || this.pessoa.cpf || this.pessoa.cnpj;
+        this.login.nome_usuario = this.pessoa.nome_usuario;
         this.login.senha = this.pessoa.senha;
       }
     }

@@ -216,10 +216,10 @@ export default {
     },
 
     async salvar() {
-      this.endereco.cep = await this.endereco.cep.replace(/\D+/g, "");
-      this.pessoa.cpf = await this.pessoa.cpf.replace(/\D+/g, "");
-      this.pessoa.cnpj = await this.pessoa.cnpj.replace(/\D+/g, "");
-      this.pessoa.telefone = await this.pessoa.telefone.replace(/\D+/g, "");
+      // this.endereco.cep = await this.endereco.cep.replace(/\D+/g, "");
+      // this.pessoa.cpf = await this.pessoa.cpf.replace(/\D+/g, "");
+      // this.pessoa.cnpj = await this.pessoa.cnpj.replace(/\D+/g, "");
+      // this.pessoa.telefone = await this.pessoa.telefone.replace(/\D+/g, "");
       await this.http
         .post("endereco", this.endereco)
         .then(async resp_endereco => {

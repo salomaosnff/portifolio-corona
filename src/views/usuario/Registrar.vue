@@ -33,45 +33,51 @@
             <h4 class="mb-4 text-warning font-weight-bold">Criar Minha Conta</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Nome" v-model="pessoa.nome"></base-input>
-                <base-input class="mb-3" placeholder="Email" v-model="pessoa.email"></base-input>
+                <base-input class="mb-3" placeholder="Nome" v-model.trim="$v.pessoa.nome.$model"></base-input>
+                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.nome.required">Campo obrigatório!</div>
+                <base-input class="mb-3" placeholder="E-mail" v-model.trim="$v.pessoa.email.$model"></base-input>
+                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.email.required">Campo obrigatório!</div>
+                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.email.email">E-mail inválido!</div>
                 <base-input
                   class="mb-3"
                   placeholder="Telefone"
-                  v-model="pessoa.telefone"
+                  v-model.trim="$v.pessoa.telefone.$model"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
+                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.telefone.required">Campo obrigatório!</div>
 
                 <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>
                 <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">Pessoa Jurídica</base-radio>
 
                 <base-input
-                  v-if="pessoa.tipo == 'fisica'"
+                  v-if="pessoa.tipo === 'fisica'"
                   class="mb-3"
                   placeholder="CPF"
                   v-mask="'###.###.###-##'"
-                  v-model="pessoa.cpf"
+                  v-model="$v.pessoa.cpf.$model"
                 ></base-input>
                 <base-input
-                  v-if="pessoa.tipo == 'juridica'"
+                  v-if="pessoa.tipo === 'juridica'"
                   class="mb-3"
                   placeholder="CNPJ"
                   v-mask="'##.###.###/####-##'"
-                  v-model="pessoa.cnpj"
+                  v-model="$v.pessoa.cnpj.$model"
                 ></base-input>
-
                 <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.cliente">Interessado em Soluções</base-checkbox>
                 <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
 
-                <base-input placeholder="Nome de Usuário" v-model="pessoa.nome_usuario"></base-input>
-                <base-input type="password" placeholder="Senha" v-model="pessoa.senha"></base-input>
+                <base-input placeholder="Nome de Usuário" v-model="$v.pessoa.nome_usuario.$model"></base-input>
+                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.nome_usuario.required">Campo obrigatório!</div>
+                <base-input type="password" placeholder="Senha" v-model="$v.pessoa.senha.$model"></base-input>
+                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.senha.required">Campo obrigatório!</div>
                 <base-input
                   type="password"
                   placeholder="Confirmar Senha"
-                  v-model="confirmacao_senha"
-                  :valid="pessoa.senha == confirmacao_senha && pessoa.senha != ''"
+                  v-model="$v.confirmacao_senha"
+                  :valid="pessoa.senha === confirmacao_senha && pessoa.senha !== ''"
                 ></base-input>
+                
                 <div class="text-center">
                   <base-button
                     type="warning"
@@ -158,6 +164,8 @@
 <script>
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
+import { required, minLength, email, sameAs  } from "vuelidate/lib/validators"
+
 export default {
   components: {
     Dropdown
@@ -192,6 +200,24 @@ export default {
       confirmacao_senha: "",
       card: 1
     };
+  },
+
+  validations: {
+    pessoa: {
+      cpf: { required, minLength: minLength(11) },
+      cnpj: { required, minLength: minLength(14) },
+      nome: { required, minLength: minLength(4) },
+      email: { required, email },
+      telefone: { required },
+      nome_usuario: { required },
+      senha: { required, minLength: minLength(8) }
+    },
+    endereco: {
+      cep: { required, minLength: minLength(8) },
+      bairro: { required, minLength: minLength(4) },
+      logradouro: { required, minLength: minLength(8) },
+      numero: { required }
+    },
   },
 
   async mounted() {

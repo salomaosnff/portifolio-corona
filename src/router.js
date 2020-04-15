@@ -15,7 +15,7 @@ import SolucoesCadastro from "./views/solucoes/Cadastro.vue";
 import SolucoesLista from "./views/solucoes/Lista.vue";
 import Desenvolvimento from './views/genericas/Desenvolvimento.vue'
 import DashboardInvestimento from './views/investimentos/Dashboard.vue'
-import UsuarioSolucoesLista from './view/usuario/ListaSolucoesLista.vue'
+import UsuarioSolucoesLista from './views/usuario/SolucoesLista.vue'
 
 Vue.use(Router);
 

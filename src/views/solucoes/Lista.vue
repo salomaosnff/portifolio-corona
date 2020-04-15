@@ -252,7 +252,7 @@
               <p class="lead text-white font-weight-bold ml-2">{{busca}}</p>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div v-show="solucoes == [] || area_aplicacao || status || busca" class="col-lg-6">
             <div class="rounded overflow-hidden transform-perspective-right">
               <i class="ni ni-planet" style="font-size: 350px; color: white"></i>
             </div>

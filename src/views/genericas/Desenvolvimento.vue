@@ -18,11 +18,10 @@
               você poderá disfrutar de seus maravilhosos recursos ;)
             </p>
             <base-button
-              tag="a"
               icon="ni ni-bold-left"
               class="mt-4 text-warning text-capitalize"
               type="white"
-              href="#/"
+              @click="$router.go(-1)"
             >Voltar</base-button>
           </div>
           <div class="col-lg-6 mb-lg-auto">

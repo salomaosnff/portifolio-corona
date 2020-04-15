@@ -12,15 +12,25 @@ import Item from "./views/Item.vue";
 import Colaborador from "./views/Colaborador.vue";
 import Investidor from "./views/Investidor.vue";
 import SolucoesCadastro from "./views/solucoes/Cadastro.vue";
-import SucoesLista from "./views/solucoes/Lista.vue";
+import SolucoesLista from "./views/solucoes/Lista.vue";
 import Desenvolvimento from './views/genericas/Desenvolvimento.vue'
 import DashboardInvestimento from './views/investimentos/Dashboard.vue'
+import UsuarioSolucoesLista from './view/usuario/ListaSolucoesLista.vue'
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/usuario_solucoes_lista",
+      name: "usuario_solucoes_lista",
+      components: {
+        header: AppHeader,
+        default: UsuarioSolucoesLista,
+        footer: AppFooter
+      }
+    },
     {
       path: "/dashboard_investimento",
       name: "dashboard_investimento",
@@ -53,7 +63,7 @@ export default new Router({
       name: "solucoes_lista",
       components: {
         header: AppHeader,
-        default: SucoesLista,
+        default: SolucoesLista,
         footer: AppFooter
       }
     },

@@ -14,11 +14,10 @@
       <div class="row">
         <div class="col-md-2">
           <base-button
-            tag="a"
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
             type="white"
-            href="#/"
+            @click="$router.go(-1)"
           >Voltar</base-button>
         </div>
       </div>

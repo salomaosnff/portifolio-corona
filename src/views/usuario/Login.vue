@@ -14,11 +14,10 @@
       <div class="row">
         <div class="col-md-2">
           <base-button
-            tag="a"
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
             type="white"
-            href="#/"
+            @click="$router.go(-1)"
           >Voltar</base-button>
         </div>
       </div>
@@ -32,7 +31,7 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">Entre no REVIVE</h4>
+            <h4 class="mb-4 text-warning font-weight-bold text-center">Entrar no REVIVE</h4>
             <template>
               <form role="form">
                 <base-input class="mb-3" placeholder="Nome de Usuário" v-model="login.nome_usuario"></base-input>
@@ -43,21 +42,26 @@
                   v-model="login.senha"
                 ></base-input>
                 <div class="text-center">
-                  <base-button type="warning" class="my-4" @click="entrar()">Entrar</base-button>
+                  <base-button type="warning" class="my-4 text-capitalize" @click="entrar()">Login</base-button>
+                  <base-button
+                    type="white"
+                    text-color="warning"
+                    class="my-4 text-capitalize"
+                    @click="$router.push('registrar')"
+                  >Criar Conta</base-button>
                 </div>
               </form>
             </template>
           </card>
-          <div class="row mt-5 mb-5">
-            <div class="col-6">
-              <a href="#" class="text-light text-white">
-                <small>Esqueceu a senha?</small>
-              </a>
-            </div>
+          <div class="row mt-4 mb-5">
+            <div class="col-6"></div>
             <div class="col-6 text-right">
-              <a href="#/registrar" class="text-light text-white">
-                <small>Criar conta!</small>
-              </a>
+              <base-button
+                type="white"
+                text-color="warning"
+                class="ml-auto text-capitalize"
+                @click="$router.push('desenvolvimento')"
+              >Esqueceu a Senha?</base-button>
             </div>
           </div>
         </div>

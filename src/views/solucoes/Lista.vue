@@ -81,23 +81,31 @@
                 <h4 class="text-default">{{solucao.nome}}</h4>
                 <p
                   class="description mt-3"
-                >{{solucao.descricao.slice(0,250)}} {{solucao.descricao.length > 250? '...' : ''}}</p>
-                <div>
-                  <badge type="warning text-lowercase" rounded>#{{solucao.tipo}}</badge>
-                </div>
+                >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
+
+                <badge v-if="solucao.tipo" type="warning text-capitalize" rounded>#{{solucao.tipo}}</badge>
+                <badge
+                  v-if="solucao.area_aplicacao"
+                  type="warning text-capitalize"
+                  rounded
+                >#{{solucao.area_aplicacao}}</badge>
+                <badge
+                  v-if="solucao.status"
+                  type="warning text-capitalize"
+                  rounded
+                >#{{solucao.status}}</badge>
+                <badge
+                  v-if="solucao.cidade && solucao.cidade.nome"
+                  type="warning text-capitalize"
+                  rounded
+                >#{{solucao.cidade.nome}}</badge>
+
                 <div class="btn-wrapper">
                   <base-button
                     class="mt-4"
                     type="warning text-capitalize"
                     @click="modal(index)"
                   >Mais</base-button>
-                  <!-- <base-button
-                    tag="a"
-                    icon="fa fa-usd"
-                    class="ml-auto mt-4 text-warning text-capitalize"
-                    type="secondary"
-                    href="#/"
-                  >Doar</base-button>-->
                 </div>
               </card>
             </div>
@@ -125,6 +133,11 @@
           <h5 class="text-white text-lowercase">{{solucoes[index_modal].tipo}}</h5>
         </div>
 
+        <div v-if="solucoes[index_modal].area_aplicacao">
+          <p class="mt-4">Área de Aplicação</p>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].area_aplicacao}}</h5>
+        </div>
+
         <div v-if="solucoes[index_modal].instituicao">
           <p class="mt-4">Instituição</p>
           <h5 class="text-white text-capitalise">{{solucoes[index_modal].instituicao}}</h5>
@@ -137,56 +150,31 @@
           >De {{converter_data(solucoes[index_modal].inicio)}} a {{converter_data(solucoes[index_modal].fim) || 'Indefinido'}}</h5>
         </div>
 
-        <div v-if="solucoes[index_modal].descricao">
-          <p class="mt-4">Descrição</p>
-          <h5 class="text-white">{{solucoes[index_modal].descricao}}</h5>
-        </div>
-
         <div v-if="solucoes[index_modal].status">
           <p class="mt-4">Status</p>
           <h5 class="text-white text-capitalise">{{solucoes[index_modal].status}}</h5>
         </div>
 
-        <div v-if="solucoes[index_modal].area_aplicacao">
-          <p class="mt-4">Área de Aplicação</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].area_aplicacao}}</h5>
-        </div>
-
-        <div v-if="solucoes[index_modal].negocio">
-          <p class="mt-4">Negócio</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
-        </div>
-      </div>
-
-      <div v-if="pagina_modal == 'endereco'">
         <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
           <p>Disponível em</p>
           <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
           <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
         </div>
 
-        <div
-          v-if="solucoes[index_modal].endereco &&
-                  (solucoes[index_modal].endereco.pais ||
-                  solucoes[index_modal].endereco.estado ||
-                  solucoes[index_modal].endereco.cidade ||
-                  solucoes[index_modal].endereco.cep ||
-                  solucoes[index_modal].endereco.bairro||
-                  solucoes[index_modal].endereco.logradouro||
-                  solucoes[index_modal].endereco.numero)"
-        >
-          <p class="mt-4">Endereço</p>
-          <h5 class="text-white text">
-            {{solucoes[index_modal].endereco.pais}},
-            {{solucoes[index_modal].endereco.estado}},
-            {{solucoes[index_modal].endereco.cidade}},
-            {{solucoes[index_modal].endereco.cep}}
-          </h5>
-          <h5 class="text-white text mt-4">
-            {{solucoes[index_modal].endereco.bairro}},
-            {{solucoes[index_modal].endereco.logradouro}},
-            {{solucoes[index_modal].endereco.numero}}
-          </h5>
+        <div v-if="solucoes[index_modal].negocio">
+          <p class="mt-4">Negócio</p>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
+        </div>
+
+        <div v-if="solucoes[index_modal].cidade">
+          <p class="mt-4">Cidade</p>
+          <h5 class="text-white text">{{solucoes[index_modal].cidade.nome}}</h5>
+        </div>
+      </div>
+
+      <div v-if="pagina_modal == 'descricao'">
+        <div v-if="solucoes[index_modal].descricao">
+          <h5 class="text-white">{{solucoes[index_modal].descricao}}</h5>
         </div>
       </div>
 
@@ -222,11 +210,11 @@
         >Geral</base-button>
 
         <base-button
-          :type="pagina_modal == 'endereco'? 'white' : 'link'"
-          :text-color="pagina_modal == 'endereco'? 'warning' : 'white'"
+          :type="pagina_modal == 'descricao'? 'white' : 'link'"
+          :text-color="pagina_modal == 'descricao'? 'warning' : 'white'"
           class="ml-auto text-capitalize"
-          @click="pagina_modal = 'endereco'"
-        >Endereço</base-button>
+          @click="pagina_modal = 'descricao'"
+        >Descrição</base-button>
 
         <base-button
           :type="pagina_modal == 'responsavel'? 'white' : 'link'"
@@ -385,5 +373,3 @@ export default {
   }
 };
 </script>
-
-mudar o que tem em Endereco para Geral

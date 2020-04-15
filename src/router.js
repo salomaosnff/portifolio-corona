@@ -14,12 +14,22 @@ import Investidor from "./views/Investidor.vue";
 import SolucoesCadastro from "./views/solucoes/Cadastro.vue";
 import SucoesLista from "./views/solucoes/Lista.vue";
 import Desenvolvimento from './views/genericas/Desenvolvimento.vue'
+import DashboardInvestimento from './views/investimentos/Dashboard.vue'
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/dashboard_investimento",
+      name: "dashboard_investimento",
+      components: {
+        header: AppHeader,
+        default: DashboardInvestimento,
+        footer: AppFooter
+      }
+    },
     {
       path: "/desenvolvimento",
       name: "desenvolvimento",

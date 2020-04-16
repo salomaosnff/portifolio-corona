@@ -49,11 +49,11 @@
                   <p class="mt-3">{{solucao.descricao}}</p>
                   <div class="text-center">
                     <base-button
-                      tag="a"
-                      :href="solucao.link"
                       class="my-4"
                       type="warning text-capitalize"
                       style="font-size: 16px"
+                      @click="$router.push({ name: solucao.link, 
+                      query: { rota: solucao.props_to_link }})"
                     >{{solucao.botao}}</base-button>
                   </div>
                 </card>
@@ -154,7 +154,8 @@ export default {
           icone: "ni ni-bulb-61",
           botao: "Cadastrar",
           // link: "https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform"
-          link: "#/login"
+          link: "login",
+          props_to_link: "usuario_solucoes_lista"
         },
         {
           titulo: "Soluções",
@@ -162,7 +163,8 @@ export default {
             "Conheça AQUI as ideias inovadoras que você procura para combater o COVID-19.",
           icone: "ni ni-settings",
           botao: "Buscar",
-          link: "#/solucoes_lista"
+          link: "solucoes_lista",
+          props_to_link: ""
         },
         {
           titulo: "Apoio",
@@ -170,7 +172,8 @@ export default {
             "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19",
           icone: "ni ni-money-coins",
           botao: "Contribuir",
-          link: "#/dashboard_investimento"
+          link: "dashboard_investimento",
+          props_to_link: ""
         }
       ]
     };

@@ -1,14 +1,21 @@
 import axios from 'axios'
 
 const baseUrl = [
+    'http://localhost:3000/',
     'https://portifolio-corona-api.herokuapp.com/',
-    'http://localhost:3000/'
 ]
 // const baseUrl = ""
 export default class Http {
     async logar(dados) {
         return await axios
-            .get(baseUrl[0] + 'pessoa/logar', { params: { nome_usuario: dados.nome_usuario, senha: dados.senha } })
+            .get(baseUrl[0] + 'pessoa/logar', { params: { email: dados.email, senha: dados.senha } })
+            .then((data) => { return data.data })
+            .catch(() => { return {} })
+    }
+
+    async solucoesPorPessoa(dados) {
+        return await axios
+            .get(baseUrl[0] + 'solucao/buscarPorPessoa', { params: { pessoaId: dados } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }

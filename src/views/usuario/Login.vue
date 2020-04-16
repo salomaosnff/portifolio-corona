@@ -34,7 +34,7 @@
             <h4 class="mb-4 text-warning font-weight-bold text-center">Entrar no REVIVE</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Nome de Usuário" v-model="login.nome_usuario"></base-input>
+                <base-input class="mb-3" placeholder="Nome de Usuário" v-model="login.email"></base-input>
                 <base-input
                   type="password"
                   placeholder="Senha"
@@ -89,34 +89,34 @@ export default {
         endereco: undefined
       },
       login: {
-        nome_usuario: "",
+        email: "",
         senha: ""
       }
     };
   },
 
   async mounted() {
-    await this.getLogin();
+    await this.get_login();
   },
 
   methods: {
     async entrar() {
       let pessoa = undefined;
-      if (this.login.nome_usuario && this.login.senha) {
+      if (this.login.email && this.login.senha) {
         pessoa = await this.http.logar(this.login);
         if (pessoa && pessoa._id) {
           await localStorage.setItem("pessoa", JSON.stringify(pessoa));
-          this.$router.push("solucoes_cadastro");
+          this.$router.push(this.$route.query.rota);
         } else console.log("Credenciais Incorretas");
       }
     },
 
-    async getLogin() {
+    async get_login() {
       let pessoa = localStorage.getItem("pessoa");
       if (pessoa) {
         pessoa = JSON.parse(pessoa);
         this.pessoa = pessoa;
-        this.login.nome_usuario = this.pessoa.nome_usuario;
+        this.login.email = this.pessoa.email;
         this.login.senha = this.pessoa.senha;
       }
     }

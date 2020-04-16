@@ -28,7 +28,7 @@
           >Voltar</base-button>
         </div>
 
-        <div class="col-md-5 text-right">
+        <div class="col-md-4 text-right">
           <base-button
             icon="ni ni-bold-right"
             class="mb-5"
@@ -37,13 +37,21 @@
           >Ver Todas as Ideias</base-button>
         </div>
 
-        <div class="col-md-3 text-right">
+        <div class="col-md-4 text-right">
           <base-button
             icon="fa fa-plus"
             class="mb-5"
             type="warning text-capitalize"
             @click="$router.push('solucoes_cadastro')"
           >Cadastrar Nova Ideia</base-button>
+          <base-button
+            icon="fa fa-info"
+            class="mb-5 text-white btn-tooltip"
+            style="font-size: 20px; cursor: context-menu"
+            type="link"
+            v-b-tooltip.hover.left
+            title="Você pode Editar e/ou Excluir uma ideia já cadastrada!"
+          ></base-button>
         </div>
       </div>
 

@@ -16,19 +16,38 @@
         <div class="col-md-3 row ml-0">
           <base-button
             icon="fa fa-home"
-            class="mb-5 text-warning text-capitalize"
+            class="mb-4 text-warning text-capitalize"
             type="white"
             @click="$router.push('/')"
           ></base-button>
           <base-button
             icon="ni ni-bold-left"
-            class="mb-5 text-warning text-capitalize"
+            class="mb-4 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
           >Voltar</base-button>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-9 pr-0">
+          <div class="input-group input-group-alternative mb-4 bg-gradient-warning">
+            <input
+              @input="value => buscar()"
+              v-model="busca"
+              class="form-control"
+              placeholder="Buscar"
+              type="text"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="ni ni-zoom-split-in"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
           <dropdown>
             <base-button
               slot="title"
@@ -44,7 +63,7 @@
           </dropdown>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <dropdown>
             <base-button
               slot="title"
@@ -60,21 +79,20 @@
           </dropdown>
         </div>
 
-        <div class="col-md-3 pr-0">
-          <div class="input-group input-group-alternative mb-5 bg-gradient-warning">
-            <input
-              @input="value => buscar()"
-              v-model="busca"
-              class="form-control"
-              placeholder="Buscar"
-              type="text"
-            />
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="ni ni-zoom-split-in"></i>
-              </span>
-            </div>
-          </div>
+        <div class="col-md-4">
+          <dropdown>
+            <base-button
+              slot="title"
+              type="warning"
+              class="dropdown-toggle mb-5 text-capitalize"
+            >{{negocio || 'Tipo de Negócio'}}</base-button>
+            <a
+              v-for="(n, index) in negocios"
+              :key="index"
+              class="dropdown-item"
+              @click="negocio = n; buscar()"
+            >{{n}}</a>
+          </dropdown>
         </div>
       </div>
 
@@ -242,6 +260,12 @@
                 @click="limpar_filtros()"
               >Limpar filtros</base-button>
             </div>
+
+            <div class="row ml-1" v-show="busca">
+              <p class="lead text-white">Busca:</p>
+              <p class="lead text-white font-weight-bold ml-2">{{busca}}</p>
+            </div>
+
             <div class="row ml-1" v-show="area_aplicacao">
               <p class="lead text-white">Área de Atuação:</p>
               <p class="lead text-white font-weight-bold ml-2">{{area_aplicacao}}</p>
@@ -252,9 +276,9 @@
               <p class="lead text-white font-weight-bold ml-2">{{status}}</p>
             </div>
 
-            <div class="row ml-1" v-show="busca">
-              <p class="lead text-white">Busca:</p>
-              <p class="lead text-white font-weight-bold ml-2">{{busca}}</p>
+            <div class="row ml-1" v-show="negocio">
+              <p class="lead text-white">Tipo de Negócio:</p>
+              <p class="lead text-white font-weight-bold ml-2">{{negocio}}</p>
             </div>
           </div>
           <div v-show="solucoes == [] || area_aplicacao || status || busca" class="col-lg-6">
@@ -285,6 +309,7 @@ export default {
       busca: "",
       area_aplicacao: "",
       status: "",
+      negocio: "",
       satuss: [
         "Produto Comercializado",
         "Produto Lançado",
@@ -299,6 +324,14 @@ export default {
         "Educação",
         "Comunicação",
         "Social",
+        "Outros"
+      ],
+      negocios: [
+        "Disponível Gratuitamente",
+        "Disponível com Restrições",
+        "À Venda",
+        "À Procura de Financiamento Público",
+        "À Procura de Financiamento Privado",
         "Outros"
       ],
       modal_visible: false,
@@ -322,11 +355,12 @@ export default {
     },
 
     buscar() {
-      if (this.busca || this.area_aplicacao || this.status) {
+      if (this.busca || this.area_aplicacao || this.status || this.negocio) {
         let params = JSON.stringify({
           busca: this.busca,
           area_aplicacao: this.area_aplicacao,
-          status: this.status
+          status: this.status,
+          negocio: this.negocio
         });
         axios
           .get(

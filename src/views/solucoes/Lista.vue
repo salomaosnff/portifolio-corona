@@ -155,7 +155,7 @@
         </div>
 
         <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
-          <p>Disponível em</p>
+          <p class="mt-4">Disponível em</p>
           <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
           <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
         </div>
@@ -165,7 +165,7 @@
           <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
         </div>
 
-        <div v-if="solucoes[index_modal].cidade">
+        <div v-if="solucoes[index_modal].cidade && solucoes[index_modal].cidade.nome">
           <p class="mt-4">Cidade</p>
           <h5 class="text-white text">{{solucoes[index_modal].cidade.nome}}</h5>
         </div>
@@ -224,7 +224,7 @@
       </template>
     </modal>
 
-    <template v-show="busca_nao_encontrada">
+    <template v-if="busca_nao_encontrada">
       <div class="container pt-5 pb-lg">
         <div class="row justify-content-between align-items-center">
           <div v-show="area_aplicacao || status || busca" class="col-lg-5 mb-5 mb-lg-0">
@@ -330,8 +330,8 @@ export default {
           )
           .then(response => {
             this.solucoes = response.data.solucoes;
-            if (!this.solucoes[0]) this.busca_nao_encontrada = true;
-            else this.busca_nao_encontrada = false;
+            if (this.solucoes[0]) this.busca_nao_encontrada = false;
+            else this.busca_nao_encontrada = true;
           })
           .catch(error => {
             console.log(error);

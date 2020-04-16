@@ -69,7 +69,7 @@
                     @click="modal(index)"
                   >Mais</base-button>
                   <base-button class="mt-4" type="primary text-capitalize">Editar</base-button>
-                  <base-button class="mt-4" type="danger text-capitalize">Excluir</base-button>
+                  <base-button class="mt-4" type="warning text-capitalize">Excluir</base-button>
                 </div>
               </card>
             </div>
@@ -120,7 +120,7 @@
         </div>
 
         <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
-          <p>Disponível em</p>
+          <p class="mt-4">Disponível em</p>
           <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
           <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
         </div>
@@ -130,7 +130,7 @@
           <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
         </div>
 
-        <div v-if="solucoes[index_modal].cidade">
+        <div v-if="solucoes[index_modal].cidade && solucoes[index_modal].cidade.nome">
           <p class="mt-4">Cidade</p>
           <h5 class="text-white text">{{solucoes[index_modal].cidade.nome}}</h5>
         </div>

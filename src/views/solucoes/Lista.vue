@@ -13,7 +13,13 @@
 
     <div class="container pt-lg-md">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3 row ml-0">
+          <base-button
+            icon="fa fa-home"
+            class="mb-5 text-warning text-capitalize"
+            type="white"
+            @click="$router.push('/')"
+          ></base-button>
           <base-button
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
@@ -54,7 +60,7 @@
           </dropdown>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3 pr-0">
           <div class="input-group input-group-alternative mb-5 bg-gradient-warning">
             <input
               @input="value => buscar()"
@@ -129,7 +135,7 @@
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
           <p>Tipo</p>
-          <h5 class="text-white text-lowercase">{{solucoes[index_modal].tipo}}</h5>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].tipo}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].area_aplicacao">

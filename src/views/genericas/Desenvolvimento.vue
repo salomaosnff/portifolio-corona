@@ -17,12 +17,20 @@
               Estamos trabalhando no desenvolvimento desta página, em breve
               você poderá disfrutar de seus maravilhosos recursos ;)
             </p>
-            <base-button
-              icon="ni ni-bold-left"
-              class="mt-4 text-warning text-capitalize"
-              type="white"
-              @click="$router.go(-1)"
-            >Voltar</base-button>
+            <div class="row ml-0 mt-4">
+              <base-button
+                icon="fa fa-home"
+                class="mb-5 text-warning text-capitalize"
+                type="white"
+                @click="$router.push('/')"
+              ></base-button>
+              <base-button
+                icon="ni ni-bold-left"
+                class="mb-5 text-warning text-capitalize"
+                type="white"
+                @click="$router.go(-1)"
+              >Voltar</base-button>
+            </div>
           </div>
           <div class="col-lg-6 mb-lg-auto">
             <div class="rounded overflow-hidden transform-perspective-right">

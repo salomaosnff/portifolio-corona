@@ -13,7 +13,13 @@
 
     <div class="container pt-lg-md">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4 row ml-0">
+          <base-button
+            icon="fa fa-home"
+            class="mb-5 text-warning text-capitalize"
+            type="white"
+            @click="$router.push('/')"
+          ></base-button>
           <base-button
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
@@ -22,13 +28,13 @@
           >Voltar</base-button>
         </div>
 
-        <div class="col-md-7 text-right">
+        <div class="col-md-5 text-right">
           <base-button
             icon="ni ni-bold-right"
             class="mb-5"
             type="primary text-capitalize"
             @click="$router.push('solucoes_lista')"
-          >Ver Todas as Soluções</base-button>
+          >Ver Todas as Ideias</base-button>
         </div>
 
         <div class="col-md-3 text-right">
@@ -37,7 +43,7 @@
             class="mb-5"
             type="warning text-capitalize"
             @click="$router.push('solucoes_cadastro')"
-          >Cadastrar Nova Solução</base-button>
+          >Cadastrar Nova Ideia</base-button>
         </div>
       </div>
 
@@ -109,7 +115,7 @@
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
           <p>Tipo</p>
-          <h5 class="text-white text-lowercase">{{solucoes[index_modal].tipo}}</h5>
+          <h5 class="text-white text-capitalise">{{solucoes[index_modal].tipo}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].area_aplicacao">

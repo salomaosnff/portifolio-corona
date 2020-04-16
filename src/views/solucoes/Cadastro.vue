@@ -12,7 +12,13 @@
     </div>
     <div class="container pt-lg-md">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4 row ml-0">
+          <base-button
+            icon="fa fa-home"
+            class="mb-5 text-warning text-capitalize"
+            type="white"
+            @click="$router.push('/')"
+          ></base-button>
           <base-button
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
@@ -32,7 +38,7 @@
             <h4 class="mb-4 text-warning font-weight-bold">Cadastre sua Ideia</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Nome" v-model="solucao.nome"></base-input>
+                <base-input class="mb-3" placeholder="Nome da Ideia" v-model="solucao.nome"></base-input>
 
                 <div>
                   <p class="d-block mb-2">Data de Início</p>

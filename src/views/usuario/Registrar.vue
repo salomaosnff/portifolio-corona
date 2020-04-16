@@ -12,7 +12,13 @@
     </div>
     <div class="container pt-lg-md">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4 row ml-0">
+          <base-button
+            icon="fa fa-home"
+            class="mb-5 text-warning text-capitalize"
+            type="white"
+            @click="$router.push('/')"
+          ></base-button>
           <base-button
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
@@ -33,17 +39,29 @@
             <template>
               <form role="form">
                 <base-input class="mb-3" placeholder="Nome" v-model.trim="$v.pessoa.nome.$model"></base-input>
-                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.nome.required">Campo obrigatório!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.nome.required"
+                >Campo obrigatório!</div>
                 <base-input class="mb-3" placeholder="E-mail" v-model.trim="$v.pessoa.email.$model"></base-input>
-                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.email.required">Campo obrigatório!</div>
-                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.email.email">E-mail inválido!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.email.required"
+                >Campo obrigatório!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.email.email"
+                >E-mail inválido!</div>
                 <base-input
                   class="mb-3"
                   placeholder="Telefone"
                   v-model.trim="$v.pessoa.telefone.$model"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
-                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.telefone.required">Campo obrigatório!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.telefone.required"
+                >Campo obrigatório!</div>
 
                 <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>
                 <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">Pessoa Jurídica</base-radio>
@@ -67,16 +85,22 @@
                 <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
 
                 <base-input placeholder="Nome de Usuário" v-model="$v.pessoa.nome_usuario.$model"></base-input>
-                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.nome_usuario.required">Campo obrigatório!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.nome_usuario.required"
+                >Campo obrigatório!</div>
                 <base-input type="password" placeholder="Senha" v-model="$v.pessoa.senha.$model"></base-input>
-                <div class="error mb-3 ml-2 text-danger" v-show="!$v.pessoa.senha.required">Campo obrigatório!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.senha.required"
+                >Campo obrigatório!</div>
                 <base-input
                   type="password"
                   placeholder="Confirmar Senha"
                   v-model="$v.confirmacao_senha"
                   :valid="pessoa.senha === confirmacao_senha && pessoa.senha !== ''"
                 ></base-input>
-                
+
                 <div class="text-center">
                   <base-button
                     type="warning"
@@ -163,7 +187,7 @@
 <script>
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
-import { required, minLength, email, sameAs  } from "vuelidate/lib/validators"
+import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 
 export default {
   components: {
@@ -216,7 +240,7 @@ export default {
       bairro: { required, minLength: minLength(4) },
       logradouro: { required, minLength: minLength(8) },
       numero: { required }
-    },
+    }
   },
 
   async mounted() {

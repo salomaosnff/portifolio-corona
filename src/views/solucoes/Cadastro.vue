@@ -139,29 +139,29 @@
                 <base-radio
                   name="Produto Comercializado"
                   class="mb-3"
-                  v-model="solucao.area_aplicacao"
+                  v-model="solucao.status"
                 >Produto Comercializado</base-radio>
                 <base-radio
                   name="Produto Lançado"
                   class="mb-3"
-                  v-model="solucao.area_aplicacao"
+                  v-model="solucao.status"
                 >Produto Lançado</base-radio>
                 <base-radio
                   name="Produto Testado"
                   class="mb-3"
-                  v-model="solucao.area_aplicacao"
+                  v-model="solucao.status"
                 >Produto Testado</base-radio>
                 <base-radio
                   name="Produto Terminado"
                   class="mb-3"
-                  v-model="solucao.area_aplicacao"
+                  v-model="solucao.status"
                 >Produto Terminado</base-radio>
                 <base-radio
                   name="Produto em Desenvolvimento"
                   class="mb-3"
-                  v-model="solucao.area_aplicacao"
+                  v-model="solucao.status"
                 >Produto em Desenvolvimento</base-radio>
-                <base-radio name="Outros" class="mb-3" v-model="solucao.area_aplicacao">Outros</base-radio>
+                <base-radio name="Outros" class="mb-3" v-model="solucao.status">Outros</base-radio>
 
                 <h6 class="mb-3 text-warning font-weight-bold">Tipo de Negócio</h6>
                 <base-radio
@@ -226,7 +226,6 @@ export default {
         tipo: "",
         status: "",
         negocio: "",
-        observacoes: "",
         responsavel: { _id: "" },
         cidade: { _id: "" }
       },

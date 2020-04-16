@@ -69,7 +69,11 @@
                     @click="modal(index)"
                   >Mais</base-button>
                   <base-button class="mt-4" type="primary text-capitalize">Editar</base-button>
-                  <base-button class="mt-4" type="warning text-capitalize">Excluir</base-button>
+                  <base-button
+                    class="mt-4"
+                    type="warning text-capitalize"
+                    @click="excluir(solucao, false)"
+                  >Excluir</base-button>
                 </div>
               </card>
             </div>
@@ -80,7 +84,7 @@
 
     <modal
       v-if="solucoes[index_modal]"
-      :show.sync="modal_visible"
+      :show.sync="modal_visivel"
       gradient="warning"
       modal-classes="modal-danger modal-dialog-centered"
     >
@@ -189,6 +193,30 @@
       </template>
     </modal>
 
+    <modal
+      :show.sync="modal_excluir_visivel"
+      gradient="warning"
+      modal-classes="modal-warning modal-dialog-centered"
+    >
+      <h6 slot="header" class="modal-title" id="modal-title-notification">{{solucao_excluir.nome}}</h6>
+
+      <div class="py-3 text-center">
+        <i class="ni ni-bell-55 ni-3x"></i>
+        <h1 class="heading mt-4 text-capitalize">Você realmente deseja excluir esse registro?</h1>
+        <p>A exclusão é permantente e não poderá ser revertida!</p>
+      </div>
+
+      <template slot="footer">
+        <base-button type="white text-capitalize" @click="modal_excluir_visivel=false">Cancelar</base-button>
+        <base-button
+          type="link text-capitalize"
+          text-color="white"
+          class="ml-auto"
+          @click="excluir(solucao_excluir, true)"
+        >Excluir</base-button>
+      </template>
+    </modal>
+
     <template v-show="busca_nao_encontrada">
       <div class="container pt-5 pb-lg">
         <div class="row justify-content-between align-items-center">
@@ -261,7 +289,9 @@ export default {
         "Social",
         "Outros"
       ],
-      modal_visible: false,
+      solucao_excluir: {},
+      modal_visivel: false,
+      modal_excluir_visivel: false,
       index_modal: 0,
       pagina_modal: "geral",
       solucoes: [],
@@ -288,7 +318,7 @@ export default {
     modal(i) {
       this.index_modal = i;
       this.pagina_modal = "geral";
-      this.modal_visible = !this.modal_visible;
+      this.modal_visivel = !this.modal_visivel;
     },
 
     async get_login() {
@@ -306,8 +336,19 @@ export default {
           this.solucoes = resp;
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
+    },
+
+    async excluir(solucao, confirmado) {
+      if (confirmado) {
+        await this.http.delete("solucao", solucao._id);
+        this.modal_excluir_visivel = false;
+        this.get_login();
+      } else {
+        this.solucao_excluir = solucao;
+        this.modal_excluir_visivel = true;
+      }
     }
   }
 };

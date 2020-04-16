@@ -45,13 +45,12 @@
             @click="$router.push('solucoes_cadastro')"
           >Cadastrar Nova Ideia</base-button>
           <base-button
-            icon="fa fa-info"
-            class="mb-5 text-white btn-tooltip"
-            style="font-size: 20px; cursor: context-menu"
+            class="mb-5 text-white btn-tooltip text-capitalize"
+            style="cursor: context-menu; font-weight: bold"
             type="link"
             v-b-tooltip.hover.left
             title="Você pode Editar e/ou Excluir uma ideia já cadastrada!"
-          ></base-button>
+          >Info</base-button>
         </div>
       </div>
 

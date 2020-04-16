@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div class="col-lg-5 pb-5">
           <card
             shadow
             header-classes="bg-white pb-5"
@@ -237,6 +237,7 @@ export default {
   },
 
   async mounted() {
+    if (this.$route.query.solucao) this.solucao = this.$route.query.solucao;
     await this.buscar_estados();
     await this.buscar_cidades();
   },
@@ -268,16 +269,26 @@ export default {
     },
 
     async salvar() {
-      let pessoa = localStorage.getItem("pessoa");
-      if (pessoa) pessoa = JSON.parse(pessoa);
-      this.solucao.responsavel._id = pessoa._id;
+      if (this.$route.query.solucao && this.solucao._id) {
+        this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
+        this.solucao.fim = Date.parse(this.converter_data(this.fim));
 
-      this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
-      this.solucao.fim = Date.parse(this.converter_data(this.fim));
+        this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
+          if (resp.message == "Editado com sucesso!")
+            this.$router.push("usuario_solucoes_lista");
+        });
+      } else {
+        let pessoa = localStorage.getItem("pessoa");
+        if (pessoa) pessoa = JSON.parse(pessoa);
+        this.solucao.responsavel._id = pessoa._id;
 
-      this.http.post("solucao", this.solucao).then(resp => {
-        if (resp._id) this.$router.push("solucoes_lista");
-      });
+        this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
+        this.solucao.fim = Date.parse(this.converter_data(this.fim));
+
+        this.http.post("solucao", this.solucao).then(resp => {
+          if (resp._id) this.$router.push("usuario_solucoes_lista");
+        });
+      }
     }
   }
 };

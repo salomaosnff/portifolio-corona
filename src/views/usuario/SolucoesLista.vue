@@ -22,7 +22,14 @@
           >Voltar</base-button>
         </div>
 
-        <div class="col-md-7"></div>
+        <div class="col-md-7 text-right">
+          <base-button
+            icon="ni ni-bold-right"
+            class="mb-5"
+            type="primary text-capitalize"
+            @click="$router.push('solucoes_lista')"
+          >Ver Todas as Soluções</base-button>
+        </div>
 
         <div class="col-md-3 text-right">
           <base-button
@@ -68,7 +75,11 @@
                     type="white text-capitalize"
                     @click="modal(index)"
                   >Mais</base-button>
-                  <base-button class="mt-4" type="primary text-capitalize">Editar</base-button>
+                  <base-button
+                    class="mt-4"
+                    type="primary text-capitalize"
+                    @click="editar(solucao)"
+                  >Editar</base-button>
                   <base-button
                     class="mt-4"
                     type="warning text-capitalize"
@@ -338,6 +349,13 @@ export default {
         .catch(error => {
           console.error(error);
         });
+    },
+
+    async editar(solucao) {
+      this.$router.push({
+        name: "solucoes_cadastro",
+        query: { solucao: solucao }
+      });
     },
 
     async excluir(solucao, confirmado) {

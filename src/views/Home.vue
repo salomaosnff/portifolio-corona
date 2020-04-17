@@ -66,8 +66,8 @@
                   </div>
                   <div v-for="(botao, index) in botoes" :key="index" class="text-center">
                     <base-button
-                      tag="a"
-                      :href="botao.link"
+                      @click="$router.push({ name: botao.link, 
+                      query: { rota: botao.props_to_link }})"
                       class="mt-4"
                       type="warning text-capitalize"
                       style="font-size: 16px"
@@ -115,36 +115,23 @@
         </div>
       </div>
     </section>
-    <!-- <section>
-      <h1>TEST Carousel</h1>
-      <div>
-        <b-carousel id="carousel1" controls indicators>
-          <b-carousel-slide img-src="/img/theme/img-1-1200x1000.jpg"></b-carousel-slide>
-          <b-carousel-slide img-src="/img/theme/img-2-1200x1000.jpg"></b-carousel-slide>
-        </b-carousel>
-      </div>
-    </section>-->
   </div>
 </template>
 
 <script>
 import Modal from "@/components/Modal.vue";
-// import { BCarousel } from "bootstrap-vue";
-// import { BCarouselSlide } from "bootstrap-vue";
 export default {
   components: {
     Modal
-    // BCarousel,
-    // BCarouselSlide,
   },
   data() {
     return {
       index_modal_info: 0,
       modal_info: false,
       botoes: [
-        { titulo: "Fórum", link: "#/desenvolvimento" },
-        { titulo: "Notícias", link: "#/desenvolvimento" },
-        { titulo: "Resultados", link: "#/desenvolvimento" }
+        { titulo: "Fórum", link: "login", props_to_link: "forum_lista" },
+        { titulo: "Notícias", link: "desenvolvimento", props_to_link: "" },
+        { titulo: "Resultados", link: "desenvolvimento", props_to_link: "" }
       ],
       solucoes: [
         {
@@ -153,7 +140,6 @@ export default {
             "Compartilhe AQUI ações e produtos de combate ao COVID-19 para um mundo melhor.",
           icone: "ni ni-bulb-61",
           botao: "Cadastrar",
-          // link: "https://docs.google.com/forms/d/e/1FAIpQLSdtwV7kK4IuRuTO5qQ60IxvWXfE-CwEmQ_a3dlD_2rFlolcQg/viewform"
           link: "login",
           props_to_link: "usuario_solucoes_lista"
         },

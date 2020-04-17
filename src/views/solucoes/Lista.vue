@@ -166,13 +166,6 @@
           <h5 class="text-white text-capitalise">{{solucoes[index_modal].instituicao}}</h5>
         </div>
 
-        <div v-if="solucoes[index_modal].inicio">
-          <p class="mt-4">Período</p>
-          <h5
-            class="text-white text-capitalise"
-          >De {{converter_data(solucoes[index_modal].inicio)}} a {{converter_data(solucoes[index_modal].fim) || 'Indefinido'}}</h5>
-        </div>
-
         <div v-if="solucoes[index_modal].status">
           <p class="mt-4">Status</p>
           <h5 class="text-white text-capitalise">{{solucoes[index_modal].status}}</h5>

@@ -40,34 +40,6 @@
               <form role="form">
                 <base-input class="mb-3" placeholder="Nome da Ideia" v-model="solucao.nome"></base-input>
 
-                <div>
-                  <p class="d-block mb-2">Data de Início</p>
-                  <base-input addon-left-icon="ni ni-calendar-grid-58">
-                    <flat-picker
-                      slot-scope="{focus, blur}"
-                      @on-open="focus"
-                      @on-close="blur"
-                      :config="{allowInput: true, dateFormat: 'd/m/Y'}"
-                      class="form-control datepicker"
-                      v-model="inicio"
-                    ></flat-picker>
-                  </base-input>
-                </div>
-
-                <div>
-                  <p class="d-block mb-2">Data de Término</p>
-                  <base-input addon-left-icon="ni ni-calendar-grid-58">
-                    <flat-picker
-                      slot-scope="{focus, blur}"
-                      @on-open="focus"
-                      @on-close="blur"
-                      :config="{allowInput: true, dateFormat: 'd/m/Y'}"
-                      class="form-control datepicker"
-                      v-model="fim"
-                    ></flat-picker>
-                  </base-input>
-                </div>
-
                 <base-input
                   class="mb-3"
                   placeholder="Instituição ou Empresa"
@@ -94,7 +66,7 @@
                       v-for="(item, index) in estados"
                       :key="index"
                       class="dropdown-item"
-                      @click="estado = item; buscar_cidades()"
+                      @click="estado = item; buscar_cidades(true)"
                     >{{item.nome}}</a>
                   </dropdown>
                 </div>
@@ -217,12 +189,7 @@ export default {
   data() {
     return {
       http: new http(),
-      inicio: "",
-      fim: "",
       solucao: {
-        // palavra_chave // Em desenvolvimento na API ainda
-        inicio: "",
-        fim: "",
         nome: "",
         instituicao: "",
         link_web: "",
@@ -243,9 +210,19 @@ export default {
   },
 
   async mounted() {
-    if (this.$route.query.solucao) this.solucao = this.$route.query.solucao;
     await this.buscar_estados();
-    await this.buscar_cidades();
+    if (!this.$route.query.solucao) await this.buscar_cidades(true);
+    else {
+      this.solucao = await this.$route.query.solucao;
+      await this.http
+        .getId("estado", this.solucao.cidade.estado)
+        .then(async data => {
+          this.estado = await data;
+          await this.buscar_cidades(false);
+          this.solucao.cidade = await this.$route.query.solucao.cidade;
+        });
+      console.log(this.estado);
+    }
   },
 
   methods: {
@@ -255,11 +232,11 @@ export default {
       });
     },
 
-    async buscar_cidades() {
+    async buscar_cidades(definir_cidade) {
       if (this.estado && this.estado._id)
         await this.http.cidadesByEstado(this.estado._id).then(async data => {
           this.cidades = await data.cidades;
-          if (this.cidades[0] && this.cidades[0]._id)
+          if (definir_cidade && this.cidades[0] && this.cidades[0]._id)
             this.solucao.cidade = this.cidades[0];
         });
     },
@@ -276,9 +253,6 @@ export default {
 
     async salvar() {
       if (this.$route.query.solucao && this.solucao._id) {
-        this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
-        this.solucao.fim = Date.parse(this.converter_data(this.fim));
-
         this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
           if (resp.message == "Editado com sucesso!")
             this.$router.push("usuario_solucoes_lista");
@@ -287,9 +261,6 @@ export default {
         let pessoa = localStorage.getItem("pessoa");
         if (pessoa) pessoa = JSON.parse(pessoa);
         this.solucao.responsavel._id = pessoa._id;
-
-        this.solucao.inicio = Date.parse(this.converter_data(this.inicio));
-        this.solucao.fim = Date.parse(this.converter_data(this.fim));
 
         this.http.post("solucao", this.solucao).then(resp => {
           if (resp._id) this.$router.push("usuario_solucoes_lista");

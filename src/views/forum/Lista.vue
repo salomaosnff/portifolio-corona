@@ -28,7 +28,7 @@
           >Voltar</base-button>
         </div>
 
-        <div class="col-md-4 text-right">
+        <div class="col-md-4 text-right pr-0">
           <base-button
             v-if="tipo_forum == 'meus'"
             icon="ni ni-chat-round"
@@ -45,7 +45,7 @@
           >Ver Meus Fóruns</base-button>
         </div>
 
-        <div class="col-md-4 text-right">
+        <div class="col-md-4 text-right pr-0">
           <base-button
             icon="fa fa-plus"
             class="mb-5"

@@ -16,12 +16,32 @@ import SolucoesLista from "./views/solucoes/Lista.vue";
 import Desenvolvimento from './views/genericas/Desenvolvimento.vue'
 import DashboardInvestimento from './views/investimentos/Dashboard.vue'
 import UsuarioSolucoesLista from './views/usuario/SolucoesLista.vue'
+import ForumLista from './views/forum/Lista.vue'
+import ForumCadastro from './views/forum/Cadastro.vue'
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/forum_cadastro",
+      name: "forum_cadastro",
+      components: {
+        header: AppHeader,
+        default: ForumCadastro,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/forum_lista",
+      name: "forum_lista",
+      components: {
+        header: AppHeader,
+        default: ForumLista,
+        footer: AppFooter
+      }
+    },
     {
       path: "/usuario_solucoes_lista",
       name: "usuario_solucoes_lista",

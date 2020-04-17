@@ -50,7 +50,7 @@
             icon="fa fa-plus"
             class="mb-5"
             type="warning text-capitalize"
-            @click="$router.push('forums_cadastro')"
+            @click="$router.push('forum_cadastro')"
           >Cadastrar Novo Fórum</base-button>
         </div>
       </div>
@@ -179,42 +179,6 @@
         >Excluir</base-button>
       </template>
     </modal>
-
-    <template v-show="busca_nao_encontrada">
-      <div class="container pt-5 pb-lg">
-        <div class="row justify-content-between align-items-center">
-          <div v-show="area_aplicacao || status || busca" class="col-lg-5 mb-5 mb-lg-0">
-            <div class="row ml-1">
-              <h1 class="text-white font-weight-light">Nada aqui</h1>
-              <base-button
-                class="ml-5 mb-4 mt-2 text-warning text-capitalize"
-                type="white"
-                @click="limpar_filtros()"
-              >Limpar filtros</base-button>
-            </div>
-            <div class="row ml-1" v-show="area_aplicacao">
-              <p class="lead text-white">Área de Atuação:</p>
-              <p class="lead text-white font-weight-bold ml-2">{{area_aplicacao}}</p>
-            </div>
-
-            <div class="row ml-1" v-show="status">
-              <p class="lead text-white">Status:</p>
-              <p class="lead text-white font-weight-bold ml-2">{{status}}</p>
-            </div>
-
-            <div class="row ml-1" v-show="busca">
-              <p class="lead text-white">Busca:</p>
-              <p class="lead text-white font-weight-bold ml-2">{{busca}}</p>
-            </div>
-          </div>
-          <div v-show="forums == [] || area_aplicacao || status || busca" class="col-lg-6">
-            <div class="rounded overflow-hidden transform-perspective-right">
-              <i class="ni ni-planet" style="font-size: 350px; color: white"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
   </section>
 </template>
 
@@ -231,7 +195,7 @@ export default {
   },
   data() {
     return {
-      tipo_forum: "todos",
+      tipo_forum: "meus",
       pessoa: {},
       http: new http(),
       forum_excluir: {},
@@ -239,8 +203,7 @@ export default {
       modal_excluir_visivel: false,
       index_modal: 0,
       pagina_modal: "geral",
-      forums: [],
-      busca_nao_encontrada: false
+      forums: []
     };
   },
 
@@ -277,7 +240,7 @@ export default {
       if (pessoa) {
         pessoa = await JSON.parse(pessoa);
         this.pessoa = await pessoa;
-        this.get_forums();
+        this.get_forums_por_pessoa();
       }
     },
 
@@ -305,7 +268,7 @@ export default {
 
     async editar(forum) {
       this.$router.push({
-        name: "forums_cadastro",
+        name: "forum_cadastro",
         query: { forum: forum }
       });
     },

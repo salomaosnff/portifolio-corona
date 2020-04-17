@@ -177,13 +177,10 @@
   </section>
 </template>
 <script>
-import flatPicker from "vue-flatpickr-component";
-import "flatpickr/dist/flatpickr.css";
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
 export default {
   components: {
-    flatPicker,
     Dropdown
   },
   data() {
@@ -204,8 +201,7 @@ export default {
       },
       estado: { _id: undefined },
       estados: [],
-      cidades: [],
-      link_home: "#/"
+      cidades: []
     };
   },
 
@@ -221,7 +217,6 @@ export default {
           await this.buscar_cidades(false);
           this.solucao.cidade = await this.$route.query.solucao.cidade;
         });
-      console.log(this.estado);
     }
   },
 
@@ -241,15 +236,15 @@ export default {
         });
     },
 
-    converter_data(data) {
-      data =
-        data.substring(6, 10) +
-        "-" +
-        data.substring(3, 5) +
-        "-" +
-        data.substring(0, 2);
-      return data;
-    },
+    // converter_data(data) {
+    //   data =
+    //     data.substring(6, 10) +
+    //     "-" +
+    //     data.substring(3, 5) +
+    //     "-" +
+    //     data.substring(0, 2);
+    //   return data;
+    // },
 
     async salvar() {
       if (this.$route.query.solucao && this.solucao._id) {

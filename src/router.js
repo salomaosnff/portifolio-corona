@@ -5,7 +5,7 @@ import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
 import Landing from "./views/Landing.vue";
 import Login from "./views/usuario/Login.vue";
-import Registrar from "./views/usuario/Registrar.vue";
+import Registro from "./views/usuario/Registro.vue";
 import Profile from "./views/Profile.vue";
 import Home from "./views/Home.vue";
 import Item from "./views/Item.vue";
@@ -131,11 +131,11 @@ export default new Router({
       }
     },
     {
-      path: "/registrar",
-      name: "registrar",
+      path: "/registro",
+      name: "registro",
       components: {
         header: AppHeader,
-        default: Registrar,
+        default: Registro,
         footer: AppFooter
       }
     },

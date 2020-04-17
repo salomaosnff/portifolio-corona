@@ -47,7 +47,7 @@
                     type="white"
                     text-color="warning"
                     class="my-4 text-capitalize"
-                    @click="$router.push('registrar')"
+                    @click="$router.push('registro')"
                   >Criar Conta</base-button>
                 </div>
               </form>

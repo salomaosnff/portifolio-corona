@@ -20,6 +20,13 @@ export default class Http {
             .catch(() => { return {} })
     }
 
+    async forunsPorPessoa(dados) {
+        return await axios
+            .get(baseUrl[0] + 'forum/buscarPorPessoa', { params: { pessoaId: dados } })
+            .then((data) => { return data.data })
+            .catch(() => { return {} })
+    }
+
     async cidadesByEstado(dados) {
         return await axios
             .get(baseUrl[0] + 'cidade/estado/' + dados)

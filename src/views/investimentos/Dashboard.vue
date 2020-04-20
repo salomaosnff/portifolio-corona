@@ -85,7 +85,7 @@
           type="white"
           text-color="warning"
           class="text-capitalize"
-          @click="$router.push('solucoes_lista')"
+          @click="modal_router()"
         >Lista de Ideias</base-button>
       </template>
     </modal>
@@ -151,6 +151,16 @@ export default {
     modal(i) {
       this.index_modal = i;
       this.modal_visivel = true;
+    },
+
+    async modal_router() {
+      this.fechar_modal().then(() => this.$router.push("solucoes_lista"));
+      //Foi necessário utilizar força bruta, pois o await não funcionou.
+    },
+
+    async fechar_modal() {
+      this.modal_visivel = await false;
+      return;
     }
   }
 };

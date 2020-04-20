@@ -143,7 +143,8 @@ export default {
       botoes: [
         { titulo: "Fórum", link: "login", props_to_link: "forum_lista" },
         { titulo: "Notícias", link: "desenvolvimento", props_to_link: "" },
-        { titulo: "Resultados", link: "desenvolvimento", props_to_link: "" }
+        { titulo: "Resultados", link: "desenvolvimento", props_to_link: "" },
+        { titulo: "Teste", link: "test", props_to_link: ""}
       ],
       solucoes: [
         {

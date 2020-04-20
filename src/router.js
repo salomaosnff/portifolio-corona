@@ -18,6 +18,7 @@ import DashboardInvestimento from './views/investimentos/Dashboard.vue'
 import UsuarioSolucoesLista from './views/usuario/SolucoesLista.vue'
 import ForumLista from './views/forum/Lista.vue'
 import ForumCadastro from './views/forum/Cadastro.vue'
+import Test from "./views/Test.vue"
 
 Vue.use(Router);
 
@@ -165,6 +166,15 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Profile,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/test",
+      name: "test",
+      components: {
+        header: AppHeader,
+        default: Test,
         footer: AppFooter
       }
     }

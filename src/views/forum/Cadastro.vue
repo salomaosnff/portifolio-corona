@@ -47,7 +47,7 @@
                 ></base-input>
                 <p
                   class="small"
-                >Você deve criar um Fórum no WhatsApp ou Telegram e inserir o link no campo acima.</p>
+                >Crie um grupo no WhatsApp e insira o link no campo acima.</p>
 
                 <textarea
                   class="form-control mb-3"

@@ -108,7 +108,6 @@
         v-if="forums[index_modal] && forums[index_modal].nome"
         slot="header"
         class="modal-title"
-        id="modal-title-notification"
       >{{forums[index_modal].nome}}</h4>
 
       <div v-if="pagina_modal == 'geral'">
@@ -160,7 +159,7 @@
       gradient="warning"
       modal-classes="modal-warning modal-dialog-centered"
     >
-      <h6 slot="header" class="modal-title" id="modal-title-notification">{{forum_excluir.nome}}</h6>
+      <h6 slot="header" class="modal-title">{{forum_excluir.nome}}</h6>
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>
@@ -184,15 +183,23 @@
       gradient="warning"
       modal-classes="modal-warning modal-dialog-centered"
     >
-      <h6 slot="header" class="modal-title" id="modal-title-notification">Entrar no Fórum</h6>
+      <h6 slot="header" class="modal-title">Como Entrar no Fórum?</h6>
 
       <div class="py-3 text-center">
-        <i class="ni ni-world ni-3x"></i>
-        <h1 class="heading mt-4 text-capitalize">{{link_forum}}</h1>
-        <p class="mt-4">O link foi copiado para sua área de transferência!</p>
-        <h1
-          class="heading mt-4 text-normal"
-        >Cole o link dentro de uma mensagem no seu WhatsApp e clique nele para entrar no Fórum!</h1>
+        <p class="mt-4 text-italic">{{link_forum}}</p>
+        <p class="mt-4">O link já foi copiado para sua área de transferência!</p>
+        <base-button
+          outline
+          size="sm"
+          class="mt-2 text-normal text-italic"
+          type="white"
+          icon="ni ni-ungroup"
+        >Copiar link novamente</base-button>
+        <p class="mt-4">. . .</p>
+        <h1 class="mt-4 heading text-normal">1. Envie o link para um de seus contatos no WhatsApp.</h1>
+        <h1 class="mt-4 heading text-normal">2. Clique em "Ver grupo" para entrar no Fórum.</h1>
+        <p class="mt-4">. . .</p>
+        <p class="mt-4">Use Ctrl + V para colar o link no WhatsApp!</p>
       </div>
 
       <template slot="footer">

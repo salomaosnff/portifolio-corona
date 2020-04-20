@@ -65,13 +65,6 @@
                   class="description mt-3"
                 >{{forum.descricao.slice(0,100)}} {{forum.descricao.length > 100? '...' : ''}}</p>
 
-                <badge
-                  v-if="forum.link"
-                  style="text-transform: none"
-                  type="warning"
-                  rounded
-                >{{forum.link}}</badge>
-
                 <div class="btn-wrapper">
                   <base-button
                     :text-color="tipo_forum == 'meus'? 'warning' : 'white'"
@@ -79,6 +72,12 @@
                     :type="tipo_forum == 'meus'? 'white' : 'warning'"
                     @click="modal(index)"
                   >Mais</base-button>
+                  <base-button
+                    class="mt-4 text-normal"
+                    type="white"
+                    text-color="warning"
+                    @click="copiar_link(forum.link)"
+                  >Entrar no Fórum</base-button>
                   <base-button
                     v-if="tipo_forum == 'meus'"
                     class="mt-4"
@@ -179,6 +178,32 @@
         >Excluir</base-button>
       </template>
     </modal>
+
+    <modal
+      :show.sync="modal_entrar_forum_visivel"
+      gradient="warning"
+      modal-classes="modal-warning modal-dialog-centered"
+    >
+      <h6 slot="header" class="modal-title" id="modal-title-notification">Entrar no Fórum</h6>
+
+      <div class="py-3 text-center">
+        <i class="ni ni-world ni-3x"></i>
+        <h1 class="heading mt-4 text-capitalize">{{link_forum}}</h1>
+        <p class="mt-4">O link foi copiado para sua área de transferência!</p>
+        <h1
+          class="heading mt-4 text-normal"
+        >Cole o link dentro de uma mensagem no seu WhatsApp e clique nele para entrar no Fórum!</h1>
+      </div>
+
+      <template slot="footer">
+        <base-button
+          type="link text-capitalize"
+          text-color="white"
+          class="ml-auto"
+          @click="modal_entrar_forum_visivel = false"
+        >Entendi</base-button>
+      </template>
+    </modal>
   </section>
 </template>
 
@@ -201,6 +226,8 @@ export default {
       forum_excluir: {},
       modal_visivel: false,
       modal_excluir_visivel: false,
+      modal_entrar_forum_visivel: false,
+      link_forum: "",
       index_modal: 0,
       pagina_modal: "geral",
       forums: []
@@ -212,6 +239,18 @@ export default {
   },
 
   methods: {
+    copiar_link(link) {
+      this.link_forum = link;
+      let el = document.createElement("textarea");
+      el.value = link;
+      el.style = { display: "none" };
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      this.modal_entrar_forum_visivel = true;
+    },
+
     mudar_tipo_forum(tipo) {
       this.tipo_forum = tipo;
       if (tipo == "todos") this.get_forums();

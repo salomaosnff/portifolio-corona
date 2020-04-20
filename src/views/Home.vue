@@ -16,9 +16,7 @@
             alt="logo"
           />
         </div>
-
-        <div class="col-lg-6 text-right">
-        </div>
+        <div class="col-lg-6 text-right"></div>
       </div>
 
       <div class="shape shape-style-1 bg-gradient-warning shape-skew">

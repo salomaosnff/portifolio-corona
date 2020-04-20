@@ -45,9 +45,7 @@
                   placeholder="Link para Entrar no Fórum"
                   v-model="forum.link"
                 ></base-input>
-                <p
-                  class="small"
-                >Crie um grupo no WhatsApp e insira o link no campo acima.</p>
+                <p class="small">Crie um grupo no WhatsApp e insira o link no campo acima.</p>
 
                 <textarea
                   class="form-control mb-3"

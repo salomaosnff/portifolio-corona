@@ -200,6 +200,15 @@
         <h1 class="mt-4 heading text-normal">2. Clique em "Ver grupo" para entrar no Fórum.</h1>
         <p class="mt-4">. . .</p>
         <p class="mt-4">Use Ctrl + V para colar o link no WhatsApp!</p>
+        <base-button
+          href="https://web.whatsapp.com/"
+          outline
+          size="sm"
+          class="mt-2 text-normal text-italic"
+          type="white"
+          tag="a"
+          target="_blank"
+        >Abrir WhatsApp Web</base-button>
       </div>
 
       <template slot="footer">

@@ -1,5 +1,12 @@
 <template>
   <div>
+    <section>
+      <div class="locale-changer">
+        <select v-model="$i18n.locale">
+          <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
+        </select>
+      </div>
+    </section>
     <section class="section-shaped my-0">
       <div class="row">
         <div class="col-lg-6">
@@ -56,7 +63,7 @@
                     <h4
                       style="margin-top: 10px; margin-left: 20px"
                       class="text-default"
-                    >{{solucao.titulo}}</h4>
+                    >{{$t(solucao.titulo)}}</h4>
                   </div>
                   <p class="mt-3">{{solucao.descricao}}</p>
                   <div class="text-center">
@@ -133,11 +140,13 @@
 <script>
 import Modal from "@/components/Modal.vue";
 export default {
+  name: "locale-changer",
   components: {
     Modal
   },
   data() {
     return {
+      langs: ["pt_BR", "en_US"],
       index_modal_info: 0,
       modal_info: false,
       botoes: [

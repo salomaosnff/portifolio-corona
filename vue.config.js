@@ -9,6 +9,7 @@ module.exports = {
       })
     ]
   },
+
   pwa: {
     name: 'Vue Argon Design',
     themeColor: '#172b4d',
@@ -16,8 +17,18 @@ module.exports = {
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: '#172b4d'
   },
+
   css: {
     // Enable CSS source maps.
     sourceMap: process.env.NODE_ENV !== 'production'
+  },
+
+  pluginOptions: {
+    i18n: {
+      locale: 'pt_BR',
+      fallbackLocale: 'pt_BR',
+      localeDir: 'locales',
+      enableInSFC: true
+    }
   }
 };

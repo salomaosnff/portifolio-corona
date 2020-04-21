@@ -2,6 +2,7 @@
     "Ideias": "Ideias",
     "Soluções": "Soluções",
     "Apoio": "Apoio",
+    "Outros": "Outros",
     "Home": {
         "Introdução": {
             "Título": "É TEMPO DE RECOMEÇAR !",
@@ -22,6 +23,17 @@
                 "Título": "Apoio",
                 "Descrição": "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19.",
                 "Botão": "Contribuir"
+            }
+        ],
+        "Outros": [
+            {
+                "Título": "Fórum"
+            },
+            {
+                "Título": "Notícias"
+            },
+            {
+                "Título": "Resultados"
             }
         ]
     }

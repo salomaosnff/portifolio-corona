@@ -79,7 +79,10 @@
                 <card class="border-0" shadow body-classes="py-5">
                   <div class="row" style="margin-left: 1px">
                     <icon name="ni ni-books" gradient="warning" color="white" shadow rounded></icon>
-                    <h4 style="margin-top: 10px; margin-left: 20px" class="text-default">Outros</h4>
+                    <h4
+                      style="margin-top: 10px; margin-left: 20px"
+                      class="text-default"
+                    >{{$t('Outros')}}</h4>
                   </div>
                   <div v-for="(botao, index) in botoes" :key="index" class="text-center">
                     <base-button
@@ -88,7 +91,7 @@
                       class="mt-4"
                       type="warning text-capitalize"
                       style="font-size: 16px"
-                    >{{botao.titulo}}</base-button>
+                    >{{$t('Home.Outros['+index+'].Título')}}</base-button>
                   </div>
                 </card>
               </div>
@@ -147,9 +150,9 @@ export default {
       index_modal_info: 0,
       modal_info: false,
       botoes: [
-        { titulo: "Fórum", link: "login", props_to_link: "forum_lista" },
-        { titulo: "Notícias", link: "desenvolvimento", props_to_link: "" },
-        { titulo: "Resultados", link: "desenvolvimento", props_to_link: "" }
+        { link: "login", props_to_link: "forum_lista" },
+        { link: "desenvolvimento", props_to_link: "" },
+        { link: "desenvolvimento", props_to_link: "" }
         // { titulo: "Teste", link: "test", props_to_link: ""}
       ],
       cards: [

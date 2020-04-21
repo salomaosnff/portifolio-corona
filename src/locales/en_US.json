@@ -2,6 +2,7 @@
     "Ideias": "Ideas",
     "Soluções": "Solutions",
     "Apoio": "Support",
+    "Outros": "Others",
     "Home": {
         "Introdução": {
             "Título": "TIME TO START ANEW !",
@@ -22,6 +23,17 @@
                 "Título": "Support",
                 "Descrição": "Give your support HERE to existing solutions to combat COVID-19.",
                 "Botão": "Help"
+            }
+        ],
+        "Outros": [
+            {
+                "Título": "Forum"
+            },
+            {
+                "Título": "News"
+            },
+            {
+                "Título": "Results"
             }
         ]
     }

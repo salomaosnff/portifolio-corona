@@ -44,11 +44,8 @@
             padding: 15px; opacity: .9; margin-left: 400px; margin-top: -200px"
           class="text-white"
         >
-          É TEMPO DE RECOMEÇAR !
-          <h5 class="text-white text-justify mt-3">
-            Esse "VÍRUS Embriagado" não é mais forte do que um País sóbrio e solidário. Somos uma plataforma integrada e colaborativa de AÇÕES e PROJETOS de combate ao COVID-19.
-            Cadastre aqui o seu projeto (IDEIAS). Conheça aqui os projetos existentes (SOLUÇÕES). Dê seu apoio (APOIO).
-          </h5>
+          {{$t('Home.Introdução.Título')}}
+          <h5 class="text-white text-justify mt-3">{{$t('Home.Introdução.Descrição')}}</h5>
         </h5>
       </div>
     </section>
@@ -57,24 +54,24 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="row row-grid">
-              <div v-for="(solucao, index) in solucoes" :key="index" class="col-lg-4 mb-5">
+              <div v-for="(card, index) in cards" :key="index" class="col-lg-4 mb-5">
                 <card class="border-0" shadow body-classes="py-5">
                   <div class="row" style="margin-left: 1px">
-                    <icon :name="solucao.icone" gradient="warning" color="white" shadow rounded></icon>
+                    <icon :name="card.icone" gradient="warning" color="white" shadow rounded></icon>
                     <h4
                       style="margin-top: 10px; margin-left: 20px"
                       class="text-default"
-                    >{{$t(solucao.titulo)}}</h4>
+                    >{{$t('Home.Cards[' + index + '].Título')}}</h4>
                   </div>
-                  <p class="mt-3">{{solucao.descricao}}</p>
+                  <p class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
                   <div class="text-center">
                     <base-button
                       class="my-4"
                       type="warning text-capitalize"
                       style="font-size: 16px"
-                      @click="$router.push({ name: solucao.link, 
-                      query: { rota: solucao.props_to_link }})"
-                    >{{solucao.botao}}</base-button>
+                      @click="$router.push({ name: card.link, 
+                      query: { rota: card.props_to_link }})"
+                    >{{$t('Home.Cards[' + index + '].Botão')}}</base-button>
                   </div>
                 </card>
               </div>
@@ -155,31 +152,19 @@ export default {
         { titulo: "Resultados", link: "desenvolvimento", props_to_link: "" }
         // { titulo: "Teste", link: "test", props_to_link: ""}
       ],
-      solucoes: [
+      cards: [
         {
-          titulo: "Ideias",
-          descricao:
-            "Compartilhe AQUI ações e produtos de combate ao COVID-19 para um mundo melhor.",
           icone: "ni ni-bulb-61",
-          botao: "Cadastrar",
           link: "login",
           props_to_link: "usuario_solucoes_lista"
         },
         {
-          titulo: "Soluções",
-          descricao:
-            "Conheça AQUI as ideias inovadoras que você procura para combater o COVID-19.",
           icone: "ni ni-settings",
-          botao: "Buscar",
           link: "solucoes_lista",
           props_to_link: ""
         },
         {
-          titulo: "Apoio",
-          descricao:
-            "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19",
           icone: "ni ni-money-coins",
-          botao: "Contribuir",
           link: "dashboard_investimento",
           props_to_link: ""
         }

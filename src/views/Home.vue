@@ -1,12 +1,5 @@
 <template>
   <div>
-    <section>
-      <div class="locale-changer">
-        <select v-model="$i18n.locale">
-          <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
-        </select>
-      </div>
-    </section>
     <section class="section-shaped my-0">
       <div class="row">
         <div class="col-lg-6">
@@ -23,7 +16,15 @@
             alt="logo"
           />
         </div>
-        <div class="col-lg-6 text-right"></div>
+        <div class="col-lg-6 text-right" style="padding-right: 30px">
+          <img
+            v-for="(idioma) in idiomas"
+            :key="idioma"
+            :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag']"
+            :src="'img/home/' + idioma + '.png'"
+            @click="$i18n.locale = idioma"
+          />
+        </div>
       </div>
 
       <div class="shape shape-style-1 bg-gradient-warning shape-skew">
@@ -140,13 +141,12 @@
 <script>
 import Modal from "@/components/Modal.vue";
 export default {
-  name: "locale-changer",
   components: {
     Modal
   },
   data() {
     return {
-      langs: ["pt_BR", "en_US"],
+      idiomas: ["pt_BR", "en_US"],
       index_modal_info: 0,
       modal_info: false,
       botoes: [

@@ -6,7 +6,9 @@ import './registerServiceWorker'
 import VueTheMask from 'vue-the-mask'
 import Vuelidate from 'vuelidate'
 import i18n from './i18n'
+import TreeView from "vue-json-tree-view"
 
+Vue.use(TreeView)
 Vue.use(Vuelidate)
 Vue.use(Argon)
 Vue.use(VueTheMask)

@@ -36,12 +36,19 @@
             class="border-0"
           >          
             <h4 class="mb-4 text-warning font-weight-bold">Teste</h4>
-            <form rule="form">
+            <form @submit.prevent="onSubmit">
+            <base-alert type="danger" v-show="error">
+                <strong>Erro!</strong> Verifique os campos destacados!
+            </base-alert>
               <base-input
-                class="mb-3" placeholder="Nome" v-model.trim="$v.form.name.$model">
+                name="name" class="mb-3" type="text" placeholder="Nome" v-model.trim="$v.form.name.$model" :valid="field_valid.name">
               </base-input>
-              <base-input placeholder="exemplo@exemplo.com" v-model.trim="$v.form.email.$model" :valid=false>
-              </base-input>                   
+              <base-input name="email" type="email" placeholder="exemplo@exemplo.com" v-model="$v.form.email.$model" :valid="field_valid.email">
+              </base-input>
+              <button name="submit" class="mb-3 btn" type="submit">
+                Submit
+              </button>              
+              <tree-view class="mb-3" :data="$v.form" :options="{rootObjectKey: '$v.form', maxDepth: 2}"></tree-view>
             </form>
 
           </card>
@@ -62,8 +69,13 @@ export default {
   data() {
     return {
       form: {
-        name: "",
-        email: ""
+        name: null,
+        email: null
+      },
+      error: false,
+      field_valid: {
+        name: null,
+        email: null
       }
     };
   },
@@ -73,17 +85,34 @@ export default {
       name: { required, min: minLength(10) },
       email: { required, email }
     }
+
   },
 
   methods: {
-    submit() {
+    onSubmit() {
       this.$v.form.$touch();
-      if(this.$v.form.$error) return
-      // to form submit after this
-      alert('Form submitted')
+      console.log("Enter submit");
+      if(this.$v.form.$anyError) {
+        this.error = true;
+        if (this.$v.form.name.$invalid)
+          this.field_valid.name = !this.$v.form.$invalid;
+        if (this.$v.form.email.$invalid)
+          this.field_valid.email = !this.$v.form.email.$invalid;
+        console.log("Error was ocurred!");
+        return;
+      }
+      // to form submit after this    
+      this.resetFieldsInvalid();
+    },
+
+    resetFieldsValid() {
+      this.field_valid.name = null;
+      this.field_valid.email = null;
     }
   }
 };
 </script>
 <style>
-</style>
+</style>>
+
+

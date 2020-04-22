@@ -146,7 +146,7 @@ export default {
   },
   data() {
     return {
-      idiomas: ["pt_BR", "en_US"],
+      idiomas: ["pt_BR", "en"],
       index_modal_info: 0,
       modal_info: false,
       botoes: [

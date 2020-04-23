@@ -41,7 +41,16 @@
         <div class="row">
           <div class="col-lg-4"></div>
           <div class="col-lg-8">
-            <card v-show="carousel == '0'" class="mt-5" style="background-color: #ffffffee" shadow>
+            <div class="row text-center" style="justify-content: right">
+              <button
+                v-for="(c, index) in carousels"
+                :key="index"
+                :class="[carousel == index? 'btn_bottom_carousel_selected text-white' : 'text-warning', 'mx-3 btn_bottom_carousel']"
+                @click="carousel = index"
+              >{{c}}</button>
+            </div>
+
+            <card v-show="carousel == '0'" class="mt-4" style="background-color: #ffffffee" shadow>
               <div class="row" style="margin-left: 1px">
                 <icon name="ni ni-world" gradient="warning" color="white" shadow rounded></icon>
                 <h4
@@ -100,10 +109,21 @@
                   </div>
                 </div>
               </div>
-              <p class="small text-right mr-5 text-thin">Fonte: {{noticias_corona.fonte}}</p>
+              <div class="row" style="justify-content: right">
+                <base-button
+                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                  outline
+                  size="sm"
+                  class="mb-4 mr-5 text-normal text-italic"
+                  type="warning"
+                  tag="a"
+                  target="_blank"
+                >Ver Monitor do COVID-19</base-button>
+                <!-- <p class="small text-right mr-5 text-thin">Fonte: {{noticias_corona.fonte}}</p> -->
+              </div>
             </card>
 
-            <card v-show="carousel == '1'" class="mt-5" style="background-color: #ffffffee" shadow>
+            <card v-show="carousel == '1'" class="mt-4" style="background-color: #ffffffee" shadow>
               <div class="row" style="margin-left: 1px">
                 <h4
                   style="margin-top: 10px; margin-left: 20px"
@@ -114,15 +134,6 @@
                 <h5 class="text-thin">{{$t('Home.Introdução.Descrição')}}</h5>
               </div>
             </card>
-
-            <div class="row text-center" style="justify-content: center">
-              <button
-                v-for="(c, index) in carousels"
-                :key="index"
-                :class="[carousel == c? 'btn_bottom_carousel_selected' : '', 'my-4 text-warning btn_bottom_carousel']"
-                @click="carousel = c"
-              ></button>
-            </div>
           </div>
         </div>
       </div>
@@ -229,8 +240,8 @@ export default {
   data() {
     return {
       http: new http(),
-      carousel: "0",
-      carousels: ["0", "1"],
+      carousel: 0,
+      carousels: ["COVID-19", "Introdução"],
       noticias_corona: {},
       idiomas: ["pt_BR", "en"],
       index_modal_info: 0,

@@ -28,33 +28,34 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div class="col-lg-5 pb-5">
           <card
             shadow
             header-classes="bg-white pb-5"
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">Cadastro da Ideia</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">Cadastre sua Ideia</h4>
             <template>
               <form role="form">
-                <base-alert type="danger" v-show="error">
-                    <strong>Dados inválidos!</strong> Verifique os campos destacados!
-                </base-alert>                
+                <base-input class="mb-3" placeholder="Nome da Ideia" v-model="solucao.nome"></base-input>
+
                 <base-input
                   class="mb-3"
-                  placeholder="Nome da ideia (projeto)"
-                  v-model="$v.ideia.nome.$model"
-                  :valid="valido.nome"
+                  placeholder="Instituição ou Empresa"
+                  v-model="solucao.instituicao"
                 ></base-input>
 
-                <base-input 
-                  class="mb-3" 
-                  placeholder="Nome da Instituição" 
-                  v-model="$v.ideia.instituicao.$model"
-                  :valid="valido.instituicao"
+                <base-input class="mb-3" placeholder="Link do Site" v-model="solucao.link_web"></base-input>
+
+                <base-input
+                  class="mb-3"
+                  placeholder="Link do YouTube"
+                  v-model="solucao.link_youtube"
                 ></base-input>
+
                 <div class="mb-3">
+                  <p class="d-block mb-2">Estado</p>
                   <dropdown>
                     <base-button
                       slot="title"
@@ -65,52 +66,107 @@
                       v-for="(item, index) in estados"
                       :key="index"
                       class="dropdown-item"
-                      @click="estado = item; buscar_cidades()"
+                      @click="estado = item; buscar_cidades(true)"
                     >{{item.nome}}</a>
                   </dropdown>
                 </div>
 
-                <div class="mb-3" v-if="endereco.cidade && endereco.cidade._id">
+                <div class="mb-3" v-if="solucao.cidade && solucao.cidade._id">
                   <p class="d-block mb-2">Cidade</p>
                   <dropdown>
                     <base-button
                       slot="title"
                       type="warning"
                       class="dropdown-toggle text-capitalize"
-                    >{{endereco.cidade.nome || "Selecione sua Cidade"}}</base-button>
+                    >{{solucao.cidade.nome || "Selecione sua Cidade"}}</base-button>
                     <a
                       v-for="(item, index) in cidades"
                       :key="index"
                       class="dropdown-item"
-                      @click="endereco.cidade = item"
+                      @click="solucao.cidade = item"
                     >{{item.nome}}</a>
                   </dropdown>
                 </div>
-                <textarea 
-                  class="mb-3 form-control" 
-                  :style="valido.descricao" 
-                  id="descricaoFormTextArea" 
-                  rows="3" 
-                  placeholder="Descreva sua ideia aqui..." 
-                  v-model="$v.ideia.descricao.$model"
+
+                <textarea
+                  class="form-control mb-3"
+                  placeholder="Descrição"
+                  v-model="solucao.descricao"
                 ></textarea>
-                <h6 class="mb-4 text-warning font-weight-bold">Área de Aplicação</h6>
-                <base-checkbox class="mb-3" v-model="ideia.area_de_aplicacao.saude">Saúde</base-checkbox>
-                <base-checkbox class="mb-3" v-model="ideia.area_de_aplicacao.economia">Economia</base-checkbox>
-                <base-checkbox class="mb-3" v-model="ideia.area_de_aplicacao.educacao">Educação</base-checkbox>
-                <base-checkbox class="mb-3" v-model="ideia.area_de_aplicacao.comunicacao">Comunicação</base-checkbox>
-                <base-checkbox class="mb-3" v-model="ideia.area_de_aplicacao.social">Social</base-checkbox>
-                <base-checkbox class="mb-3" v-model="ideia.area_de_aplicacao.outros">Outros</base-checkbox>
-                
-                <h6 class="mb-4 text-warning font-weight-bold">Status da Ideia</h6>
-                <base-radio name="comercializado" class="mb-3" v-model="ideia.status.escolhido">Produto Comercializado</base-radio>
-                <base-radio name="lancado" class="mb-3" v-model="ideia.status.escolhido">Produto Lançado</base-radio>
-                <base-radio name="testado" class="mb-3" v-model="ideia.status.escolhido">Produto Testado</base-radio>
-                <base-radio name="terminado" class="mb-3" v-model="ideia.status.escolhido">Produto Terminado</base-radio>
-                <base-radio name="desenvolvimento" class="mb-3" v-model="ideia.status.escolhido">Produto em Desenvolvimento</base-radio>
-                <base-radio name="outros" class="mb-3" v-model="ideia.status.escolhido">Outros</base-radio>
+
+                <h6 class="mb-3 text-warning font-weight-bold">Área de Aplicação</h6>
+                <base-radio name="Saúde" class="mb-3" v-model="solucao.area_aplicacao">Saúde</base-radio>
+                <base-radio name="Economia" class="mb-3" v-model="solucao.area_aplicacao">Economia</base-radio>
+                <base-radio name="Educação" class="mb-3" v-model="solucao.area_aplicacao">Educação</base-radio>
+                <base-radio
+                  name="Comunicação"
+                  class="mb-3"
+                  v-model="solucao.area_aplicacao"
+                >Comunicação</base-radio>
+                <base-radio name="Social" class="mb-3" v-model="solucao.area_aplicacao">Social</base-radio>
+                <base-radio name="Outros" class="mb-3" v-model="solucao.area_aplicacao">Outros</base-radio>
+
+                <h6 class="mb-3 text-warning font-weight-bold">Tipo</h6>
+                <base-radio name="Software" class="mb-3" v-model="solucao.tipo">Software</base-radio>
+                <base-radio name="Hardware" class="mb-3" v-model="solucao.tipo">Hardware</base-radio>
+                <base-radio name="Processo" class="mb-3" v-model="solucao.tipo">Processo</base-radio>
+                <base-radio name="Material" class="mb-3" v-model="solucao.tipo">Material</base-radio>
+                <base-radio name="Outros" class="mb-3" v-model="solucao.tipo">Outros</base-radio>
+
+                <h6 class="mb-3 text-warning font-weight-bold">Status</h6>
+                <base-radio
+                  name="Produto Comercializado"
+                  class="mb-3"
+                  v-model="solucao.status"
+                >Produto Comercializado</base-radio>
+                <base-radio
+                  name="Produto Lançado"
+                  class="mb-3"
+                  v-model="solucao.status"
+                >Produto Lançado</base-radio>
+                <base-radio
+                  name="Produto Testado"
+                  class="mb-3"
+                  v-model="solucao.status"
+                >Produto Testado</base-radio>
+                <base-radio
+                  name="Produto Terminado"
+                  class="mb-3"
+                  v-model="solucao.status"
+                >Produto Terminado</base-radio>
+                <base-radio
+                  name="Produto em Desenvolvimento"
+                  class="mb-3"
+                  v-model="solucao.status"
+                >Produto em Desenvolvimento</base-radio>
+                <base-radio name="Outros" class="mb-3" v-model="solucao.status">Outros</base-radio>
+
+                <h6 class="mb-3 text-warning font-weight-bold">Tipo de Negócio</h6>
+                <base-radio
+                  name="Disponível Gratuitamente"
+                  class="mb-3"
+                  v-model="solucao.negocio"
+                >Disponível Gratuitamente</base-radio>
+                <base-radio
+                  name="Disponível com Restrições"
+                  class="mb-3"
+                  v-model="solucao.negocio"
+                >Disponível com Restrições</base-radio>
+                <base-radio name="À Venda" class="mb-3" v-model="solucao.negocio">À Venda</base-radio>
+                <base-radio
+                  name="À Procura de Financiamento Público"
+                  class="mb-3"
+                  v-model="solucao.negocio"
+                >À Procura de Financiamento Público</base-radio>
+                <base-radio
+                  name="À Procura de Financiamento Privado"
+                  class="mb-3"
+                  v-model="solucao.negocio"
+                >À Procura de Financiamento Privado</base-radio>
+                <base-radio name="Outros" class="mb-3" v-model="solucao.negocio">Outros</base-radio>
+
                 <div class="text-center">
-                  <base-button class="my-4" type="warning" @click="onSubmit">Cadastrar</base-button>
+                  <base-button type="warning" class="mt-4" @click="salvar()">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -123,8 +179,6 @@
 <script>
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
-import { required, minLength, maxLength, sameAs } from "vuelidate/lib/validators";
-
 export default {
   components: {
     Dropdown
@@ -132,127 +186,75 @@ export default {
   data() {
     return {
       http: new http(),
-      ideia: {
+      solucao: {
         nome: "",
         instituicao: "",
-        endereco: { _id: "" },
+        link_web: "",
+        link_youtube: "",
         descricao: "",
-        area_de_aplicacao: {
-          saude: true,
-          economia: false,
-          educacao: false,
-          comunicacao: false,
-          social: false,
-          outros: false
-        },
-        status: {
-          escolhido: "desenvolvimento"
-        }
+        area_aplicacao: "",
+        tipo: "",
+        status: "",
+        negocio: "",
+        responsavel: { _id: "" },
+        cidade: { _id: "" }
       },
-      endereco: {
-        cidade: { _id: "" },
-      },
-      estado: { _id: "" },
+      estado: { _id: undefined },
       estados: [],
-      cidades: [],
-      valido: {
-        nome: null,
-        instituicao: null,
-        descricao: null
-      },
-      error: false
+      cidades: []
     };
   },
-
-  validations: {
-    ideia: {
-      nome: { required, minLength: minLength(4) },
-      instituicao: { required, minLength: minLength(4), maxLength: maxLength(50) },
-      descricao: {required, minLength: minLength(10), maxLength: maxLength(300)},
-    }
-  },
-
   async mounted() {
     await this.buscar_estados();
-    await this.buscar_cidades();
+    if (!this.$route.query.solucao) await this.buscar_cidades(true);
+    else {
+      this.solucao = await this.$route.query.solucao;
+      await this.http
+        .getId("estado", this.solucao.cidade.estado)
+        .then(async data => {
+          this.estado = await data;
+          await this.buscar_cidades(false);
+          this.solucao.cidade = await this.$route.query.solucao.cidade;
+        });
+    }
   },
-
   methods: {
-    onSubmit() {
-      this.$v.ideia.$touch();
-
-      if(this.$v.ideia.$anyError) {
-        this.error = true;
-        if (this.$v.ideia.nome.$invalid)
-          this.valido.nome = !this.$v.ideia.nome.$invalid;
-        if (this.$v.ideia.instituicao.$invalid)
-          this.valido.instituicao = !this.$v.ideia.instituicao.$invalid;
-        if (this.$v.ideia.descricao.$invalid)
-          this.valido.descricao = "border-color:red";
-        //TODO: Validar area de aplicacao e Status da Ideia
-        return;
-      }
-
-      // Submeter apos insenção de erros
-      this.resetaCamposValidos();
-      //TODO: Enviar registro ao banco de dados
-      this.$router.push('solucoes_lista');
-    },
-
-    resetaCamposValidos() {
-      this.error = false;
-      this.valido.nome = null;
-      this.valido.instituicao = null;
-      this.valido.descricao = null;
-    },
-
     async buscar_estados() {
       await this.http.get("estado", 0).then(async data => {
         this.estados = await data;
       });
     },
-
-    async buscar_cidades() {
+    async buscar_cidades(definir_cidade) {
       if (this.estado && this.estado._id)
         await this.http.cidadesByEstado(this.estado._id).then(async data => {
           this.cidades = await data.cidades;
-          if (this.cidades[0] && this.cidades[0]._id)
-            this.endereco.cidade = this.cidades[0];
+          if (definir_cidade && this.cidades[0] && this.cidades[0]._id)
+            this.solucao.cidade = this.cidades[0];
         });
     },
-
+    // converter_data(data) {
+    //   data =
+    //     data.substring(6, 10) +
+    //     "-" +
+    //     data.substring(3, 5) +
+    //     "-" +
+    //     data.substring(0, 2);
+    //   return data;
+    // },
     async salvar() {
-      // this.endereco.cep = await this.endereco.cep.replace(/\D+/g, "");
-      // this.pessoa.cpf = await this.pessoa.cpf.replace(/\D+/g, "");
-      // this.pessoa.cnpj = await this.pessoa.cnpj.replace(/\D+/g, "");
-      // this.pessoa.telefone = await this.pessoa.telefone.replace(/\D+/g, "");
-      await this.http
-        .post("endereco", this.endereco)
-        .then(async resp_endereco => {
-          if (resp_endereco._id) {
-            this.pessoa.endereco = resp_endereco._id;
-            await this.http
-              .post("pessoa", this.pessoa)
-              .then(async resp_pessoa => {
-                if (resp_pessoa._id) {
-                  this.pessoa._id = resp_pessoa._id;
-                  await localStorage.setItem(
-                    "pessoa",
-                    JSON.stringify(this.pessoa)
-                  );
-                  this.$router.push("solucoes_cadastro");
-                }
-              })
-              .catch(err => {
-                console.log("Erro ao Salvar a Pessoa");
-                console.error(err);
-              });
-          }
-        })
-        .catch(err => {
-          console.log("Erro ao Salvar o Endereço");
-          console.error(err);
+      if (this.$route.query.solucao && this.solucao._id) {
+        this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
+          if (resp.message == "Editado com sucesso!")
+            this.$router.push("usuario_solucoes_lista");
         });
+      } else {
+        let pessoa = localStorage.getItem("pessoa");
+        if (pessoa) pessoa = JSON.parse(pessoa);
+        this.solucao.responsavel._id = pessoa._id;
+        this.http.post("solucao", this.solucao).then(resp => {
+          if (resp._id) this.$router.push("usuario_solucoes_lista");
+        });
+      }
     }
   }
 };

@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div class="col-lg-5 pb-5">
           <card
             shadow
             header-classes="bg-white pb-5"
@@ -38,27 +38,31 @@
             <h4 class="mb-4 text-warning font-weight-bold">Criar Minha Conta</h4>
             <template>
               <form role="form">
-                <base-alert type="danger" v-show="error">
-                    <strong>Dados inválidos!</strong> Verifique os campos destacados!
-                </base-alert>                
-                <base-input 
-                  class="mb-3" 
-                  placeholder="Nome Completo" 
-                  v-model="$v.pessoa.nome.$model" 
-                  :valid="valido.nome"></base-input>
+                <base-input class="mb-3" placeholder="Nome" v-model.trim="$v.pessoa.nome.$model"></base-input>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.nome.required"
+                >Campo obrigatório!</div>
+                <base-input class="mb-3" placeholder="E-mail" v-model.trim="$v.pessoa.email.$model"></base-input>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.email.required"
+                >Campo obrigatório!</div>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.email.email"
+                >E-mail inválido!</div>
                 <base-input
                   class="mb-3"
                   placeholder="Telefone"
-                  v-model.number="$v.pessoa.telefone.$model"
-                  v-mask="['(##) #### - ####', '(##) ##### - ####']"
-                  :valid="valido.telefone"
-                ></base-input>
-                <base-input
-                  class="mb-3"
-                  placeholder="WhatsApp (opcional)"
-                  v-model.number="pessoa.wapp"
+                  v-model.trim="$v.pessoa.telefone.$model"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.telefone.required"
+                >Campo obrigatório!</div>
+                <base-input placeholder="WhatsApp" v-model="pessoa.whatsapp"></base-input>
 
                 <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>
                 <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">Pessoa Jurídica</base-radio>
@@ -66,43 +70,35 @@
                 <base-input
                   v-if="pessoa.tipo === 'fisica'"
                   class="mb-3"
-                  placeholder="CPF (opcional)"
+                  placeholder="CPF"
                   v-mask="'###.###.###-##'"
-                  v-model.number="pessoa.cpf"
+                  v-model="$v.pessoa.cpf.$model"
                 ></base-input>
                 <base-input
                   v-if="pessoa.tipo === 'juridica'"
-                  type="number"
                   class="mb-3"
-                  placeholder="CNPJ (opcional)"
+                  placeholder="CNPJ"
                   v-mask="'##.###.###/####-##'"
-                  v-model.number="pessoa.cnpj"
+                  v-model="$v.pessoa.cnpj.$model"
                 ></base-input>
-                <base-input 
-                  class="mb-3" 
-                  placeholder="E-mail" 
-                  v-model.trim="$v.pessoa.email.$model"
-                  :valid="valido.email"
-                ></base-input>
-                <base-input 
-                  type="password" 
-                  placeholder="Senha (mínimo de 8 caracteres)" 
-                  v-model="$v.pessoa.senha.$model"
-                  :valid="valido.senha"
-                ></base-input>
+                <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>
+                <base-checkbox class="mb-3" v-model="pessoa.cliente">Interessado em Soluções</base-checkbox>
+                <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
+
+                <base-input type="password" placeholder="Senha" v-model="$v.pessoa.senha.$model"></base-input>
+                <div
+                  class="error mb-3 ml-2 text-danger"
+                  v-show="!$v.pessoa.senha.required"
+                >Campo obrigatório!</div>
                 <base-input
                   type="password"
                   placeholder="Confirmar Senha"
-                  v-model="$v.pessoa.confirmacao_senha.$model"
-                  :valid="valido.confirmacao_senha"
+                  v-model="$v.confirmacao_senha"
+                  :valid="pessoa.senha == confirmacao_senha && pessoa.senha != ''"
                 ></base-input>
+
                 <div class="text-center">
-                  <base-button
-                    type="warning"
-                    class="my-4 btn-warning btn"
-                    icon="ni ni-bold-right"
-                    @click="onSubmit"
-                  >Próximo</base-button>
+                  <base-button class="mt-4" type="warning" @click="salvar()">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -114,78 +110,60 @@
 </template>
 <script>
 import http from "../../services/http";
-import { required, minLength, maxLength, email, sameAs } from "vuelidate/lib/validators";
-
+import Dropdown from "../../components/BaseDropdown.vue";
+import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 export default {
   components: {
+    Dropdown
   },
   data() {
     return {
       http: new http(),
       pessoa: {
-        nome: "",
+        colaborador: false,
+        investidor: false,
+        cliente: false,
         tipo: "fisica",
         cpf: "",
         cnpj: "",
-        telefone: "",
-        wapp: "",
+        nome: "",
         email: "",
-        senha: "",
-        confirmacao_senha: ""
+        telefone: "",
+        whatsapp: "",
+        senha: ""
       },
-      valido: {
-        nome: null,
-        telefone: null,
-        email: null,
-        senha: null,
-        confirmacao_senha: null
-      },
-      error: false
+      confirmacao_senha: ""
     };
   },
-
   validations: {
     pessoa: {
-      nome: { required, minLength: minLength(4), maxLength: maxLength(50) },
-      email: { required, email, maxLength:maxLength(50) },
+      cpf: { required, minLength: minLength(11) },
+      cnpj: { required, minLength: minLength(14) },
+      nome: { required, minLength: minLength(4) },
+      email: { required, email },
       telefone: { required },
-      senha: { required, minLength: minLength(8), maxLength: maxLength(50) },
-      confirmacao_senha: { required, mesma_como: sameAs("senha")}
-    },
+      senha: { required, minLength: minLength(8) }
+    }
   },
 
-  methods: {
-    onSubmit() {
-      this.$v.pessoa.$touch();
+  async mounted() {},
 
-      if(this.$v.pessoa.$anyError) {
-        this.error = true;
-        if (this.$v.pessoa.nome.$invalid)
-          this.valido.nome = !this.$v.pessoa.nome.$invalid;
-        if (this.$v.pessoa.telefone.$invalid)
-          this.valido.telefone = !this.$v.pessoa.telefone.$invalid;
-        if (this.$v.pessoa.email.$invalid)
-          this.valido.email = !this.$v.pessoa.email.$invalid;
-        if (this.$v.pessoa.senha.$invalid)
-          this.valido.senha = !this.$v.pessoa.senha.$invalid;
-        if (this.$v.pessoa.confirmacao_senha.$invalid)
-          this.valido.confirmacao_senha = !this.$v.pessoa.confirmacao_senha.$invalid;
-        return;
-      }
-      // Submeter apos insenção de erros
-      this.resetaCamposValidos();
-      //TODO: Enviar registro ao banco de dados
-      this.$router.push('solucoes_cadastro');
-    },    
-    
-    resetaCamposValidos() {
-      this.error = false;
-      this.valido.nome = null;
-      this.valido.telefone = null;
-      this.valido.email = null;
-      this.valido.senha = null;
-      this.valido.confirmacao_senha = null;
-    }    
+  methods: {
+    async salvar() {
+      await this.http
+        .post("pessoa", this.pessoa)
+        .then(async resp_pessoa => {
+          if (resp_pessoa._id) {
+            this.pessoa._id = resp_pessoa._id;
+            await localStorage.setItem("pessoa", JSON.stringify(this.pessoa));
+            this.$router.push("solucoes_cadastro");
+          }
+        })
+        .catch(err => {
+          console.log("Erro ao Salvar a Pessoa");
+          console.error(err);
+        });
+    }
   }
 };
 </script>

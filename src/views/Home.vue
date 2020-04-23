@@ -262,6 +262,7 @@ export default {
   },
   async mounted() {
     await this.corona_noticias();
+    // this.change_carousel(0);
   },
   methods: {
     corona_noticias() {
@@ -274,6 +275,17 @@ export default {
         .catch(err => {
           console.error(err);
         });
+    },
+
+    change_carousel: async function(n) {
+      this.carousel = n;
+      var that = this;
+      setTimeout(function() {
+        n = n + 1;
+        if (n > that.carousels.length - 1) n = 0;
+        console.log(n);
+        that.change_carousel(n);
+      }, 5000);
     }
   }
 };

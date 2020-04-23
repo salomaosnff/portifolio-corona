@@ -34,15 +34,22 @@
             <h4 class="mb-4 text-warning font-weight-bold text-center">Entrar no REVIVE</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Nome de Usuário" v-model="login.email"></base-input>
+                <base-alert type="danger" v-show="error">
+                    <strong>Dados inválidos!</strong> E-mail ou senha incorretos!
+                </base-alert>                
+                <base-input 
+                  class="mb-3" 
+                  placeholder="E-mail" 
+                  v-model="$v.login.email.$model" 
+                  :valid="field_valid.email"></base-input>
                 <base-input
                   type="password"
-                  placeholder="Senha"
-                  addon-left-icon="ni ni-lock-circle-open"
-                  v-model="login.senha"
+                  placeholder=" Senha"
+                  v-model="$v.login.senha.$model"
+                  :valid="field_valid.senha"
                 ></base-input>
                 <div class="text-center">
-                  <base-button type="warning" class="my-4 text-capitalize" @click="entrar()">Login</base-button>
+                  <base-button type="warning" class="my-4 text-capitalize" @click="onClick()">Login</base-button>
                   <base-button
                     type="white"
                     text-color="warning"
@@ -71,6 +78,7 @@
 </template>
 <script>
 import http from "../../services/http";
+import { required, sameAs, minLength, email } from "vuelidate/lib/validators"
 export default {
   data() {
     return {
@@ -91,8 +99,21 @@ export default {
       login: {
         email: "",
         senha: ""
-      }
+      },
+      field_valid: {
+        email: null,
+        senha: null        
+      },
+      error: null
     };
+  },
+
+  validations: {
+    login: {
+      email: { required, email },
+      senha: { required, minLength: minLength(8) }
+    },
+
   },
 
   async mounted() {
@@ -100,15 +121,34 @@ export default {
   },
 
   methods: {
+    onClick() {
+      this.$v.login.$touch();
+      if (this.$v.login.$anyError){
+        this.error = true;
+        if (this.$v.login.email.$invalid)
+          this.field_valid.email = !this.$v.login.email.$invalid;
+        if (this.$v.login.senha)
+          this.field_valid.senha = !this.$v.login.senha.$invalid;
+        return;
+      }
+      this.resetFieldsValid();
+      this.entrar();
+      //TODO: Tratar credenciais incorretas
+
+    },
+
+    resetFieldsValid() {
+      this.field_valid.nome = null;
+      this.field_valid.senha = null;
+    },
+
     async entrar() {
       let pessoa = undefined;
-      if (this.login.email && this.login.senha) {
-        pessoa = await this.http.logar(this.login);
-        if (pessoa && pessoa._id) {
-          await localStorage.setItem("pessoa", JSON.stringify(pessoa));
-          this.$router.push(this.$route.query.rota);
-        } else console.log("Credenciais Incorretas");
-      }
+      pessoa = await this.http.logar(this.login);
+      if (pessoa && pessoa._id) {
+        await localStorage.setItem("pessoa", JSON.stringify(pessoa));
+        this.$router.push(this.$route.query.rota);
+      } else return console.log("Credenciais Incorretas");
     },
 
     async get_login() {

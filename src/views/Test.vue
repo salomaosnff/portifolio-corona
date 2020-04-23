@@ -102,7 +102,7 @@ export default {
         return;
       }
       // to form submit after this    
-      this.resetFieldsInvalid();
+      this.resetFieldsValid();
     },
 
     resetFieldsValid() {
@@ -113,6 +113,6 @@ export default {
 };
 </script>
 <style>
-</style>>
+</style>
 
 

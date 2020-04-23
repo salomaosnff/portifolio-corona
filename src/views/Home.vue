@@ -1,22 +1,33 @@
 <template>
   <div>
     <section class="section-shaped my-0">
-      <div class="row">
+      <div class="shape shape-style-1 shape-warning">
+        <img v-lazy="'img/equipe.jpg'" class="card-img-top" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="row p-5">
         <div class="col-lg-6">
           <img
-            style="width: 300px; margin-left: 30px; margin-top: 30px; background-color: #008ecd; opacity: .8;
-      border-radius: 20px; padding: 15px"
+            style="height: 100px; background-color: #008ecd; border-radius: 20px; padding: 15px"
             src="img/logo.png"
             alt="logo"
           />
           <img
-            style="height: 100px; margin-left: 30px; margin-top: 30px; background-color: #fff; opacity: .8;
-      border-radius: 20px; padding: 15px"
+            style="height: 100px; background-color: #fff; border-radius: 20px; padding: 15px; margin-left: 30px"
             src="img/if.png"
             alt="logo"
           />
         </div>
-        <div class="col-lg-6 text-right" style="padding-right: 30px">
+
+        <div class="col-lg-6 text-right">
           <img
             v-for="(idioma) in idiomas"
             :key="idioma"
@@ -26,31 +37,99 @@
           />
         </div>
       </div>
+      <div class="container shape-container pb-5">
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-8">
+            <card v-show="carousel == '0'" class="mt-5" style="background-color: #ffffffee" shadow>
+              <div class="row" style="margin-left: 1px">
+                <icon name="ni ni-world" gradient="warning" color="white" shadow rounded></icon>
+                <h4
+                  style="margin-top: 10px; margin-left: 20px"
+                  class="text-default"
+                >{{$t('Estatísticas do COVID-19')}} / (Brasil - {{noticias_corona.sigla}})</h4>
+              </div>
+              <div class="col" style="justify-content: center">
+                <div class="row" style="justify-content: center">
+                  <div class="m-4" v-if="noticias_corona.posicao">
+                    <p>Ranking</p>
+                    <h4>{{noticias_corona.posicao}}</h4>
+                  </div>
 
-      <div class="shape shape-style-1 bg-gradient-warning shape-skew">
-        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -200px" />
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="container shape-container text-right">
-        <h5
-          style="background-color: #fb8540; border-radius: 20px; 
-            padding: 15px; opacity: .9; margin-left: 400px; margin-top: -200px"
-          class="text-white"
-        >
-          {{$t('Home.Introdução.Título')}}
-          <h5 class="text-white text-justify mt-3">{{$t('Home.Introdução.Descrição')}}</h5>
-        </h5>
+                  <div class="m-4" v-if="noticias_corona.casos">
+                    <p>Casos</p>
+                    <h4>{{noticias_corona.casos}}</h4>
+                  </div>
+
+                  <div class="m-4" v-if="noticias_corona.curas">
+                    <p>Curas</p>
+                    <h4>{{noticias_corona.curas}}</h4>
+                  </div>
+
+                  <div class="m-4" v-if="noticias_corona.mortes">
+                    <p>Mortes</p>
+                    <h4>{{noticias_corona.mortes}}</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col" style="justify-content: center">
+                <div class="row" style="justify-content: center">
+                  <p style="align-self: center">. . . . . . . Hoje . . . . . . .</p>
+                </div>
+
+                <div class="row" style="justify-content: center">
+                  <div class="m-4" v-if="noticias_corona.novos_casos_hoje">
+                    <p>Novos Casos</p>
+                    <h4>{{noticias_corona.novos_casos_hoje}}</h4>
+                  </div>
+
+                  <div class="m-4" v-if="noticias_corona.novas_mortes_hoje">
+                    <p>Novas Mortes</p>
+                    <h4>{{noticias_corona.novas_mortes_hoje}}</h4>
+                  </div>
+
+                  <div class="m-4" v-if="noticias_corona.casos_ativos">
+                    <p>Casos Ativos</p>
+                    <h4>{{noticias_corona.casos_ativos}}</h4>
+                  </div>
+
+                  <div class="m-4" v-if="noticias_corona.casos_graves">
+                    <p>Casos Graves</p>
+                    <h4>{{noticias_corona.casos_graves}}</h4>
+                  </div>
+                </div>
+              </div>
+              <p class="small text-right mr-5 text-thin">Fonte: {{noticias_corona.fonte}}</p>
+            </card>
+
+            <card v-show="carousel == '1'" class="mt-5" style="background-color: #ffffffee" shadow>
+              <div class="row" style="margin-left: 1px">
+                <h4
+                  style="margin-top: 10px; margin-left: 20px"
+                  class="text-default"
+                >{{$t('Home.Introdução.Título')}}</h4>
+              </div>
+              <div class="m-4" v-if="noticias_corona.casos_graves">
+                <h5 class="text-thin">{{$t('Home.Introdução.Descrição')}}</h5>
+              </div>
+            </card>
+
+            <div class="row text-center" style="justify-content: center">
+              <button
+                v-for="(c, index) in carousels"
+                :key="index"
+                :class="[carousel == c? 'btn_bottom_carousel_selected' : '', 'my-4 text-warning btn_bottom_carousel']"
+                @click="carousel = c"
+              ></button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-    <section gradient="warning" class="section section-lg pt-lg-0 mt--200">
-      <div style="margin-top: -100px" class="container">
+
+    <section class="section bg-secondary pb-0">
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="row row-grid">
@@ -99,7 +178,9 @@
           </div>
         </div>
       </div>
+    </section>
 
+    <section class="section pt-0">
       <div class="row">
         <div class="col-sm-4 text-right mt-5">
           <img
@@ -140,12 +221,17 @@
 
 <script>
 import Modal from "@/components/Modal.vue";
+import http from "../services/http";
 export default {
   components: {
     Modal
   },
   data() {
     return {
+      http: new http(),
+      carousel: "0",
+      carousels: ["0", "1"],
+      noticias_corona: {},
       idiomas: ["pt_BR", "en"],
       index_modal_info: 0,
       modal_info: false,
@@ -174,6 +260,21 @@ export default {
       ]
     };
   },
-  methods: {}
+  async mounted() {
+    await this.corona_noticias();
+  },
+  methods: {
+    corona_noticias() {
+      this.http
+        .get("corona_noticias")
+        .then(async data => {
+          this.noticias_corona = await data;
+          console.log(this.noticias_corona);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }
 };
 </script>

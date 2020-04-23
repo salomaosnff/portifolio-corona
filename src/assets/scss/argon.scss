@@ -118,5 +118,31 @@
 }
 
 .flag-selected {
-    box-shadow: 5px 5px 8px #777;
+    box-shadow: 0px 0px 10px #00000077;
+}
+
+.btn_bottom_carousel {
+    background-color: white;
+    border: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 30px;
+    padding: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0 2px 3px #00000044;
+}
+
+.btn_bottom_carousel_selected {
+    background-color: #fb6340;
+}
+
+.btn_bottom_carousel:hover,
+.btn_bottom_carousel_selected:hover {
+    transform: translateY(-1px);
+}
+
+.text-thin {
+    font-weight: 300;
+    color: #525f7f;
 }

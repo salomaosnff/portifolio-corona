@@ -1,18 +1,6 @@
 <template>
   <div>
     <section class="section-shaped my-0">
-      <div class="shape shape-style-1 shape-warning">
-        <img v-lazy="'img/equipe.jpg'" class="card-img-top" />
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
       <div class="row p-5">
         <div class="col-lg-6">
           <img
@@ -37,159 +25,178 @@
           />
         </div>
       </div>
-      <div class="container shape-container pb-5">
-        <div class="row">
-          <div class="col-lg-4"></div>
-          <div class="col-lg-8">
-            <div class="row text-center" style="justify-content: right">
-              <button
-                v-for="(c, index) in carousels"
-                :key="index"
-                :class="[carousel == index? 'btn_bottom_carousel_selected text-white' : 'text-warning', 'mx-3 btn_bottom_carousel']"
-                @click="carousel = index"
-              >{{c}}</button>
+
+      <div class="shape shape-style-1 bg-gradient-warning shape-skew">
+        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -100px" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="p-5">
+        <div class="row pt-5">
+          <div class="col-lg-6">
+            <div class="col-lg-6">
+              <base-button
+                type="warning text-normal"
+                style="font-size: 16px"
+                @click="modal_covid = !modal_covid"
+              >Estatísticas do COVID-19</base-button>
+              <base-button
+                class="mt-4"
+                href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                type="warning text-normal"
+                style="font-size: 16px"
+                tag="a"
+                target="_blank"
+              >Monitor do COVID-19</base-button>
+              <base-button
+                @click="$router.push('desenvolvimento')"
+                class="mt-4"
+                type="warning text-normal"
+                style="font-size: 16px"
+              >Notícias do COVID-19</base-button>
             </div>
 
-            <card v-show="carousel == '0'" class="mt-4" style="background-color: #ffffffee" shadow>
-              <div class="row" style="margin-left: 1px">
-                <icon name="ni ni-world" gradient="warning" color="white" shadow rounded></icon>
-                <h4
-                  style="margin-top: 10px; margin-left: 20px"
-                  class="text-default"
-                >{{$t('Estatísticas do COVID-19')}} / (Brasil - {{noticias_corona.sigla}})</h4>
-              </div>
+            <modal
+              v-if="noticias_corona"
+              :show.sync="modal_covid"
+              gradient="warning"
+              modal-classes="modal-warning modal-dialog-centered"
+            >
+              <h4 class="modal-title" slot="header">{{$t('Estatísticas do COVID-19')}} no Brasil</h4>
               <div class="col" style="justify-content: center">
                 <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.posicao">
-                    <p>Ranking</p>
-                    <h4>{{noticias_corona.posicao}}</h4>
+                    <p class="text-white">Ranking</p>
+                    <h4 class="text-white">{{noticias_corona.posicao}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.casos">
-                    <p>Casos</p>
-                    <h4>{{noticias_corona.casos}}</h4>
+                    <p class="text-white">Casos</p>
+                    <h4 class="text-white">{{noticias_corona.casos}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.curas">
-                    <p>Curas</p>
-                    <h4>{{noticias_corona.curas}}</h4>
+                    <p class="text-white">Curas</p>
+                    <h4 class="text-white">{{noticias_corona.curas}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.mortes">
-                    <p>Mortes</p>
-                    <h4>{{noticias_corona.mortes}}</h4>
+                    <p class="text-white">Mortes</p>
+                    <h4 class="text-white">{{noticias_corona.mortes}}</h4>
                   </div>
                 </div>
               </div>
 
               <div class="col" style="justify-content: center">
                 <div class="row" style="justify-content: center">
-                  <p style="align-self: center">. . . . . . . Hoje . . . . . . .</p>
+                  <p class="text-white" style="align-self: center">. . . . . . . Hoje . . . . . . .</p>
                 </div>
 
                 <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.novos_casos_hoje">
-                    <p>Novos Casos</p>
-                    <h4>{{noticias_corona.novos_casos_hoje}}</h4>
+                    <p class="text-white">Novos Casos</p>
+                    <h4 class="text-white">{{noticias_corona.novos_casos_hoje}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.novas_mortes_hoje">
-                    <p>Novas Mortes</p>
-                    <h4>{{noticias_corona.novas_mortes_hoje}}</h4>
+                    <p class="text-white">Novas Mortes</p>
+                    <h4 class="text-white">{{noticias_corona.novas_mortes_hoje}}</h4>
                   </div>
+                </div>
 
+                <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.casos_ativos">
-                    <p>Casos Ativos</p>
-                    <h4>{{noticias_corona.casos_ativos}}</h4>
+                    <p class="text-white">Casos Ativos</p>
+                    <h4 class="text-white">{{noticias_corona.casos_ativos}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.casos_graves">
-                    <p>Casos Graves</p>
-                    <h4>{{noticias_corona.casos_graves}}</h4>
+                    <p class="text-white">Casos Graves</p>
+                    <h4 class="text-white">{{noticias_corona.casos_graves}}</h4>
                   </div>
                 </div>
               </div>
-              <div class="row" style="justify-content: right">
+              <p class="small text-right mr-5 text-thin text-white">Fonte: {{noticias_corona.fonte}}</p>
+              <template slot="footer">
                 <base-button
-                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                  outline
-                  size="sm"
-                  class="mb-4 mr-5 text-normal text-italic"
-                  type="warning"
-                  tag="a"
-                  target="_blank"
-                >Ver Monitor do COVID-19</base-button>
-                <!-- <p class="small text-right mr-5 text-thin">Fonte: {{noticias_corona.fonte}}</p> -->
-              </div>
-            </card>
+                  type="link"
+                  text-color="white"
+                  class="text-normal"
+                  @click="modal_covid = false"
+                >Fechar</base-button>
+              </template>
+            </modal>
+          </div>
 
-            <card v-show="carousel == '1'" class="mt-4" style="background-color: #ffffffee" shadow>
-              <div class="row" style="margin-left: 1px">
-                <h4
-                  style="margin-top: 10px; margin-left: 20px"
-                  class="text-default"
-                >{{$t('Home.Introdução.Título')}}</h4>
-              </div>
-              <div class="m-4" v-if="noticias_corona.casos_graves">
-                <h5 class="text-thin">{{$t('Home.Introdução.Descrição')}}</h5>
-              </div>
+          <div class="col-lg-6">
+            <card style="background-color: #fb8640ee" shadow>
+              <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
+              <h5
+                v-if="noticias_corona.casos_graves"
+                class="m-2 text-thin text-white"
+              >{{$t('Home.Introdução.Descrição')}}</h5>
             </card>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section bg-secondary pb-0">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-12">
-            <div class="row row-grid">
-              <div v-for="(card, index) in cards" :key="index" class="col-lg-4 mb-5">
-                <card class="border-0" shadow body-classes="py-5">
-                  <div class="row" style="margin-left: 1px">
-                    <icon :name="card.icone" gradient="warning" color="white" shadow rounded></icon>
-                    <h4
-                      style="margin-top: 10px; margin-left: 20px"
-                      class="text-default"
-                    >{{$t('Home.Cards[' + index + '].Título')}}</h4>
-                  </div>
-                  <p class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
-                  <div class="text-center">
-                    <base-button
-                      class="my-4"
-                      type="warning text-capitalize"
-                      style="font-size: 16px"
-                      @click="$router.push({ name: card.link, 
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row row-grid">
+            <div v-for="(card, index) in cards" :key="index" class="col-lg-4 mb-5">
+              <card class="border-0" shadow body-classes="py-5">
+                <div class="row" style="margin-left: 1px">
+                  <icon :name="card.icone" gradient="warning" color="white" shadow rounded></icon>
+                  <h4
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >{{$t('Home.Cards[' + index + '].Título')}}</h4>
+                </div>
+                <p class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
+                <div class="text-center">
+                  <base-button
+                    class="my-4"
+                    type="warning text-capitalize"
+                    style="font-size: 16px"
+                    @click="$router.push({ name: card.link, 
                       query: { rota: card.props_to_link }})"
-                    >{{$t('Home.Cards[' + index + '].Botão')}}</base-button>
-                  </div>
-                </card>
-              </div>
-              <div class="col-lg-4 mb-5">
-                <card class="border-0" shadow body-classes="py-5">
-                  <div class="row" style="margin-left: 1px">
-                    <icon name="ni ni-books" gradient="warning" color="white" shadow rounded></icon>
-                    <h4
-                      style="margin-top: 10px; margin-left: 20px"
-                      class="text-default"
-                    >{{$t('Outros')}}</h4>
-                  </div>
-                  <div v-for="(botao, index) in botoes" :key="index" class="text-center">
-                    <base-button
-                      @click="$router.push({ name: botao.link, 
+                  >{{$t('Home.Cards[' + index + '].Botão')}}</base-button>
+                </div>
+              </card>
+            </div>
+            <div class="col-lg-4 mb-5">
+              <card class="border-0" shadow body-classes="py-5">
+                <div class="row" style="margin-left: 1px">
+                  <icon name="ni ni-books" gradient="warning" color="white" shadow rounded></icon>
+                  <h4
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >{{$t('Outros')}}</h4>
+                </div>
+                <div v-for="(botao, index) in botoes" :key="index" class="text-center">
+                  <base-button
+                    @click="$router.push({ name: botao.link, 
                       query: { rota: botao.props_to_link }})"
-                      class="mt-4"
-                      type="warning text-capitalize"
-                      style="font-size: 16px"
-                    >{{$t('Home.Outros['+index+'].Título')}}</base-button>
-                  </div>
-                </card>
-              </div>
+                    class="mt-4"
+                    type="warning text-capitalize"
+                    style="font-size: 16px"
+                  >{{$t('Home.Outros['+index+'].Título')}}</base-button>
+                </div>
+              </card>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <section class="section pt-0">
       <div class="row">
@@ -244,8 +251,7 @@ export default {
       carousels: ["COVID-19", "Introdução"],
       noticias_corona: {},
       idiomas: ["pt_BR", "en"],
-      index_modal_info: 0,
-      modal_info: false,
+      modal_covid: false,
       botoes: [
         { link: "login", props_to_link: "forum_lista" },
         { link: "desenvolvimento", props_to_link: "" },

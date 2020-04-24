@@ -363,6 +363,7 @@ export default {
           )
           .then(response => {
             this.solucoes = response.data.solucoes;
+            console.log(response.data.solucoes.length);
             if (this.solucoes[0]) this.busca_nao_encontrada = false;
             else this.busca_nao_encontrada = true;
           })
@@ -397,6 +398,7 @@ export default {
         .get("solucao")
         .then(resp => {
           this.solucoes = resp;
+          console.log(resp.length);
         })
         .catch(error => {
           console.log(error);

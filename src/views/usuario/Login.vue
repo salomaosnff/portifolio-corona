@@ -22,6 +22,8 @@
         </div>
       </div>
 
+      <alerta v-if="alerta.ver" :sucesso="alerta.sucesso" :mensagem="alerta.mensagem" />
+
       <div class="row justify-content-center">
         <div class="col-lg-5">
           <card
@@ -75,6 +77,7 @@ export default {
   data() {
     return {
       http: new http(),
+      alerta: { ver: false, sucesso: "false", mensagem: "" },
       pessoa: {
         colaborador: false,
         investidor: false,
@@ -103,9 +106,22 @@ export default {
       if (this.login.email && this.login.senha) {
         pessoa = await this.http.logar(this.login);
         if (pessoa && pessoa._id) {
+          this.alerta.ver = await false;
+          this.alerta = await {
+            ver: true,
+            sucesso: "true",
+            mensagem: "Logado com Sucesso!"
+          };
           await localStorage.setItem("pessoa", JSON.stringify(pessoa));
           this.$router.push(this.$route.query.rota);
-        } else console.log("Credenciais Incorretas");
+        } else {
+          this.alerta.ver = await false;
+          this.alerta = await {
+            ver: true,
+            sucesso: "false",
+            mensagem: "Credenciais Incorretas!"
+          };
+        }
       }
     },
     async get_login() {

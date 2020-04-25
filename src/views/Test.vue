@@ -59,8 +59,9 @@
 </template>
 
 <script>
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { required, email, minLength, helpers } from "vuelidate/lib/validators";
 // import Modal from "@/components/Modal.vue";
+// const mustBeCool = (value) => value !== 'test@gmail.com';
 
 export default {
   components:{
@@ -82,7 +83,19 @@ export default {
 
   validations: {
     form: {
-      name: { required, min: minLength(10) },
+      name: { required,
+        isUnique(value) {
+          // standalone validator ideally should not assume a field is required
+          if (value === '') return true
+
+          // simulate async call, fail for all logins with even length
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(typeof value === 'string' && value.length % 2 !== 0)
+            }, 350 + Math.random() * 300)
+          })
+        }      
+      },
       email: { required, email }
     }
 
@@ -103,9 +116,11 @@ export default {
       }
       // to form submit after this    
       this.resetFieldsValid();
+      // this.$v.form.$reset();
     },
 
     resetFieldsValid() {
+      this.error = false;
       this.field_valid.name = null;
       this.field_valid.email = null;
     }

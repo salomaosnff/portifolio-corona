@@ -4,7 +4,7 @@ const baseUrl = [
     'https://portifolio-corona-api.herokuapp.com/',
     'http://localhost:3000/',
 ]
-// const baseUrl = ""
+
 export default class Http {
     async logar(dados) {
         return await axios

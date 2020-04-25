@@ -38,12 +38,21 @@
             <h4 class="mb-4 text-warning font-weight-bold">Cadastre sua Ideia</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Nome da Ideia" v-model="solucao.nome"></base-input>
+                <base-alert type="danger" v-show="error">
+                    <strong>Dados inválidos!</strong> Verifique os campos destacados!
+                </base-alert>                  
+                <base-input 
+                  class="mb-3" 
+                  placeholder="Nome da Ideia" 
+                  v-model="solucao.nome"
+                  :valid="valido.nome"
+                ></base-input>
 
                 <base-input
                   class="mb-3"
                   placeholder="Instituição ou Empresa"
                   v-model="solucao.instituicao"
+                  :valid="valido.instituicao"
                 ></base-input>
 
                 <base-input class="mb-3" placeholder="Link do Site" v-model="solucao.link_web"></base-input>
@@ -54,8 +63,8 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
+
                 <div class="mb-3">
-                  <p class="d-block mb-2">Estado</p>
                   <dropdown>
                     <base-button
                       slot="title"
@@ -70,9 +79,7 @@
                     >{{item.nome}}</a>
                   </dropdown>
                 </div>
-
-                <div class="mb-3" v-if="solucao.cidade && solucao.cidade._id">
-                  <p class="d-block mb-2">Cidade</p>
+                <div class="mb-3" v-show="solucao.cidade && solucao.cidade._id">
                   <dropdown>
                     <base-button
                       slot="title"
@@ -84,89 +91,94 @@
                       :key="index"
                       class="dropdown-item"
                       @click="solucao.cidade = item"
+                      :valido="valido.cidade"
                     >{{item.nome}}</a>
                   </dropdown>
                 </div>
-
                 <textarea
                   class="form-control mb-3"
+                  :class="valido.descricao"
                   placeholder="Descrição"
-                  v-model="solucao.descricao"
+                  v-model="solucao.descricao"                  
                 ></textarea>
-
-                <h6 class="mb-3 text-warning font-weight-bold">Área de Aplicação</h6>
-                <base-radio name="Saúde" class="mb-3" v-model="solucao.area_aplicacao">Saúde</base-radio>
-                <base-radio name="Economia" class="mb-3" v-model="solucao.area_aplicacao">Economia</base-radio>
-                <base-radio name="Educação" class="mb-3" v-model="solucao.area_aplicacao">Educação</base-radio>
-                <base-radio
-                  name="Comunicação"
-                  class="mb-3"
-                  v-model="solucao.area_aplicacao"
-                >Comunicação</base-radio>
-                <base-radio name="Social" class="mb-3" v-model="solucao.area_aplicacao">Social</base-radio>
-                <base-radio name="Outros" class="mb-3" v-model="solucao.area_aplicacao">Outros</base-radio>
-
-                <h6 class="mb-3 text-warning font-weight-bold">Tipo</h6>
-                <base-radio name="Software" class="mb-3" v-model="solucao.tipo">Software</base-radio>
-                <base-radio name="Hardware" class="mb-3" v-model="solucao.tipo">Hardware</base-radio>
-                <base-radio name="Processo" class="mb-3" v-model="solucao.tipo">Processo</base-radio>
-                <base-radio name="Material" class="mb-3" v-model="solucao.tipo">Material</base-radio>
-                <base-radio name="Outros" class="mb-3" v-model="solucao.tipo">Outros</base-radio>
-
-                <h6 class="mb-3 text-warning font-weight-bold">Status</h6>
-                <base-radio
-                  name="Produto Comercializado"
-                  class="mb-3"
-                  v-model="solucao.status"
-                >Produto Comercializado</base-radio>
-                <base-radio
-                  name="Produto Lançado"
-                  class="mb-3"
-                  v-model="solucao.status"
-                >Produto Lançado</base-radio>
-                <base-radio
-                  name="Produto Testado"
-                  class="mb-3"
-                  v-model="solucao.status"
-                >Produto Testado</base-radio>
-                <base-radio
-                  name="Produto Terminado"
-                  class="mb-3"
-                  v-model="solucao.status"
-                >Produto Terminado</base-radio>
-                <base-radio
-                  name="Produto em Desenvolvimento"
-                  class="mb-3"
-                  v-model="solucao.status"
-                >Produto em Desenvolvimento</base-radio>
-                <base-radio name="Outros" class="mb-3" v-model="solucao.status">Outros</base-radio>
-
-                <h6 class="mb-3 text-warning font-weight-bold">Tipo de Negócio</h6>
-                <base-radio
-                  name="Disponível Gratuitamente"
-                  class="mb-3"
-                  v-model="solucao.negocio"
-                >Disponível Gratuitamente</base-radio>
-                <base-radio
-                  name="Disponível com Restrições"
-                  class="mb-3"
-                  v-model="solucao.negocio"
-                >Disponível com Restrições</base-radio>
-                <base-radio name="À Venda" class="mb-3" v-model="solucao.negocio">À Venda</base-radio>
-                <base-radio
-                  name="À Procura de Financiamento Público"
-                  class="mb-3"
-                  v-model="solucao.negocio"
-                >À Procura de Financiamento Público</base-radio>
-                <base-radio
-                  name="À Procura de Financiamento Privado"
-                  class="mb-3"
-                  v-model="solucao.negocio"
-                >À Procura de Financiamento Privado</base-radio>
-                <base-radio name="Outros" class="mb-3" v-model="solucao.negocio">Outros</base-radio>
+                <div class="card mb-3 p-2" :class="valido.area_aplicacao">
+                  <h6 class="mb-3 text-warning font-weight-bold">Área de Aplicação</h6>
+                  <base-radio name="Saúde" class="mb-3" v-model="solucao.area_aplicacao">Saúde</base-radio>
+                  <base-radio name="Economia" class="mb-3" v-model="solucao.area_aplicacao">Economia</base-radio>
+                  <base-radio name="Educação" class="mb-3" v-model="solucao.area_aplicacao">Educação</base-radio>
+                  <base-radio
+                    name="Comunicação"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >Comunicação</base-radio>
+                  <base-radio name="Social" class="mb-3" v-model="solucao.area_aplicacao">Social</base-radio>
+                  <base-radio name="Outros" class="mb-3" v-model="solucao.area_aplicacao">Outros</base-radio>
+                </div>
+                <div class="card div-valid mb-3 p-2">
+                  <h6 class="mb-3 text-warning font-weight-bold">Tipo</h6>
+                  <base-radio name="Software" class="mb-3" v-model="solucao.tipo">Software</base-radio>
+                  <base-radio name="Hardware" class="mb-3" v-model="solucao.tipo">Hardware</base-radio>
+                  <base-radio name="Processo" class="mb-3" v-model="solucao.tipo">Processo</base-radio>
+                  <base-radio name="Material" class="mb-3" v-model="solucao.tipo">Material</base-radio>
+                  <base-radio name="Outros" class="mb-3" v-model="solucao.tipo">Outros</base-radio>
+                </div>
+                <div class="card mb-3 p-2" :class="valido.status">
+                  <h6 class="mb-3 text-warning font-weight-bold">Status</h6>
+                  <base-radio
+                    name="Produto Comercializado"
+                    class="mb-3"
+                    v-model="solucao.status"
+                  >Produto Comercializado</base-radio>
+                  <base-radio
+                    name="Produto Lançado"
+                    class="mb-3"
+                    v-model="solucao.status"
+                  >Produto Lançado</base-radio>
+                  <base-radio
+                    name="Produto Testado"
+                    class="mb-3"
+                    v-model="solucao.status"
+                  >Produto Testado</base-radio>
+                  <base-radio
+                    name="Produto Terminado"
+                    class="mb-3"
+                    v-model="solucao.status"
+                  >Produto Terminado</base-radio>
+                  <base-radio
+                    name="Produto em Desenvolvimento"
+                    class="mb-3"
+                    v-model="solucao.status"
+                  >Produto em Desenvolvimento</base-radio>
+                  <base-radio name="Outros" class="mb-3" v-model="solucao.status">Outros</base-radio>
+                </div>
+                <div class="card div-valid mb-3 p-2">
+                  <h6 class="mb-3 text-warning font-weight-bold">Tipo de Negócio</h6>
+                  <base-radio
+                    name="Disponível Gratuitamente"
+                    class="mb-3"
+                    v-model="solucao.negocio"
+                  >Disponível Gratuitamente</base-radio>
+                  <base-radio
+                    name="Disponível com Restrições"
+                    class="mb-3"
+                    v-model="solucao.negocio"
+                  >Disponível com Restrições</base-radio>
+                  <base-radio name="À Venda" class="mb-3" v-model="solucao.negocio">À Venda</base-radio>
+                  <base-radio
+                    name="À Procura de Financiamento Público"
+                    class="mb-3"
+                    v-model="solucao.negocio"
+                  >À Procura de Financiamento Público</base-radio>
+                  <base-radio
+                    name="À Procura de Financiamento Privado"
+                    class="mb-3"
+                    v-model="solucao.negocio"
+                  >À Procura de Financiamento Privado</base-radio>
+                  <base-radio name="Outros" class="mb-3" v-model="solucao.negocio">Outros</base-radio>
+                </div>
 
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="salvar()">Salvar</base-button>
+                  <base-button type="warning" class="mt-4" @click="onSubmit()">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -179,6 +191,8 @@
 <script>
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
+
 export default {
   components: {
     Dropdown
@@ -192,16 +206,26 @@ export default {
         link_web: "",
         link_youtube: "",
         descricao: "",
-        area_aplicacao: "",
-        tipo: "",
-        status: "",
-        negocio: "",
+        area_aplicacao: "Saúde",
+        tipo: "Material",
+        status: "Produto em Desenvolvimento",
+        negocio: "Disponível Gratuitamente",
         responsavel: { _id: "" },
         cidade: { _id: "" }
       },
       estado: { _id: undefined },
       estados: [],
-      cidades: []
+      cidades: [],
+      
+      valido: {
+        nome: null,
+        instituicao: null,
+        cidade: null,
+        descricao: "border-valid",
+        area_aplicacao: "border-valid",
+        status: "border-valid",
+      },
+      error: false
     };
   },
   async mounted() {
@@ -218,12 +242,51 @@ export default {
         });
     }
   },
+
+  validations: {
+    solucao: {
+      nome: { required, maxLength: maxLength(60) },
+      instituicao: { required, minLength: minLength(5), maxLength: maxLength(60)},
+      //TODO: cidade: {required},
+      descricao: { required, minLength: minLength(10), maxLength: maxLength }      
+    }
+  },  
+
   methods: {
+    onSubmit() {
+      this.$v.solucao.$touch();
+
+      if(this.$v.solucao.$anyError) {
+        this.error = true;
+        if (this.$v.solucao.nome.$invalid)
+          this.valido.nome = !this.$v.solucao.nome.$invalid;
+        if (this.$v.solucao.instituicao.$invalid)
+          this.valido.instituicao = !this.$v.solucao.instituicao.$invalid;
+        if (this.$v.solucao.descricao.$invalid)
+          this.valido.descricao = "border-danger";
+        return;
+      }
+      // Submeter apos insenção de erros
+      this.resetaCamposValidos();
+      this.salvar();
+      
+    },
+
+    resetaCamposValidos(){
+      this.error = false;
+
+      this.valido.nome = null;
+      this.valido.instituicao = null;
+      this.valido.cidade = null;
+      this.valido.descricao = "border-valid";
+    },
+
     async buscar_estados() {
       await this.http.get("estado", 0).then(async data => {
         this.estados = await data;
       });
     },
+
     async buscar_cidades(definir_cidade) {
       if (this.estado && this.estado._id)
         await this.http.cidadesByEstado(this.estado._id).then(async data => {
@@ -232,6 +295,7 @@ export default {
             this.solucao.cidade = this.cidades[0];
         });
     },
+
     // converter_data(data) {
     //   data =
     //     data.substring(6, 10) +
@@ -241,7 +305,9 @@ export default {
     //     data.substring(0, 2);
     //   return data;
     // },
+
     async salvar() {
+      console.log("Enter Salve")
       if (this.$route.query.solucao && this.solucao._id) {
         this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
           if (resp.message == "Editado com sucesso!")
@@ -259,3 +325,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .border-valid{
+    border-style: solid; 
+    border-color: rgba(192,192,192,0.7); 
+    border-radius: 15px;
+    border-width: thin;
+  }
+</style>

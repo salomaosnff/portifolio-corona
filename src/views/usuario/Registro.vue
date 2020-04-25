@@ -50,13 +50,14 @@
                 <base-input
                   class="mb-3"
                   placeholder="Telefone"
-                  v-model.trim="$v.pessoa.telefone.$model"
+                  v-model.number="$v.pessoa.telefone.$model"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                   :valid="valido.telefone"
                 ></base-input>
                 <base-input 
                   placeholder="WhatsApp (Opcional)" 
-                  v-model="pessoa.whatsapp"
+                  v-model.number="pessoa.whatsapp"
+                  v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
 
                 <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>

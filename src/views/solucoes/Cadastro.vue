@@ -114,7 +114,7 @@
                   <base-radio name="Social" class="mb-3" v-model="solucao.area_aplicacao">Social</base-radio>
                   <base-radio name="Outros" class="mb-3" v-model="solucao.area_aplicacao">Outros</base-radio>
                 </div>
-                <div class="card div-valid mb-3 p-2">
+                <div class="card border-valid mb-3 p-2">
                   <h6 class="mb-3 text-warning font-weight-bold">Tipo</h6>
                   <base-radio name="Software" class="mb-3" v-model="solucao.tipo">Software</base-radio>
                   <base-radio name="Hardware" class="mb-3" v-model="solucao.tipo">Hardware</base-radio>
@@ -151,7 +151,7 @@
                   >Produto em Desenvolvimento</base-radio>
                   <base-radio name="Outros" class="mb-3" v-model="solucao.status">Outros</base-radio>
                 </div>
-                <div class="card div-valid mb-3 p-2">
+                <div class="card border-valid mb-3 p-2">
                   <h6 class="mb-3 text-warning font-weight-bold">Tipo de Negócio</h6>
                   <base-radio
                     name="Disponível Gratuitamente"

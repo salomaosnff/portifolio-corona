@@ -261,12 +261,13 @@ export default {
           })       
         }
       },
-      descricao: { required, minLength: minLength(10), maxLength: maxLength }      
+      descricao: { required, maxLength: maxLength(300) }      
     }
   },  
 
   methods: {
     onSubmit() {
+      this.resetaCamposValidos();
       this.$v.solucao.$touch();
 
       if(this.$v.solucao.$anyError) {
@@ -277,9 +278,8 @@ export default {
           this.valido.instituicao = !this.$v.solucao.instituicao.$invalid;
         if (this.$v.solucao.descricao.$invalid)
           this.valido.descricao = "border-danger";
-        if (this.$v.solucao.cidade.$invalid){
+        if (this.$v.solucao.cidade.$invalid)
           this.valido.cidade.block = "border-danger";
-        }
         return;
       }
       // Salvar apos insenção de erros
@@ -293,10 +293,8 @@ export default {
 
       this.valido.nome = null;
       this.valido.instituicao = null;
-      this.valido.cidade = null;
+      this.valido.cidade.block = "border-valid";      
       this.valido.descricao = "border-valid";
-      this.valido.cidade.block = "border-valid";
-      this.valido.cidade.button = "disabled";
     },
 
     async buscar_estados() {

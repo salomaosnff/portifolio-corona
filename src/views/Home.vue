@@ -5,7 +5,7 @@
         <div class="col-lg-6">
           <img
             style="height: 100px; background-color: #008ecd; border-radius: 20px; padding: 15px"
-            src="img/logo.png"
+            :src="'img/logo_' + $i18n.locale + '.png'"
             alt="logo"
           />
           <img
@@ -46,7 +46,7 @@
                 type="warning text-normal"
                 style="font-size: 16px"
                 @click="modal_covid = !modal_covid"
-              >Estatísticas do COVID-19</base-button>
+              >{{$t('Home.Estatísticas do COVID-19')}}</base-button>
               <base-button
                 class="mt-4"
                 href="http://lapisco.fortaleza.ifce.edu.br/covid19"
@@ -54,13 +54,13 @@
                 style="font-size: 16px"
                 tag="a"
                 target="_blank"
-              >Monitor do COVID-19</base-button>
+              >{{$t('Home.Monitor do COVID-19')}}</base-button>
               <base-button
                 @click="$router.push('desenvolvimento')"
                 class="mt-4"
                 type="warning text-normal"
                 style="font-size: 16px"
-              >Notícias do COVID-19</base-button>
+              >{{$t('Home.Notícias do COVID-19')}}</base-button>
             </div>
 
             <modal
@@ -69,7 +69,10 @@
               gradient="warning"
               modal-classes="modal-warning modal-dialog-centered"
             >
-              <h4 class="modal-title" slot="header">{{$t('Estatísticas do COVID-19')}} no Brasil</h4>
+              <h4
+                class="modal-title"
+                slot="header"
+              >{{$t('Home.Estatísticas do COVID-19')}} (Brasil)</h4>
               <div class="col" style="justify-content: center">
                 <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.posicao">
@@ -254,7 +257,7 @@ export default {
       modal_covid: false,
       botoes: [
         { link: "login", props_to_link: "forum_lista" },
-        { link: "login", props_to_link: "noticias_lista"},
+        { link: "login", props_to_link: "noticias_lista" },
         { link: "noticias_cadastro", props_to_link: "" }
         // { titulo: "Teste", link: "test", props_to_link: ""}
       ],

@@ -39,11 +39,11 @@
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                    <strong>Dados inválidos!</strong> Verifique os campos destacados!
-                </base-alert>                   
-                <base-input 
-                  class="mb-3" 
-                  placeholder="Nome" 
+                  <strong>Dados inválidos!</strong> Verifique os campos destacados!
+                </base-alert>
+                <base-input
+                  class="mb-3"
+                  placeholder="Nome"
                   v-model="$v.pessoa.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
@@ -54,8 +54,8 @@
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                   :valid="valido.telefone"
                 ></base-input>
-                <base-input 
-                  placeholder="WhatsApp (Opcional)" 
+                <base-input
+                  placeholder="WhatsApp (Opcional)"
                   v-model.number="pessoa.whatsapp"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
@@ -77,31 +77,21 @@
                   v-mask="'##.###.###/####-##'"
                   v-model.number="pessoa.cnpj"
                 ></base-input>
-                <div class="mb-3 p-2" :class="valido.conta_tipo"
-                >
-                  <base-checkbox 
-                    class="mb-3" 
-                    v-model="pessoa.colaborador"
-                  >Produtor de Ideias</base-checkbox>
-                  <base-checkbox 
-                    class="mb-3" 
-                    v-model="pessoa.cliente"
-                  >Interessado em Soluções</base-checkbox>
-                  <base-checkbox 
-                    class="mb-3" 
-                    v-model="pessoa.investidor"
-                  >Contribuidor e Investidor</base-checkbox>                  
+                <div class="mb-3 p-2" :class="valido.conta_tipo">
+                  <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>
+                  <base-checkbox class="mb-3" v-model="pessoa.cliente">Interessado em Soluções</base-checkbox>
+                  <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
                 </div>
 
-                <base-input 
-                  class="mb-3" 
-                  placeholder="E-mail" 
+                <base-input
+                  class="mb-3"
+                  placeholder="E-mail"
                   v-model.trim="$v.pessoa.email.$model"
                   :valid="valido.email"
                 ></base-input>
-                <base-input 
-                  type="password" 
-                  placeholder="Senha (mínimo de 8 caracteres)" 
+                <base-input
+                  type="password"
+                  placeholder="Senha (mínimo de 8 caracteres)"
                   v-model="$v.pessoa.senha.$model"
                   :valid="valido.senha"
                 ></base-input>
@@ -109,7 +99,7 @@
                   type="password"
                   placeholder="Confirmar Senha"
                   v-model="$v.pessoa.confirmacao_senha.$model"
-                  :valid="valido.confirmacao_senha"          
+                  :valid="valido.confirmacao_senha"
                 ></base-input>
 
                 <div class="text-center">
@@ -126,7 +116,13 @@
 <script>
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
-import { required, minLength, maxLength, email, sameAs } from "vuelidate/lib/validators";
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+  sameAs
+} from "vuelidate/lib/validators";
 export default {
   components: {
     Dropdown
@@ -156,16 +152,20 @@ export default {
         confirmacao_senha: null,
         conta_tipo: "div-valid"
       },
-      error: false,
+      error: false
     };
   },
   validations: {
     pessoa: {
       nome: { required, minLength: minLength(4), maxLength: maxLength(60) },
-      email: { required, email , maxLength: maxLength(60)},
+      email: { required, email, maxLength: maxLength(60) },
       telefone: { required },
-      senha: { required, minLength: minLength(8) }, 
-      confirmacao_senha: { required, mesma_como: sameAs("senha"), maxLength: maxLength(60)}
+      senha: { required, minLength: minLength(8) },
+      confirmacao_senha: {
+        required,
+        mesma_como: sameAs("senha"),
+        maxLength: maxLength(60)
+      }
     }
   },
 
@@ -175,33 +175,39 @@ export default {
     onSubmit() {
       this.$v.pessoa.$touch();
 
-      if(this.$v.pessoa.$anyError) {
+      if (this.$v.pessoa.$anyError) {
         this.error = true;
         if (this.$v.pessoa.nome.$invalid)
           this.valido.nome = !this.$v.pessoa.nome.$invalid;
         if (this.$v.pessoa.telefone.$invalid)
           this.valido.telefone = !this.$v.pessoa.telefone.$invalid;
-        if ( !(this.pessoa.colaborador || this.pessoa.investidor || this.pessoa.cliente) )
+        if (
+          !(
+            this.pessoa.colaborador ||
+            this.pessoa.investidor ||
+            this.pessoa.cliente
+          )
+        )
           this.valido.conta_tipo = "div-error";
         if (this.$v.pessoa.email.$invalid)
           this.valido.email = !this.$v.pessoa.email.$invalid;
         if (this.$v.pessoa.senha.$invalid)
           this.valido.senha = !this.$v.pessoa.senha.$invalid;
         if (this.$v.pessoa.confirmacao_senha.$invalid)
-          this.valido.confirmacao_senha = !this.$v.pessoa.confirmacao_senha.$invalid;
+          this.valido.confirmacao_senha = !this.$v.pessoa.confirmacao_senha
+            .$invalid;
         return;
       }
       // Submeter apos insenção de erros
       this.resetaCamposValidos();
       this.salvar();
-      
-    },    
-    
+    },
+
     resetaCamposValidos() {
       this.error = false;
       this.valido.nome = null;
       this.valido.telefone = null;
-      this.valido.conta_tipo = "div-valid"
+      this.valido.conta_tipo = "div-valid";
       this.valido.email = null;
       this.valido.senha = null;
       this.valido.confirmacao_senha = null;
@@ -227,17 +233,17 @@ export default {
 </script>
 
 <style scoped>
-  .div-valid{
-    border-style: solid; 
-    border-color: rgba(192,192,192,0.7); 
-    border-radius: 15px;
-    border-width: thin;
-  }
+.div-valid {
+  border-style: solid;
+  border-color: rgba(192, 192, 192, 0.7);
+  border-radius: 15px;
+  border-width: thin;
+}
 
-  .div-error{
-    border-style: solid; 
-    border-color: red;
-    border-radius: 15px;
-    border-width: thin;
-  }
+.div-error {
+  border-style: solid;
+  border-color: red;
+  border-radius: 15px;
+  border-width: thin;
+}
 </style>

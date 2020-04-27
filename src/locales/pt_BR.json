@@ -1,10 +1,13 @@
 {
+    "Slogan": "Rede de Voluntários Inovadores contra o 'Vírus Embriagado'",
     "Ideias": "Ideias",
     "Soluções": "Soluções",
     "Apoio": "Apoio",
     "Outros": "Outros",
-    "Estatísticas do COVID-19": "Estatísticas do COVID-19",
     "Home": {
+        "Estatísticas do COVID-19": "Estatísticas do COVID-19",
+        "Monitor do COVID-19": "Monitor do COVID-19",
+        "Notícias do COVID-19": "Notícias do COVID-19",
         "Introdução": {
             "Título": "É TEMPO DE RECOMEÇAR !",
             "Descrição": "Esse 'VÍRUS Embriagado' não é mais forte do que um País sóbrio e solidário. Somos uma plataforma integrada e colaborativa de AÇÕES e PROJETOS de combate ao COVID-19. Cadastre aqui o seu projeto (IDEIAS). Conheça aqui os projetos existentes (SOLUÇÕES). Dê seu apoio (APOIO)."

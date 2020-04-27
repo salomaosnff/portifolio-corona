@@ -69,10 +69,7 @@
               gradient="warning"
               modal-classes="modal-warning modal-dialog-centered"
             >
-              <h4
-                class="modal-title"
-                slot="header"
-              >{{$t('Home.Estatísticas do COVID-19')}} (Brasil)</h4>
+              <h4 class="modal-title" slot="header">{{$t('Home.Estatísticas do COVID-19')}} (Brasil)</h4>
               <div class="col" style="justify-content: center">
                 <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.posicao">
@@ -145,6 +142,10 @@
                 v-if="noticias_corona.casos_graves"
                 class="m-2 text-thin text-white"
               >{{$t('Home.Introdução.Descrição')}}</h5>
+              <h5
+                v-if="noticias_corona.casos_graves"
+                class="m-2 text-thin text-white"
+              >{{$t('Home.Introdução.Subdescrição')}}</h5>
             </card>
           </div>
         </div>

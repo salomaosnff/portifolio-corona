@@ -180,7 +180,6 @@
                   >À Procura de Financiamento Privado</base-radio>
                   <base-radio name="Outros" class="mb-3" v-model="solucao.negocio">Outros</base-radio>
                 </div>
-                <tree-view :data="$v" :options="{rootObjectKey: '$v', maxDepth: 2}"></tree-view>
                 <div class="text-center">
                   <base-button type="warning" class="mt-4" @click="onSubmit()">Salvar</base-button>
                 </div>

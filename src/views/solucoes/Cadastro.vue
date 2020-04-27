@@ -44,18 +44,22 @@
                 <base-input 
                   class="mb-3" 
                   placeholder="Nome da Ideia" 
-                  v-model="solucao.nome"
+                  v-model="$v.solucao.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
 
                 <base-input
                   class="mb-3"
                   placeholder="Instituição ou Empresa"
-                  v-model="solucao.instituicao"
+                  v-model="$v.solucao.instituicao.$model"
                   :valid="valido.instituicao"
                 ></base-input>
 
-                <base-input class="mb-3" placeholder="Link do Site" v-model="solucao.link_web"></base-input>
+                <base-input 
+                  class="mb-3" 
+                  placeholder="Link do Site" 
+                  v-model="solucao.link_web"
+                ></base-input>
 
                 <base-input
                   class="mb-3"
@@ -63,43 +67,43 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
-
-                <div class="mb-3">
+                <div class="button-group mb-3 p-1 card w-50 " :class="valido.cidade.block">
                   <dropdown>
                     <base-button
                       slot="title"
                       type="warning"
-                      class="dropdown-toggle text-capitalize"
-                    >{{estado.nome || "Selecione seu Estado"}}</base-button>
+                      class="dropdown-toggle text-capitalize m-1"
+                    ><strong>{{estado.nome || "Selecione seu Estado"}}</strong></base-button>
                     <a
                       v-for="(item, index) in estados"
                       :key="index"
                       class="dropdown-item"
-                      @click="estado = item; buscar_cidades(true)"
+                      @click="estado = item; buscar_cidades(true); valido.cidade.button='enabled';"
                     >{{item.nome}}</a>
                   </dropdown>
-                </div>
-                <div class="mb-3" v-show="solucao.cidade && solucao.cidade._id">
+
                   <dropdown>
                     <base-button
                       slot="title"
                       type="warning"
-                      class="dropdown-toggle text-capitalize"
-                    >{{solucao.cidade.nome || "Selecione sua Cidade"}}</base-button>
+                      class="dropdown-toggle  text-capitalize m-1"
+                      :class= "valido.cidade.button"
+                    ><strong>{{solucao.cidade.nome || "Selecione sua Cidade"}}</strong></base-button>
                     <a
                       v-for="(item, index) in cidades"
                       :key="index"
                       class="dropdown-item"
                       @click="solucao.cidade = item"
-                      :valido="valido.cidade"
+                      :valid="false"
                     >{{item.nome}}</a>
                   </dropdown>
                 </div>
+
                 <textarea
                   class="form-control mb-3"
                   :class="valido.descricao"
                   placeholder="Descrição"
-                  v-model="solucao.descricao"                  
+                  v-model="$v.solucao.descricao.$model"                  
                 ></textarea>
                 <div class="card mb-3 p-2" :class="valido.area_aplicacao">
                   <h6 class="mb-3 text-warning font-weight-bold">Área de Aplicação</h6>
@@ -176,7 +180,7 @@
                   >À Procura de Financiamento Privado</base-radio>
                   <base-radio name="Outros" class="mb-3" v-model="solucao.negocio">Outros</base-radio>
                 </div>
-
+                <tree-view :data="$v" :options="{rootObjectKey: '$v', maxDepth: 2}"></tree-view>
                 <div class="text-center">
                   <base-button type="warning" class="mt-4" @click="onSubmit()">Salvar</base-button>
                 </div>
@@ -220,7 +224,7 @@ export default {
       valido: {
         nome: null,
         instituicao: null,
-        cidade: null,
+        cidade: {block:"border-valid", button: "disabled"},
         descricao: "border-valid",
         area_aplicacao: "border-valid",
         status: "border-valid",
@@ -247,7 +251,17 @@ export default {
     solucao: {
       nome: { required, maxLength: maxLength(60) },
       instituicao: { required, minLength: minLength(5), maxLength: maxLength(60)},
-      //TODO: cidade: {required},
+      cidade: {
+        isCidadeSelected(value) {
+          if (value._id === '') return false;
+          
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(typeof value._id === 'string' && value._id !== '')
+            }, 350 + Math.random() * 300)
+          })       
+        }
+      },
       descricao: { required, minLength: minLength(10), maxLength: maxLength }      
     }
   },  
@@ -264,9 +278,12 @@ export default {
           this.valido.instituicao = !this.$v.solucao.instituicao.$invalid;
         if (this.$v.solucao.descricao.$invalid)
           this.valido.descricao = "border-danger";
+        if (this.$v.solucao.cidade.$invalid){
+          this.valido.cidade.block = "border-danger";
+        }
         return;
       }
-      // Submeter apos insenção de erros
+      // Salvar apos insenção de erros
       this.resetaCamposValidos();
       this.salvar();
       
@@ -279,6 +296,8 @@ export default {
       this.valido.instituicao = null;
       this.valido.cidade = null;
       this.valido.descricao = "border-valid";
+      this.valido.cidade.block = "border-valid";
+      this.valido.cidade.button = "disabled";
     },
 
     async buscar_estados() {
@@ -287,7 +306,7 @@ export default {
       });
     },
 
-    async buscar_cidades(definir_cidade) {
+    async buscar_cidades(definir_cidade) {    
       if (this.estado && this.estado._id)
         await this.http.cidadesByEstado(this.estado._id).then(async data => {
           this.cidades = await data.cidades;
@@ -295,16 +314,6 @@ export default {
             this.solucao.cidade = this.cidades[0];
         });
     },
-
-    // converter_data(data) {
-    //   data =
-    //     data.substring(6, 10) +
-    //     "-" +
-    //     data.substring(3, 5) +
-    //     "-" +
-    //     data.substring(0, 2);
-    //   return data;
-    // },
 
     async salvar() {
       console.log("Enter Salve")

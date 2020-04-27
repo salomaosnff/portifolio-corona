@@ -19,12 +19,32 @@ import UsuarioSolucoesLista from './views/usuario/SolucoesLista.vue'
 import ForumLista from './views/forum/Lista.vue'
 import ForumCadastro from './views/forum/Cadastro.vue'
 import Test from "./views/Test.vue"
+import NoticiasCadastro from './views/noticias/Cadastro.vue'
+import NoticiasLista from './views/noticias/Lista.vue'
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/noticias_cadastro",
+      name: "noticias_cadastro",
+      components: {
+        header: AppHeader,
+        default: NoticiasCadastro,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/noticias_lista",
+      name: "noticias_lista",
+      components: {
+        header: AppHeader,
+        default: NoticiasLista,
+        footer: AppFooter
+      }
+    },
     {
       path: "/forum_cadastro",
       name: "forum_cadastro",

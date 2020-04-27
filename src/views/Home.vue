@@ -254,8 +254,8 @@ export default {
       modal_covid: false,
       botoes: [
         { link: "login", props_to_link: "forum_lista" },
-        { link: "desenvolvimento", props_to_link: "" },
-        { link: "desenvolvimento", props_to_link: "" }
+        { link: "login", props_to_link: "noticias_lista"},
+        { link: "noticias_cadastro", props_to_link: "" }
         // { titulo: "Teste", link: "test", props_to_link: ""}
       ],
       cards: [

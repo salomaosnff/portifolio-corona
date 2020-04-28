@@ -288,7 +288,7 @@ export default {
   methods: {
     corona_noticias() {
       this.http
-        .get("corona_noticias")
+        .get("corona_noticia")
         .then(async data => {
           this.noticias_corona = await data;
           console.log(this.noticias_corona);

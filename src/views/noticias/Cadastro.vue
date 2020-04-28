@@ -38,21 +38,16 @@
             <h4 class="mb-4 text-warning font-weight-bold">Cadastre sua Notícia</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Descrição da Notícia" v-model="noticia.titulo"></base-input>
+                <base-input class="mb-3" placeholder="Título" v-model="noticia.titulo"></base-input>
 
-                <base-input
-                  class="mb-3"
-                  placeholder="Subtítulo da Notícia"
-                  v-model="noticia.subtitulo"
-                ></base-input>
-                
+                <base-input class="mb-3" placeholder="Subtítulo" v-model="noticia.subtitulo"></base-input>
+
                 <textarea
                   class="form-control mb-3"
-                  placeholder="Descrição"
+                  placeholder="Notícia"
                   v-model="noticia.descricao"
                 ></textarea>
 
-                
                 <div class="text-center">
                   <base-button type="warning" class="mt-4" @click="salvar()">Salvar</base-button>
                 </div>
@@ -82,13 +77,14 @@ export default {
   },
 
   async mounted() {
-    if (this.$route.query.noticias) this.noticia = await this.$route.query.noticias;
+    if (this.$route.query.noticias)
+      this.noticia = await this.$route.query.noticias;
   },
 
   methods: {
     async salvar() {
       if (this.$route.query.noticias && this.noticia._id) {
-        this.http.put("noticias", this.noticia._id, this.noticia).then(resp => {
+        this.http.put("noticia", this.noticia._id, this.noticia).then(resp => {
           if (resp.message == "Editado com sucesso!")
             this.$router.push("noticias_lista");
         });
@@ -97,7 +93,7 @@ export default {
         if (pessoa) pessoa = JSON.parse(pessoa);
         this.noticia.responsavel._id = pessoa._id;
 
-        this.http.post("noticias", this.noticia).then(resp => {
+        this.http.post("noticia", this.noticia).then(resp => {
           if (resp._id) this.$router.push("noticias_lista");
         });
       }

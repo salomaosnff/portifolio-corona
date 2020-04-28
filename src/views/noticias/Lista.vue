@@ -42,7 +42,7 @@
             class="mb-5"
             type="primary text-capitalize"
             @click="mudar_tipo_noticia('meus')"
-          >Ver Meus Fóruns</base-button>
+          >Ver Minhas Notícias</base-button>
         </div>
 
         <div class="col-md-4 text-right pr-0">
@@ -58,9 +58,14 @@
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="row row-grid">
-            <div v-for="(noticias, index) in noticias" :key="noticias + index" class="col-lg-4 mb-5">
+            <div
+              v-for="(noticias, index) in noticias"
+              :key="noticias + index"
+              class="col-lg-4 mb-5"
+            >
               <card class="border-0" shadow body-classes="py-5">
                 <h4 class="text-default">{{noticias.titulo}}</h4>
+                <h6 class="text-default">{{noticias.subtitulo}}</h6>
                 <p
                   class="description mt-3"
                 >{{noticias.descricao.slice(0,100)}} {{noticias.descricao.length > 100? '...' : ''}}</p>
@@ -133,7 +138,9 @@
           >
             <p class="mt-4">Contato</p>
             <h5 class="text-white">{{noticias[index_modal].responsavel.email}}</h5>
-            <h5 class="text-white text-lowercase mt-4">{{noticias[index_modal].responsavel.telefone}}</h5>
+            <h5
+              class="text-white text-lowercase mt-4"
+            >{{noticias[index_modal].responsavel.telefone}}</h5>
           </div>
         </div>
       </div>
@@ -275,7 +282,7 @@ export default {
 
     async get_noticias() {
       await this.http
-        .get("noticias")
+        .get("noticia")
         .then(resp => {
           this.noticias = resp;
         })
@@ -312,7 +319,7 @@ export default {
 
     async get_noticia() {
       await this.http
-        .get("noticias")
+        .get("noticia")
         .then(resp => {
           this.noticias = resp;
         })
@@ -341,7 +348,7 @@ export default {
 
     async excluir(noticias, confirmado) {
       if (confirmado) {
-        await this.http.delete("noticias", noticias._id);
+        await this.http.delete("noticia", noticias._id);
         this.modal_excluir_visivel = false;
         this.get_login();
       } else {

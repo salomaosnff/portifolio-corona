@@ -48,7 +48,7 @@
               <button name="submit" class="mb-3 btn" type="submit">
                 Submit
               </button>              
-              <tree-view class="mb-3" :data="$v.form" :options="{rootObjectKey: '$v.form', maxDepth: 2}"></tree-view>
+              <tree-view class="mb-3" :data="$v" :options="{rootObjectKey: '$v', maxDepth: 2}"></tree-view>
             </form>
 
           </card>

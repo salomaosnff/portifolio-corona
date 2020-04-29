@@ -77,7 +77,7 @@
                   v-mask="'##.###.###/####-##'"
                   v-model.number="pessoa.cnpj"
                 ></base-input>
-                <div class="mb-3 p-2" :class="valido.conta_tipo">
+                <div class="mb-3 p-2 w-50 card" :class="valido.conta_tipo">
                   <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>
                   <base-checkbox class="mb-3" v-model="pessoa.cliente">Interessado em Soluções</base-checkbox>
                   <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
@@ -101,7 +101,6 @@
                   v-model="$v.pessoa.confirmacao_senha.$model"
                   :valid="valido.confirmacao_senha"
                 ></base-input>
-
                 <div class="text-center">
                   <base-button class="mt-4" type="warning" @click="onSubmit()">Salvar</base-button>
                 </div>
@@ -114,6 +113,18 @@
   </section>
 </template>
 <script>
+
+export function isEmptySelection(){
+  if ( !(
+          this.pessoa.colaborador || 
+          this.pessoa.cliente     || 
+          this.pessoa.investidor
+        ) 
+      )          
+    return true;
+  return false;
+}
+
 import http from "../../services/http";
 import Dropdown from "../../components/BaseDropdown.vue";
 import {
@@ -123,6 +134,9 @@ import {
   email,
   sameAs
 } from "vuelidate/lib/validators";
+// import { isEmptySelection } from "@/validators";
+
+
 export default {
   components: {
     Dropdown
@@ -150,13 +164,14 @@ export default {
         email: null,
         senha: null,
         confirmacao_senha: null,
-        conta_tipo: "div-valid"
+        conta_tipo: "border-valid"
       },
       error: false
     };
   },
   validations: {
     pessoa: {
+      conta_tipo: { isEmpty: isEmptySelection },
       nome: { required, minLength: minLength(4), maxLength: maxLength(60) },
       email: { required, email, maxLength: maxLength(60) },
       telefone: { required },
@@ -165,7 +180,7 @@ export default {
         required,
         mesma_como: sameAs("senha"),
         maxLength: maxLength(60)
-      }
+      },
     }
   },
 
@@ -173,22 +188,17 @@ export default {
 
   methods: {
     onSubmit() {
+      this.resetaCamposValidos();      
       this.$v.pessoa.$touch();
 
-      if (this.$v.pessoa.$anyError) {
+      if (this.$v.pessoa.$anyError || this.$v.pessoa.conta_tipo.isEmpty) {
         this.error = true;
         if (this.$v.pessoa.nome.$invalid)
           this.valido.nome = !this.$v.pessoa.nome.$invalid;
         if (this.$v.pessoa.telefone.$invalid)
           this.valido.telefone = !this.$v.pessoa.telefone.$invalid;
-        if (
-          !(
-            this.pessoa.colaborador ||
-            this.pessoa.investidor ||
-            this.pessoa.cliente
-          )
-        )
-          this.valido.conta_tipo = "div-error";
+        if (this.$v.pessoa.conta_tipo.isEmpty)
+          this.valido.conta_tipo = "border-danger";
         if (this.$v.pessoa.email.$invalid)
           this.valido.email = !this.$v.pessoa.email.$invalid;
         if (this.$v.pessoa.senha.$invalid)
@@ -207,7 +217,7 @@ export default {
       this.error = false;
       this.valido.nome = null;
       this.valido.telefone = null;
-      this.valido.conta_tipo = "div-valid";
+      this.valido.conta_tipo = "border-valid";
       this.valido.email = null;
       this.valido.senha = null;
       this.valido.confirmacao_senha = null;
@@ -233,16 +243,9 @@ export default {
 </script>
 
 <style scoped>
-.div-valid {
+.border-valid {
   border-style: solid;
   border-color: rgba(192, 192, 192, 0.7);
-  border-radius: 15px;
-  border-width: thin;
-}
-
-.div-error {
-  border-style: solid;
-  border-color: red;
   border-radius: 15px;
   border-width: thin;
 }

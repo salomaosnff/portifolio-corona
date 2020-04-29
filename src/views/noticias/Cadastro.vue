@@ -38,18 +38,32 @@
             <h4 class="mb-4 text-warning font-weight-bold">Cadastre sua Notícia</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Título" v-model="noticia.titulo"></base-input>
+                <base-alert type="danger" v-show="error">
+                    <strong>Dados inválidos!</strong> Verifique os campos destacados!
+                </base-alert>
+                <base-input 
+                  class="mb-3" 
+                  placeholder="Título" 
+                  v-model="$v.noticia.titulo.$model"
+                  :valid="valido.titulo"
+                ></base-input>
 
-                <base-input class="mb-3" placeholder="Subtítulo" v-model="noticia.subtitulo"></base-input>
+                <base-input 
+                  class="mb-3" 
+                  placeholder="Subtítulo" 
+                  v-model="$v.noticia.subtitulo.$model"
+                  :valid="valido.subtitulo"
+                ></base-input>
 
                 <textarea
-                  class="form-control mb-3"
-                  placeholder="Notícia"
-                  v-model="noticia.descricao"
+                  class="form-control mb-3 card"
+                  placeholder="Descrição da Notícia"
+                  v-model="$v.noticia.descricao.$model"
+                  :class="valido.descricao"
                 ></textarea>
 
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="salvar()">Salvar</base-button>
+                  <base-button type="warning" class="mt-4" @click="onSubmit()">Salvar</base-button>
                 </div>
               </form>
             </template>
@@ -61,6 +75,8 @@
 </template>
 <script>
 import http from "../../services/http";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
+
 export default {
   data() {
     return {
@@ -72,7 +88,14 @@ export default {
         data_publicacao: "",
         data_atualizacao: "",
         responsavel: { _id: "" }
-      }
+      },
+
+      valido: {
+        titulo: null,
+        subtitulo: null,
+        descricao: "border-valid"
+      },
+      error: false      
     };
   },
 
@@ -81,7 +104,43 @@ export default {
       this.noticia = await this.$route.query.noticias;
   },
 
+  validations: {
+    noticia: {
+      titulo: { required, maxLength: maxLength(60) },
+      subtitulo: { required, minLength: minLength(5), maxLength: maxLength(60)},
+      descricao: { required, maxLength: maxLength(300) }
+    }
+  }, 
+  
   methods: {
+    onSubmit() {
+      this.resetaCamposValidos();
+      this.$v.noticia.$touch();
+
+      if(this.$v.noticia.$anyError) {
+        this.error = true;
+        if (this.$v.noticia.titulo.$invalid)
+          this.valido.titulo = !this.$v.noticia.titulo.$invalid;
+        if (this.$v.noticia.subtitulo.$invalid)
+          this.valido.subtitulo = !this.$v.noticia.subtitulo.$invalid;
+        if (this.$v.noticia.descricao.$invalid)
+          this.valido.descricao = "border-danger";
+        return;
+      }
+      // Salvar apos insenção de erros
+      this.resetaCamposValidos();
+      this.salvar();
+      
+    },
+
+    resetaCamposValidos(){
+      this.error = false;
+
+      this.valido.titulo = null;
+      this.valido.subtitulo = null;
+      this.valido.descricao = "border-valid";
+    },
+
     async salvar() {
       if (this.$route.query.noticias && this.noticia._id) {
         this.http.put("noticia", this.noticia._id, this.noticia).then(resp => {
@@ -101,3 +160,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .border-valid{
+    border-style: solid; 
+    border-color: rgba(192,192,192,0.7); 
+    border-radius: 15px;
+    border-width: thin;
+  }
+</style>

@@ -18,7 +18,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t('Voltar')}}</base-button>
         </div>
       </div>
 
@@ -33,13 +33,15 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold text-center">Entrar no REVIVE</h4>
+            <h4
+              class="mb-4 text-warning font-weight-bold text-center"
+            >{{$t('Login.Entrar no REVIVE')}}</h4>
             <template>
               <form role="form">
                 <base-input class="mb-3" placeholder="Email" v-model="login.email"></base-input>
                 <base-input
                   type="password"
-                  placeholder="Senha"
+                  :placeholder="$t('Senha')"
                   addon-left-icon="ni ni-lock-circle-open"
                   v-model="login.senha"
                 ></base-input>
@@ -48,9 +50,9 @@
                   <base-button
                     type="white"
                     text-color="warning"
-                    class="my-4 text-capitalize"
+                    class="my-4 text-normal"
                     @click="$router.push('registro')"
-                  >Criar Conta</base-button>
+                  >{{$t('Login.Criar Conta')}}</base-button>
                 </div>
               </form>
             </template>
@@ -61,9 +63,9 @@
               <base-button
                 type="white"
                 text-color="warning"
-                class="ml-auto text-capitalize"
+                class="ml-auto text-normal"
                 @click="$router.push('desenvolvimento')"
-              >Esqueceu a Senha?</base-button>
+              >{{$t('Esqueci a Senha')}}</base-button>
             </div>
           </div>
         </div>

@@ -4,6 +4,13 @@
     "Soluções": "Solutions",
     "Apoio": "Support",
     "Outros": "Others",
+    "Voltar": "Back",
+    "Senha": "Password",
+    "Login": {
+        "Entrar no REVIVE": "Enter REVIVE",
+        "Criar Conta": "Create an Account",
+        "Esqueci a Senha": "Forgot Password"
+    },
     "Home": {
         "Estatísticas do COVID-19": "COVID-19 Statistics",
         "Monitor do COVID-19": "COVID-19 Monitor",

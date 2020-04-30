@@ -16,40 +16,39 @@
         <div class="col-md-4 row ml-0">
           <base-button
             icon="fa fa-home"
-            class="mb-5 text-warning text-capitalize"
+            class="mb-5 text-warning text-normal"
             type="white"
             @click="$router.push('/')"
           ></base-button>
           <base-button
             icon="ni ni-bold-left"
-            class="mb-5 text-warning text-capitalize"
+            class="mb-5 text-warning text-normal"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t('Voltar')}}</base-button>
         </div>
 
-        <div class="col-md-4 text-right">
+        <div class="col-md-8 text-right">
           <base-button
             icon="ni ni-bold-right"
             class="mb-5"
-            type="primary text-capitalize"
+            type="primary text-normal"
             @click="$router.push('solucoes_lista')"
-          >Ver Todas as Ideias</base-button>
-        </div>
+          >{{$t('Ver Todas as Ideias')}}</base-button>
 
-        <div class="col-md-4 text-right">
           <base-button
             icon="fa fa-plus"
             class="mb-5"
-            type="warning text-capitalize"
+            type="warning text-normal"
             @click="$router.push('solucoes_cadastro')"
-          >Cadastrar Nova Ideia</base-button>
-          <base-button
-            class="mb-5 text-white btn-tooltip text-capitalize"
+          >{{$t('Cadastrar Nova Ideia')}}</base-button>
+
+          <!-- <base-button
+            class="mb-5 text-white btn-tooltip text-normal"
             style="cursor: context-menu; font-weight: bold"
             type="link"
             title="Você pode Editar e/ou Excluir uma ideia já cadastrada!"
-          >Info</base-button>
+          >Info</base-button>-->
         </div>
       </div>
 
@@ -63,20 +62,20 @@
                   class="description mt-3"
                 >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
 
-                <badge v-if="solucao.tipo" type="warning text-capitalize" rounded>#{{solucao.tipo}}</badge>
+                <badge v-if="solucao.tipo" type="warning text-normal" rounded>#{{$t(solucao.tipo)}}</badge>
                 <badge
                   v-if="solucao.area_aplicacao"
-                  type="warning text-capitalize"
+                  type="warning text-normal"
                   rounded
-                >#{{solucao.area_aplicacao}}</badge>
+                >#{{$t(solucao.area_aplicacao)}}</badge>
                 <badge
                   v-if="solucao.status"
-                  type="warning text-capitalize"
+                  type="warning text-normal"
                   rounded
-                >#{{solucao.status}}</badge>
+                >#{{$t(solucao.status)}}</badge>
                 <badge
                   v-if="solucao.cidade && solucao.cidade.nome"
-                  type="warning text-capitalize"
+                  type="warning text-normal"
                   rounded
                 >#{{solucao.cidade.nome}}</badge>
 
@@ -84,19 +83,19 @@
                   <base-button
                     text-color="warning"
                     class="mt-4"
-                    type="white text-capitalize"
+                    type="white text-normal"
                     @click="modal(index)"
-                  >Mais</base-button>
+                  >{{$t('Mais')}}</base-button>
                   <base-button
                     class="mt-4"
-                    type="primary text-capitalize"
+                    type="primary text-normal"
                     @click="editar(solucao)"
-                  >Editar</base-button>
+                  >{{$t('Editar')}}</base-button>
                   <base-button
                     class="mt-4"
-                    type="warning text-capitalize"
+                    type="warning text-normal"
                     @click="excluir(solucao, false)"
-                  >Excluir</base-button>
+                  >{{$t('Excluir')}}</base-button>
                 </div>
               </card>
             </div>
@@ -120,38 +119,38 @@
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
-          <p>Tipo</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].tipo}}</h5>
+          <p>{{$t('Tipo')}}</p>
+          <h5 class="text-white text-normal">{{$t(solucoes[index_modal].tipo)}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].area_aplicacao">
-          <p class="mt-4">Área de Aplicação</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].area_aplicacao}}</h5>
+          <p class="mt-4">{{$t('Área de Aplicação')}}</p>
+          <h5 class="text-white text-normal">{{$t(solucoes[index_modal].area_aplicacao)}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].instituicao">
-          <p class="mt-4">Instituição</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].instituicao}}</h5>
+          <p class="mt-4">{{$t('Instituição')}}</p>
+          <h5 class="text-white text-normal">{{solucoes[index_modal].instituicao}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].status">
-          <p class="mt-4">Status</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].status}}</h5>
+          <p class="mt-4">{{$t('Status')}}</p>
+          <h5 class="text-white text-normal">{{$t(solucoes[index_modal].status)}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
-          <p class="mt-4">Disponível em</p>
+          <p class="mt-4">{{$t('Disponível em')}}</p>
           <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
           <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].negocio">
-          <p class="mt-4">Negócio</p>
-          <h5 class="text-white text-capitalise">{{solucoes[index_modal].negocio}}</h5>
+          <p class="mt-4">{{$t('Negócio')}}</p>
+          <h5 class="text-white text-normal">{{$t(solucoes[index_modal].negocio)}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].cidade && solucoes[index_modal].cidade.nome">
-          <p class="mt-4">Cidade</p>
+          <p class="mt-4">{{$t('Cidade')}}</p>
           <h5 class="text-white text">{{solucoes[index_modal].cidade.nome}}</h5>
         </div>
       </div>
@@ -164,20 +163,20 @@
 
       <div v-if="pagina_modal == 'responsavel'">
         <div v-if="solucoes[index_modal].responsavel && !solucoes[index_modal].responsavel._id">
-          <p>Nome</p>
+          <p>{{$t('Nome')}}</p>
           <h5 class="text-white">{{solucoes[index_modal].responsavel}}</h5>
         </div>
 
         <div v-else>
           <div v-if="solucoes[index_modal].responsavel.nome">
-            <p>Nome</p>
+            <p>{{$t('Nome')}}</p>
             <h5 class="text-white">{{solucoes[index_modal].responsavel.nome}}</h5>
           </div>
 
           <div
             v-if="solucoes[index_modal].responsavel.email || solucoes[index_modal].responsavel.telefone"
           >
-            <p class="mt-4">Contato</p>
+            <p class="mt-4">{{$t('Contato')}}</p>
             <h5 class="text-white">{{solucoes[index_modal].responsavel.email}}</h5>
             <h5
               class="text-white text-lowercase mt-4"
@@ -189,23 +188,23 @@
         <base-button
           :type="pagina_modal == 'geral'? 'white' : 'link'"
           :text-color="pagina_modal == 'geral'? 'warning' : 'white'"
-          class="text-capitalize"
+          class="text-normal"
           @click="pagina_modal = 'geral'"
-        >Geral</base-button>
+        >{{$t('Geral')}}</base-button>
 
         <base-button
           :type="pagina_modal == 'descricao'? 'white' : 'link'"
           :text-color="pagina_modal == 'descricao'? 'warning' : 'white'"
-          class="ml-auto text-capitalize"
+          class="ml-auto text-normal"
           @click="pagina_modal = 'descricao'"
-        >Descrição</base-button>
+        >{{$t('Descrição')}}</base-button>
 
         <base-button
           :type="pagina_modal == 'responsavel'? 'white' : 'link'"
           :text-color="pagina_modal == 'responsavel'? 'warning' : 'white'"
-          class="ml-auto text-capitalize"
+          class="ml-auto text-normal"
           @click="pagina_modal = 'responsavel'"
-        >Responsável</base-button>
+        >{{$t('Responsável')}}</base-button>
       </template>
     </modal>
 
@@ -218,14 +217,14 @@
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>
-        <h1 class="heading mt-4 text-capitalize">Você realmente deseja excluir esse registro?</h1>
+        <h1 class="heading mt-4 text-normal">Você realmente deseja excluir esse registro?</h1>
         <p>A exclusão é permantente e não poderá ser revertida!</p>
       </div>
 
       <template slot="footer">
-        <base-button type="white text-capitalize" @click="modal_excluir_visivel=false">Cancelar</base-button>
+        <base-button type="white text-normal" @click="modal_excluir_visivel=false">Cancelar</base-button>
         <base-button
-          type="link text-capitalize"
+          type="link text-normal"
           text-color="white"
           class="ml-auto"
           @click="excluir(solucao_excluir, true)"
@@ -240,7 +239,7 @@
             <div class="row ml-1">
               <h1 class="text-white font-weight-light">Nada aqui</h1>
               <base-button
-                class="ml-5 mb-4 mt-2 text-warning text-capitalize"
+                class="ml-5 mb-4 mt-2 text-warning text-normal"
                 type="white"
                 @click="limpar_filtros()"
               >Limpar filtros</base-button>

@@ -135,7 +135,7 @@
 
     <modal
       v-if="solucoes[index_modal]"
-      :show.sync="modal_visible"
+      :show.sync="modal_visivel"
       gradient="warning"
       modal-classes="modal-danger modal-dialog-centered"
     >
@@ -323,7 +323,7 @@ export default {
         "À Procura de Financiamento Privado",
         "Outros"
       ],
-      modal_visible: false,
+      modal_visivel: false,
       index_modal: 0,
       pagina_modal: "geral",
       solucoes: [],
@@ -386,7 +386,7 @@ export default {
     modal(i) {
       this.index_modal = i;
       this.pagina_modal = "geral";
-      this.modal_visible = !this.modal_visible;
+      this.modal_visivel = !this.modal_visivel;
     },
 
     async get_solucoes() {

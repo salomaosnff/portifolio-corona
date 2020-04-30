@@ -65,7 +65,7 @@
                 text-color="warning"
                 class="ml-auto text-normal"
                 @click="$router.push('desenvolvimento')"
-              >{{$t('Esqueci a Senha')}}</base-button>
+              >{{$t('Login.Esqueci a Senha')}}</base-button>
             </div>
           </div>
         </div>

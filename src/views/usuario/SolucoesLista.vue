@@ -13,7 +13,7 @@
 
     <div class="container pt-lg-md">
       <div class="row">
-        <div class="col-md-4 row ml-0">
+        <div class="col-md-3 row ml-0">
           <base-button
             icon="fa fa-home"
             class="mb-5 text-warning text-normal"
@@ -28,7 +28,7 @@
           >{{$t('Voltar')}}</base-button>
         </div>
 
-        <div class="col-md-8 text-right">
+        <div class="col-md-9 text-right">
           <base-button
             icon="ni ni-bold-right"
             class="mb-5"
@@ -42,6 +42,14 @@
             type="warning text-normal"
             @click="$router.push('solucoes_cadastro')"
           >{{$t('Cadastrar Nova Ideia')}}</base-button>
+
+          <base-button
+            v-if="pessoa.admin"
+            icon="ni ni-badge"
+            :class="['mb-5 text-normal', modo_administrativo? '':'desativado' ]"
+            type="success"
+            @click="modo_administrativo=!modo_administrativo"
+          >{{modo_administrativo? $t('Desativar') : $t('Ativar')}} {{$t('Modo Administrativo')}}</base-button>
 
           <!-- <base-button
             class="mb-5 text-white btn-tooltip text-normal"
@@ -283,6 +291,7 @@ export default {
   },
   data() {
     return {
+      modo_administrativo: false,
       pessoa: {},
       http: new http(),
       busca: "",
@@ -340,6 +349,7 @@ export default {
       let pessoa = localStorage.getItem("pessoa");
       if (pessoa) {
         pessoa = await JSON.parse(pessoa);
+        this.pessoa = pessoa;
         await this.get_solucoes(pessoa._id);
       }
     },

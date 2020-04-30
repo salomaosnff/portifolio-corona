@@ -78,17 +78,17 @@
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.casos">
-                    <p class="text-white">Casos</p>
+                    <p class="text-white">{{$t('Casos')}}</p>
                     <h4 class="text-white">{{noticias_corona.casos}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.curas">
-                    <p class="text-white">Curas</p>
+                    <p class="text-white">{{$t('Curas')}}</p>
                     <h4 class="text-white">{{noticias_corona.curas}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.mortes">
-                    <p class="text-white">Mortes</p>
+                    <p class="text-white">{{$t('Mortes')}}</p>
                     <h4 class="text-white">{{noticias_corona.mortes}}</h4>
                   </div>
                 </div>
@@ -96,41 +96,46 @@
 
               <div class="col" style="justify-content: center">
                 <div class="row" style="justify-content: center">
-                  <p class="text-white" style="align-self: center">. . . . . . . Hoje . . . . . . .</p>
+                  <p
+                    class="text-white"
+                    style="align-self: center"
+                  >. . . . . . . {{$t('Hoje')}} . . . . . . .</p>
                 </div>
 
                 <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.novos_casos_hoje">
-                    <p class="text-white">Novos Casos</p>
+                    <p class="text-white">{{$t('Novos Casos')}}</p>
                     <h4 class="text-white">{{noticias_corona.novos_casos_hoje}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.novas_mortes_hoje">
-                    <p class="text-white">Novas Mortes</p>
+                    <p class="text-white">{{$t('Novas Mortes')}}</p>
                     <h4 class="text-white">{{noticias_corona.novas_mortes_hoje}}</h4>
                   </div>
                 </div>
 
                 <div class="row" style="justify-content: center">
                   <div class="m-4" v-if="noticias_corona.casos_ativos">
-                    <p class="text-white">Casos Ativos</p>
+                    <p class="text-white">{{$t('Casos Ativos')}}</p>
                     <h4 class="text-white">{{noticias_corona.casos_ativos}}</h4>
                   </div>
 
                   <div class="m-4" v-if="noticias_corona.casos_graves">
-                    <p class="text-white">Casos Graves</p>
+                    <p class="text-white">{{$t('Casos Graves')}}</p>
                     <h4 class="text-white">{{noticias_corona.casos_graves}}</h4>
                   </div>
                 </div>
               </div>
-              <p class="small text-right mr-5 text-thin text-white">Fonte: {{noticias_corona.fonte}}</p>
+              <p
+                class="small text-right mr-5 text-thin text-white"
+              >{{$t('Fonte')}}: {{noticias_corona.fonte}}</p>
               <template slot="footer">
                 <base-button
                   type="link"
                   text-color="white"
                   class="text-normal"
                   @click="modal_covid = false"
-                >Fechar</base-button>
+                >{{$t('Fechar')}}</base-button>
               </template>
             </modal>
           </div>

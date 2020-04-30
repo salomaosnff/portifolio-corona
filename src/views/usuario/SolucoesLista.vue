@@ -48,7 +48,7 @@
             icon="ni ni-badge"
             :class="['mb-5 text-normal', modo_administrativo? '':'desativado' ]"
             type="success"
-            @click="modo_administrativo=!modo_administrativo"
+            @click="modo_administrativo=!modo_administrativo; get_solucoes()"
           >{{modo_administrativo? $t('Desativar') : $t('Ativar')}} {{$t('Modo Administrativo')}}</base-button>
 
           <!-- <base-button
@@ -63,8 +63,12 @@
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="row row-grid">
-            <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
-              <card class="border-0" shadow body-classes="py-5">
+            <div
+              v-for="(solucao, index) in solucoes"
+              :key="solucao + index"
+              :class="solucao.base? 'display: none' : 'col-lg-4 mb-5'"
+            >
+              <card v-if="!solucao.base" class="border-0" shadow body-classes="py-5">
                 <h4 class="text-default">{{solucao.nome}}</h4>
                 <p
                   class="description mt-3"
@@ -350,19 +354,30 @@ export default {
       if (pessoa) {
         pessoa = await JSON.parse(pessoa);
         this.pessoa = pessoa;
-        await this.get_solucoes(pessoa._id);
+        await this.get_solucoes();
       }
     },
 
-    async get_solucoes(pessoaId) {
-      await this.http
-        .solucoesPorPessoa(pessoaId)
-        .then(resp => {
-          this.solucoes = resp;
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    async get_solucoes() {
+      if (this.modo_administrativo) {
+        await this.http
+          .get("solucao")
+          .then(resp => {
+            this.solucoes = resp;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      } else {
+        await this.http
+          .solucoesPorPessoa(this.pessoa._id)
+          .then(resp => {
+            this.solucoes = resp;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     },
 
     async editar(solucao) {

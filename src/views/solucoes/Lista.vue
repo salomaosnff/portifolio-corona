@@ -97,6 +97,13 @@
           <div class="row row-grid">
             <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
+                <badge
+                  v-if="solucao.base"
+                  type="success text-normal"
+                  style="position: absolute; top: 18px; right: 20px"
+                  rounded
+                >{{$t('Fonte')}}: {{solucao.base}}</badge>
+
                 <h4 class="text-default">{{solucao.nome}}</h4>
                 <p
                   class="description mt-3"

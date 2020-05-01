@@ -143,14 +143,8 @@
           <div class="col-lg-6">
             <card style="background-color: #fb8640ee" shadow>
               <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
-              <h5
-                v-if="noticias_corona.casos_graves"
-                class="m-2 text-thin text-white"
-              >{{$t('Home.Introdução.Descrição')}}</h5>
-              <h5
-                v-if="noticias_corona.casos_graves"
-                class="m-2 text-thin text-white"
-              >{{$t('Home.Introdução.Subdescrição')}}</h5>
+              <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Descrição')}}</h5>
+              <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Subdescrição')}}</h5>
             </card>
           </div>
         </div>

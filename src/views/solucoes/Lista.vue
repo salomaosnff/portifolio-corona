@@ -12,6 +12,7 @@
     </div>
 
     <div class="container pt-lg-md">
+      <h2 class="text-white mb-5">{{$t('Soluções')}}</h2>
       <div class="row">
         <div class="col-md-3 row ml-0">
           <base-button

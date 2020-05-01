@@ -102,5 +102,48 @@
                 "Título": "Results"
             }
         ]
+    },
+    "investimentos/Dashboard": {
+        "solucoes": [
+            {
+                "titulo": "REVIVE Fund",
+                "descricao": "Contribute to the maintenance, administration and improvement of the REVIVE platform.",
+                "icone": "ni ni-money-coins",
+                "botao": "Contribute",
+                "link": "#/desenvolvimento",
+                "texto_modal": "The REVIVE platform is the responsibility of Prof. Mauro Oliveira, researcher of the Graduate Program in Computer Science (PPGCC) of IFCE.",
+                "texto_modal_secundario": "This project was developed by teachers and students of PPGCC. The purpose of REVIVE Fund is to obtain resources for maintenance, administration and improvement of this platform.",
+                "texto_modal_alerta": ""
+            },
+            {
+                "titulo": "Financial Support",
+                "descricao": "Support financially one of the IDEAS registered on the REVIVE platform.",
+                "icone": "ni ni-money-coins",
+                "botao": "Support",
+                "link": "#/solucoes_lista",
+                "texto_modal": "It is simple to financially support one of the IDEAS registered in the REVIVE. You select one of the registered projects (Action Area, IDEIA Status or Search with Keywords). After the selection, you must contact the RESPONSIBLE for the project to give your contribution.",
+                "texto_modal_secundario": "We suggest that 1% of your collaboration be donated to the Revive Fund.",
+                "texto_modal_alerta": "IMPORTANT: The REVIVE platform does not assume any kind of responsibility in the application of the donated resources."
+            },
+            {
+                "titulo": "Start a partnership",
+                "descricao": "Start a partnership with the person in charge of one of the IDEIAS registered on the REVIVE platform.",
+                "icone": "ni ni-building",
+                "botao": "Start",
+                "link": "#/desenvolvimento",
+                "texto_modal": "It is simple to make a COMMERCIAL or ACADEMIC partnership with one of the IDEAS registered on REVIVE. You select one of the registered projects by the type of BUSINESS that your are interested.",
+                "texto_modal_secundario": "Then, you can select the project by IDEIA's Action Area, IDEIA Status, or Keyword Search. After selecting one project, you must contact the RESPONSIBLE to propose a  partnership.",
+                "texto_modal_alerta": "IMPORTANT: The REVIVE platform does not assume any kind of responsibility in the partnerships made."
+            }
+        ],
+        "complemento": {
+            "modal": {
+                "informacoes": "For more information, please contact: mauro@lar.ifce.edu.br",
+                "ideias_b": "List of Ideas"
+            },
+            "nav_buttons": {
+                "back": "Back"
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{complemento.nav_buttons.back}}</base-button>
         </div>
       </div>
 
@@ -68,15 +68,13 @@
       >{{solucoes[index_modal].titulo}}</h4>
 
       <div>
-        <h5 class="text-white">{{solucoes[index_modal].texto_modal}}</h5>
         <h5 class="text-white mt-4">{{solucoes[index_modal].texto_modal_secundario}}</h5>
         <p
           v-if="solucoes[index_modal].texto_modal_alerta"
           class="text-white mt-4"
         >{{solucoes[index_modal].texto_modal_alerta}}</p>
         <p class="mt-4">
-          Para mais informações, favor entrar em contato:
-          mauro@lar.ifce.edu.br
+          {{complemento.modal.informacoes}}
           <br />(85) 99705 - 4321
         </p>
       </div>
@@ -86,7 +84,7 @@
           text-color="warning"
           class="text-capitalize"
           @click="modal_router()"
-        >Lista de Ideias</base-button>
+        >{{complemento.modal.ideias_b}}</base-button>
       </template>
     </modal>
   </section>
@@ -101,50 +99,10 @@ export default {
   data() {
     return {
       modal_visivel: false,
+      idiomas: ["pt_BR", "en"],
       index_modal: 0,
-      solucoes: [
-        {
-          titulo: "Fundo REVIVE",
-          descricao:
-            "Colabore com a manutenção, administração e aperfeiçoamento da plataforma REVIVE.",
-          icone: "ni ni-money-coins",
-          botao: "Aplicar",
-          link: "#/desenvolvimento",
-          texto_modal:
-            "A plataforma REVIVE é de responsabilidade do Prof. Mauro Oliveira, pesquisador do Programa de Pós-graduação em Ciência da Computação (PPGCC) do IFCE.",
-          texto_modal_secundario:
-            "Este projeto foi desenvolvido por professores e alunos do PPGCC. O propósito do Fundo REVIVE é a obtenção de recursos para manutenção, administração e aperfeiçoamento desta plataforma.",
-          texto_modal_alerta: ""
-        },
-        {
-          titulo: "Apoio Financeiro",
-          descricao:
-            "Apoie financeiramente um das IDEIAS cadastradas na plataforma REVIVE.",
-          icone: "ni ni-money-coins",
-          botao: "Apoiar",
-          link: "#/solucoes_lista",
-          texto_modal:
-            "É simples apoiar financeiramente uma das IDEIAS cadastradas no REVIVE. Você seleciona um dos projetos cadastrados (ÁREA de Atuação, Status da IDEIA ou Busca com Palavras-chave). Após a seleção, você deve entrar em contato com o RESPONSÁVEL pelo projeto para dar sua contribuição.",
-          texto_modal_secundario:
-            "Sugerimos que 1% de sua colaboração seja doado ao Fundo REVIVE.",
-          texto_modal_alerta:
-            "IMPORTANTE: A plataforma REVIVE não assume nenhum tipo de responsabilidade na aplicação dos recursos doados."
-        },
-        {
-          titulo: "Criar Parceria",
-          descricao:
-            "Crie uma parceria com o responsável por uma das IDEIAS cadastradas na plataforma REVIVE.",
-          icone: "ni ni-building",
-          botao: "Criar",
-          link: "#/desenvolvimento",
-          texto_modal:
-            "É simples fazer parceria COMERCIAL ou ACADÊMICA com uma das IDEIAS cadastradas no REVIVE. Você seleciona um dos projetos cadastrados pelo tipo de NEGÓCIO que lhe interessa.",
-          texto_modal_secundario:
-            "Em seguida, você seleciona o projeto pela ÁREA de Atuação, Status da IDEIA, ou Busca com Palavras-chave. Após a seleção do projeto, você deve entrar em contato com o RESPONSÁVEL para propor a parceria.",
-          texto_modal_alerta:
-            "IMPORTANTE: A plataforma REVIVE não assume nenhum tipo responsabilidades nas parcerias realizadas."
-        }
-      ]
+      solucoes: this.$t("investimentos/Dashboard.solucoes"),
+      complemento: this.$t("investimentos/Dashboard.complemento")
     };
   },
   methods: {
@@ -161,6 +119,11 @@ export default {
     async fechar_modal() {
       this.modal_visivel = await false;
       return;
+    },
+    change_language(idioma) {
+      this.$i18n.locale = idioma;
+      this.solucoes = this.$t("investimentos/Dashboard.solucoes");
+      this.complemento = this.$t("investimentos/Dashboard.complemento");
     }
   }
 };

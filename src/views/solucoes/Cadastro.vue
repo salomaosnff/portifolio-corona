@@ -70,6 +70,7 @@
                 <div class="button-group mb-3 p-1 card w-50 " :class="valido.cidade.block">
                   <dropdown>
                     <base-button
+                      name= "b-state"
                       slot="title"
                       type="warning"
                       class="dropdown-toggle text-capitalize m-1"
@@ -78,25 +79,24 @@
                       v-for="(item, index) in estados"
                       :key="index"
                       class="dropdown-item"
-                      @click="estado = item; buscar_cidades(true); valido.cidade.button='enabled';"
+                      @click="estado = item; buscar_cidades(true);"
                     >{{item.nome}}</a>
                   </dropdown>
-
-                  <dropdown>
-                    <base-button
-                      slot="title"
-                      type="warning"
-                      class="dropdown-toggle  text-capitalize m-1"
-                      :class= "valido.cidade.button"
-                    ><strong>{{solucao.cidade.nome || "Selecione sua Cidade"}}</strong></base-button>
-                    <a
-                      v-for="(item, index) in cidades"
-                      :key="index"
-                      class="dropdown-item"
-                      @click="solucao.cidade = item"
-                      :valid="false"
-                    >{{item.nome}}</a>
-                  </dropdown>
+                  <div class="mb3" v-show="solucao.cidade && solucao.cidade._id">
+                    <dropdown>
+                      <base-button
+                        slot="title"
+                        type="warning"
+                        class="dropdown-toggle  text-capitalize m-1"
+                      ><strong>{{solucao.cidade.nome || "Selecione sua Cidade"}}</strong></base-button>
+                      <a
+                        v-for="(item, index) in cidades"
+                        :key="index"
+                        class="dropdown-item"                      
+                        @click="solucao.cidade = item; "                      
+                      >{{item.nome}}</a>
+                    </dropdown>
+                  </div>
                 </div>
 
                 <textarea
@@ -223,7 +223,7 @@ export default {
       valido: {
         nome: null,
         instituicao: null,
-        cidade: {block:"border-valid", button: "disabled"},
+        cidade: {block:"border-valid"},
         descricao: "border-valid",
         area_aplicacao: "border-valid",
         status: "border-valid",

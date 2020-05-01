@@ -114,15 +114,15 @@
 </template>
 <script>
 
-export function isEmptySelection(){
+export function isSelected(){
   if ( !(
           this.pessoa.colaborador || 
           this.pessoa.cliente     || 
           this.pessoa.investidor
         ) 
       )          
-    return true;
-  return false;
+    return false;
+  return true;
 }
 
 import http from "../../services/http";
@@ -134,7 +134,6 @@ import {
   email,
   sameAs
 } from "vuelidate/lib/validators";
-// import { isEmptySelection } from "@/validators";
 
 
 export default {
@@ -171,7 +170,8 @@ export default {
   },
   validations: {
     pessoa: {
-      conta_tipo: { isEmpty: isEmptySelection },
+      conta_tipo: { hasSelected: isSelected },       
+
       nome: { required, minLength: minLength(4), maxLength: maxLength(60) },
       email: { required, email, maxLength: maxLength(60) },
       telefone: { required },
@@ -191,13 +191,13 @@ export default {
       this.resetaCamposValidos();      
       this.$v.pessoa.$touch();
 
-      if (this.$v.pessoa.$anyError || this.$v.pessoa.conta_tipo.isEmpty) {
+      if (this.$v.pessoa.$anyError) {
         this.error = true;
         if (this.$v.pessoa.nome.$invalid)
           this.valido.nome = !this.$v.pessoa.nome.$invalid;
         if (this.$v.pessoa.telefone.$invalid)
           this.valido.telefone = !this.$v.pessoa.telefone.$invalid;
-        if (this.$v.pessoa.conta_tipo.isEmpty)
+        if (!this.$v.pessoa.conta_tipo.hasSelected)
           this.valido.conta_tipo = "border-danger";
         if (this.$v.pessoa.email.$invalid)
           this.valido.email = !this.$v.pessoa.email.$invalid;

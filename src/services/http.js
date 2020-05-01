@@ -22,7 +22,7 @@ export default class Http {
 
     async noticiasPorPessoa(dados) {
         return await axios
-            .get(baseUrl[0] + 'noticias/buscarPorPessoa', { params: { pessoaId: dados } })
+            .get(baseUrl[0] + 'noticia/buscarPorPessoa', { params: { pessoaId: dados } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }

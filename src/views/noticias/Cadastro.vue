@@ -39,18 +39,18 @@
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                    <strong>Dados inválidos!</strong> Verifique os campos destacados!
+                  <strong>Dados inválidos!</strong> Verifique os campos destacados!
                 </base-alert>
-                <base-input 
-                  class="mb-3" 
-                  placeholder="Título" 
+                <base-input
+                  class="mb-3"
+                  placeholder="Título"
                   v-model="$v.noticia.titulo.$model"
                   :valid="valido.titulo"
                 ></base-input>
 
-                <base-input 
-                  class="mb-3" 
-                  placeholder="Subtítulo" 
+                <base-input
+                  class="mb-3"
+                  placeholder="Subtítulo"
                   v-model="$v.noticia.subtitulo.$model"
                   :valid="valido.subtitulo"
                 ></base-input>
@@ -95,7 +95,7 @@ export default {
         subtitulo: null,
         descricao: "border-valid"
       },
-      error: false      
+      error: false
     };
   },
 
@@ -107,17 +107,21 @@ export default {
   validations: {
     noticia: {
       titulo: { required, maxLength: maxLength(60) },
-      subtitulo: { required, minLength: minLength(5), maxLength: maxLength(60)},
+      subtitulo: {
+        required,
+        minLength: minLength(5),
+        maxLength: maxLength(60)
+      },
       descricao: { required, maxLength: maxLength(300) }
     }
-  }, 
-  
+  },
+
   methods: {
     onSubmit() {
       this.resetaCamposValidos();
       this.$v.noticia.$touch();
 
-      if(this.$v.noticia.$anyError) {
+      if (this.$v.noticia.$anyError) {
         this.error = true;
         if (this.$v.noticia.titulo.$invalid)
           this.valido.titulo = !this.$v.noticia.titulo.$invalid;
@@ -130,12 +134,10 @@ export default {
       // Salvar apos insenção de erros
       this.resetaCamposValidos();
       this.salvar();
-      
     },
 
-    resetaCamposValidos(){
+    resetaCamposValidos() {
       this.error = false;
-
       this.valido.titulo = null;
       this.valido.subtitulo = null;
       this.valido.descricao = "border-valid";
@@ -148,10 +150,11 @@ export default {
             this.$router.push("noticias_lista");
         });
       } else {
-        let pessoa = localStorage.getItem("pessoa");
-        if (pessoa) pessoa = JSON.parse(pessoa);
-        this.noticia.responsavel._id = pessoa._id;
-
+        let pessoa = await localStorage.getItem("pessoa");
+        if (pessoa) {
+          pessoa = await JSON.parse(pessoa);
+          this.noticia.responsavel._id = await pessoa._id;
+        }
         this.http.post("noticia", this.noticia).then(resp => {
           if (resp._id) this.$router.push("noticias_lista");
         });
@@ -161,10 +164,10 @@ export default {
 };
 </script>
 <style scoped>
-  .border-valid{
-    border-style: solid; 
-    border-color: rgba(192,192,192,0.7); 
-    border-radius: 15px;
-    border-width: thin;
-  }
+.border-valid {
+  border-style: solid;
+  border-color: rgba(192, 192, 192, 0.7);
+  border-radius: 15px;
+  border-width: thin;
+}
 </style>

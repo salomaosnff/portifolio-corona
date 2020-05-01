@@ -29,7 +29,7 @@
           >{{$t('Voltar')}}</base-button>
         </div>
 
-        <div class="col-md-9 text-right">
+        <div class="col-md-9 text-right pr-0">
           <base-button
             icon="ni ni-bold-right"
             class="mb-5"
@@ -213,6 +213,7 @@
         >{{$t('Descrição')}}</base-button>
 
         <base-button
+          v-if="solucoes[index_modal].responsavel"
           :type="pagina_modal == 'responsavel'? 'white' : 'link'"
           :text-color="pagina_modal == 'responsavel'? 'warning' : 'white'"
           class="ml-auto text-normal"
@@ -354,7 +355,7 @@ export default {
       let pessoa = localStorage.getItem("pessoa");
       if (pessoa) {
         pessoa = await JSON.parse(pessoa);
-        this.pessoa = pessoa;
+        this.pessoa = await pessoa;
         await this.get_solucoes();
       }
     },

@@ -11,7 +11,9 @@
       <span></span>
     </div>
     <div class="container pt-lg-md">
-      <h2 class="text-white mb-5">{{modo_administrativo? 'Notícias' : 'Minhas Notícias'}}</h2>
+      <h2
+        class="text-white mb-5"
+      >{{modo_administrativo || !pessoa.admin? 'Notícias' : 'Minhas Notícias'}}</h2>
       <div class="row">
         <div class="col-md-3 row ml-0">
           <base-button
@@ -65,11 +67,13 @@
                     @click="modal(index)"
                   >Mais</base-button>
                   <base-button
+                    v-if="pessoa.admin"
                     class="mt-4"
                     type="primary text-capitalize"
                     @click="editar(noticia)"
                   >Editar</base-button>
                   <base-button
+                    v-if="pessoa.admin"
                     class="mt-4"
                     type="warning text-capitalize"
                     @click="excluir(noticia, false)"
@@ -185,7 +189,8 @@ export default {
       if (pessoa) {
         pessoa = await JSON.parse(pessoa);
         this.pessoa = await pessoa;
-        if (this.modo_administrativo) await this.get_noticias();
+        if (this.modo_administrativo || !pessoa.admin)
+          await this.get_noticias();
         else await this.get_noticia_por_pessoa();
       }
     },

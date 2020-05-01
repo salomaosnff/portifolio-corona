@@ -197,8 +197,8 @@
         </div>
       </div>
 
-      <div v-if="pagina_modal == 'responsavel'">
-        <div v-if="solucoes[index_modal].responsavel && !solucoes[index_modal].responsavel._id">
+      <div v-if="pagina_modal == 'responsavel' && solucoes[index_modal].responsavel">
+        <div v-if="!solucoes[index_modal].responsavel._id">
           <p>{{$t('Nome')}}</p>
           <h5 class="text-white">{{solucoes[index_modal].responsavel}}</h5>
         </div>

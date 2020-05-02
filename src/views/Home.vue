@@ -219,40 +219,44 @@
     </div>
 
     <section class="section pt-0">
-      <div class="row">
-        <div class="col-sm-4 text-right mt-5">
+      <h2 class="text-center mt-0">Realização</h2>
+      <hr class="listinha my-1">
+      <div class="row p-4">
+        <div class="col-sm cards__images">
           <img
             alt="Rounded image"
-            class="img-fluid rounded ml-5"
-            style="width: 400px;"
-            src="img/iracema.jpg"
+            class="img-fluid rounded"
+            style="width: 300px; margin: 14px; margin-left: 30px"
+            src="img/iracemadigital3.png"
             lazy="loaded"
           />
         </div>
-        <div class="col-sm-8 text-right mt-5 pt-5">
+        <div class="col-sm cards__images">
           <img
             class="img-fluid rounded"
             style="width: 160px; margin: 30px"
             src="img/lar.png"
             lazy="loaded"
           />
-
+        </div>
+        <div class="col-sm cards__images">
           <img
             class="img-fluid rounded"
             style="width: 160px; margin: 30px"
             src="img/ppgcc.png"
             lazy="loaded"
           />
-
+        </div>
+        <div class="col-sm cards__images">
           <img
             alt="Rounded image"
             class="img-fluid rounded"
-            style="width: 160px; margin: 30px; margin-right: 90px"
+            style="width: 190px; margin: 30px; margin-right: 33px"
             src="img/ifce.png"
             lazy="loaded"
           />
         </div>
-      </div>
+      </div>    
     </section>
   </div>
 </template>
@@ -327,3 +331,32 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+hr.listinha {
+    max-width: 3.25rem;
+    border-width: .2rem;
+    border-color: #fb8640ee;
+}
+
+.cards__images {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+</style>

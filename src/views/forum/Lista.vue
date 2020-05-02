@@ -25,7 +25,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t("Voltar")}}</base-button>
         </div>
 
         <div class="col-md-4 text-right pr-0">
@@ -35,14 +35,14 @@
             class="mb-5"
             type="primary text-capitalize"
             @click="mudar_tipo_forum('todos')"
-          >Ver Todos os Fóruns</base-button>
+          >{{$t("forum.Lista.complemento.nav_buttons.filter_all")}}</base-button>
           <base-button
             v-if="tipo_forum == 'todos'"
             icon="ni ni-chat-round"
             class="mb-5"
             type="primary text-capitalize"
             @click="mudar_tipo_forum('meus')"
-          >Ver Meus Fóruns</base-button>
+          >{{$t("forum.Lista.complemento.nav_buttons.filter_my")}}</base-button>
         </div>
 
         <div class="col-md-4 text-right pr-0">
@@ -51,7 +51,7 @@
             class="mb-5"
             type="warning text-capitalize"
             @click="$router.push('forum_cadastro')"
-          >Cadastrar Novo Fórum</base-button>
+          >{{$t("forum.Lista.complemento.nav_buttons.registe")}}</base-button>
         </div>
       </div>
 
@@ -71,25 +71,25 @@
                     class="mt-4 text-capitalize"
                     :type="tipo_forum == 'meus'? 'white' : 'warning'"
                     @click="modal(index)"
-                  >Mais</base-button>
+                  >{{$t("forum.Lista.forum.more")}}</base-button>
                   <base-button
                     class="mt-4 text-normal"
                     type="white"
                     text-color="warning"
                     @click="copiar_link(forum.link)"
-                  >Entrar no Fórum</base-button>
+                  >{{$t("forum.Lista.forum.join_forum")}}</base-button>
                   <base-button
                     v-if="tipo_forum == 'meus'"
                     class="mt-4"
                     type="primary text-capitalize"
                     @click="editar(forum)"
-                  >Editar</base-button>
+                  >{{$t("forum.Lista.forum.edit")}}</base-button>
                   <base-button
                     v-if="tipo_forum == 'meus'"
                     class="mt-4"
                     type="warning text-capitalize"
                     @click="excluir(forum, false)"
-                  >Excluir</base-button>
+                  >{{$t("forum.Lista.forum.delete")}}</base-button>
                 </div>
               </card>
             </div>
@@ -112,11 +112,11 @@
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="forums[index_modal].link">
-          <p>Link</p>
+          <p>{{$t("forum.Lista.forum.modal_title.link")}}</p>
           <h5 class="text-white text-capitalise">{{forums[index_modal].link}}</h5>
         </div>
         <div v-if="forums[index_modal].descricao">
-          <p class="mt-4">Descrição</p>
+          <p class="mt-4">{{$t("forum.Lista.forum.modal_title.description")}}</p>
           <h5 class="text-white">{{forums[index_modal].descricao}}</h5>
         </div>
       </div>
@@ -124,14 +124,14 @@
       <div v-if="pagina_modal == 'responsavel'">
         <div>
           <div v-if="forums[index_modal].responsavel.nome">
-            <p>Nome</p>
+            <p>{{$t("forum.Lista.forum.modal_title.name")}}</p>
             <h5 class="text-white">{{forums[index_modal].responsavel.nome}}</h5>
           </div>
 
           <div
             v-if="forums[index_modal].responsavel.email || forums[index_modal].responsavel.telefone"
           >
-            <p class="mt-4">Contato</p>
+            <p class="mt-4">{{$t("forum.Lista.forum.modal_title.contact")}}</p>
             <h5 class="text-white">{{forums[index_modal].responsavel.email}}</h5>
             <h5 class="text-white text-lowercase mt-4">{{forums[index_modal].responsavel.telefone}}</h5>
           </div>
@@ -143,14 +143,14 @@
           :text-color="pagina_modal == 'geral'? 'warning' : 'white'"
           class="text-capitalize"
           @click="pagina_modal = 'geral'"
-        >Geral</base-button>
+        >{{$t("forum.Lista.forum.modal_title.general")}}</base-button>
 
         <base-button
           :type="pagina_modal == 'responsavel'? 'white' : 'link'"
           :text-color="pagina_modal == 'responsavel'? 'warning' : 'white'"
           class="ml-auto text-capitalize"
           @click="pagina_modal = 'responsavel'"
-        >Responsável</base-button>
+        >{{$t("forum.Lista.forum.modal_title.responsable")}}</base-button>
       </template>
     </modal>
 
@@ -163,18 +163,21 @@
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>
-        <h1 class="heading mt-4 text-capitalize">Você realmente deseja excluir esse registro?</h1>
-        <p>A exclusão é permantente e não poderá ser revertida!</p>
+        <h1 class="heading mt-4 text-capitalize">{{$t("forum.Lista.forum.modal_warning.heading")}}</h1>
+        <p>{{$t("forum.Lista.forum.modal_warning.warning")}}</p>
       </div>
 
       <template slot="footer">
-        <base-button type="white text-capitalize" @click="modal_excluir_visivel=false">Cancelar</base-button>
+        <base-button
+          type="white text-capitalize"
+          @click="modal_excluir_visivel=false"
+        >{{$t("forum.Lista.forum.modal_warning.cancel")}}</base-button>
         <base-button
           type="link text-capitalize"
           text-color="white"
           class="ml-auto"
           @click="excluir(forum_excluir, true)"
-        >Excluir</base-button>
+        >{{$t("forum.Lista.forum.modal_warning.delete")}}</base-button>
       </template>
     </modal>
 
@@ -183,23 +186,23 @@
       gradient="warning"
       modal-classes="modal-warning modal-dialog-centered"
     >
-      <h6 slot="header" class="modal-title">Como Entrar no Fórum?</h6>
+      <h6 slot="header" class="modal-title">{{$t("forum.Lista.forum.modal_join.title")}}</h6>
 
       <div class="py-3 text-center">
         <p class="mt-4 text-italic">{{link_forum}}</p>
-        <p class="mt-4">O link já foi copiado para sua área de transferência!</p>
+        <p class="mt-4">{{$t("forum.Lista.forum.modal_join.link")}}</p>
         <base-button
           outline
           size="sm"
           class="mt-2 text-normal text-italic"
           type="white"
           icon="ni ni-ungroup"
-        >Copiar link novamente</base-button>
+        >{{$t("forum.Lista.forum.modal_join.copie_link")}}</base-button>
         <p class="mt-4">. . .</p>
-        <h1 class="mt-4 heading text-normal">1. Envie o link para um de seus contatos no WhatsApp.</h1>
-        <h1 class="mt-4 heading text-normal">2. Clique em "Ver grupo" para entrar no Fórum.</h1>
+        <h1 class="mt-4 heading text-normal"></h1>
+        <h1 class="mt-4 heading text-normal">{{$t("forum.Lista.forum.modal_join.send_link_1")}}</h1>
         <p class="mt-4">. . .</p>
-        <p class="mt-4">Use Ctrl + V para colar o link no WhatsApp!</p>
+        <p class="mt-4">{{$t("forum.Lista.forum.modal_join.send_link_2")}}</p>
         <base-button
           href="https://web.whatsapp.com/"
           outline
@@ -208,7 +211,7 @@
           type="white"
           tag="a"
           target="_blank"
-        >Abrir WhatsApp Web</base-button>
+        >{{$t("forum.Lista.forum.modal_join.send_link_3")}}</base-button>
       </div>
 
       <template slot="footer">
@@ -217,7 +220,7 @@
           text-color="white"
           class="ml-auto"
           @click="modal_entrar_forum_visivel = false"
-        >Entendi</base-button>
+        >{{$t("forum.Lista.forum.modal_join.I_understood")}}</base-button>
       </template>
     </modal>
   </section>
@@ -246,7 +249,7 @@ export default {
       link_forum: "",
       index_modal: 0,
       pagina_modal: "geral",
-      forums: []
+      forums: [],
     };
   },
 

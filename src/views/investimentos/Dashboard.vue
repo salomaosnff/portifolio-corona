@@ -25,30 +25,30 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >{{complemento.nav_buttons.back}}</base-button>
+          >{{$t("Voltar")}}</base-button>
         </div>
       </div>
 
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="row row-grid">
-            <div v-for="(solucao, index) in solucoes" :key="index" class="col-lg-4 mb-5">
+            <div v-for="(solucao, index) in $t('investimentos/Dashboard.solucoes')" :key="index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
                 <div class="row" style="margin-left: 1px">
                   <icon :name="solucao.icone" gradient="warning" color="white" shadow rounded></icon>
                   <h4
                     style="margin-top: 10px; margin-left: 20px"
                     class="text-default"
-                  >{{solucao.titulo}}</h4>
+                  >{{$t("investimentos/Dashboard.solucoes["+index+"].titulo")}}</h4>
                 </div>
-                <p class="mt-3">{{solucao.descricao}}</p>
+                <p class="mt-3">{{$t("investimentos/Dashboard.solucoes["+index+"].descricao")}}</p>
                 <div class="text-center">
                   <base-button
                     class="my-4"
                     type="warning text-capitalize"
                     style="font-size: 16px"
                     @click="modal(index)"
-                  >{{solucao.botao}}</base-button>
+                  >{{$t("investimentos/Dashboard.solucoes["+index+"].botao")}}</base-button>
                 </div>
               </card>
             </div>
@@ -65,16 +65,18 @@
         slot="header"
         class="modal-title"
         id="modal-title-notification"
-      >{{solucoes[index_modal].titulo}}</h4>
+      >{{$t("investimentos/Dashboard.solucoes["+index_modal+"].titulo")}}</h4>
 
       <div>
-        <h5 class="text-white mt-4">{{solucoes[index_modal].texto_modal_secundario}}</h5>
+        <h5
+          class="text-white mt-4"
+        >{{$t("investimentos/Dashboard.solucoes["+index_modal+"].texto_modal_secundario")}}</h5>
         <p
           v-if="solucoes[index_modal].texto_modal_alerta"
           class="text-white mt-4"
         >{{solucoes[index_modal].texto_modal_alerta}}</p>
         <p class="mt-4">
-          {{complemento.modal.informacoes}}
+          {{$t("investimentos/Dashboard.complemento.modal.informacoes")}}
           <br />(85) 99705 - 4321
         </p>
       </div>
@@ -84,7 +86,7 @@
           text-color="warning"
           class="text-capitalize"
           @click="modal_router()"
-        >{{complemento.modal.ideias_b}}</base-button>
+        >{{$t("investimentos/Dashboard.complemento.modal.ideias_b")}}</base-button>
       </template>
     </modal>
   </section>
@@ -99,10 +101,8 @@ export default {
   data() {
     return {
       modal_visivel: false,
-      idiomas: ["pt_BR", "en"],
       index_modal: 0,
       solucoes: this.$t("investimentos/Dashboard.solucoes"),
-      complemento: this.$t("investimentos/Dashboard.complemento")
     };
   },
   methods: {
@@ -119,11 +119,6 @@ export default {
     async fechar_modal() {
       this.modal_visivel = await false;
       return;
-    },
-    change_language(idioma) {
-      this.$i18n.locale = idioma;
-      this.solucoes = this.$t("investimentos/Dashboard.solucoes");
-      this.complemento = this.$t("investimentos/Dashboard.complemento");
     }
   }
 };

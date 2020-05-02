@@ -145,6 +145,63 @@
             "nav_buttons": {
                 "back": "Back"
             }
+        },
+        "Forum/Lista": {
+            "complemento": {
+                "nav_buttons": {
+                    "back": "Black"
+                }
+            }
+        }
+    },
+    "forum": {
+        "Lista": {
+            "forum": {
+                "more": "More",
+                "join_forum": "Join Forum",
+                "edit": "Edit",
+                "delete": "Delete",
+                "modal_title": {
+                    "link": "Link",
+                    "description": "Description",
+                    "name": "Name",
+                    "contact": "Contact",
+                    "general": "General",
+                    "responsable": "responsable"
+                },
+                "modal_warning": {
+                    "heading": "You really want to delete this forum?",
+                    "warning": "The exclusion is permanent  and irreversible!",
+                    "cancel": "Cancel",
+                    "delete": "Delete"
+                },
+                "modal_join": {
+                    "title": "How to join the forum?",
+                    "link": "The link has already been copied to your clipboard!",
+                    "copie_link": "Copie the link again",
+                    "send_link_1": "1. Send the link to one of your WhatsApp contacts.",
+                    "send_link_2": "2. Click on \"See group\" to enter the Forum.",
+                    "send_link_3": "Use Ctrl + V to paste the link into WhatsApp!",
+                    "open_whatsapp": "Open WhatsApp Web",
+                    "I_understood": "I understood"
+                }
+            },
+            "complemento": {
+                "nav_buttons": {
+                    "back": "Black",
+                    "filter_all": "Show All Forums",
+                    "filter_my": "Show My Forums",
+                    "registe": "Register a New Forum"
+                }
+            }
+        },
+        "Cadastro":{
+            "title":"Register Your Forum",
+            "ph_forum_name":"Forum Name",
+            "ph_forum_link":"Link to join to the Forum",
+            "whatsapp_link":"Create a group in WhatsApp and enter the link in the field above",
+            "ph_forum_description":"Description",
+            "save":"Salvar"
         }
     }
 }

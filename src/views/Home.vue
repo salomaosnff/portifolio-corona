@@ -26,8 +26,8 @@
         </div>
       </div>
 
-      <div class="shape shape-style-1 bg-gradient-warning shape-skew">
-        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -100px" />
+      <div class="shape shape-style-1 shape-skew">
+        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -100px; height: 800px;" />
         <span></span>
         <span></span>
         <span></span>

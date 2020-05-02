@@ -38,29 +38,46 @@
         <span></span>
         <span></span>
       </div>
+
       <div class="p-5">
         <div class="row pt-5">
           <div class="col-lg-6">
             <div class="col-lg-6">
-              <base-button
-                type="warning text-normal"
-                style="font-size: 16px"
-                @click="modal_covid = !modal_covid"
-              >{{$t('Home.Estatísticas do COVID-19')}}</base-button>
-              <base-button
-                class="mt-4"
-                href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                type="warning text-normal"
-                style="font-size: 16px"
-                tag="a"
-                target="_blank"
-              >{{$t('Home.Monitor do COVID-19')}}</base-button>
-              <base-button
-                @click="$router.push('noticias_lista')"
-                class="mt-4"
-                type="warning text-normal"
-                style="font-size: 16px"
-              >{{$t('Home.Notícias do COVID-19')}}</base-button>
+              <div class="row">
+                <div class="col-lg-6">
+                  <base-button
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  @click="modal_covid = !modal_covid"
+                  >{{$t('Home.Estatísticas do COVID-19')}}
+                  </base-button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                   <base-button
+                  class="mt-4"
+                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                  >{{$t('Home.Monitor do COVID-19')}}
+                  </base-button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                   <base-button
+                   @click="$router.push('desenvolvimento')"
+                   class="mt-4"
+                   type="warning text-normal"
+                   style="font-size: 16px"
+                  >{{$t('Home.Notícias do COVID-19')}}
+                  </base-button>
+                </div>
+              </div>
+              <br>
             </div>
 
             <modal

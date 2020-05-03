@@ -27,7 +27,11 @@
       </div>
 
       <div class="shape shape-style-1 shape-skew">
-        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -100px; height: 800px;" />
+        <img
+          v-lazy="'img/equipe.jpg'"
+          class="card-img-top"
+          style="margin-top: -100px; height: 800px;"
+        />
         <span></span>
         <span></span>
         <span></span>
@@ -46,38 +50,35 @@
               <div class="row">
                 <div class="col-lg-6">
                   <base-button
-                  type="warning text-normal"
-                  style="font-size: 16px"
-                  @click="modal_covid = !modal_covid"
-                  >{{$t('Home.Estatísticas do COVID-19')}}
-                  </base-button>
+                    type="warning text-normal"
+                    style="font-size: 16px"
+                    @click="modal_covid = !modal_covid"
+                  >{{$t('Home.Estatísticas do COVID-19')}}</base-button>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
-                   <base-button
-                  class="mt-4"
-                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                  type="warning text-normal"
-                  style="font-size: 16px"
-                  tag="a"
-                  target="_blank"
-                  >{{$t('Home.Monitor do COVID-19')}}
-                  </base-button>
+                  <base-button
+                    class="mt-4"
+                    href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                    type="warning text-normal"
+                    style="font-size: 16px"
+                    tag="a"
+                    target="_blank"
+                  >{{$t('Home.Monitor do COVID-19')}}</base-button>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
-                   <base-button
-                   @click="$router.push('desenvolvimento')"
-                   class="mt-4"
-                   type="warning text-normal"
-                   style="font-size: 16px"
-                  >{{$t('Home.Notícias do COVID-19')}}
-                  </base-button>
+                  <base-button
+                    @click="$router.push('desenvolvimento')"
+                    class="mt-4"
+                    type="warning text-normal"
+                    style="font-size: 16px"
+                  >{{$t('Home.Notícias do COVID-19')}}</base-button>
                 </div>
               </div>
-              <br>
+              <br />
             </div>
 
             <modal
@@ -220,7 +221,7 @@
 
     <section class="section pt-0">
       <h2 class="text-center mt-0">Realização</h2>
-      <hr class="listinha my-1">
+      <hr class="listinha my-1" />
       <div class="row p-4">
         <div class="col-sm cards__images">
           <img
@@ -256,7 +257,7 @@
             lazy="loaded"
           />
         </div>
-      </div>    
+      </div>
     </section>
   </div>
 </template>
@@ -279,13 +280,8 @@ export default {
       botoes: [
         { link: "login", props_to_link: "forum_lista" },
         { link: "login", props_to_link: "noticias_lista" },
-<<<<<<< HEAD
-        { link: "noticias_cadastro", props_to_link: "" }
-        // { titulo: "Teste", link: "test", props_to_link: ""}
-=======
         { link: "desenvolvimento", props_to_link: "" }
-        // { link: "test", props_to_link: "" }
->>>>>>> 9ac8055f80f8a5cd90adf65aa141053063e6fd77
+        // { titulo: "Teste", link: "test", props_to_link: ""}
       ],
       cards: [
         {
@@ -338,30 +334,28 @@ export default {
 </script>
 
 <style scoped>
-
 hr.listinha {
-    max-width: 3.25rem;
-    border-width: .2rem;
-    border-color: #fb8640ee;
+  max-width: 3.25rem;
+  border-width: 0.2rem;
+  border-color: #fb8640ee;
 }
 
 .cards__images {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 1rem;
-    margin-left: 20px;
-    margin-right: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  margin-left: 20px;
+  margin-right: 20px;
 }
-
 </style>

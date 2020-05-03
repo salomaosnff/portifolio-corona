@@ -154,10 +154,56 @@
             "modal": {
                 "informacoes": "Para mais informações, favor entrar em contato: mauro@lar.ifce.edu.br",
                 "ideias_b": "Lista de Ideias"
-            },
-            "nav_buttons": {
-                "back": "Voltar"
             }
+        }
+    },
+    "forum": {
+        "Lista": {
+            "forum": {
+                "more": "Mais",
+                "join_forum": "Entrar no Fórum",
+                "edit": "Editar",
+                "delete": "Delete",
+                "modal_title": {
+                    "link": "Link",
+                    "description": "Descrição",
+                    "name": "Nome",
+                    "contact": "Contato",
+                    "general": "Geral",
+                    "responsable": "Responsável"
+                },
+                "modal_warning": {
+                    "heading": "Você realmente deseja excluir esse registro?",
+                    "warning": "A exclusão é permantente e não poderá ser revertida!",
+                    "cancel": "Cancelar",
+                    "delete": "Excluir"
+                },
+                "modal_join": {
+                    "title": "Como Entrar no Fórum?",
+                    "link": "O link já foi copiado para sua área de transferência!",
+                    "copie_link": "Copiar link novamente",
+                    "send_link_1": "1. Envie o link para um de seus contatos no WhatsApp.",
+                    "send_link_2": "2. Clique em \"Ver grupo\" para entrar no Fórum.",
+                    "send_link_3": "Use Ctrl + V para colar o link no WhatsApp!",
+                    "open_whatsapp": "Abrir WhatsApp Web",
+                    "I_understood": "Entendi"
+                }
+            },
+            "complemento": {
+                "nav_buttons": {
+                    "filter_all": "Ver Todos os Fóruns",
+                    "filter_my": "Ver Meus Fóruns",
+                    "registe": "Cadastrar Novo Fórum"
+                }
+            }
+        },
+        "Cadastro":{
+            "title":"Cadastre seu Fórum",
+            "ph_forum_name":"Nome do Fórum",
+            "ph_forum_link":"Link para Entrar no Fórum",
+            "whatsapp_link":"Crie um grupo no WhatsApp e insira o link no campo acima",
+            "ph_forum_description":"Descrição",
+            "save":"Salvar"
         }
     }
 }

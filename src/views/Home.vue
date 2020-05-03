@@ -26,8 +26,8 @@
         </div>
       </div>
 
-      <div class="shape shape-style-1 bg-gradient-warning shape-skew">
-        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -100px" />
+      <div class="shape shape-style-1 shape-skew">
+        <img v-lazy="'img/equipe.jpg'" class="card-img-top" style="margin-top: -100px; height: 800px;" />
         <span></span>
         <span></span>
         <span></span>
@@ -38,29 +38,46 @@
         <span></span>
         <span></span>
       </div>
+
       <div class="p-5">
         <div class="row pt-5">
           <div class="col-lg-6">
             <div class="col-lg-6">
-              <base-button
-                type="warning text-normal"
-                style="font-size: 16px"
-                @click="modal_covid = !modal_covid"
-              >{{$t('Home.Estatísticas do COVID-19')}}</base-button>
-              <base-button
-                class="mt-4"
-                href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                type="warning text-normal"
-                style="font-size: 16px"
-                tag="a"
-                target="_blank"
-              >{{$t('Home.Monitor do COVID-19')}}</base-button>
-              <base-button
-                @click="$router.push('noticias_lista')"
-                class="mt-4"
-                type="warning text-normal"
-                style="font-size: 16px"
-              >{{$t('Home.Notícias do COVID-19')}}</base-button>
+              <div class="row">
+                <div class="col-lg-6">
+                  <base-button
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  @click="modal_covid = !modal_covid"
+                  >{{$t('Home.Estatísticas do COVID-19')}}
+                  </base-button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                   <base-button
+                  class="mt-4"
+                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                  >{{$t('Home.Monitor do COVID-19')}}
+                  </base-button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                   <base-button
+                   @click="$router.push('desenvolvimento')"
+                   class="mt-4"
+                   type="warning text-normal"
+                   style="font-size: 16px"
+                  >{{$t('Home.Notícias do COVID-19')}}
+                  </base-button>
+                </div>
+              </div>
+              <br>
             </div>
 
             <modal
@@ -202,40 +219,44 @@
     </div>
 
     <section class="section pt-0">
-      <div class="row">
-        <div class="col-sm-4 text-right mt-5">
+      <h2 class="text-center mt-0">Realização</h2>
+      <hr class="listinha my-1">
+      <div class="row p-4">
+        <div class="col-sm cards__images">
           <img
             alt="Rounded image"
-            class="img-fluid rounded ml-5"
-            style="width: 400px;"
-            src="img/iracema.jpg"
+            class="img-fluid rounded"
+            style="width: 300px; margin: 14px; margin-left: 30px"
+            src="img/iracemadigital3.png"
             lazy="loaded"
           />
         </div>
-        <div class="col-sm-8 text-right mt-5 pt-5">
+        <div class="col-sm cards__images">
           <img
             class="img-fluid rounded"
             style="width: 160px; margin: 30px"
             src="img/lar.png"
             lazy="loaded"
           />
-
+        </div>
+        <div class="col-sm cards__images">
           <img
             class="img-fluid rounded"
             style="width: 160px; margin: 30px"
             src="img/ppgcc.png"
             lazy="loaded"
           />
-
+        </div>
+        <div class="col-sm cards__images">
           <img
             alt="Rounded image"
             class="img-fluid rounded"
-            style="width: 160px; margin: 30px; margin-right: 90px"
+            style="width: 190px; margin: 30px; margin-right: 33px"
             src="img/ifce.png"
             lazy="loaded"
           />
         </div>
-      </div>
+      </div>    
     </section>
   </div>
 </template>
@@ -258,8 +279,13 @@ export default {
       botoes: [
         { link: "login", props_to_link: "forum_lista" },
         { link: "login", props_to_link: "noticias_lista" },
+<<<<<<< HEAD
         { link: "noticias_cadastro", props_to_link: "" }
         // { titulo: "Teste", link: "test", props_to_link: ""}
+=======
+        { link: "desenvolvimento", props_to_link: "" }
+        // { link: "test", props_to_link: "" }
+>>>>>>> 9ac8055f80f8a5cd90adf65aa141053063e6fd77
       ],
       cards: [
         {
@@ -310,3 +336,32 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+hr.listinha {
+    max-width: 3.25rem;
+    border-width: .2rem;
+    border-color: #fb8640ee;
+}
+
+.cards__images {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+</style>

@@ -24,7 +24,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t("Voltar")}}</base-button>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -35,26 +35,25 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">Cadastre seu Fórum</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">{{$t("forum.Cadastro.title")}}</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" placeholder="Nome do Fórum" v-model="forum.nome"></base-input>
-
+                <base-input class="mb-3" :placeholder="$t('forum.Cadastro.ph_forum_name')" v-model="forum.nome"></base-input>
                 <base-input
-                  class="mb-3"
-                  placeholder="Link para Entrar no Fórum"
+                  class="mb-3" 
+                  :placeholder="$t('forum.Cadastro.ph_forum_link')" 
                   v-model="forum.link"
                 ></base-input>
-                <p class="small">Crie um grupo no WhatsApp e insira o link no campo acima.</p>
+                <p class="small">{{$t("forum.Cadastro.whatsapp_link")}}</p>
 
                 <textarea
                   class="form-control mb-3"
-                  placeholder="Descrição"
+                 :placeholder="$t('forum.Cadastro.ph_forum_description')"
                   v-model="forum.descricao"
                 ></textarea>
 
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="salvar()">Salvar</base-button>
+                  <base-button type="warning" class="mt-4" @click="salvar()">{{$t('forum.Cadastro.save')}}</base-button>
                 </div>
               </form>
             </template>

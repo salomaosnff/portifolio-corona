@@ -193,7 +193,7 @@
             <h5 class="text-white">{{solucoes[index_modal].responsavel.email}}</h5>
             <h5
               class="text-white text-lowercase mt-4"
-            >{{solucoes[index_modal].responsavel.telefone}}</h5>
+            >{{solucoes[index_modal].responsavel.telefone | formatPhone}}</h5>
           </div>
         </div>
       </div>

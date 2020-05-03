@@ -13,7 +13,7 @@
     <div class="container pt-lg-md">
       <h2
         class="text-white mb-5"
-      >{{modo_administrativo || !pessoa.admin? 'Notícias' : 'Minhas Notícias'}}</h2>
+      >{{modo_administrativo || !pessoa.admin? $t('Lista.Notícias') : $t('Lista.Minhas Notícias')}}</h2>
       <div class="row">
         <div class="col-md-3 row ml-0">
           <base-button
@@ -27,7 +27,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t('Voltar')}}</base-button>
         </div>
 
         <div v-if="pessoa.admin" class="col-md-9 text-right pr-0">
@@ -36,7 +36,7 @@
             class="mb-5"
             type="warning text-capitalize"
             @click="$router.push('noticias_cadastro')"
-          >Cadastrar Nova Notícia</base-button>
+          >{{$t('Lista.Cadastrar Nova Notícia')}}</base-button>
 
           <base-button
             v-if="pessoa.admin"
@@ -65,19 +65,19 @@
                     class="mt-4 text-capitalize"
                     type="white"
                     @click="modal(index)"
-                  >Mais</base-button>
+                  >{{$t('Mais')}}</base-button>
                   <base-button
                     v-if="pessoa.admin"
                     class="mt-4"
                     type="primary text-capitalize"
                     @click="editar(noticia)"
-                  >Editar</base-button>
+                  >{{$t('Editar')}}</base-button>
                   <base-button
                     v-if="pessoa.admin"
                     class="mt-4"
                     type="warning text-capitalize"
                     @click="excluir(noticia, false)"
-                  >Excluir</base-button>
+                  >{{$t('Excluir')}}</base-button>
                 </div>
               </card>
             </div>

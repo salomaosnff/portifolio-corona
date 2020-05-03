@@ -258,7 +258,7 @@ export default {
       botoes: [
         { link: "login", props_to_link: "forum_lista" },
         { link: "login", props_to_link: "noticias_lista" },
-        { link: "desenvolvimento", props_to_link: "" }
+        { link: "noticias_cadastro", props_to_link: "" }
         // { titulo: "Teste", link: "test", props_to_link: ""}
       ],
       cards: [

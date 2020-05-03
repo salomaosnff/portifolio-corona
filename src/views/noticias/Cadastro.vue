@@ -24,7 +24,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t('Voltar')}}</base-button>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -35,35 +35,35 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">Cadastre sua Notícia</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">{{$t('Noticias.Cadastre sua notícia')}}</h4>
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                  <strong>Dados inválidos!</strong> Verifique os campos destacados!
+                  <strong>{{$t('Dados inválidos!')}}</strong>{{$t('Noticias.Verifique os campos destacados!')}}
                 </base-alert>
                 <base-input
                   class="mb-3"
-                  placeholder="Título"
+                  :placeholder="$t('Noticias.Título')"
                   v-model="$v.noticia.titulo.$model"
                   :valid="valido.titulo"
                 ></base-input>
 
                 <base-input
                   class="mb-3"
-                  placeholder="Subtítulo"
+                  :placeholder="$t('Noticias.Subtítulo')"
                   v-model="$v.noticia.subtitulo.$model"
                   :valid="valido.subtitulo"
                 ></base-input>
 
                 <textarea
                   class="form-control mb-3 card"
-                  placeholder="Descrição da Notícia"
+                  :placeholder="$t('Descrição')"
                   v-model="$v.noticia.descricao.$model"
                   :class="valido.descricao"
                 ></textarea>
 
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="onSubmit()">Salvar</base-button>
+                  <base-button type="warning" class="mt-4" @click="onSubmit()">{{$t('Noticias.Salvar')}}</base-button>
                 </div>
               </form>
             </template>

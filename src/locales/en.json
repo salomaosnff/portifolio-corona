@@ -66,6 +66,19 @@
         "Criar Conta": "Create an Account",
         "Esqueci a Senha": "Forgot Password"
     },
+    "Noticias": {
+        "Título": "Title",
+        "Subtítulo": "Subtitle",
+        "Salvar": "Save",
+        "Cadastre sua notícia": "Register your news",
+        "Dados inválidos": "Invalid data",
+        "Verifique os campos destacados!": "Check the highlighted fields"         
+    },
+    "Lista": {
+        "Cadastrar Nova Notícia": "Register new news",
+        "Notícias": "News",
+        "Minhas Notícias": "My News"
+    },
     "Home": {
         "Estatísticas do COVID-19": "COVID-19 Statistics",
         "Monitor do COVID-19": "COVID-19 Monitor",

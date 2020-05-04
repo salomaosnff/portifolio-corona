@@ -113,14 +113,10 @@
   </section>
 </template>
 <script>
-
-export function isSelected(){
-  if ( !(
-          this.pessoa.colaborador || 
-          this.pessoa.cliente     || 
-          this.pessoa.investidor
-        ) 
-      )          
+export function isSelected() {
+  if (
+    !(this.pessoa.colaborador || this.pessoa.cliente || this.pessoa.investidor)
+  )
     return false;
   return true;
 }
@@ -134,7 +130,6 @@ import {
   email,
   sameAs
 } from "vuelidate/lib/validators";
-
 
 export default {
   components: {
@@ -155,7 +150,8 @@ export default {
         telefone: "",
         whatsapp: "",
         senha: "",
-        confirmacao_senha: ""
+        confirmacao_senha: "",
+        admin: false
       },
       valido: {
         nome: null,
@@ -170,8 +166,7 @@ export default {
   },
   validations: {
     pessoa: {
-      conta_tipo: { hasSelected: isSelected },       
-
+      conta_tipo: { hasSelected: isSelected },
       nome: { required, minLength: minLength(4), maxLength: maxLength(60) },
       email: { required, email, maxLength: maxLength(60) },
       telefone: { required },
@@ -180,7 +175,7 @@ export default {
         required,
         mesma_como: sameAs("senha"),
         maxLength: maxLength(60)
-      },
+      }
     }
   },
 
@@ -188,7 +183,7 @@ export default {
 
   methods: {
     onSubmit() {
-      this.resetaCamposValidos();      
+      this.resetaCamposValidos();
       this.$v.pessoa.$touch();
 
       if (this.$v.pessoa.$anyError) {

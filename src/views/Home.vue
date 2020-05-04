@@ -4,7 +4,7 @@
       <div class="row p-5">
         <div class="col-lg-6">
           <img
-            style="height: 100px; background-color: #008ecd; border-radius: 20px; padding: 15px"
+            style="height: 90px; background-color: #008ecd; border-radius: 20px; padding: 15px"
             :src="'img/logo_' + $i18n.locale + '.png'"
             alt="logo"
           />

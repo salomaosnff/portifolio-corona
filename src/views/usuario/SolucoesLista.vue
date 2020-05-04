@@ -12,7 +12,9 @@
     </div>
 
     <div class="container pt-lg-md">
-      <h2 class="text-white mb-5">{{$t('Minhas Soluções')}}</h2>
+      <h2
+        class="text-white mb-5"
+      >{{modo_administrativo || !pessoa.admin? $t('Soluções') : $t('Minhas Soluções')}}</h2>
       <div class="row">
         <div class="col-md-3 row ml-0">
           <base-button

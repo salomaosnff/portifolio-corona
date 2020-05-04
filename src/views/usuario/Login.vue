@@ -107,8 +107,6 @@ export default {
       let pessoa = undefined;
       if (this.login.email && this.login.senha) {
         pessoa = await this.http.logar(this.login);
-        console.log("pessoa");
-        console.log(pessoa);
         if (pessoa && pessoa._id) {
           this.alerta.ver = await false;
           this.alerta = await {

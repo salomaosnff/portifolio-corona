@@ -15,14 +15,27 @@ Vue.use(Argon)
 Vue.use(VueTheMask)
 
 Vue.filter("formatPhone", function(value){
-  if (value < 11) return '';
+  // console.log("value: "+value);
+  // console.log("Value length: "+value.length);
+  if (value.length < 10) return '';
   
-  let ddd = (value/10**9).toFixed();
-  let cellphone = (value%10**8).toFixed();
-  let first_part_phone = (cellphone/10**4).toFixed();
-  let seccond_part_phone = (cellphone%10**4).toFixed();
-
-  return ('('+ddd+')'+' 9.'+first_part_phone+'.'+seccond_part_phone).toString();
+  if (value.length === 10) {
+    let ddd = (value/10**8).toFixed();
+    let phone = (value%10**7).toFixed();
+    let first_part_phone = (phone/10**3).toFixed();
+    let seccond_part_phone = (phone%10**3).toFixed();
+    // console.log('('+ddd+')'+' '+first_part_phone+'.'+seccond_part_phone);
+    return '('+ddd+')'+' '+first_part_phone+'.'+seccond_part_phone;
+  } 
+  if (value.length === 11) {
+    // Cellphone
+    let ddd = (value/10**9).toFixed();
+    let phone = (value%10**8).toFixed();
+    let first_part_phone = (phone/10**4).toFixed();
+    let seccond_part_phone = (phone%10**4).toFixed();
+    // console.log('('+ddd+')'+' 9.'+first_part_phone+'.'+seccond_part_phone);
+    return '('+ddd+')'+' 9.'+first_part_phone+'.'+seccond_part_phone;
+  }
 })
 
 Vue.config.productionTip = false

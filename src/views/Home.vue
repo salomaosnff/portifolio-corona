@@ -9,20 +9,32 @@
             alt="logo"
           />
           <img
-            style="height: 100px; background-color: #fff; border-radius: 20px; padding: 15px; margin-left: 30px"
-            src="img/if.png"
+            style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+            src="img/home/citinova.jpg"
+            alt="logo"
+          />
+          <img
+            style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+            src="img/home/iracema.png"
             alt="logo"
           />
         </div>
 
-        <div class="col-lg-6 text-right">
-          <img
-            v-for="(idioma) in idiomas"
-            :key="idioma"
-            :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag']"
-            :src="'img/home/' + idioma + '.png'"
-            @click="$i18n.locale = idioma"
-          />
+        <div class="col-lg-6 my-4 pr-4 text-right">
+          <ul class="row" style="justify-content: right; align-itens: center">
+            <a class="menu-text" href="#/colaborador">{{$t('Sobre')}}</a>
+
+            <a class="menu-text" href="#/solucoes_lista">{{$t('Notícias')}}</a>
+
+            <a class="menu-text" href="#/investidor">{{$t('Fale Conosco')}}</a>
+            <img
+              v-for="(idioma) in idiomas"
+              :key="idioma"
+              :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag']"
+              :src="'img/home/' + idioma + '.png'"
+              @click="$i18n.locale = idioma"
+            />
+          </ul>
         </div>
       </div>
 
@@ -71,11 +83,13 @@
               <div class="row">
                 <div class="col-lg-6">
                   <base-button
-                    @click="$router.push('noticias_lista')"
                     class="mt-4"
+                    href="http://lar.ifce.edu.br:5000"
                     type="warning text-normal"
                     style="font-size: 16px"
-                  >{{$t('Home.Notícias do COVID-19')}}</base-button>
+                    tag="a"
+                    target="_blank"
+                  >{{$t('Home.Monitor de Fake News')}}</base-button>
                 </div>
               </div>
               <br />
@@ -228,7 +242,7 @@
             alt="Rounded image"
             class="img-fluid rounded"
             style="width: 300px; margin: 14px; margin-left: 30px"
-            src="img/iracemadigital3.png"
+            src="img/iracema.jpg"
             lazy="loaded"
           />
         </div>

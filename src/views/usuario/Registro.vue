@@ -50,13 +50,13 @@
                 <base-input
                   class="mb-3"
                   placeholder="Telefone"
-                  v-model.number="$v.pessoa.telefone.$model"
+                  v-model="$v.pessoa.telefone.$model"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                   :valid="valido.telefone"
                 ></base-input>
                 <base-input
                   placeholder="WhatsApp (Opcional)"
-                  v-model.number="pessoa.whatsapp"
+                  v-model="pessoa.whatsapp"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
 
@@ -68,14 +68,14 @@
                   class="mb-3"
                   placeholder="CPF (Opcional)"
                   v-mask="'###.###.###-##'"
-                  v-model.number="pessoa.cpf"
+                  v-model="pessoa.cpf"
                 ></base-input>
                 <base-input
                   v-if="pessoa.tipo === 'juridica'"
                   class="mb-3"
                   placeholder="CNPJ"
                   v-mask="'##.###.###/####-##'"
-                  v-model.number="pessoa.cnpj"
+                  v-model="pessoa.cnpj"
                 ></base-input>
                 <div class="mb-3 p-2 w-50 card" :class="valido.conta_tipo">
                   <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>

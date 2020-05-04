@@ -71,7 +71,7 @@
               <div class="row">
                 <div class="col-lg-6">
                   <base-button
-                    @click="$router.push('desenvolvimento')"
+                    @click="$router.push('noticias_lista')"
                     class="mt-4"
                     type="warning text-normal"
                     style="font-size: 16px"

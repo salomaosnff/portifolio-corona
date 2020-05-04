@@ -18,7 +18,8 @@ Vue.filter("formatPhone", function(value){
   // console.log("value: "+value);
   // console.log("Value length: "+value.length);
   if (value.length < 10) return '';
-  
+  if (value.length > 11) return value;
+
   if (value.length === 10) {
     let ddd = (value/10**8).toFixed();
     let phone = (value%10**7).toFixed();

@@ -72,7 +72,7 @@
         "Salvar": "Save",
         "Cadastre sua notícia": "Register your news",
         "Dados inválidos": "Invalid data",
-        "Verifique os campos destacados!": "Check the highlighted fields"         
+        "Verifique os campos destacados!": "Check the highlighted fields"
     },
     "Lista": {
         "Cadastrar Nova Notícia": "Register new news",
@@ -83,6 +83,7 @@
         "Estatísticas do COVID-19": "COVID-19 Statistics",
         "Monitor do COVID-19": "COVID-19 Monitor",
         "Notícias do COVID-19": "COVID-19 News",
+        "Monitor de Fake News": "Fake News Monitor",
         "Introdução": {
             "Título": "TIME TO START AGAIN !",
             "Descrição": "This 'crazy VIRUS' is no stronger than a lucid and supportive humanity.",
@@ -208,13 +209,13 @@
                 }
             }
         },
-        "Cadastro":{
-            "title":"Register Your Forum",
-            "ph_forum_name":"Forum Name",
-            "ph_forum_link":"Link to join to the Forum",
-            "whatsapp_link":"Create a group in WhatsApp and enter the link in the field above",
-            "ph_forum_description":"Description",
-            "save":"Salvar"
+        "Cadastro": {
+            "title": "Register Your Forum",
+            "ph_forum_name": "Forum Name",
+            "ph_forum_link": "Link to join to the Forum",
+            "whatsapp_link": "Create a group in WhatsApp and enter the link in the field above",
+            "ph_forum_description": "Description",
+            "save": "Salvar"
         }
     }
 }

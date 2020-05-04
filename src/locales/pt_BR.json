@@ -72,7 +72,7 @@
         "Salvar": "Save",
         "Cadastre sua notícia": "Register your news",
         "Dados inválidos": "Invalid data",
-        "Verifique os campos destacados!": "Check the highlighted fields"         
+        "Verifique os campos destacados!": "Check the highlighted fields"
     },
     "Lista": {
         "Cadastrar Nova Notícia": "Register new news",
@@ -83,6 +83,7 @@
         "Estatísticas do COVID-19": "Estatísticas do COVID-19",
         "Monitor do COVID-19": "Monitor do COVID-19",
         "Notícias do COVID-19": "Notícias do COVID-19",
+        "Monitor de Fake News": "Monitor de Fake News",
         "Introdução": {
             "Título": "É TEMPO DE RECOMEÇAR !",
             "Descrição": "Esse 'VÍRUS embriagado' não é mais forte que uma humanidade lúcida e solidária.",
@@ -197,13 +198,13 @@
                 }
             }
         },
-        "Cadastro":{
-            "title":"Cadastre seu Fórum",
-            "ph_forum_name":"Nome do Fórum",
-            "ph_forum_link":"Link para Entrar no Fórum",
-            "whatsapp_link":"Crie um grupo no WhatsApp e insira o link no campo acima",
-            "ph_forum_description":"Descrição",
-            "save":"Salvar"
+        "Cadastro": {
+            "title": "Cadastre seu Fórum",
+            "ph_forum_name": "Nome do Fórum",
+            "ph_forum_link": "Link para Entrar no Fórum",
+            "whatsapp_link": "Crie um grupo no WhatsApp e insira o link no campo acima",
+            "ph_forum_description": "Descrição",
+            "save": "Salvar"
         }
     }
 }

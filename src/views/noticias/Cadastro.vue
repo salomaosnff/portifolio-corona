@@ -39,7 +39,7 @@
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                  <strong>{{$t('Dados inválidos!')}}</strong>{{$t('Noticias.Verifique os campos destacados!')}}
+                  <strong>{{$t('Noticias.Dados inválidos!')}}</strong>{{$t('Noticias.Verifique os campos destacados!')}}
                 </base-alert>
                 <base-input
                   class="mb-3"

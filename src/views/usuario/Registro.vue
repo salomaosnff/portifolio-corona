@@ -24,7 +24,7 @@
             class="mb-5 text-warning text-capitalize"
             type="white"
             @click="$router.go(-1)"
-          >Voltar</base-button>
+          >{{$t('Voltar')}}</base-button>
         </div>
       </div>
       <div class="row justify-content-center">

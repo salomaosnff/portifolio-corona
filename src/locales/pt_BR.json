@@ -89,8 +89,10 @@
         "Monitor de Fake News": "Monitor de Fake News",
         "Introdução": {
             "Título": "É TEMPO DE RECOMEÇAR !",
-            "Descrição": "Esse 'VÍRUS embriagado' não é mais forte que uma humanidade lúcida e solidária.",
-            "Subdescrição": "REVIVE é uma plataforma integrada e colaborativa de AÇÕES e PROJETOS para combater o COVID-19. Registre seu projeto aqui (IDEAS). Conheça os projetos existentes aqui (SOLUÇÕES). Dê seu apoio (SUPORTE)."
+            "Subtítulo": "REVIVE é uma plataforma integrada e colaborativa de IDEIAS e SOLUCOES para apoiar o combate ao COVID-19.",
+            "Descrição": "Assim como as ondas do mar, tudo vem e vai! Algumas ondas as recebemos de peito aberto, rindo; outras arrebentam em nossas costas e continuamos firmes…",
+            "Subdescrição": "De repente, vem uma onda grande, dessas que a gente nunca viu… e nos assusta. Olhamos pra ela de frente, mantendo a serenidade, a gente se abaixa, com humildade, pensativo, e deixa ela passar!",
+            "Subsubdescrição": "E ela passa… e nos reerguemos melhores, mais fortes!"
         },
         "Cards": [
             {

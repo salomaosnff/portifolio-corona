@@ -89,8 +89,10 @@
         "Monitor de Fake News": "Fake News Monitor",
         "Introdução": {
             "Título": "TIME TO START AGAIN !",
-            "Descrição": "This 'crazy VIRUS' is no stronger than a lucid and supportive humanity.",
-            "Subdescrição": "REVIVE is an integrated and collaborative platform for ACTIONS and PROJECTS to fight COVID-19. Register your project here (IDEAS). Know the existing projects here (SOLUTIONS). Give your support (SUPPORT)."
+            "Subtítulo": "REVIVE is an integrated and collaborative platform of IDEAS and SOLUTIONS to support the fight against COVID-19.",
+            "Descrição": "Like the tides that ebb and flow, so everything comes in and goes out! Some waves must be faced with courage and a smile; others  may break on our backs, but we stand firm...",
+            "Subdescrição": "Unexpectedly big waves, of the kind we have never seen, may come our way, and scare us. We must look at them -  in the face, so to speak  - and,  maintaining our composure,  dodge them, humbly and thoughtfully, and let them pass!",
+            "Subsubdescrição": "Because they certainly pass... and we will get back on our feet again, better and stronger!"
         },
         "Cards": [
             {

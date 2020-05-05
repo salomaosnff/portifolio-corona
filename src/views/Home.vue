@@ -10,12 +10,12 @@
           />
           <img
             style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-            src="img/home/citinova.jpg"
+            src="img/home/iracema.png"
             alt="logo"
           />
           <img
             style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-            src="img/home/iracema.png"
+            src="img/home/citinova.jpg"
             alt="logo"
           />
         </div>
@@ -57,7 +57,7 @@
 
       <div class="p-5">
         <div class="row pt-5">
-          <div class="col-lg-6">
+          <div class="col-lg-5">
             <div class="col-lg-6">
               <div class="row">
                 <div class="col-lg-6">
@@ -172,11 +172,13 @@
             </modal>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-7">
             <card style="background-color: #fb8640ee" shadow>
               <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
+              <h5 class="m-2 text-white">{{$t('Home.Introdução.Subtítulo')}}</h5>
               <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Descrição')}}</h5>
               <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Subdescrição')}}</h5>
+              <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Subsubdescrição')}}</h5>
             </card>
           </div>
         </div>

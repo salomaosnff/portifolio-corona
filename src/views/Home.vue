@@ -176,9 +176,18 @@
             <card style="background-color: #fb8640ee" shadow>
               <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
               <h5 class="m-2 text-white">{{$t('Home.Introdução.Subtítulo')}}</h5>
-              <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Descrição')}}</h5>
-              <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Subdescrição')}}</h5>
-              <h5 class="m-2 text-thin text-white">{{$t('Home.Introdução.Subsubdescrição')}}</h5>
+              <h5
+                class="m-2 ml-5 text-thin text-italic text-white"
+                style="font-size: 18px"
+              >... {{$t('Home.Introdução.Descrição')}}</h5>
+              <h5
+                class="m-2 ml-5 text-thin text-italic text-white"
+                style="font-size: 18px"
+              >{{$t('Home.Introdução.Subdescrição')}}</h5>
+              <h5
+                class="m-2 ml-5 text-thin text-italic text-white"
+                style="font-size: 18px"
+              >{{$t('Home.Introdução.Subsubdescrição')}}</h5>
             </card>
           </div>
         </div>

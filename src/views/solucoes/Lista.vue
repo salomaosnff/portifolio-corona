@@ -53,12 +53,15 @@
             <base-button
               slot="title"
               type="warning"
-              class="dropdown-toggle mb-5 text-normal"
+              class="dropdown-toggle mb-1 text-normal"
+              style="font-size:medium"
+              size="sm"
             >{{$t(area_aplicacao) || $t('Área de Atuação')}}</base-button>
             <a
               v-for="(area, index) in areas_aplicacao"
               :key="index"
               class="dropdown-item"
+              style="font-size:large"
               @click="area_aplicacao = area; buscar()"
             >{{$t(area)}}</a>
           </dropdown>
@@ -67,12 +70,15 @@
             <base-button
               slot="title"
               type="warning"
-              class="dropdown-toggle mb-5 text-normal"
+              class="dropdown-toggle mb-1 text-normal"
+              style="font-size:medium"
+              size="sm"
             >{{$t(status) || $t('Status da Ideia')}}</base-button>
             <a
               v-for="(s, index) in satuss"
               :key="index"
               class="dropdown-item"
+              style="font-size:large"
               @click="status = s; buscar()"
             >{{$t(s)}}</a>
           </dropdown>
@@ -81,12 +87,15 @@
             <base-button
               slot="title"
               type="warning"
-              class="dropdown-toggle mb-5 text-normal"
+              class="dropdown-toggle mb-1 text-normal"
+              style="font-size:medium"
+              size="sm"
             >{{$t(negocio) || $t('Tipo de Negócio')}}</base-button>
             <a
               v-for="(n, index) in negocios"
               :key="index"
               class="dropdown-item"
+              style="font-size:large"
               @click="negocio = n; buscar()"
             >{{$t(n)}}</a>
           </dropdown>
@@ -94,7 +103,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-lg-12">
+        <div class="col-lg-12 my-3">
           <div class="row row-grid">
             <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">

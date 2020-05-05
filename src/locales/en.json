@@ -64,6 +64,8 @@
     "Ativar": "Enable",
     "Desativar": "Disable",
     "Minhas Soluções": "My Solutions",
+    "Realização": "Realization",
+    "Meus Fóruns": "My Forums",
     "Login": {
         "Entrar no REVIVE": "Enter REVIVE",
         "Criar Conta": "Create an Account",
@@ -81,6 +83,24 @@
         "Cadastrar Nova Notícia": "Register news",
         "Notícias": "News",
         "Minhas Notícias": "My News"
+    },
+    "Registro": {
+        "Criar Minha Conta": "Create Account",
+        "Dados inválidos": "Invalid data!",
+        "Verifique os campos destacados!": "Check the highlighted fields.",
+        "Nome": "Name",
+        "Telefone": "Phone",
+        "WhatsApp (Opcional)": "WhatsApp (Optional)",
+        "Pessoa Física": "Physical person",
+        "Pessoa Jurídica": "Legal Entity",
+        "CPF (Opcional)": "CPF (Optional)",
+        "Produtor de Ideias": "Idea Producer",
+        "Interessado em Soluções": "Interested in Solutions",
+        "Contribuidor e Investidor": "Contributor and Investor",
+        "E-mail": "Email address",
+        "Senha (mínimo de 8 caracteres)": "Password (minimum 8 characters)",
+        "Confirmar Senha": "Confirm Password",
+        "Salvar": "Save"
     },
     "Solucoes": {
         "Cadastre sua Ideia": "Register your Idea",
@@ -255,7 +275,7 @@
             "ph_forum_link": "Link to join to the Forum",
             "whatsapp_link": "Create a group in WhatsApp and enter the link in the field above",
             "ph_forum_description": "Description",
-            "save": "Salvar"
+            "save": "Save"
         }
     }
 }

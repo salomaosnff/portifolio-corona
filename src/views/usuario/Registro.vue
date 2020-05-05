@@ -35,38 +35,38 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">Criar Minha Conta</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">{{$t('Registro.Criar Minha Conta')}}</h4>
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                  <strong>Dados inválidos!</strong> Verifique os campos destacados!
+                  <strong>{{$t('Registro.Dados inválidos!')}}</strong>{{$t('Registro.Verifique os campos destacados!')}}
                 </base-alert>
                 <base-input
                   class="mb-3"
-                  placeholder="Nome"
+                  :placeholder="$t('Registro.Nome')"
                   v-model="$v.pessoa.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
                 <base-input
                   class="mb-3"
-                  placeholder="Telefone"
+                  :placeholder="$t('Registro.Telefone')"
                   v-model="$v.pessoa.telefone.$model"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                   :valid="valido.telefone"
                 ></base-input>
                 <base-input
-                  placeholder="WhatsApp (Opcional)"
+                  :placeholder="$t('Registro.WhatsApp (Opcional)')"
                   v-model="pessoa.whatsapp"
                   v-mask="['(##) #### - ####', '(##) ##### - ####']"
                 ></base-input>
 
-                <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">Pessoa Física</base-radio>
-                <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">Pessoa Jurídica</base-radio>
+                <base-radio name="fisica" class="mb-3" v-model="pessoa.tipo">{{$t('Registro.Pessoa Física')}}</base-radio>
+                <base-radio name="juridica" class="mb-3" v-model="pessoa.tipo">{{$t('Registro.Pessoa Jurídica')}}</base-radio>
 
                 <base-input
                   v-if="pessoa.tipo === 'fisica'"
                   class="mb-3"
-                  placeholder="CPF (Opcional)"
+                  :placeholder="$t('Registro.CPF (Opcional)')"
                   v-mask="'###.###.###-##'"
                   v-model="pessoa.cpf"
                 ></base-input>
@@ -78,31 +78,31 @@
                   v-model="pessoa.cnpj"
                 ></base-input>
                 <div class="mb-3 p-2 w-50 card" :class="valido.conta_tipo">
-                  <base-checkbox class="mb-3" v-model="pessoa.colaborador">Produtor de Ideias</base-checkbox>
-                  <base-checkbox class="mb-3" v-model="pessoa.cliente">Interessado em Soluções</base-checkbox>
-                  <base-checkbox class="mb-3" v-model="pessoa.investidor">Contribuidor e Investidor</base-checkbox>
+                  <base-checkbox class="mb-3" v-model="pessoa.colaborador">{{$t('Registro.Produtor de Ideias')}}</base-checkbox>
+                  <base-checkbox class="mb-3" v-model="pessoa.cliente">{{$t('Registro.Interessado em Soluções')}}</base-checkbox>
+                  <base-checkbox class="mb-3" v-model="pessoa.investidor">{{$t('Registro.Contribuidor e Investidor')}}</base-checkbox>
                 </div>
 
                 <base-input
                   class="mb-3"
-                  placeholder="E-mail"
+                  :placeholder="$t('Registro.E-mail')"
                   v-model.trim="$v.pessoa.email.$model"
                   :valid="valido.email"
                 ></base-input>
                 <base-input
                   type="password"
-                  placeholder="Senha (mínimo de 8 caracteres)"
+                  :placeholder="$t('Registro.Senha (mínimo de 8 caracteres)')"
                   v-model="$v.pessoa.senha.$model"
                   :valid="valido.senha"
                 ></base-input>
                 <base-input
                   type="password"
-                  placeholder="Confirmar Senha"
+                  :placeholder="$t('Registro.Confirmar Senha')"
                   v-model="$v.pessoa.confirmacao_senha.$model"
                   :valid="valido.confirmacao_senha"
                 ></base-input>
                 <div class="text-center">
-                  <base-button class="mt-4" type="warning" @click="onSubmit()">Salvar</base-button>
+                  <base-button class="mt-4" type="warning" @click="onSubmit()">{{$t('Registro.Salvar')}}</base-button>
                 </div>
               </form>
             </template>

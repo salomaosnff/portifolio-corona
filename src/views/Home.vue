@@ -245,7 +245,7 @@
     </div>
 
     <section class="section pt-0">
-      <h2 class="text-center mt-0">Realização</h2>
+      <h2 class="text-center mt-0">{{$t('Realização')}}</h2>
       <hr class="listinha my-1" />
       <div class="row p-4">
         <div class="col-sm cards__images">

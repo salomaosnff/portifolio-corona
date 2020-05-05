@@ -11,7 +11,7 @@
       <span></span>
     </div>
     <div class="container pt-lg-md">
-      <h2 class="text-white mb-5">{{tipo_forum == 'todos'? 'Fóruns' : 'Meus Fóruns'}}</h2>
+      <h2 class="text-white mb-5">{{tipo_forum == 'todos'? 'Fóruns' : $t('Meus Fóruns')}}</h2>
       <div class="row">
         <div class="col-md-4 row ml-0">
           <base-button

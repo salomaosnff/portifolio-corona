@@ -64,6 +64,8 @@
     "Ativar": "Ativar",
     "Desativar": "Desativar",
     "Minhas Soluções": "Minhas Soluções",
+    "Realização": "Realização",
+    "Meus Fóruns": "Meus Fóruns",
     "Login": {
         "Entrar no REVIVE": "Entrar no REVIVE",
         "Criar Conta": "Criar Conta",
@@ -81,6 +83,24 @@
         "Cadastrar Nova Notícia": "Cadastrar Nova Notícia",
         "Notícias": "Notícias",
         "Minhas Notícias": "Minhas Notícias"
+    },
+    "Registro": {
+        "Criar Minha Conta": "Criar Minha Conta",
+        "Dados inválidos": "Dados inválidos!",
+        "Verifique os campos destacados!": "Verifique os campos destacados!",
+        "Nome": "Nome",
+        "Telefone": "Telefone",
+        "WhatsApp (Opcional)": "WhatsApp (Opcional)",
+        "Pessoa Física": "Pessoa Física",
+        "Pessoa Jurídica": "Pessoa Jurídica",
+        "CPF (Opcional)": "CPF (Opcional)",
+        "Produtor de Ideias": "Produtor de Ideias",
+        "Interessado em Soluções": "Interessado em Soluções",
+        "Contribuidor e Investidor": "Contribuidor e Investidor",
+        "E-mail": "E-mail",
+        "Senha (mínimo de 8 caracteres)": "Senha (mínimo de 8 caracteres)",
+        "Confirmar Senha": "Confirmar Senha",
+        "Salvar": "Salvar "
     },
     "Solucoes": {
         "Cadastre sua Ideia": "Cadastre sua Ideia",

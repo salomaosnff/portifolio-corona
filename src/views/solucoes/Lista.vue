@@ -18,9 +18,17 @@
         </div>
         <div class="col-lg-6 text-right">
           <badge
-            v-if="acessos"
+            v-if="solucoes && solucoes.length"
             rounded
             class="mt-2 text-warning text-normal"
+            type="white"
+            style="font-size: medium"
+          >{{$t('Soluções')}}: {{solucoes.length}}</badge>
+
+          <badge
+            v-if="acessos"
+            rounded
+            class="mt-2 ml-4 text-warning text-normal"
             type="white"
             style="font-size: medium"
           >{{$t('Acessos')}}: {{acessos}}</badge>
@@ -326,24 +334,24 @@ export default {
         "Produto Lançado",
         "Produto Testado",
         "Produto Terminado",
-        "Produto em Desenvolvimento",
-        "Outros"
+        "Produto em Desenvolvimento"
       ],
       areas_aplicacao: [
-        "Saúde",
-        "Economia",
-        "Educação",
-        "Comunicação",
-        "Social",
-        "Outros"
+        "Projeto de Saúde",
+        "Trabalho / Renda",
+        "Educação / Cursos",
+        "Serviços de Informação",
+        "Ação Social",
+        "Mobilidade / Transporte",
+        "Meio ambiente / Urbanismo"
       ],
       negocios: [
-        "Disponível Gratuitamente",
-        "Disponível com Restrições",
-        "À Venda",
-        "À Procura de Financiamento Público",
-        "À Procura de Financiamento Privado",
-        "Outros"
+        "Grátis",
+        "Com Restrições",
+        "Pago",
+        "Negócio à Venda",
+        "À Procura de Financiamento",
+        "À Procura de Parceria"
       ],
       modal_visivel: false,
       index_modal: 0,
@@ -385,12 +393,11 @@ export default {
           )
           .then(response => {
             this.solucoes = response.data.solucoes;
-            console.log(response.data.solucoes.length);
             if (this.solucoes[0]) this.busca_nao_encontrada = false;
             else this.busca_nao_encontrada = true;
           })
           .catch(error => {
-            console.log(error);
+            console.error(error);
           });
       } else {
         this.busca_nao_encontrada = false;
@@ -420,10 +427,9 @@ export default {
         .get("solucao")
         .then(resp => {
           this.solucoes = resp;
-          console.log(resp.length);
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
     }
   }

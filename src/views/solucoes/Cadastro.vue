@@ -39,11 +39,12 @@
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                    <strong>{{$t('Solucoes.Dados inválidos!')}}</strong>{{$t('Solucoes.Verifique os campos destacados!')}}
-                </base-alert>                  
-                <base-input 
-                  class="mb-3" 
-                  :placeholder="$t('Solucoes.Nome da Ideia')" 
+                  <strong>{{$t('Solucoes.Dados inválidos!')}}</strong>
+                  {{$t('Solucoes.Verifique os campos destacados!')}}
+                </base-alert>
+                <base-input
+                  class="mb-3"
+                  :placeholder="$t('Solucoes.Nome da Ideia')"
                   v-model="$v.solucao.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
@@ -55,9 +56,9 @@
                   :valid="valido.instituicao"
                 ></base-input>
 
-                <base-input 
-                  class="mb-3" 
-                  :placeholder="$t('Solucoes.Link do Site')" 
+                <base-input
+                  class="mb-3"
+                  :placeholder="$t('Solucoes.Link do Site')"
                   v-model="solucao.link_web"
                 ></base-input>
 
@@ -67,14 +68,16 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
-                <div class="button-group mb-3 p-1 card w-50 " :class="valido.cidade.block">
+                <div class="button-group mb-3 p-1 card w-50" :class="valido.cidade.block">
                   <dropdown>
                     <base-button
-                      name= "b-state"
+                      name="b-state"
                       slot="title"
                       type="warning"
                       class="dropdown-toggle text-capitalize m-1"
-                    ><strong>{{estado.nome || $t('Solucoes.Selecione seu Estado')}}</strong></base-button>
+                    >
+                      <strong>{{estado.nome || $t('Solucoes.Selecione seu Estado')}}</strong>
+                    </base-button>
                     <a
                       v-for="(item, index) in estados"
                       :key="index"
@@ -87,13 +90,15 @@
                       <base-button
                         slot="title"
                         type="warning"
-                        class="dropdown-toggle  text-capitalize m-1"
-                      ><strong>{{solucao.cidade.nome || $t('Solucoes.Selecione sua Cidade')}}</strong></base-button>
+                        class="dropdown-toggle text-capitalize m-1"
+                      >
+                        <strong>{{solucao.cidade.nome || $t('Solucoes.Selecione sua Cidade')}}</strong>
+                      </base-button>
                       <a
                         v-for="(item, index) in cidades"
                         :key="index"
-                        class="dropdown-item"                      
-                        @click="solucao.cidade = item; "                      
+                        class="dropdown-item"
+                        @click="solucao.cidade = item; "
                       >{{item.nome}}</a>
                     </dropdown>
                   </div>
@@ -103,28 +108,75 @@
                   class="form-control mb-3"
                   :class="valido.descricao"
                   :placeholder="$t('Descrição')"
-                  v-model="$v.solucao.descricao.$model"                  
+                  v-model="$v.solucao.descricao.$model"
                 ></textarea>
                 <div class="card mb-3 p-2" :class="valido.area_aplicacao">
-                  <h6 class="mb-3 text-warning font-weight-bold">{{$t('Solucoes.Área de Aplicação')}}</h6>
-                  <base-radio name="Saúde" class="mb-3" v-model="solucao.area_aplicacao">{{$t('Solucoes.Saúde')}}</base-radio>
-                  <base-radio name="Economia" class="mb-3" v-model="solucao.area_aplicacao">{{$t('Solucoes.Economia')}}</base-radio>
-                  <base-radio name="Educação" class="mb-3" v-model="solucao.area_aplicacao">{{$t('Solucoes.Educação')}}</base-radio>
+                  <h6
+                    class="mb-3 text-warning font-weight-bold"
+                  >{{$t('Solucoes.Área de Aplicação')}}</h6>
                   <base-radio
-                    name="Comunicação"
+                    name="Projeto de Saúde"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Comunicação')}}</base-radio>
-                  <base-radio name="Social" class="mb-3" v-model="solucao.area_aplicacao">{{$t('Solucoes.Social')}}</base-radio>
-                  <base-radio name="Outros" class="mb-3" v-model="solucao.area_aplicacao">{{$t('Solucoes.Outros')}}</base-radio>
+                  >{{$t('Solucoes.Projeto de Saúde')}}</base-radio>
+                  <base-radio
+                    name="Trabalho / Renda"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >{{$t('Solucoes.Trabalho / Renda')}}</base-radio>
+                  <base-radio
+                    name="Educação / Cursos"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >{{$t('Solucoes.Educação / Cursos')}}</base-radio>
+                  <base-radio
+                    name="Serviços de Informação"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >{{$t('Solucoes.Serviços de Informação')}}</base-radio>
+                  <base-radio
+                    name="Ação Social"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >{{$t('Solucoes.Ação Social')}}</base-radio>
+                  <base-radio
+                    name="Mobilidade / Transporte"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >{{$t('Solucoes.Mobilidade / Transporte')}}</base-radio>
+                  <base-radio
+                    name="Meio Ambiente / Urbanismo"
+                    class="mb-3"
+                    v-model="solucao.area_aplicacao"
+                  >{{$t('Solucoes.Meio Ambiente / Urbanismo')}}</base-radio>
                 </div>
                 <div class="card border-valid mb-3 p-2">
                   <h6 class="mb-3 text-warning font-weight-bold">{{$t('Tipo')}}</h6>
-                  <base-radio name="Software" class="mb-3" v-model="solucao.tipo">{{$t('Solucoes.Software')}}</base-radio>
-                  <base-radio name="Hardware" class="mb-3" v-model="solucao.tipo">{{$t('Solucoes.Hardware')}}</base-radio>
-                  <base-radio name="Processo" class="mb-3" v-model="solucao.tipo">{{$t('Solucoes.Processo')}}</base-radio>
-                  <base-radio name="Material" class="mb-3" v-model="solucao.tipo">{{$t('Solucoes.Material')}}</base-radio>
-                  <base-radio name="Outros" class="mb-3" v-model="solucao.tipo">{{$t('Solucoes.Outros')}}</base-radio>
+                  <base-radio
+                    name="Software"
+                    class="mb-3"
+                    v-model="solucao.tipo"
+                  >{{$t('Solucoes.Software')}}</base-radio>
+                  <base-radio
+                    name="Hardware"
+                    class="mb-3"
+                    v-model="solucao.tipo"
+                  >{{$t('Solucoes.Hardware')}}</base-radio>
+                  <base-radio
+                    name="Processo"
+                    class="mb-3"
+                    v-model="solucao.tipo"
+                  >{{$t('Solucoes.Processo')}}</base-radio>
+                  <base-radio
+                    name="Material"
+                    class="mb-3"
+                    v-model="solucao.tipo"
+                  >{{$t('Solucoes.Material')}}</base-radio>
+                  <base-radio
+                    name="Outros"
+                    class="mb-3"
+                    v-model="solucao.tipo"
+                  >{{$t('Solucoes.Outros')}}</base-radio>
                 </div>
                 <div class="card mb-3 p-2" :class="valido.status">
                   <h6 class="mb-3 text-warning font-weight-bold">{{$t('Solucoes.Status')}}</h6>
@@ -153,35 +205,48 @@
                     class="mb-3"
                     v-model="solucao.status"
                   >{{$t('Solucoes.Produto em Desenvolvimento')}}</base-radio>
-                  <base-radio name="Outros" class="mb-3" v-model="solucao.status">{{$t('Solucoes.Outros')}}</base-radio>
                 </div>
+
                 <div class="card border-valid mb-3 p-2">
                   <h6 class="mb-3 text-warning font-weight-bold">{{$t('Solucoes.Tipo de Negócio')}}</h6>
                   <base-radio
-                    name="Disponível Gratuitamente"
+                    name="Grátis"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.Disponível Gratuitamente')}}</base-radio>
+                  >{{$t('Solucoes.Grátis')}}</base-radio>
                   <base-radio
-                    name="Disponível com Restrições"
+                    name="Com Restrições"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.Disponível com Restrições')}}</base-radio>
-                  <base-radio name="À Venda" class="mb-3" v-model="solucao.negocio">{{$t('Solucoes.À Venda')}}</base-radio>
+                  >{{$t('Solucoes.Com Restrições')}}</base-radio>
                   <base-radio
-                    name="À Procura de Financiamento Público"
+                    name="Pago"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.À Procura de Financiamento Público')}}</base-radio>
+                  >{{$t('Solucoes.Pago')}}</base-radio>
                   <base-radio
-                    name="À Procura de Financiamento Privado"
+                    name="Negócio à Venda"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.À Procura de Financiamento Privado')}}</base-radio>
-                  <base-radio name="Outros" class="mb-3" v-model="solucao.negocio">{{$t('Solucoes.Outros')}}</base-radio>
+                  >{{$t('Solucoes.Negócio à Venda')}}</base-radio>
+                  <base-radio
+                    name="À Procura de Financiamento"
+                    class="mb-3"
+                    v-model="solucao.negocio"
+                  >{{$t('Solucoes.À Procura de Financiamento')}}</base-radio>
+                  <base-radio
+                    name="À Procura de Parceria"
+                    class="mb-3"
+                    v-model="solucao.negocio"
+                  >{{$t('Solucoes.À Procura de Parceria')}}</base-radio>
                 </div>
+
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="onSubmit()">{{$t('Solucoes.Salvar')}}</base-button>
+                  <base-button
+                    type="warning"
+                    class="mt-4"
+                    @click="onSubmit()"
+                  >{{$t('Solucoes.Salvar')}}</base-button>
                 </div>
               </form>
             </template>
@@ -209,24 +274,24 @@ export default {
         link_web: "",
         link_youtube: "",
         descricao: "",
-        area_aplicacao: "Saúde",
+        area_aplicacao: "Projeto de Saúde",
         tipo: "Material",
         status: "Produto em Desenvolvimento",
-        negocio: "Disponível Gratuitamente",
+        negocio: "Grátis",
         responsavel: { _id: "" },
         cidade: { _id: "" }
       },
       estado: { _id: undefined },
       estados: [],
       cidades: [],
-      
+
       valido: {
         nome: null,
         instituicao: null,
-        cidade: {block:"border-valid"},
+        cidade: { block: "border-valid" },
         descricao: "border-valid",
         area_aplicacao: "border-valid",
-        status: "border-valid",
+        status: "border-valid"
       },
       error: false
     };
@@ -249,28 +314,32 @@ export default {
   validations: {
     solucao: {
       nome: { required, maxLength: maxLength(60) },
-      instituicao: { required, minLength: minLength(5), maxLength: maxLength(60)},
+      instituicao: {
+        required,
+        minLength: minLength(5),
+        maxLength: maxLength(60)
+      },
       cidade: {
         isCidadeSelected(value) {
-          if (value._id === '') return false;
-          
+          if (value._id === "") return false;
+
           return new Promise((resolve, reject) => {
             setTimeout(() => {
-              resolve(typeof value._id === 'string' && value._id !== '')
-            }, 350 + Math.random() * 300)
-          })       
+              resolve(typeof value._id === "string" && value._id !== "");
+            }, 350 + Math.random() * 300);
+          });
         }
       },
-      descricao: { required, maxLength: maxLength(300) }      
+      descricao: { required, maxLength: maxLength(300) }
     }
-  },  
+  },
 
   methods: {
     onSubmit() {
       this.resetaCamposValidos();
       this.$v.solucao.$touch();
 
-      if(this.$v.solucao.$anyError) {
+      if (this.$v.solucao.$anyError) {
         this.error = true;
         if (this.$v.solucao.nome.$invalid)
           this.valido.nome = !this.$v.solucao.nome.$invalid;
@@ -285,15 +354,14 @@ export default {
       // Salvar apos insenção de erros
       this.resetaCamposValidos();
       this.salvar();
-      
     },
 
-    resetaCamposValidos(){
+    resetaCamposValidos() {
       this.error = false;
 
       this.valido.nome = null;
       this.valido.instituicao = null;
-      this.valido.cidade.block = "border-valid";      
+      this.valido.cidade.block = "border-valid";
       this.valido.descricao = "border-valid";
     },
 
@@ -303,7 +371,7 @@ export default {
       });
     },
 
-    async buscar_cidades(definir_cidade) {    
+    async buscar_cidades(definir_cidade) {
       if (this.estado && this.estado._id)
         await this.http.cidadesByEstado(this.estado._id).then(async data => {
           this.cidades = await data.cidades;
@@ -313,7 +381,7 @@ export default {
     },
 
     async salvar() {
-      console.log("Enter Salve")
+      console.log("Enter Salve");
       if (this.$route.query.solucao && this.solucao._id) {
         this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
           if (resp.message == "Editado com sucesso!")
@@ -332,10 +400,10 @@ export default {
 };
 </script>
 <style scoped>
-  .border-valid{
-    border-style: solid; 
-    border-color: rgba(192,192,192,0.7); 
-    border-radius: 15px;
-    border-width: thin;
-  }
+.border-valid {
+  border-style: solid;
+  border-color: rgba(192, 192, 192, 0.7);
+  border-radius: 15px;
+  border-width: thin;
+}
 </style>

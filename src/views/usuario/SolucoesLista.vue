@@ -305,22 +305,6 @@ export default {
       busca: "",
       area_aplicacao: "",
       status: "",
-      satuss: [
-        "Produto Comercializado",
-        "Produto Lançado",
-        "Produto Testado",
-        "Produto Terminado",
-        "Produto em Desenvolvimento",
-        "Outros"
-      ],
-      areas_aplicacao: [
-        "Saúde",
-        "Economia",
-        "Educação",
-        "Comunicação",
-        "Social",
-        "Outros"
-      ],
       solucao_excluir: {},
       modal_visivel: false,
       modal_excluir_visivel: false,

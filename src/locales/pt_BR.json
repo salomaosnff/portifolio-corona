@@ -268,7 +268,7 @@
             "save": "Salvar"
         }
     },
-    "Colaborador":{
+    "Colaborador||Investidor":{
         "text-warning":"Deseja se alistar?",
         "description":"Texto motivacional ...",
         "badge_warning1":"#paz",
@@ -281,8 +281,5 @@
     "Item":{
         "text-sucess": "Cadastrar Ideia",
         "salvar":"Salvar"        
-    },
-    "Profile":{
-        
     }
 }

@@ -267,5 +267,15 @@
             "ph_forum_description": "Descrição",
             "save": "Salvar"
         }
+    },
+    "Colaborador":{
+        "text-warning":"Deseja se alistar?",
+        "description":"Texto motivacional ...",
+        "badge_warning1":"#paz",
+        "badge_warning2":"#amor",
+        "badge_warning3":"#sucesso",
+        "button_register":"Alistar-me",
+        "text-primary":"Deseja cadastrar ums solução?",
+        "button_solucoes_cadastro":"Cadastrar solução"
     }
 }

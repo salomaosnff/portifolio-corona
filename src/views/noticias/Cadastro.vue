@@ -39,7 +39,8 @@
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                  <strong>{{$t('Noticias.Dados inválidos!')}}</strong>{{$t('Noticias.Verifique os campos destacados!')}}
+                  <strong>{{$t('Noticias.Dados inválidos!')}}</strong>
+                  {{$t('Noticias.Verifique os campos destacados!')}}
                 </base-alert>
                 <base-input
                   class="mb-3"
@@ -63,7 +64,11 @@
                 ></textarea>
 
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="onSubmit()">{{$t('Noticias.Salvar')}}</base-button>
+                  <base-button
+                    type="warning"
+                    class="mt-4"
+                    @click="onSubmit()"
+                  >{{$t('Noticias.Salvar')}}</base-button>
                 </div>
               </form>
             </template>
@@ -85,8 +90,8 @@ export default {
         titulo: "",
         subtitulo: "",
         descricao: "",
-        data_publicacao: "",
-        data_atualizacao: "",
+        data_publicacao: Date,
+        data_atualizacao: Date,
         responsavel: { _id: "" }
       },
 
@@ -131,7 +136,6 @@ export default {
           this.valido.descricao = "border-danger";
         return;
       }
-      // Salvar apos insenção de erros
       this.resetaCamposValidos();
       this.salvar();
     },
@@ -145,6 +149,7 @@ export default {
 
     async salvar() {
       if (this.$route.query.noticias && this.noticia._id) {
+        this.noticia.data_atualizacao = Date.now();
         this.http.put("noticia", this.noticia._id, this.noticia).then(resp => {
           if (resp.message == "Editado com sucesso!")
             this.$router.push("noticias_lista");
@@ -155,6 +160,8 @@ export default {
           pessoa = await JSON.parse(pessoa);
           this.noticia.responsavel._id = await pessoa._id;
         }
+        this.noticia.data_publicacao = Date.now();
+        this.noticia.data_atualizacao = Date.now();
         this.http.post("noticia", this.noticia).then(resp => {
           if (resp._id) this.$router.push("noticias_lista");
         });

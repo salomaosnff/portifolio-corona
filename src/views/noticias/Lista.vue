@@ -55,6 +55,7 @@
               <card class="border-0" shadow body-classes="py-5">
                 <h4 class="text-default">{{noticia.titulo}}</h4>
                 <h6 class="text-default">{{noticia.subtitulo}}</h6>
+                <h6 class="text-thin text-right">{{converter_data(noticia.data_publicacao)}}</h6>
                 <p
                   class="description mt-3"
                 >{{noticia.descricao.slice(0,100)}} {{noticia.descricao.length > 100? '...' : ''}}</p>
@@ -99,6 +100,12 @@
       >
         {{noticias[index_modal].titulo}}
         <h5 class="modal-title text-thin mt-3">{{noticias[index_modal].subtitulo}}</h5>
+        <p
+          class="modal-title text-thin text-right mt-3"
+        >{{$t('Publicado em')}} {{converter_data(noticias[index_modal].data_publicacao)}}</p>
+        <p
+          class="modal-title text-thin text-right mt-3"
+        >{{$t('Atualizado em')}} {{converter_data(noticias[index_modal].data_atualizacao)}}</p>
       </h4>
 
       <div v-if="noticias[index_modal].descricao">
@@ -222,6 +229,17 @@ export default {
         this.noticia_excluir = noticia;
         this.modal_excluir_visivel = true;
       }
+    },
+
+    converter_data(data) {
+      if (data)
+        data =
+          data.substring(8, 10) +
+          "/" +
+          data.substring(5, 7) +
+          "/" +
+          data.substring(0, 4);
+      return data;
     }
   }
 };

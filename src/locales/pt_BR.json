@@ -277,5 +277,12 @@
         "button_register":"Alistar-me",
         "text-primary":"Deseja cadastrar ums solução?",
         "button_solucoes_cadastro":"Cadastrar solução"
+    },
+    "Item":{
+        "text-sucess": "Cadastrar Ideia",
+        "salvar":"Salvar"        
+    },
+    "Profile":{
+        
     }
 }

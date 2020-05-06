@@ -22,11 +22,11 @@
 
         <div class="col-lg-6 my-4 pr-4 text-right">
           <ul class="row" style="justify-content: right; align-itens: center">
-            <a class="menu-text" href="#/colaborador">{{$t('Sobre')}}</a>
+            <a class="menu-text" href="#/desenvolvimento">{{$t('Sobre')}}</a>
 
             <a class="menu-text" href="#/noticias_lista">{{$t('Notícias')}}</a>
 
-            <a class="menu-text" href="#/investidor">{{$t('Fale Conosco')}}</a>
+            <a class="menu-text" href="#/desenvolvimento">{{$t('Fale Conosco')}}</a>
             <img
               v-for="(idioma) in idiomas"
               :key="idioma"
@@ -91,7 +91,7 @@
                     target="_blank"
                   >{{$t('Home.Monitor de Fake News')}}</base-button>
                 </div>
-              </div> -->
+              </div>-->
               <br />
             </div>
 

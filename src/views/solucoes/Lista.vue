@@ -12,7 +12,20 @@
     </div>
 
     <div class="container pt-lg-md">
-      <h2 class="text-white mb-5">{{$t('Soluções')}}</h2>
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="text-white mb-5">{{$t('Soluções')}}</h2>
+        </div>
+        <div class="col-lg-6 text-right">
+          <badge
+            v-if="acessos"
+            rounded
+            class="mt-2 text-warning text-normal"
+            type="white"
+            style="font-size: medium"
+          >{{$t('Acessos')}}: {{acessos}}</badge>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-3 row ml-0">
           <base-button
@@ -53,7 +66,7 @@
             <base-button
               slot="title"
               type="warning"
-              class="dropdown-toggle mb-5 text-normal"
+              class="dropdown-toggle mb-1 text-normal"
             >{{$t(area_aplicacao) || $t('Área de Atuação')}}</base-button>
             <a
               v-for="(area, index) in areas_aplicacao"
@@ -67,7 +80,7 @@
             <base-button
               slot="title"
               type="warning"
-              class="dropdown-toggle mb-5 text-normal"
+              class="dropdown-toggle mb-1 text-normal"
             >{{$t(status) || $t('Status da Ideia')}}</base-button>
             <a
               v-for="(s, index) in satuss"
@@ -81,7 +94,7 @@
             <base-button
               slot="title"
               type="warning"
-              class="dropdown-toggle mb-5 text-normal"
+              class="dropdown-toggle mb-1 text-normal"
             >{{$t(negocio) || $t('Tipo de Negócio')}}</base-button>
             <a
               v-for="(n, index) in negocios"
@@ -94,7 +107,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-lg-12">
+        <div class="col-lg-12 my-3">
           <div class="row row-grid">
             <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
@@ -336,12 +349,16 @@ export default {
       index_modal: 0,
       pagina_modal: "geral",
       solucoes: [],
-      busca_nao_encontrada: false
+      busca_nao_encontrada: false,
+      acessos: ""
     };
   },
 
   async mounted() {
     await this.get_solucoes();
+    this.http.novo_acesso_solucoes().then(acessos => {
+      this.acessos = acessos;
+    });
   },
 
   methods: {

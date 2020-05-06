@@ -6,6 +6,13 @@ const baseUrl = [
 ]
 
 export default class Http {
+    async novo_acesso_solucoes() {
+        return await axios
+            .get(baseUrl[0] + 'acesso/novo')
+            .then(data => { return data.data.solucoes })
+            .catch(() => { return {} })
+    }
+
     async logar(dados) {
         return await axios
             .get(baseUrl[0] + 'pessoa/logar', { params: { email: dados.email, senha: dados.senha } })

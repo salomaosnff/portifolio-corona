@@ -80,7 +80,7 @@
                   >{{$t('Home.Monitor do COVID-19')}}</base-button>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-lg-6">
                   <base-button
                     class="mt-4"
@@ -91,7 +91,7 @@
                     target="_blank"
                   >{{$t('Home.Monitor de Fake News')}}</base-button>
                 </div>
-              </div>
+              </div> -->
               <br />
             </div>
 

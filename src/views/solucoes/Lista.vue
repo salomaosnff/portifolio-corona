@@ -23,7 +23,7 @@
             class="mt-2 text-warning text-normal"
             type="white"
             style="font-size: medium"
-          >{{$t('Soluções')}}: {{solucoes.length}}</badge>
+          >{{$t('Quantidade')}}: {{solucoes.length}}</badge>
 
           <badge
             v-if="acessos"

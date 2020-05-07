@@ -66,6 +66,8 @@
     "Minhas Soluções": "Minhas Soluções",
     "Realização": "Realização",
     "Meus Fóruns": "Meus Fóruns",
+    "Quantidade": "Quantidade",
+    "Acessos": "Acessos",
     "Login": {
         "Entrar no REVIVE": "Entrar no REVIVE",
         "Criar Conta": "Criar Conta",
@@ -103,6 +105,19 @@
         "Salvar": "Salvar "
     },
     "Solucoes": {
+        "Projeto de Saúde": "Projeto de Saúde",
+        "Trabalho / Renda": "Trabalho / Renda",
+        "Educação / Cursos": "Educação / Cursos",
+        "Serviços de Informação": "Serviços de Informação",
+        "Ação Social": "Ação Social",
+        "Mobilidade / Transporte": "Mobilidade / Transporte",
+        "Meio Ambiente / Urbanismo": "Meio Ambiente / Urbanismo",
+        "Grátis": "Grátis",
+        "Com Restrições": "Com Restrições",
+        "Pago": "Pago",
+        "Negócio à Venda": "Negócio à Venda",
+        "À Procura de Financiamento": "À Procura de Financiamento",
+        "À Procura de Parceria": "À Procura de Parceria",
         "Cadastre sua Ideia": "Cadastre sua Ideia",
         "Dados inválidos": "Dados inválidos!",
         "Verifique os campos destacados!": "Verifique os campos destacados!",
@@ -268,22 +283,22 @@
             "save": "Salvar"
         }
     },
-    "Colaborador||Investidor":{
-        "text-warning":"Deseja se alistar?",
-        "description":"Texto motivacional ...",
-        "badge_warning1":"#paz",
-        "badge_warning2":"#amor",
-        "badge_warning3":"#sucesso",
-        "button_register":"Alistar-me",
-        "text-primary":"Deseja cadastrar ums solução?",
-        "button_solucoes_cadastro":"Cadastrar solução"
+    "Colaborador||Investidor": {
+        "text-warning": "Deseja se alistar?",
+        "description": "Texto motivacional ...",
+        "badge_warning1": "#paz",
+        "badge_warning2": "#amor",
+        "badge_warning3": "#sucesso",
+        "button_register": "Alistar-me",
+        "text-primary": "Deseja cadastrar ums solução?",
+        "button_solucoes_cadastro": "Cadastrar solução"
     },
-    "Item":{
+    "Item": {
         "text-sucess": "Cadastrar Ideia",
-        "salvar":"Salvar"        
+        "salvar": "Salvar"
     },
-    "Desenvolvimento":{
-        "title":"Página em Desenvolvimento",
-        "lead":"Estamos trabalhando no desenvolvimento desta página, em breve você poderá disfrutar de seus maravilhosos recursos ;)"
+    "Desenvolvimento": {
+        "title": "Página em Desenvolvimento",
+        "lead": "Estamos trabalhando no desenvolvimento desta página, em breve você poderá disfrutar de seus maravilhosos recursos ;)"
     }
 }

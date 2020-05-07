@@ -66,6 +66,8 @@
     "Minhas Soluções": "My Solutions",
     "Realização": "Realization",
     "Meus Fóruns": "My Forums",
+    "Quantidade": "Quantity",
+    "Acessos": "Access",
     "Login": {
         "Entrar no REVIVE": "Enter REVIVE",
         "Criar Conta": "Create an Account",
@@ -103,6 +105,19 @@
         "Salvar": "Save"
     },
     "Solucoes": {
+        "Projeto de Saúde": "Health Project",
+        "Trabalho / Renda": "Work / Income",
+        "Educação / Cursos": "Education / Courses",
+        "Serviços de Informação": "Information Services",
+        "Ação Social": "Social Action",
+        "Mobilidade / Transporte": "Mobility / Transport",
+        "Meio Ambiente / Urbanismo": "Sustainability / Urbanism",
+        "Grátis": "Free",
+        "Com Restrições": "With Restrictions",
+        "Pago": "Paid Out",
+        "Negócio à Venda": "Business for Sale",
+        "À Procura de Financiamento": "Looking for Funding",
+        "À Procura de Parceria": "Looking for Partnership",
         "Cadastre sua Ideia": "Register your Idea",
         "Dados inválidos": "Invalid data!",
         "Verifique os campos destacados!": "Check the highlighted fields.",

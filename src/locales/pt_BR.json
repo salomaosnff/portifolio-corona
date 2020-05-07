@@ -281,5 +281,9 @@
     "Item":{
         "text-sucess": "Cadastrar Ideia",
         "salvar":"Salvar"        
+    },
+    "Desenvolvimento":{
+        "title":"Página em Desenvolvimento",
+        "lead":"Estamos trabalhando no desenvolvimento desta página, em breve você poderá disfrutar de seus maravilhosos recursos ;)"
     }
 }

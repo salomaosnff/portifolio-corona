@@ -297,11 +297,10 @@ export default {
 
   validations: {
     solucao: {
-      nome: { required, maxLength: maxLength(60) },
+      nome: { required, maxLength: maxLength(100) },
       instituicao: {
         required,
-        minLength: minLength(5),
-        maxLength: maxLength(60)
+        maxLength: maxLength(100)
       },
       cidade: {
         isCidadeSelected(value) {

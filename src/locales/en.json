@@ -277,5 +277,23 @@
             "ph_forum_description": "Description",
             "save": "Save"
         }
+    },
+    "Colaborador||Investidor": {
+        "text-warning": "Would you like to enlist?",
+        "description": "Motivational text ...",
+        "badge_warning1": "#peace",
+        "badge_warning2": "#love",
+        "badge_warning3": "#success",
+        "button_register": "Enlist me",
+        "text-primary": "Would you like to register a solution?",
+        "button_solucoes_cadastro": "Register a solution"
+    },
+    "Item": {
+        "text-sucess": "Register Idea",
+        "salvar": "Save"
+    },
+    "Desenvolvimento": {
+        "title": "Page in Development",
+        "lead": "We are working on the development of this page, soon you will be able to enjoy its wonderful resources ;)"
     }
 }

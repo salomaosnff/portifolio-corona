@@ -267,5 +267,23 @@
             "ph_forum_description": "Descrição",
             "save": "Salvar"
         }
+    },
+    "Colaborador||Investidor":{
+        "text-warning":"Deseja se alistar?",
+        "description":"Texto motivacional ...",
+        "badge_warning1":"#paz",
+        "badge_warning2":"#amor",
+        "badge_warning3":"#sucesso",
+        "button_register":"Alistar-me",
+        "text-primary":"Deseja cadastrar ums solução?",
+        "button_solucoes_cadastro":"Cadastrar solução"
+    },
+    "Item":{
+        "text-sucess": "Cadastrar Ideia",
+        "salvar":"Salvar"        
+    },
+    "Desenvolvimento":{
+        "title":"Página em Desenvolvimento",
+        "lead":"Estamos trabalhando no desenvolvimento desta página, em breve você poderá disfrutar de seus maravilhosos recursos ;)"
     }
 }

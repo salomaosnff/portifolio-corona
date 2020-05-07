@@ -21,7 +21,7 @@
           >
             <template>
               <div class="text-center text-muted mb-4">
-                <h3 class="text-success text-bold">Cadastrar Ideia</h3>
+                <h3 class="text-success text-bold">{{$t("Item.text-sucess")}}</h3>
               </div>
               <form role="form">
                 <base-input class="mb-3" placeholder="Name" addon-left-icon="ni ni-hat-3"></base-input>
@@ -32,7 +32,7 @@
                   addon-left-icon="ni ni-lock-circle-open"
                 ></base-input>
                 <div class="text-center">
-                  <base-button type="success" class="my-4">Salvar</base-button>
+                  <base-button type="success" class="my-4">{{$t("Item.salvar")}}</base-button>
                 </div>
               </form>
             </template>

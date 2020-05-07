@@ -12,10 +12,9 @@
       <div class="container py-0 pb-lg">
         <div class="row justify-content-between align-items-center">
           <div class="col-lg-5 mb-5 mb-lg-0">
-            <h1 class="text-white font-weight-light">Página em Desenvolvimento</h1>
+            <h1 class="text-white font-weight-light">{{$t("Desenvolvimento.title")}}</h1>
             <p class="lead text-white mt-4">
-              Estamos trabalhando no desenvolvimento desta página, em breve
-              você poderá disfrutar de seus maravilhosos recursos ;)
+              {{$t("Desenvolvimento.lead")}}
             </p>
             <div class="row ml-0 mt-4">
               <base-button
@@ -29,7 +28,7 @@
                 class="mb-5 text-warning text-capitalize"
                 type="white"
                 @click="$router.go(-1)"
-              >Voltar</base-button>
+              >{{$t("Voltar")}}</base-button>
             </div>
           </div>
           <div class="col-lg-6 mb-lg-auto">

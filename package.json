@@ -24,7 +24,8 @@
     "vue-router": "^3.0.2",
     "vue-the-mask": "^0.11.1",
     "vue2-transitions": "^0.2.3",
-    "vuelidate": "^0.7.5"
+    "vuelidate": "^0.7.5",
+    "vuetify": "^2.2.27"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",

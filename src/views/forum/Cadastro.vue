@@ -38,22 +38,45 @@
             <h4 class="mb-4 text-warning font-weight-bold">{{$t("forum.Cadastro.title")}}</h4>
             <template>
               <form role="form">
-                <base-input class="mb-3" :placeholder="$t('forum.Cadastro.ph_forum_name')" v-model="forum.nome"></base-input>
                 <base-input
-                  class="mb-3" 
-                  :placeholder="$t('forum.Cadastro.ph_forum_link')" 
+                  v-if="$i18n.locale == 'pt_BR'"
+                  class="mb-3"
+                  :placeholder="$t('forum.Cadastro.ph_forum_name')"
+                  v-model="forum.nome"
+                ></base-input>
+                <base-input
+                  v-else
+                  class="mb-3"
+                  :placeholder="$t('forum.Cadastro.ph_forum_name')"
+                  v-model="forum.en_nome"
+                ></base-input>
+
+                <base-input
+                  class="mb-3"
+                  :placeholder="$t('forum.Cadastro.ph_forum_link')"
                   v-model="forum.link"
                 ></base-input>
                 <p class="small">{{$t("forum.Cadastro.whatsapp_link")}}</p>
 
                 <textarea
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="form-control mb-3"
-                 :placeholder="$t('forum.Cadastro.ph_forum_description')"
+                  :placeholder="$t('forum.Cadastro.ph_forum_description')"
                   v-model="forum.descricao"
+                ></textarea>
+                <textarea
+                  v-else
+                  class="form-control mb-3"
+                  :placeholder="$t('forum.Cadastro.ph_forum_description')"
+                  v-model="forum.en_descricao"
                 ></textarea>
 
                 <div class="text-center">
-                  <base-button type="warning" class="mt-4" @click="salvar()">{{$t('forum.Cadastro.save')}}</base-button>
+                  <base-button
+                    type="warning"
+                    class="mt-4"
+                    @click="salvar()"
+                  >{{$t('forum.Cadastro.save')}}</base-button>
                 </div>
               </form>
             </template>
@@ -71,8 +94,10 @@ export default {
       http: new http(),
       forum: {
         nome: "",
+        en_nome: "",
         link: "",
         descricao: "",
+        en_descricao: "",
         responsavel: { _id: "" }
       }
     };

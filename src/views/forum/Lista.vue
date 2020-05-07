@@ -28,7 +28,7 @@
           >{{$t("Voltar")}}</base-button>
         </div>
 
-        <div class="col-md-4 text-right pr-0">
+        <div class="col-md-8 text-right pr-0">
           <base-button
             v-if="tipo_forum == 'meus'"
             icon="ni ni-chat-round"
@@ -43,9 +43,6 @@
             type="primary text-capitalize"
             @click="mudar_tipo_forum('meus')"
           >{{$t("forum.Lista.complemento.nav_buttons.filter_my")}}</base-button>
-        </div>
-
-        <div class="col-md-4 text-right pr-0">
           <base-button
             icon="fa fa-plus"
             class="mb-5"
@@ -60,8 +57,15 @@
           <div class="row row-grid">
             <div v-for="(forum, index) in forums" :key="forum + index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
-                <h4 class="text-default">{{forum.nome}}</h4>
+                <h4
+                  class="text-default"
+                >{{$i18n.locale == 'en' && forum.en_nome? forum.en_nome : forum.nome}}</h4>
                 <p
+                  v-if="$i18n.locale == 'en' && forum.en_descricao"
+                  class="description mt-3"
+                >{{forum.en_descricao.slice(0,100)}} {{forum.en_descricao.length > 100? '...' : ''}}</p>
+                <p
+                  v-else
                   class="description mt-3"
                 >{{forum.descricao.slice(0,100)}} {{forum.descricao.length > 100? '...' : ''}}</p>
 
@@ -108,7 +112,7 @@
         v-if="forums[index_modal] && forums[index_modal].nome"
         slot="header"
         class="modal-title"
-      >{{forums[index_modal].nome}}</h4>
+      >{{$i18n.locale == 'en' && forums[index_modal].en_nome? forums[index_modal].en_nome : forums[index_modal].nome}}</h4>
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="forums[index_modal].link">
@@ -117,7 +121,9 @@
         </div>
         <div v-if="forums[index_modal].descricao">
           <p class="mt-4">{{$t("forum.Lista.forum.modal_title.description")}}</p>
-          <h5 class="text-white">{{forums[index_modal].descricao}}</h5>
+          <h5
+            class="text-white"
+          >{{$i18n.locale == 'en' && forums[index_modal].en_descricao? forums[index_modal].en_descricao : forums[index_modal].descricao}}</h5>
         </div>
       </div>
 
@@ -159,7 +165,10 @@
       gradient="warning"
       modal-classes="modal-warning modal-dialog-centered"
     >
-      <h6 slot="header" class="modal-title">{{forum_excluir.nome}}</h6>
+      <h6
+        slot="header"
+        class="modal-title"
+      >{{$i18n.locale == 'en' && forum_excluir.en_nome? forum_excluir.en_nome : forum_excluir.nome}}</h6>
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>
@@ -199,10 +208,10 @@
           icon="ni ni-ungroup"
         >{{$t("forum.Lista.forum.modal_join.copie_link")}}</base-button>
         <p class="mt-4">. . .</p>
-        <h1 class="mt-4 heading text-normal"></h1>
         <h1 class="mt-4 heading text-normal">{{$t("forum.Lista.forum.modal_join.send_link_1")}}</h1>
+        <h1 class="mt-4 heading text-normal">{{$t("forum.Lista.forum.modal_join.send_link_2")}}</h1>
         <p class="mt-4">. . .</p>
-        <p class="mt-4">{{$t("forum.Lista.forum.modal_join.send_link_2")}}</p>
+        <p class="mt-4">{{$t("forum.Lista.forum.modal_join.send_link_3")}}</p>
         <base-button
           href="https://web.whatsapp.com/"
           outline
@@ -211,7 +220,7 @@
           type="white"
           tag="a"
           target="_blank"
-        >{{$t("forum.Lista.forum.modal_join.send_link_3")}}</base-button>
+        >{{$t("forum.Lista.forum.modal_join.open_whatsapp")}}</base-button>
       </div>
 
       <template slot="footer">
@@ -249,7 +258,7 @@ export default {
       link_forum: "",
       index_modal: 0,
       pagina_modal: "geral",
-      forums: [],
+      forums: []
     };
   },
 

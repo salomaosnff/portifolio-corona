@@ -238,7 +238,11 @@
       gradient="warning"
       modal-classes="modal-warning modal-dialog-centered"
     >
-      <h6 slot="header" class="modal-title" id="modal-title-notification">{{solucao_excluir.nome}}</h6>
+      <h6
+        slot="header"
+        class="modal-title"
+        id="modal-title-notification"
+      >{{$i18n.locale == 'en' && solucao_excluir.en_nome? solucao_excluir.en_nome : solucao_excluir.nome}}</h6>
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>

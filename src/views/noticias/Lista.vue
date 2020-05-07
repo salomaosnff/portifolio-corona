@@ -53,10 +53,19 @@
           <div class="row row-grid">
             <div v-for="(noticia, index) in noticias" :key="index" class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
-                <h4 class="text-default">{{noticia.titulo}}</h4>
-                <h6 class="text-default">{{noticia.subtitulo}}</h6>
+                <h4
+                  class="text-default"
+                >{{$i18n.locale == 'en' && noticia.en_titulo? noticia.en_titulo : noticia.titulo}}</h4>
+                <h6
+                  class="text-default"
+                >{{$i18n.locale == 'en' && noticia.en_subtitulo? noticia.en_subtitulo : noticia.subtitulo}}</h6>
                 <h6 class="text-thin text-right">{{converter_data(noticia.data_publicacao)}}</h6>
                 <p
+                  v-if="$i18n.locale == 'en' && noticia.en_descricao"
+                  class="description mt-3"
+                >{{noticia.en_descricao.slice(0,100)}} {{noticia.en_descricao.length > 100? '...' : ''}}</p>
+                <p
+                  v-else
                   class="description mt-3"
                 >{{noticia.descricao.slice(0,100)}} {{noticia.descricao.length > 100? '...' : ''}}</p>
 
@@ -98,8 +107,10 @@
         slot="header"
         class="modal-title"
       >
-        {{noticias[index_modal].titulo}}
-        <h5 class="modal-title text-thin mt-3">{{noticias[index_modal].subtitulo}}</h5>
+        {{$i18n.locale == 'en' && noticias[index_modal].en_titulo? noticias[index_modal].en_titulo : noticias[index_modal].titulo}}
+        <h5
+          class="modal-title text-thin mt-3"
+        >{{$i18n.locale == 'en' && noticias[index_modal].en_subtitulo ? noticias[index_modal].en_subtitulo : noticias[index_modal].subtitulo}}</h5>
         <p
           class="modal-title text-thin text-right mt-3"
         >{{$t('Publicado em')}} {{converter_data(noticias[index_modal].data_publicacao)}}</p>
@@ -109,7 +120,9 @@
       </h4>
 
       <div v-if="noticias[index_modal].descricao">
-        <h5 class="text-white">{{noticias[index_modal].descricao}}</h5>
+        <h5
+          class="text-white"
+        >{{$i18n.locale == 'en' && noticias[index_modal].en_descricao? noticias[index_modal].en_descricao : noticias[index_modal].descricao}}</h5>
       </div>
     </modal>
 
@@ -118,7 +131,10 @@
       gradient="warning"
       modal-classes="modal-warning modal-dialog-centered"
     >
-      <h6 slot="header" class="modal-title">{{noticia_excluir.titulo}}</h6>
+      <h6
+        slot="header"
+        class="modal-title"
+      >{{$i18n.locale == 'en' && noticia_excluir.en_titulo? noticia_excluir.en_titulo : noticia_excluir.titulo}}</h6>
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>

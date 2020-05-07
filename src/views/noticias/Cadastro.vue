@@ -43,24 +43,45 @@
                   {{$t('Noticias.Verifique os campos destacados!')}}
                 </base-alert>
                 <base-input
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Noticias.Título')"
                   v-model="$v.noticia.titulo.$model"
                   :valid="valido.titulo"
                 ></base-input>
+                <base-input
+                  v-else
+                  class="mb-3"
+                  :placeholder="$t('Noticias.Título')"
+                  v-model="noticia.en_titulo"
+                ></base-input>
 
                 <base-input
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Noticias.Subtítulo')"
                   v-model="$v.noticia.subtitulo.$model"
                   :valid="valido.subtitulo"
                 ></base-input>
+                <base-input
+                  v-else
+                  class="mb-3"
+                  :placeholder="$t('Noticias.Subtítulo')"
+                  v-model="noticia.en_subtitulo"
+                ></base-input>
 
                 <textarea
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="form-control mb-3 card"
                   :placeholder="$t('Descrição')"
                   v-model="$v.noticia.descricao.$model"
                   :class="valido.descricao"
+                ></textarea>
+                <textarea
+                  v-else
+                  class="form-control mb-3 card"
+                  :placeholder="$t('Descrição')"
+                  v-model="noticia.en_descricao"
                 ></textarea>
 
                 <div class="text-center">
@@ -88,8 +109,11 @@ export default {
       http: new http(),
       noticia: {
         titulo: "",
+        en_titulo: "",
         subtitulo: "",
+        en_subtitulo: "",
         descricao: "",
+        en_descricao: "",
         data_publicacao: Date,
         data_atualizacao: Date,
         responsavel: { _id: "" }

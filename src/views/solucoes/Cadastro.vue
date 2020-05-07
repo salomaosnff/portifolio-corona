@@ -297,10 +297,9 @@ export default {
 
   validations: {
     solucao: {
-      nome: { required, maxLength: maxLength(100) },
+      nome: { required },
       instituicao: {
-        required,
-        maxLength: maxLength(100)
+        required
       },
       cidade: {
         isCidadeSelected(value) {
@@ -313,7 +312,7 @@ export default {
           });
         }
       },
-      descricao: { required, maxLength: maxLength(300) }
+      descricao: { required }
     }
   },
 

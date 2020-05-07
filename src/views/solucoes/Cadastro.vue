@@ -76,7 +76,7 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
-                <div class="button-group mb-3 p-1 card w-50" :class="valido.cidade.block">
+                <div class="button-group mb-3 p-1 card" :class="valido.cidade.block">
                   <dropdown>
                     <base-button
                       name="b-state"

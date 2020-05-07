@@ -72,8 +72,15 @@
               :class="solucao.base? 'display: none' : 'col-lg-4 mb-5'"
             >
               <card v-if="!solucao.base" class="border-0" shadow body-classes="py-5">
-                <h4 class="text-default">{{solucao.nome}}</h4>
+                <h4
+                  class="text-default"
+                >{{$i18n.locale == 'en' && solucao.en_nome? solucao.en_nome : solucao.nome}}</h4>
                 <p
+                  v-if="$i18n.locale == 'en' && solucao.en_descricao"
+                  class="description mt-3"
+                >{{solucao.en_descricao.slice(0,100)}} {{solucao.en_descricao.length > 100? '...' : ''}}</p>
+                <p
+                  v-else
                   class="description mt-3"
                 >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
 
@@ -130,7 +137,7 @@
         slot="header"
         class="modal-title"
         id="modal-title-notification"
-      >{{solucoes[index_modal].nome}}</h4>
+      >{{$i18n.locale == 'en' && solucoes[index_modal].en_nome? solucoes[index_modal].en_nome : solucoes[index_modal].nome}}</h4>
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
@@ -172,7 +179,9 @@
 
       <div v-if="pagina_modal == 'descricao'">
         <div v-if="solucoes[index_modal].descricao">
-          <h5 class="text-white">{{solucoes[index_modal].descricao}}</h5>
+          <h5
+            class="text-white"
+          >{{$i18n.locale == 'en' && solucoes[index_modal].en_descricao? solucoes[index_modal].en_descricao : solucoes[index_modal].descricao}}</h5>
         </div>
       </div>
 

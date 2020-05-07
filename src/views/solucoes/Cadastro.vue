@@ -42,11 +42,19 @@
                   <strong>{{$t('Dados inválidos!')}}</strong>
                   {{$t('Verifique os campos destacados!')}}
                 </base-alert>
+
                 <base-input
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Nome da Ideia')"
                   v-model="$v.solucao.nome.$model"
                   :valid="valido.nome"
+                ></base-input>
+                <base-input
+                  v-else
+                  class="mb-3"
+                  :placeholder="$t('Nome da Ideia')"
+                  v-model="solucao.en_nome"
                 ></base-input>
 
                 <base-input
@@ -105,11 +113,19 @@
                 </div>
 
                 <textarea
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="form-control mb-3"
                   :class="valido.descricao"
                   :placeholder="$t('Descrição')"
                   v-model="$v.solucao.descricao.$model"
                 ></textarea>
+                <textarea
+                  v-else
+                  class="form-control mb-3"
+                  :placeholder="$t('Descrição')"
+                  v-model="solucao.en_descricao"
+                ></textarea>
+
                 <div class="card mb-3 p-2" :class="valido.area_aplicacao">
                   <h6 class="mb-3 text-warning font-weight-bold">{{$t('Área de Aplicação')}}</h6>
                   <base-radio
@@ -236,10 +252,12 @@ export default {
       http: new http(),
       solucao: {
         nome: "",
+        en_nome: "",
         instituicao: "",
         link_web: "",
         link_youtube: "",
         descricao: "",
+        en_descricao: "",
         area_aplicacao: "Projeto de Saúde",
         tipo: "Material",
         status: "Produto em Desenvolvimento",

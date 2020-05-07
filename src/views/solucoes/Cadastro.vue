@@ -35,36 +35,36 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <h4 class="mb-4 text-warning font-weight-bold">{{$t('Solucoes.Cadastre sua Ideia')}}</h4>
+            <h4 class="mb-4 text-warning font-weight-bold">{{$t('Cadastre sua Ideia')}}</h4>
             <template>
               <form role="form">
                 <base-alert type="danger" v-show="error">
-                  <strong>{{$t('Solucoes.Dados inválidos!')}}</strong>
-                  {{$t('Solucoes.Verifique os campos destacados!')}}
+                  <strong>{{$t('Dados inválidos!')}}</strong>
+                  {{$t('Verifique os campos destacados!')}}
                 </base-alert>
                 <base-input
                   class="mb-3"
-                  :placeholder="$t('Solucoes.Nome da Ideia')"
+                  :placeholder="$t('Nome da Ideia')"
                   v-model="$v.solucao.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
 
                 <base-input
                   class="mb-3"
-                  :placeholder="$t('Solucoes.Instituição ou Empresa')"
+                  :placeholder="$t('Instituição ou Empresa')"
                   v-model="$v.solucao.instituicao.$model"
                   :valid="valido.instituicao"
                 ></base-input>
 
                 <base-input
                   class="mb-3"
-                  :placeholder="$t('Solucoes.Link do Site')"
+                  :placeholder="$t('Link do Site')"
                   v-model="solucao.link_web"
                 ></base-input>
 
                 <base-input
                   class="mb-3"
-                  :placeholder="$t('Solucoes.Link do YouTube')"
+                  :placeholder="$t('Link do YouTube')"
                   v-model="solucao.link_youtube"
                 ></base-input>
 
@@ -76,7 +76,7 @@
                       type="warning"
                       class="dropdown-toggle text-capitalize m-1"
                     >
-                      <strong>{{estado.nome || $t('Solucoes.Selecione seu Estado')}}</strong>
+                      <strong>{{estado.nome || $t('Selecione seu Estado')}}</strong>
                     </base-button>
                     <a
                       v-for="(item, index) in estados"
@@ -92,7 +92,7 @@
                         type="warning"
                         class="dropdown-toggle text-capitalize m-1"
                       >
-                        <strong>{{solucao.cidade.nome || $t('Solucoes.Selecione sua Cidade')}}</strong>
+                        <strong>{{solucao.cidade.nome || $t('Selecione sua Cidade')}}</strong>
                       </base-button>
                       <a
                         v-for="(item, index) in cidades"
@@ -111,142 +111,108 @@
                   v-model="$v.solucao.descricao.$model"
                 ></textarea>
                 <div class="card mb-3 p-2" :class="valido.area_aplicacao">
-                  <h6
-                    class="mb-3 text-warning font-weight-bold"
-                  >{{$t('Solucoes.Área de Aplicação')}}</h6>
+                  <h6 class="mb-3 text-warning font-weight-bold">{{$t('Área de Aplicação')}}</h6>
                   <base-radio
                     name="Projeto de Saúde"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Projeto de Saúde')}}</base-radio>
+                  >{{$t('Projeto de Saúde')}}</base-radio>
                   <base-radio
                     name="Trabalho / Renda"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Trabalho / Renda')}}</base-radio>
+                  >{{$t('Trabalho / Renda')}}</base-radio>
                   <base-radio
                     name="Educação / Cursos"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Educação / Cursos')}}</base-radio>
+                  >{{$t('Educação / Cursos')}}</base-radio>
                   <base-radio
                     name="Serviços de Informação"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Serviços de Informação')}}</base-radio>
+                  >{{$t('Serviços de Informação')}}</base-radio>
                   <base-radio
                     name="Ação Social"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Ação Social')}}</base-radio>
+                  >{{$t('Ação Social')}}</base-radio>
                   <base-radio
                     name="Mobilidade / Transporte"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Mobilidade / Transporte')}}</base-radio>
+                  >{{$t('Mobilidade / Transporte')}}</base-radio>
                   <base-radio
                     name="Meio Ambiente / Urbanismo"
                     class="mb-3"
                     v-model="solucao.area_aplicacao"
-                  >{{$t('Solucoes.Meio Ambiente / Urbanismo')}}</base-radio>
+                  >{{$t('Meio Ambiente / Urbanismo')}}</base-radio>
                 </div>
                 <div class="card border-valid mb-3 p-2">
                   <h6 class="mb-3 text-warning font-weight-bold">{{$t('Tipo')}}</h6>
-                  <base-radio
-                    name="Software"
-                    class="mb-3"
-                    v-model="solucao.tipo"
-                  >{{$t('Solucoes.Software')}}</base-radio>
-                  <base-radio
-                    name="Hardware"
-                    class="mb-3"
-                    v-model="solucao.tipo"
-                  >{{$t('Solucoes.Hardware')}}</base-radio>
-                  <base-radio
-                    name="Processo"
-                    class="mb-3"
-                    v-model="solucao.tipo"
-                  >{{$t('Solucoes.Processo')}}</base-radio>
-                  <base-radio
-                    name="Material"
-                    class="mb-3"
-                    v-model="solucao.tipo"
-                  >{{$t('Solucoes.Material')}}</base-radio>
-                  <base-radio
-                    name="Outros"
-                    class="mb-3"
-                    v-model="solucao.tipo"
-                  >{{$t('Solucoes.Outros')}}</base-radio>
+                  <base-radio name="Software" class="mb-3" v-model="solucao.tipo">{{$t('Software')}}</base-radio>
+                  <base-radio name="Hardware" class="mb-3" v-model="solucao.tipo">{{$t('Hardware')}}</base-radio>
+                  <base-radio name="Processo" class="mb-3" v-model="solucao.tipo">{{$t('Processo')}}</base-radio>
+                  <base-radio name="Material" class="mb-3" v-model="solucao.tipo">{{$t('Material')}}</base-radio>
+                  <base-radio name="Outros" class="mb-3" v-model="solucao.tipo">{{$t('Outros')}}</base-radio>
                 </div>
                 <div class="card mb-3 p-2" :class="valido.status">
-                  <h6 class="mb-3 text-warning font-weight-bold">{{$t('Solucoes.Status')}}</h6>
+                  <h6 class="mb-3 text-warning font-weight-bold">{{$t('Status')}}</h6>
                   <base-radio
                     name="Produto Comercializado"
                     class="mb-3"
                     v-model="solucao.status"
-                  >{{$t('Solucoes.Produto Comercializado')}}</base-radio>
+                  >{{$t('Produto Comercializado')}}</base-radio>
                   <base-radio
                     name="Produto Lançado"
                     class="mb-3"
                     v-model="solucao.status"
-                  >{{$t('Solucoes.Produto Lançado')}}</base-radio>
+                  >{{$t('Produto Lançado')}}</base-radio>
                   <base-radio
                     name="Produto Testado"
                     class="mb-3"
                     v-model="solucao.status"
-                  >{{$t('Solucoes.Produto Testado')}}</base-radio>
+                  >{{$t('Produto Testado')}}</base-radio>
                   <base-radio
                     name="Produto Terminado"
                     class="mb-3"
                     v-model="solucao.status"
-                  >{{$t('Solucoes.Produto Terminado')}}</base-radio>
+                  >{{$t('Produto Terminado')}}</base-radio>
                   <base-radio
                     name="Produto em Desenvolvimento"
                     class="mb-3"
                     v-model="solucao.status"
-                  >{{$t('Solucoes.Produto em Desenvolvimento')}}</base-radio>
+                  >{{$t('Produto em Desenvolvimento')}}</base-radio>
                 </div>
 
                 <div class="card border-valid mb-3 p-2">
-                  <h6 class="mb-3 text-warning font-weight-bold">{{$t('Solucoes.Tipo de Negócio')}}</h6>
-                  <base-radio
-                    name="Grátis"
-                    class="mb-3"
-                    v-model="solucao.negocio"
-                  >{{$t('Solucoes.Grátis')}}</base-radio>
+                  <h6 class="mb-3 text-warning font-weight-bold">{{$t('Tipo de Negócio')}}</h6>
+                  <base-radio name="Grátis" class="mb-3" v-model="solucao.negocio">{{$t('Grátis')}}</base-radio>
                   <base-radio
                     name="Com Restrições"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.Com Restrições')}}</base-radio>
-                  <base-radio
-                    name="Pago"
-                    class="mb-3"
-                    v-model="solucao.negocio"
-                  >{{$t('Solucoes.Pago')}}</base-radio>
+                  >{{$t('Com Restrições')}}</base-radio>
+                  <base-radio name="Pago" class="mb-3" v-model="solucao.negocio">{{$t('Pago')}}</base-radio>
                   <base-radio
                     name="Negócio à Venda"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.Negócio à Venda')}}</base-radio>
+                  >{{$t('Negócio à Venda')}}</base-radio>
                   <base-radio
                     name="À Procura de Financiamento"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.À Procura de Financiamento')}}</base-radio>
+                  >{{$t('À Procura de Financiamento')}}</base-radio>
                   <base-radio
                     name="À Procura de Parceria"
                     class="mb-3"
                     v-model="solucao.negocio"
-                  >{{$t('Solucoes.À Procura de Parceria')}}</base-radio>
+                  >{{$t('À Procura de Parceria')}}</base-radio>
                 </div>
 
                 <div class="text-center">
-                  <base-button
-                    type="warning"
-                    class="mt-4"
-                    @click="onSubmit()"
-                  >{{$t('Solucoes.Salvar')}}</base-button>
+                  <base-button type="warning" class="mt-4" @click="onSubmit()">{{$t('Salvar')}}</base-button>
                 </div>
               </form>
             </template>

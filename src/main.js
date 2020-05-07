@@ -15,8 +15,6 @@ Vue.use(Argon)
 Vue.use(VueTheMask)
 
 Vue.filter("formatPhone", function(value){
-  // console.log("value: "+value);
-  // console.log("Value length: "+value.length);
   if (value.length < 10) return '';
   if (value.length > 11) return value;
 
@@ -25,8 +23,7 @@ Vue.filter("formatPhone", function(value){
     let phone = (value%10**7).toFixed();
     let first_part_phone = (phone/10**3).toFixed();
     let seccond_part_phone = (phone%10**3).toFixed();
-    // console.log('('+ddd+')'+' '+first_part_phone+'.'+seccond_part_phone);
-    return '('+ddd+')'+' '+first_part_phone+'.'+seccond_part_phone;
+    return '('+ddd+')'+' '+first_part_phone+'-'+seccond_part_phone;
   } 
   if (value.length === 11) {
     // Cellphone
@@ -34,8 +31,7 @@ Vue.filter("formatPhone", function(value){
     let phone = (value%10**8).toFixed();
     let first_part_phone = (phone/10**4).toFixed();
     let seccond_part_phone = (phone%10**4).toFixed();
-    // console.log('('+ddd+')'+' 9.'+first_part_phone+'.'+seccond_part_phone);
-    return '('+ddd+')'+' 9.'+first_part_phone+'.'+seccond_part_phone;
+    return '('+ddd+')'+' 9'+first_part_phone+'-'+seccond_part_phone;
   }
 })
 

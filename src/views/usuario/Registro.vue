@@ -90,17 +90,20 @@
                   :valid="valido.email"
                 ></base-input>
                 <base-input
-                  type="password"
+                  :type="!passwordVisible? 'password' : 'text'"
                   :placeholder="$t('Registro.Senha (mínimo de 8 caracteres)')"
                   v-model="$v.pessoa.senha.$model"
                   :valid="valido.senha"
                 ></base-input>
                 <base-input
-                  type="password"
+                  :type="!passwordVisible? 'password' : 'text'"
                   :placeholder="$t('Registro.Confirmar Senha')"
                   v-model="$v.pessoa.confirmacao_senha.$model"
                   :valid="valido.confirmacao_senha"
                 ></base-input>
+                <base-checkbox
+                  v-model="passwordVisible"
+                >{{$t("Login.Mostrar Senha")}}</base-checkbox>
                 <div class="text-center">
                   <base-button class="mt-4" type="warning" @click="onSubmit()">{{$t('Registro.Salvar')}}</base-button>
                 </div>
@@ -161,7 +164,8 @@ export default {
         confirmacao_senha: null,
         conta_tipo: "border-valid"
       },
-      error: false
+      error: false,
+      passwordVisible: false
     };
   },
   validations: {

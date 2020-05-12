@@ -8,6 +8,7 @@
             :src="'img/logo_' + $i18n.locale + '.png'"
             alt="logo"
           />
+          <!--
           <img
             style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
             src="img/home/iracema.png"
@@ -18,15 +19,16 @@
             src="img/home/citinova.jpg"
             alt="logo"
           />
+          -->
         </div>
 
         <div class="col-lg-6 my-4 pr-4 text-right">
-          <ul class="row" style="justify-content: right; align-itens: center">
-            <a class="menu-text" href="#/desenvolvimento">{{$t('Sobre')}}</a>
+          <ul class="row" style="justify-content: right; align-itens: center;">
+            <a class="menu-text" style="text-align: justify" href="#/desenvolvimento">{{$t('Sobre o')}}<br>REVIVE</a>
 
-            <a class="menu-text" href="#/noticias_lista">{{$t('Notícias')}}</a>
+            <a class="menu-text" style="text-align: justify" href="#/noticias_lista">{{$t('Notícias')}}<br>COVID-19</a>
 
-            <a class="menu-text" href="#/desenvolvimento">{{$t('Fale Conosco')}}</a>
+            <a class="menu-text p-2" style="text-align: center" href="#/desenvolvimento">{{$t('Fale Conosco')}}</a>
             <img
               v-for="(idioma) in idiomas"
               :key="idioma"
@@ -172,6 +174,14 @@
             </modal>
           </div>
 
+          <div class="col-lg-5 text-center">
+            <card style="background-color: #fb8640ee;" shadow>
+              <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
+              <h4 class="m-2 text-white">{{$t('Home.Introdução.Subtítulo')}}</h4>
+              <h4 class="m-2 text-white">{{$t('Home.Introdução.Descrição')}}</h4>
+            </card>
+          </div>
+          <!-- JOYCE
           <div class="col-lg-7">
             <card style="background-color: #fb8640ee" shadow>
               <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
@@ -190,6 +200,7 @@
               >{{$t('Home.Introdução.Subsubdescrição')}}</h5>
             </card>
           </div>
+          -->
         </div>
       </div>
     </section>
@@ -244,41 +255,79 @@
       </div>
     </div>
 
-    <section class="section pt-0">
-      <h2 class="text-center mt-0">{{$t('Realização')}}</h2>
-      <hr class="listinha my-1" />
+    <h2 class="text-center mt-0">{{$t('Realização')}}</h2>
+    <hr class="listinha my-1" />
+    <section class="container" style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;">
       <div class="row p-4">
-        <div class="col-sm cards__images">
+        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;">
           <img
-            alt="Rounded image"
-            class="img-fluid rounded"
-            style="width: 300px; margin: 14px; margin-left: 30px"
-            src="img/iracema.jpg"
-            lazy="loaded"
-          />
-        </div>
-        <div class="col-sm cards__images">
-          <img
-            class="img-fluid rounded"
-            style="width: 160px; margin: 30px"
+            class=""
+            style="width: 160px; margin: 5px;"
             src="img/lar.png"
             lazy="loaded"
           />
         </div>
-        <div class="col-sm cards__images">
+        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;">
           <img
-            class="img-fluid rounded"
-            style="width: 160px; margin: 30px"
+            alt="Rounded image"
+            class=""
+            style="width: 190px; margin: 5px;"
+            src="img/ifce.png"
+            lazy="loaded"
+          />
+        </div>
+      </div>
+    </section>
+
+    <h2 class="text-center mt-0">{{$t('Promoção')}}</h2>
+    <hr class="listinha my-1" />
+    <section class="container wrap" style="max-width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <div class="row p-4">
+        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: -110px;">
+          <img
+            class=""
+            style="width: 190px; margin: 5px"
+            src="img/sedet.png"
+            lazy="loaded"
+          />
+        </div>
+        <div class="item" style="width: 100px; height: 100px; margin-right: 10px; margin-left: 135px;">
+          <img
+            alt="Rounded image"
+            class=""
+            style="width: 300px; margin: 5px;"
+            src="img/iracema.jpg"
+            lazy="loaded"
+          />
+        </div>
+        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: 550px;">
+          <img
+            class=""
+            style="width: 160px; margin: -55px"
+            src="img/citinova.jpg"
+            lazy="loaded"
+          />
+        </div>
+      </div>
+    </section>
+    <h2 class="text-center mt-0">{{$t('Colaboradores')}}</h2>
+    <hr class="listinha my-1" />
+    <section class="container" style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+      <div class="row p-4">
+        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;">
+          <img
+            class=""
+            style="width: 160px; margin: 5px;"
             src="img/ppgcc.png"
             lazy="loaded"
           />
         </div>
-        <div class="col-sm cards__images">
+        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;">
           <img
             alt="Rounded image"
-            class="img-fluid rounded"
-            style="width: 190px; margin: 30px; margin-right: 33px"
-            src="img/ifce.png"
+            class=""
+            style="width: 190px; margin: 3px;"
+            src="img/lapisco.png"
             lazy="loaded"
           />
         </div>
@@ -365,6 +414,11 @@ hr.listinha {
   border-color: #fb8640ee;
 }
 
+.content-wrap {
+    position: relative;
+    padding: 80px 0;
+}
+
 .cards__images {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -382,5 +436,9 @@ hr.listinha {
   padding: 1rem;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.cardFrase {
+  width: 0px;
 }
 </style>

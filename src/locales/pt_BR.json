@@ -2,7 +2,7 @@
     "Atualizado em": "Atualizado em",
     "Publicado em": "Publicado em",
     "Notícias": "Notícias",
-    "Sobre": "Sobre",
+    "Sobre o": "Sobre o",
     "Fale Conosco": "Fale Conosco",
     "Slogan": "Rede de Voluntários Inovadores contra o 'Vírus Embriagado'",
     "Ideias": "Ideias",
@@ -138,11 +138,9 @@
         "Notícias do COVID-19": "Notícias do COVID-19",
         "Monitor de Fake News": "Monitor de Fake News",
         "Introdução": {
-            "Título": "É TEMPO DE RECOMEÇAR !",
-            "Subtítulo": "REVIVE é uma plataforma integrada e colaborativa de IDEIAS e SOLUCOES para apoiar o combate ao COVID-19.",
-            "Descrição": "assim como as ondas do mar, tudo vem e vai! Algumas ondas as recebemos de peito aberto, rindo; outras arrebentam em nossas costas e continuamos firmes…",
-            "Subdescrição": "De repente, vem uma onda grande, dessas que a gente nunca viu… e nos assusta. Olhamos pra ela de frente, mantendo a serenidade, a gente se abaixa, com humildade, pensativo, e deixa ela passar!",
-            "Subsubdescrição": "E ela passa… e nos reerguemos melhores, mais fortes!"
+            "Título": "REVIVE, um ponto de encontro de",
+            "Subtítulo": "PESSOAS, IDEIAS e SOLUÇÕES",
+            "Descrição": "no enfrentamento ao CORONAVÍRUS"
         },
         "Cards": [
             {

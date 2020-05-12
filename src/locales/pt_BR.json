@@ -95,10 +95,12 @@
     "À Procura de Financiamento Privado": "À Procura de Financiamento Privado",
     "Salvar": "Salvar",
     "Tipo": "Tipo",
+    "Entrar": "Entrar",
+    "Solicitar": "Solicitar",
     "Login": {
         "Entrar no REVIVE": "Entrar no REVIVE",
         "Criar Conta": "Criar Conta",
-        "Mostrar Senha":"Exibir Senha",
+        "Mostrar Senha": "Exibir Senha",
         "Esqueci a Senha": "Esqueci a Senha"
     },
     "Noticias": {
@@ -157,17 +159,6 @@
                 "Título": "Apoio",
                 "Descrição": "Dê seu apoio AQUI às soluções já existentes para combater o COVID-19.",
                 "Botão": "Contribuir"
-            }
-        ],
-        "Outros": [
-            {
-                "Título": "Fórum"
-            },
-            {
-                "Título": "Notícias"
-            },
-            {
-                "Título": "Resultados"
             }
         ]
     },

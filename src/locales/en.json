@@ -14,7 +14,6 @@
     "Busca": "Search",
     "Área de Atuação": "Occupation Area",
     "Status da Ideia": "Idea Status",
-    "Tipo": "Type",
     "Mais": "More",
     "Instituição": "Institution",
     "Disponível em": "Available in",
@@ -95,10 +94,13 @@
     "À Procura de Financiamento Público": "Looking for Public Funding",
     "À Procura de Financiamento Privado": "Seeking Private Finance",
     "Salvar": "Save",
+    "Tipo": "Type",
+    "Entrar": "Enter",
+    "Solicitar": "Request",
     "Login": {
         "Entrar no REVIVE": "Enter REVIVE",
         "Criar Conta": "Create an Account",
-        "Mostrar Senha":"Show Password",
+        "Mostrar Senha": "Show Password",
         "Esqueci a Senha": "Forgot Password"
     },
     "Noticias": {
@@ -159,17 +161,6 @@
                 "Título": "Support",
                 "Descrição": "Give your support HERE to existing solutions to combat COVID-19.",
                 "Botão": "Help"
-            }
-        ],
-        "Outros": [
-            {
-                "Título": "Forum"
-            },
-            {
-                "Título": "News"
-            },
-            {
-                "Título": "Results"
             }
         ]
     },

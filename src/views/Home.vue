@@ -4,7 +4,7 @@
       <div class="row p-5">
         <div class="col-lg-6">
           <img
-            style="height: 90px; background-color: #008ecd; border-radius: 20px; padding: 15px"
+            style="height: 100px; background-color: #008ecd; border-radius: 20px; padding: 15px"
             :src="'img/logo_' + $i18n.locale + '.png'"
             alt="logo"
           />
@@ -24,15 +24,32 @@
 
         <div class="col-lg-6 my-4 pr-4 text-right">
           <ul class="row" style="justify-content: right; align-itens: center;">
-            <a class="menu-text" style="text-align: justify" href="#/desenvolvimento">{{$t('Sobre o')}}<br>REVIVE</a>
+            <a class="menu-text" href="#/desenvolvimento">
+              {{$t('Sobre o')}}
+              <br />REVIVE
+            </a>
 
-            <a class="menu-text" style="text-align: justify" href="#/noticias_lista">{{$t('Notícias')}}<br>COVID-19</a>
+            <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/noticias_lista">
+              Notícias
+              <br />COVID-19
+            </a>
+            <a v-else class="menu-text" href="#/noticias_lista">
+              COVID-19
+              <br />News
+            </a>
 
-            <a class="menu-text p-2" style="text-align: center" href="#/desenvolvimento">{{$t('Fale Conosco')}}</a>
+            <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/desenvolvimento">
+              Fale com
+              <br />A GENTE
+            </a>
+            <a v-else class="menu-text" href="#/desenvolvimento">
+              Contact
+              <br />US
+            </a>
             <img
               v-for="(idioma) in idiomas"
               :key="idioma"
-              :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag']"
+              :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag mt-2']"
               :src="'img/home/' + idioma + '.png'"
               @click="$i18n.locale = idioma"
             />
@@ -40,7 +57,7 @@
         </div>
       </div>
 
-      <div class="shape shape-style-1 shape-skew">
+      <div class="shape shape-style-1">
         <img
           v-lazy="'img/equipe.jpg'"
           class="card-img-top"
@@ -59,41 +76,42 @@
 
       <div class="p-5">
         <div class="row pt-5">
-          <div class="col-lg-5">
+          <div class="col-lg-6">
             <div class="col-lg-6">
               <div class="row">
-                <div class="col-lg-6">
-                  <base-button
-                    type="warning text-normal"
-                    style="font-size: 16px"
-                    @click="modal_covid = !modal_covid"
-                  >{{$t('Home.Estatísticas do COVID-19')}}</base-button>
-                </div>
+                <base-button
+                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Home.Monitor do COVID-19')}}</base-button>
+
+                <base-button
+                  class="mt-4"
+                  href="http://www.fiquenolar.ifce.edu.br/#/"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >FiqueNoLar</base-button>
+
+                <!-- <base-button
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  @click="modal_covid = !modal_covid"
+                >{{$t('Home.Estatísticas do COVID-19')}}</base-button>-->
+
+                <!-- <base-button
+                  class="mt-4"
+                  href="http://lar.ifce.edu.br:5000"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Home.Monitor de Fake News')}}</base-button>-->
               </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <base-button
-                    class="mt-4"
-                    href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                    type="warning text-normal"
-                    style="font-size: 16px"
-                    tag="a"
-                    target="_blank"
-                  >{{$t('Home.Monitor do COVID-19')}}</base-button>
-                </div>
-              </div>
-              <!-- <div class="row">
-                <div class="col-lg-6">
-                  <base-button
-                    class="mt-4"
-                    href="http://lar.ifce.edu.br:5000"
-                    type="warning text-normal"
-                    style="font-size: 16px"
-                    tag="a"
-                    target="_blank"
-                  >{{$t('Home.Monitor de Fake News')}}</base-button>
-                </div>
-              </div>-->
+
               <br />
             </div>
 
@@ -176,31 +194,22 @@
 
           <div class="col-lg-5 text-center">
             <card style="background-color: #fb8640ee;" shadow>
-              <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
-              <h4 class="m-2 text-white">{{$t('Home.Introdução.Subtítulo')}}</h4>
-              <h4 class="m-2 text-white">{{$t('Home.Introdução.Descrição')}}</h4>
+              <h4
+                v-if="$i18n.locale == 'pt_BR'"
+                class="m-2 text-white font-weight-bold"
+                style="line-height: 150%"
+              >
+                REVIVE, um ponto de encontro de
+                <br />PESSOAS, IDEIAS e SOLUÇÕES
+                <br />no enfrentamento ao CORONAVÍRUS
+              </h4>
+              <h4 v-else class="m-2 text-white font-weight-bold" style="line-height: 150%">
+                REVIVE, a meeting point for
+                <br />PEOPLE, IDEAS and SOLUTIONS
+                <br />in the fight against CORONAVIRUS
+              </h4>
             </card>
           </div>
-          <!-- JOYCE
-          <div class="col-lg-7">
-            <card style="background-color: #fb8640ee" shadow>
-              <h4 class="m-2 text-white">{{$t('Home.Introdução.Título')}}</h4>
-              <h5 class="m-2 text-white">{{$t('Home.Introdução.Subtítulo')}}</h5>
-              <h5
-                class="m-2 ml-5 text-thin text-italic text-white"
-                style="font-size: 18px"
-              >... {{$t('Home.Introdução.Descrição')}}</h5>
-              <h5
-                class="m-2 ml-5 text-thin text-italic text-white"
-                style="font-size: 18px"
-              >{{$t('Home.Introdução.Subdescrição')}}</h5>
-              <h5
-                class="m-2 ml-5 text-thin text-italic text-white"
-                style="font-size: 18px"
-              >{{$t('Home.Introdução.Subsubdescrição')}}</h5>
-            </card>
-          </div>
-          -->
         </div>
       </div>
     </section>
@@ -218,7 +227,7 @@
                     class="text-default"
                   >{{$t('Home.Cards[' + index + '].Título')}}</h4>
                 </div>
-                <p class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
+                <p v-if="index < 3" class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
                 <div class="text-center">
                   <base-button
                     class="my-4"
@@ -233,20 +242,114 @@
             <div class="col-lg-4 mb-5">
               <card class="border-0" shadow body-classes="py-5">
                 <div class="row" style="margin-left: 1px">
-                  <icon name="ni ni-books" gradient="warning" color="white" shadow rounded></icon>
+                  <icon name="ni ni-chat-round" gradient="warning" color="white" shadow rounded></icon>
                   <h4
+                    v-show="$i18n.locale == 'pt_BR'"
                     style="margin-top: 10px; margin-left: 20px"
                     class="text-default"
-                  >{{$t('Outros')}}</h4>
+                  >Fóruns de</h4>
+                  <h4
+                    v-show="$i18n.locale == 'pt_BR'"
+                    style="margin-left: 66px"
+                    class="text-default"
+                  >Discussão</h4>
+                  <h4
+                    v-show="$i18n.locale == 'en'"
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >Discussion</h4>
+                  <h4
+                    v-show="$i18n.locale == 'en'"
+                    style="margin-left: 66px"
+                    class="text-default"
+                  >Forums</h4>
                 </div>
-                <div v-for="(botao, index) in botoes" :key="index" class="text-center">
+                <div class="text-center">
                   <base-button
-                    @click="$router.push({ name: botao.link, 
-                      query: { rota: botao.props_to_link }})"
-                    class="mt-4"
+                    class="my-4"
                     type="warning text-capitalize"
                     style="font-size: 16px"
-                  >{{$t('Home.Outros['+index+'].Título')}}</base-button>
+                    @click="$router.push({ name: 'login', 
+                      query: { rota: 'forum_lista' }})"
+                  >{{$t('Entrar')}}</base-button>
+                </div>
+              </card>
+            </div>
+            <div class="col-lg-4 mb-5">
+              <card class="border-0" shadow body-classes="py-5">
+                <div class="row" style="margin-left: 1px">
+                  <icon
+                    name="ni ni-settings-gear-65"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4
+                    v-show="$i18n.locale == 'pt_BR'"
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >Aconselhamento</h4>
+                  <h4
+                    v-show="$i18n.locale == 'pt_BR'"
+                    style="margin-left: 66px"
+                    class="text-default"
+                  >Tecnológico</h4>
+                  <h4
+                    v-show="$i18n.locale == 'en'"
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >Technological</h4>
+                  <h4
+                    v-show="$i18n.locale == 'en'"
+                    style="margin-left: 66px"
+                    class="text-default"
+                  >Advice</h4>
+                </div>
+                <div class="text-center">
+                  <base-button
+                    class="my-4"
+                    type="warning text-capitalize"
+                    style="font-size: 16px"
+                    @click="$router.push({ name: 'login', 
+                      query: { rota: 'forum_lista' }})"
+                  >{{$t('Solicitar')}}</base-button>
+                </div>
+              </card>
+            </div>
+            <div class="col-lg-4 mb-5">
+              <card class="border-0" shadow body-classes="py-5">
+                <div class="row" style="margin-left: 1px">
+                  <icon name="ni ni-money-coins" gradient="warning" color="white" shadow rounded></icon>
+                  <h4
+                    v-show="$i18n.locale == 'pt_BR'"
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >Aconselhamento</h4>
+                  <h4
+                    v-show="$i18n.locale == 'pt_BR'"
+                    style="margin-left: 66px"
+                    class="text-default"
+                  >Econômico</h4>
+                  <h4
+                    v-show="$i18n.locale == 'en'"
+                    style="margin-top: 10px; margin-left: 20px"
+                    class="text-default"
+                  >Economic</h4>
+                  <h4
+                    v-show="$i18n.locale == 'en'"
+                    style="margin-left: 66px"
+                    class="text-default"
+                  >Advice</h4>
+                </div>
+                <div class="text-center">
+                  <base-button
+                    class="my-4"
+                    type="warning text-capitalize"
+                    style="font-size: 16px"
+                    @click="$router.push({ name: 'login', 
+                      query: { rota: 'forum_lista' }})"
+                  >{{$t('Solicitar')}}</base-button>
                 </div>
               </card>
             </div>
@@ -257,20 +360,24 @@
 
     <h2 class="text-center mt-0">{{$t('Realização')}}</h2>
     <hr class="listinha my-1" />
-    <section class="container" style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    <section
+      class="container"
+      style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;"
+    >
       <div class="row p-4">
-        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;">
-          <img
-            class=""
-            style="width: 160px; margin: 5px;"
-            src="img/lar.png"
-            lazy="loaded"
-          />
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;"
+        >
+          <img class style="width: 160px; margin: 5px;" src="img/lar.png" lazy="loaded" />
         </div>
-        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;">
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;"
+        >
           <img
             alt="Rounded image"
-            class=""
+            class
             style="width: 190px; margin: 5px;"
             src="img/ifce.png"
             lazy="loaded"
@@ -281,51 +388,57 @@
 
     <h2 class="text-center mt-0">{{$t('Promoção')}}</h2>
     <hr class="listinha my-1" />
-    <section class="container wrap" style="max-width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <section
+      class="container wrap"
+      style="max-width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center;"
+    >
       <div class="row p-4">
-        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: -110px;">
-          <img
-            class=""
-            style="width: 190px; margin: 5px"
-            src="img/sedet.png"
-            lazy="loaded"
-          />
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 50px; margin-left: -110px;"
+        >
+          <img class style="width: 190px; margin: 5px" src="img/sedet.png" lazy="loaded" />
         </div>
-        <div class="item" style="width: 100px; height: 100px; margin-right: 10px; margin-left: 135px;">
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 10px; margin-left: 135px;"
+        >
           <img
             alt="Rounded image"
-            class=""
+            class
             style="width: 300px; margin: 5px;"
             src="img/iracema.jpg"
             lazy="loaded"
           />
         </div>
-        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: 550px;">
-          <img
-            class=""
-            style="width: 160px; margin: -55px"
-            src="img/citinova.jpg"
-            lazy="loaded"
-          />
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 50px; margin-left: 550px;"
+        >
+          <img class style="width: 160px; margin: -55px" src="img/citinova.jpg" lazy="loaded" />
         </div>
       </div>
     </section>
     <h2 class="text-center mt-0">{{$t('Colaboradores')}}</h2>
     <hr class="listinha my-1" />
-    <section class="container" style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    <section
+      class="container"
+      style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;"
+    >
       <div class="row p-4">
-        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;">
-          <img
-            class=""
-            style="width: 160px; margin: 5px;"
-            src="img/ppgcc.png"
-            lazy="loaded"
-          />
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;"
+        >
+          <img class style="width: 160px; margin: 5px;" src="img/ppgcc.png" lazy="loaded" />
         </div>
-        <div class="item" style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;">
+        <div
+          class="item"
+          style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;"
+        >
           <img
             alt="Rounded image"
-            class=""
+            class
             style="width: 190px; margin: 3px;"
             src="img/lapisco.png"
             lazy="loaded"
@@ -351,12 +464,6 @@ export default {
       noticias_corona: {},
       idiomas: ["pt_BR", "en"],
       modal_covid: false,
-      botoes: [
-        { link: "login", props_to_link: "forum_lista" },
-        { link: "login", props_to_link: "noticias_lista" },
-        { link: "desenvolvimento", props_to_link: "" }
-        // { titulo: "Teste", link: "test", props_to_link: ""}
-      ],
       cards: [
         {
           icone: "ni ni-bulb-61",
@@ -377,7 +484,7 @@ export default {
     };
   },
   async mounted() {
-    await this.corona_noticias();
+    // await this.corona_noticias();
     // this.change_carousel(0);
   },
   methods: {
@@ -415,8 +522,8 @@ hr.listinha {
 }
 
 .content-wrap {
-    position: relative;
-    padding: 80px 0;
+  position: relative;
+  padding: 80px 0;
 }
 
 .cards__images {

@@ -6,7 +6,6 @@
           <img
             style="height: 100px; background-color: #008ecd; border-radius: 20px; padding: 15px"
             :src="'img/logo_' + $i18n.locale + '.png'"
-            alt="logo"
           />
         </div>
 
@@ -51,44 +50,6 @@
           class="card-img-top"
           style="margin-top: -100px; height: 800px;"
         />
-        <!-- <div class="col col-lg-12" style="margin-top: -150px">
-          <div class="col-lg-6">
-            <img
-              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-              src="img/if.png"
-              alt="logo"
-            />
-          </div>
-          <div class="col-lg-6 text-right">
-            <img
-              class="ml-5"
-              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-              src="img/if.png"
-              alt="logo"
-            />
-            <img
-              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-              src="img/home/iracema.png"
-              alt="logo"
-            />
-            <img
-              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-              src="img/home/citinova.jpg"
-              alt="logo"
-            />
-            <img
-              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-              src="img/estado.jpg"
-              alt="logo"
-            />
-          </div>
-        </div> -->
-        <div
-          class="col-lg-12 text-white text-right pr-0 pt-0"
-          style="margin-top: -100px; background-color: #00000000"
-        >
-          <p class="font-weight-bold">Designed by rawpixel.com / Freepik</p>
-        </div>
         <span></span>
         <span></span>
         <span></span>
@@ -240,7 +201,23 @@
       </div>
     </section>
 
-    <section class="container pt-5" style="background-color: #00000000; margin-top: 150px">
+    <div class="row" style="background-color: #00000000">
+      <div class="col-lg-6" style="background-color: #00000000"></div>
+      <div class="col-lg-6" style="background-color: #00000000">
+        <img class="logos" src="img/if.png" />
+        <img class="logos" src="img/home/iracema.png" />
+        <img class="logos" src="img/home/citinova.jpg" />
+        <img class="logos" src="img/estado.jpg" />
+        <div class="text-right pt-5 pr-5" style="background-color: #00000000">
+          <p
+            style="background-color: #00000000"
+            class="text-white"
+          >Designed by rawpixel.com / Freepik</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="container" style="margin-top: 100px">
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="row row-grid">

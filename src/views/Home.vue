@@ -63,6 +63,12 @@
           class="card-img-top"
           style="margin-top: -100px; height: 800px;"
         />
+        <div
+          class="col-lg-12 text-white text-right pr-0 pt-0"
+          style="margin-top: -100px; background-color: #00000000"
+        >
+          <p class="font-weight-bold">Designed by rawpixel.com / Freepik</p>
+        </div>
         <span></span>
         <span></span>
         <span></span>
@@ -214,12 +220,12 @@
       </div>
     </section>
 
-    <div class="container pt-5">
+    <section class="container pt-5" style="background-color: #00000000; margin-top: 150px">
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="row row-grid">
             <div v-for="(card, index) in cards" :key="index" class="col-lg-4 mb-5">
-              <card class="border-0" shadow body-classes="py-5">
+              <card class="border-0 text-center" shadow body-classes="py-5">
                 <div class="row" style="margin-left: 1px">
                   <icon :name="card.icone" gradient="warning" color="white" shadow rounded></icon>
                   <h4
@@ -265,6 +271,12 @@
                   >Forums</h4>
                 </div>
                 <div class="text-center">
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/forum.jpg"
+                    lazy="loaded"
+                    alt="Smiley face"
+                  />
                   <base-button
                     class="my-4"
                     type="warning text-capitalize"
@@ -307,6 +319,11 @@
                   >Advice</h4>
                 </div>
                 <div class="text-center">
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/tecnologico.jpg"
+                    lazy="loaded"
+                  />
                   <base-button
                     class="my-4"
                     type="warning text-capitalize"
@@ -343,6 +360,11 @@
                   >Advice</h4>
                 </div>
                 <div class="text-center">
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/economico.jpg"
+                    lazy="loaded"
+                  />
                   <base-button
                     class="my-4"
                     type="warning text-capitalize"
@@ -356,9 +378,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <h2 class="text-center mt-0">{{$t('Realização')}}</h2>
+    <h2 class="text-center mt-5">{{$t('Realização')}}</h2>
     <hr class="listinha my-1" />
     <section
       class="container"

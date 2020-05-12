@@ -8,18 +8,6 @@
             :src="'img/logo_' + $i18n.locale + '.png'"
             alt="logo"
           />
-          <!--
-          <img
-            style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-            src="img/home/iracema.png"
-            alt="logo"
-          />
-          <img
-            style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
-            src="img/home/citinova.jpg"
-            alt="logo"
-          />
-          -->
         </div>
 
         <div class="col-lg-6 my-4 pr-4 text-right">
@@ -63,6 +51,38 @@
           class="card-img-top"
           style="margin-top: -100px; height: 800px;"
         />
+        <!-- <div class="col col-lg-12" style="margin-top: -150px">
+          <div class="col-lg-6">
+            <img
+              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+              src="img/if.png"
+              alt="logo"
+            />
+          </div>
+          <div class="col-lg-6 text-right">
+            <img
+              class="ml-5"
+              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+              src="img/if.png"
+              alt="logo"
+            />
+            <img
+              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+              src="img/home/iracema.png"
+              alt="logo"
+            />
+            <img
+              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+              src="img/home/citinova.jpg"
+              alt="logo"
+            />
+            <img
+              style="height: 80px; background-color: #fff; border-radius: 20px; padding: 10px; margin-left: 20px"
+              src="img/estado.jpg"
+              alt="logo"
+            />
+          </div>
+        </div> -->
         <div
           class="col-lg-12 text-white text-right pr-0 pt-0"
           style="margin-top: -100px; background-color: #00000000"
@@ -236,8 +256,8 @@
                 <p v-if="index < 3" class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
                 <div class="text-center">
                   <base-button
-                    class="my-4"
-                    type="warning text-capitalize"
+                    class="mt-4"
+                    type="warning text-normal"
                     style="font-size: 16px"
                     @click="$router.push({ name: card.link, 
                       query: { rota: card.props_to_link }})"
@@ -278,8 +298,8 @@
                     alt="Smiley face"
                   />
                   <base-button
-                    class="my-4"
-                    type="warning text-capitalize"
+                    class="mt-4"
+                    type="warning text-normal"
                     style="font-size: 16px"
                     @click="$router.push({ name: 'login', 
                       query: { rota: 'forum_lista' }})"
@@ -325,11 +345,12 @@
                     lazy="loaded"
                   />
                   <base-button
-                    class="my-4"
-                    type="warning text-capitalize"
+                    class="mt-4"
+                    href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/formResponse"
+                    type="warning text-normal"
                     style="font-size: 16px"
-                    @click="$router.push({ name: 'login', 
-                      query: { rota: 'forum_lista' }})"
+                    tag="a"
+                    target="_blank"
                   >{{$t('Solicitar')}}</base-button>
                 </div>
               </card>
@@ -366,11 +387,12 @@
                     lazy="loaded"
                   />
                   <base-button
-                    class="my-4"
-                    type="warning text-capitalize"
+                    class="mt-4"
+                    href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/formResponse"
+                    type="warning text-normal"
                     style="font-size: 16px"
-                    @click="$router.push({ name: 'login', 
-                      query: { rota: 'forum_lista' }})"
+                    tag="a"
+                    target="_blank"
                   >{{$t('Solicitar')}}</base-button>
                 </div>
               </card>
@@ -381,92 +403,25 @@
     </section>
 
     <h2 class="text-center mt-5">{{$t('Realização')}}</h2>
-    <hr class="listinha my-1" />
-    <section
-      class="container"
-      style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;"
-    >
-      <div class="row p-4">
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;"
-        >
-          <img class style="width: 160px; margin: 5px;" src="img/lar.png" lazy="loaded" />
-        </div>
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;"
-        >
-          <img
-            alt="Rounded image"
-            class
-            style="width: 190px; margin: 5px;"
-            src="img/ifce.png"
-            lazy="loaded"
-          />
-        </div>
-      </div>
+    <hr class="listinha mt-4" />
+    <section class="text-center m-5">
+      <img class="mx-5" style="height: 60px" src="img/lar.png" lazy="loaded" />
+      <img class="mx-5" style="height: 60px" src="img/ifce.png" lazy="loaded" />
     </section>
 
     <h2 class="text-center mt-0">{{$t('Promoção')}}</h2>
-    <hr class="listinha my-1" />
-    <section
-      class="container wrap"
-      style="max-width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center;"
-    >
-      <div class="row p-4">
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 50px; margin-left: -110px;"
-        >
-          <img class style="width: 190px; margin: 5px" src="img/sedet.png" lazy="loaded" />
-        </div>
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 10px; margin-left: 135px;"
-        >
-          <img
-            alt="Rounded image"
-            class
-            style="width: 300px; margin: 5px;"
-            src="img/iracema.jpg"
-            lazy="loaded"
-          />
-        </div>
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 50px; margin-left: 550px;"
-        >
-          <img class style="width: 160px; margin: -55px" src="img/citinova.jpg" lazy="loaded" />
-        </div>
-      </div>
+    <hr class="listinha mt-4" />
+    <section class="text-center m-5">
+      <img class="mx-5" style="height: 130px" src="img/sedet.png" lazy="loaded" />
+      <img class="mx-5" style="height: 130px" src="img/home/iracema.png" lazy="loaded" />
+      <img class="mx-5" style="height: 130px" src="img/citinova.jpg" lazy="loaded" />
     </section>
+
     <h2 class="text-center mt-0">{{$t('Colaboradores')}}</h2>
-    <hr class="listinha my-1" />
-    <section
-      class="container"
-      style="max-width: 400px; display: flex; flex-direction: row; align-items: center; justify-content: center;"
-    >
-      <div class="row p-4">
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 50px; margin-left: -26px;"
-        >
-          <img class style="width: 160px; margin: 5px;" src="img/ppgcc.png" lazy="loaded" />
-        </div>
-        <div
-          class="item"
-          style="width: 100px; height: 100px; margin-right: 50px; margin-left: 50px;"
-        >
-          <img
-            alt="Rounded image"
-            class
-            style="width: 190px; margin: 3px;"
-            src="img/lapisco.png"
-            lazy="loaded"
-          />
-        </div>
-      </div>
+    <hr class="listinha mt-4" />
+    <section class="text-center m-5">
+      <img class="mx-5" style="height: 70px" src="img/ppgcc.png" lazy="loaded" />
+      <img class="mx-5" style="height: 70px" src="img/lapisco.png" lazy="loaded" />
     </section>
   </div>
 </template>

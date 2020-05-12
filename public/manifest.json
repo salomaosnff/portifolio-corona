@@ -1,39 +1,53 @@
 {
-    "name": "HackerWeb",
-    "short_name": "HackerWeb",
-    "start_url": ".",
-    "display": "standalone",
+    "name": "REVIVE",
+    "short_name": "REVIVE",
+    "start_url": "/?utm_source=web_app_manifest",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
     "background_color": "#fff",
-    "description": "A simply readable Hacker News app.",
-    "icons": [{
-      "src": "images/touch/homescreen48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },{
-        "src": "images/touch/homescreen72.png",
+    "description": "REVIVE é uma plataforma integrada e colaborativa de IDEIAS e SOLUCOES para apoiar o combate ao COVID-19.",
+    "icons": [
+      {
+        "src": "images/icons/icon-72x72.png",
         "sizes": "72x72",
         "type": "image/png"
-      }, {
-        "src": "images/touch/homescreen96.png",
+      },
+      {
+        "src": "images/icons/icon-96x96.png",
         "sizes": "96x96",
         "type": "image/png"
-      }, {
-        "src": "images/touch/homescreen144.png",
+      },
+      {
+        "src": "images/icons/icon-128x128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "images/icons/icon-144x144.png",
         "sizes": "144x144",
         "type": "image/png"
-      }, {
-        "src": "images/touch/homescreen168.png",
-        "sizes": "168x168",
+      },
+      {
+        "src": "images/icons/icon-152x152.png",
+        "sizes": "152x152",
         "type": "image/png"
-      }, {
-        "src": "images/touch/homescreen192.png",
+      },
+      {
+        "src": "images/icons/icon-192x192.png",
         "sizes": "192x192",
         "type": "image/png"
-      }],
-      "related_applications": [{
-        "platform": "web"
-      }, {
-        "platform": "play",
-        "url": "https://play.google.com/store/apps/details?id=cheeaun.hackerweb"
-      }]
-    }
+      },
+      {
+        "src": "images/icons/icon-384x384.png",
+        "sizes": "384x384",
+        "type": "image/png"
+      },
+      {
+        "src": "images/icons/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "splash_pages": null
+   }

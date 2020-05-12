@@ -40,11 +40,14 @@
               <form role="form">
                 <base-input class="mb-3" placeholder="Email" v-model="login.email"></base-input>
                 <base-input
-                  type="password"
+                  :type="!passwordVisible? 'password' : 'text'"
                   :placeholder="$t('Senha')"
                   addon-left-icon="ni ni-lock-circle-open"
                   v-model="login.senha"
                 ></base-input>
+                <base-checkbox
+                  v-model="passwordVisible"
+                >{{$t("Login.Mostrar Senha")}}</base-checkbox>
                 <div class="text-center">
                   <base-button type="warning" class="my-4 text-capitalize" @click="entrar()">Login</base-button>
                   <base-button
@@ -96,7 +99,8 @@ export default {
       login: {
         email: "",
         senha: ""
-      }
+      },
+      passwordVisible: false
     };
   },
   async mounted() {
@@ -134,7 +138,7 @@ export default {
         this.login.email = this.pessoa.email;
         this.login.senha = this.pessoa.senha;
       }
-    }
+    },
   }
 };
 </script>

@@ -98,6 +98,7 @@
     "Login": {
         "Entrar no REVIVE": "Entrar no REVIVE",
         "Criar Conta": "Criar Conta",
+        "Mostrar Senha":"Exibir Senha",
         "Esqueci a Senha": "Esqueci a Senha"
     },
     "Noticias": {
@@ -275,7 +276,7 @@
         "text-sucess": "Cadastrar Ideia",
         "salvar": "Salvar"
     },
-    "Desenvolvimento": {
+    "Em Desenvolvimento": {
         "title": "Página em Desenvolvimento",
         "lead": "Estamos trabalhando no desenvolvimento desta página, em breve você poderá disfrutar de seus maravilhosos recursos ;)"
     }

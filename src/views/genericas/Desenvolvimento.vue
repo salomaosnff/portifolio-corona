@@ -12,9 +12,9 @@
       <div class="container py-0 pb-lg">
         <div class="row justify-content-between align-items-center">
           <div class="col-lg-5 mb-5 mb-lg-0">
-            <h1 class="text-white font-weight-light">{{$t("Desenvolvimento.title")}}</h1>
+            <h1 class="text-white font-weight-light">{{$t("Em Desenvolvimento.title")}}</h1>
             <p class="lead text-white mt-4">
-              {{$t("Desenvolvimento.lead")}}
+              {{$t("Em Desenvolvimento.lead")}}
             </p>
             <div class="row ml-0 mt-4">
               <base-button

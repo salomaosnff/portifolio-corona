@@ -3,14 +3,13 @@
     <section class="section-shaped my-0">
       <div class="row p-5">
         <div class="col-lg-6">
-          <img
-            style="height: 100px; background-color: #008ecd; border-radius: 20px; padding: 15px"
+          <img id="logo"        
             :src="'img/logo_' + $i18n.locale + '.png'"
           />
         </div>
 
-        <div class="col-lg-6 my-4 pr-4 text-right">
-          <ul class="row" style="justify-content: right; align-itens: center;">
+        <div class="col-lg-6 my-4 pr-4">
+          <ul class="row" style="align-itens: center;">
             <a class="menu-text" href="#/desenvolvimento">
               {{$t('Sobre o')}}
               <br />REVIVE
@@ -50,15 +49,7 @@
           class="card-img-top"
           style="margin-top: -100px; height: 800px;"
         />
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        
       </div>
 
       <div class="p-5">
@@ -469,6 +460,47 @@ export default {
 </script>
 
 <style scoped>
+
+@media (min-width: 320px) {
+  #logo{
+    width: 100%; 
+    height: auto;
+    background-color: #008ecd; 
+    border-radius: 20px; 
+    padding: 15px
+  }
+}
+
+@media (min-width: 480px) {
+  #logo{
+    width: 100%; 
+    height: auto;
+    background-color: #008ecd; 
+    border-radius: 20px; 
+    padding: 15px
+  }
+}
+
+@media (min-width: 600px) {
+  #logo{
+    width: 40%; 
+    height: auto;
+    background-color: #008ecd; 
+    border-radius: 20px; 
+    padding: 15px
+  }
+}
+
+@media (min-width: 1200px) {
+  #logo{
+    width:40%; 
+    height: auto;
+    background-color: #008ecd; 
+    border-radius: 20px; 
+    padding: 15px
+  }
+}
+
 hr.listinha {
   max-width: 3.25rem;
   border-width: 0.2rem;

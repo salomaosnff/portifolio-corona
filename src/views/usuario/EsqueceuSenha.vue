@@ -127,7 +127,7 @@ export default {
       
     },
 
-    async recuperar() {
+    async recuperarDesativado() {
       await this.http
         .post("pessoa", this.pessoa)
         .then(async resp_pessoa => {

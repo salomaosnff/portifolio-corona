@@ -21,6 +21,7 @@ import ForumCadastro from './views/forum/Cadastro.vue'
 import Test from "./views/Test.vue"
 import NoticiasCadastro from './views/noticias/Cadastro.vue'
 import NoticiasLista from './views/noticias/Lista.vue'
+import EsqueceuSenha from './views/usuario/EsqueceuSenha.vue'
 
 Vue.use(Router);
 
@@ -195,6 +196,15 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Test,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/esqueceu_senha",
+      name: "esqueceu_senha",
+      components: {
+        header: AppHeader,
+        default: EsqueceuSenha,
         footer: AppFooter
       }
     }

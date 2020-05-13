@@ -3,9 +3,7 @@
     <section class="section-shaped my-0">
       <div class="row p-5">
         <div class="col-lg-6">
-          <img id="logo"        
-            :src="'img/logo_' + $i18n.locale + '.png'"
-          />
+          <img id="logo" :src="'img/logo_' + $i18n.locale + '.png'" />
         </div>
 
         <div class="col-lg-6 my-4 pr-4">
@@ -49,7 +47,6 @@
           class="card-img-top"
           style="margin-top: -100px; height: 800px;"
         />
-        
       </div>
 
       <div class="p-5">
@@ -193,13 +190,14 @@
     </section>
 
     <div class="row" style="background-color: #00000000">
-      <div class="col-lg-6" style="background-color: #00000000"></div>
       <div class="col-lg-6" style="background-color: #00000000">
-        <img class="logos" src="img/if.png" />
-        <img class="logos" src="img/home/iracema.png" />
-        <img class="logos" src="img/home/citinova.jpg" />
-        <img class="logos" src="img/estado.jpg" />
-        <div class="text-right pt-5 pr-5" style="background-color: #00000000">
+        <img class="logos ml-5" src="img/if.png" />
+      </div>
+      <div class="col-lg-6" style="background-color: #00000000">
+        <img class="logos ml-4 mr-5" src="img/home/iracema.png" />
+        <img class="logos ml-5" src="img/home/citinova.jpg" />
+        <img class="logos ml-5" src="img/estado.jpg" />
+        <div class="text-right pt-4 pr-5" style="background-color: #00000000">
           <p
             style="background-color: #00000000"
             class="text-white"
@@ -208,7 +206,7 @@
       </div>
     </div>
 
-    <section class="container" style="margin-top: 100px">
+    <section class="container" style="margin-top: 90px">
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="row row-grid">
@@ -409,6 +407,7 @@ export default {
       noticias_corona: {},
       idiomas: ["pt_BR", "en"],
       modal_covid: false,
+      creditos: false,
       cards: [
         {
           icone: "ni ni-bulb-61",
@@ -460,44 +459,43 @@ export default {
 </script>
 
 <style scoped>
-
 @media (min-width: 320px) {
-  #logo{
-    width: 100%; 
+  #logo {
+    width: 100%;
     height: auto;
-    background-color: #008ecd; 
-    border-radius: 20px; 
-    padding: 15px
+    background-color: #008ecd;
+    border-radius: 20px;
+    padding: 15px;
   }
 }
 
 @media (min-width: 480px) {
-  #logo{
-    width: 100%; 
+  #logo {
+    width: 100%;
     height: auto;
-    background-color: #008ecd; 
-    border-radius: 20px; 
-    padding: 15px
+    background-color: #008ecd;
+    border-radius: 20px;
+    padding: 15px;
   }
 }
 
 @media (min-width: 600px) {
-  #logo{
-    width: 40%; 
+  #logo {
+    width: 40%;
     height: auto;
-    background-color: #008ecd; 
-    border-radius: 20px; 
-    padding: 15px
+    background-color: #008ecd;
+    border-radius: 20px;
+    padding: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  #logo{
-    width:40%; 
+  #logo {
+    width: 40%;
     height: auto;
-    background-color: #008ecd; 
-    border-radius: 20px; 
-    padding: 15px
+    background-color: #008ecd;
+    border-radius: 20px;
+    padding: 15px;
   }
 }
 

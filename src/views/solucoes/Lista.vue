@@ -80,7 +80,7 @@
               v-for="(area, index) in areas_aplicacao"
               :key="index"
               class="dropdown-item"
-              @click="area_aplicacao = area; buscar()"
+              @click="area_aplicacao = area == 'Todos' ? '': area; buscar()"
             >{{$t(area)}}</a>
           </dropdown>
 
@@ -91,10 +91,10 @@
               class="dropdown-toggle mb-1 text-normal"
             >{{$t(status) || $t('Status da Ideia')}}</base-button>
             <a
-              v-for="(s, index) in satuss"
+              v-for="(s, index) in states"
               :key="index"
               class="dropdown-item"
-              @click="status = s; buscar()"
+              @click="status = s == 'Todos' ? '': s; buscar()"
             >{{$t(s)}}</a>
           </dropdown>
 
@@ -108,7 +108,7 @@
               v-for="(n, index) in negocios"
               :key="index"
               class="dropdown-item"
-              @click="negocio = n; buscar()"
+              @click="negocio = n == 'Todos' ? '': n; buscar()"
             >{{$t(n)}}</a>
           </dropdown>
         </div>
@@ -338,7 +338,8 @@ export default {
       area_aplicacao: "",
       status: "",
       negocio: "",
-      satuss: [
+      states: [
+        "Todos",
         "Produto Comercializado",
         "Produto Lançado",
         "Produto Testado",
@@ -346,6 +347,8 @@ export default {
         "Produto em Desenvolvimento"
       ],
       areas_aplicacao: [
+        "Todos",
+        "Produto Comercializado",
         "Projeto de Saúde",
         "Trabalho / Renda",
         "Educação / Cursos",
@@ -355,6 +358,8 @@ export default {
         "Meio ambiente / Urbanismo"
       ],
       negocios: [
+        "Todos",
+        "Produto Comercializado",
         "Grátis",
         "Com Restrições",
         "Pago",

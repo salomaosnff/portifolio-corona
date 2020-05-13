@@ -67,7 +67,7 @@
                 type="white"
                 text-color="warning"
                 class="ml-auto text-normal"
-                @click="$router.push('desenvolvimento')"
+                @click="$router.push('esqueceu_senha')"
               >{{$t('Login.Esqueci a Senha')}}</base-button>
             </div>
           </div>

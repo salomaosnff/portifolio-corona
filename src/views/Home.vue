@@ -6,18 +6,25 @@
           <img id="logo" :src="'img/logo_' + $i18n.locale + '.png'" />
         </div>
 
-        <div class="col-lg-6 my-4 pr-4">
+        <div class="col-lg-6 my-4">
           <ul class="row" style="align-itens: center;">
             <a class="menu-text" href="#/desenvolvimento">
               {{$t('Sobre o')}}
               <br />REVIVE
             </a>
 
-            <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/noticias_lista">
+            <!-- <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/noticias_lista"> -->
+            <a
+              v-if="$i18n.locale == 'pt_BR'"
+              class="menu-text"
+              target="_blank"
+              href="https://www.bbc.com/portuguese/topics/clmq8rgyyvjt"
+            >
               Notícias
               <br />COVID-19
             </a>
-            <a v-else class="menu-text" href="#/noticias_lista">
+            <!-- <a v-else class="menu-text" href="#/noticias_lista"> -->
+            <a v-else class="menu-text" target="_blank" href="https://www.bbc.com/news/coronavirus">
               COVID-19
               <br />News
             </a>
@@ -47,50 +54,52 @@
           class="card-img-top"
           style="margin-top: -100px; height: 800px;"
         />
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
       <div class="p-5">
         <div class="row pt-5">
           <div class="col-lg-6">
-            <div class="col-lg-6">
-              <div class="row">
-                <base-button
-                  href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                  type="warning text-normal"
-                  style="font-size: 16px"
-                  tag="a"
-                  target="_blank"
-                >{{$t('Home.Monitor do COVID-19')}}</base-button>
+            <div class="col-lg-4">
+              <base-button
+                href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+                type="warning text-normal"
+                style="font-size: 16px"
+                tag="a"
+                target="_blank"
+              >{{$t('Home.Monitor do COVID-19')}}</base-button>
 
-                <base-button
-                  class="mt-4"
-                  href="http://www.fiquenolar.ifce.edu.br/#/"
-                  type="warning text-normal"
-                  style="font-size: 16px"
-                  tag="a"
-                  target="_blank"
-                >FiqueNoLar</base-button>
+              <base-button
+                class="mt-4"
+                href="http://www.fiquenolar.ifce.edu.br/#/"
+                type="warning text-normal"
+                style="font-size: 16px"
+                tag="a"
+                target="_blank"
+              >FiqueNoLar</base-button>
 
-                <!-- <base-button
-                  type="warning text-normal"
-                  style="font-size: 16px"
-                  @click="modal_covid = !modal_covid"
-                >{{$t('Home.Estatísticas do COVID-19')}}</base-button>-->
-
-                <!-- <base-button
-                  class="mt-4"
-                  href="http://lar.ifce.edu.br:5000"
-                  type="warning text-normal"
-                  style="font-size: 16px"
-                  tag="a"
-                  target="_blank"
-                >{{$t('Home.Monitor de Fake News')}}</base-button>-->
-              </div>
-
+              <base-button
+                v-if="$i18n.locale == 'pt_BR'"
+                class="mt-4"
+                href="https://perfilcovid.saude.ce.gov.br/"
+                type="warning text-normal"
+                style="font-size: 16px"
+                tag="a"
+                target="_blank"
+              >COVID-19 no Ceará</base-button>
               <br />
             </div>
+          </div>
 
-            <modal
+          <!-- <modal
               v-if="noticias_corona"
               :show.sync="modal_covid"
               gradient="warning"
@@ -164,8 +173,7 @@
                   @click="modal_covid = false"
                 >{{$t('Fechar')}}</base-button>
               </template>
-            </modal>
-          </div>
+          </modal>-->
 
           <div class="col-lg-5 text-center">
             <card style="background-color: #fb8640ee;" shadow>
@@ -190,11 +198,13 @@
     </section>
 
     <div class="row" style="background-color: #00000000">
-      <div class="col-lg-6" style="background-color: #00000000">
+      <div class="col-lg-5 pl-4" style="background-color: #00000000">
         <img class="logos ml-5" src="img/if.png" />
       </div>
-      <div class="col-lg-6" style="background-color: #00000000">
-        <img class="logos ml-4 mr-5" src="img/home/iracema.png" />
+      <div class="col-lg-2" style="background-color: #00000000">
+        <img class="logos ml-5 mr-5" src="img/home/iracema.png" />
+      </div>
+      <div class="col-lg-5 pl-5" style="background-color: #00000000">
         <img class="logos ml-5" src="img/home/citinova.jpg" />
         <img class="logos ml-5" src="img/estado.jpg" />
         <div class="text-right pt-4 pr-5" style="background-color: #00000000">

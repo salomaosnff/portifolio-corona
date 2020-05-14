@@ -204,7 +204,10 @@
         <img class="logos" src="img/home/iracema.png" />
         <img class="logos" src="img/home/citinova.jpg" />
         <img class="logos" src="img/estado.jpg" />
-        <p class="text-dark" style="position: absolute; bottom: 0; right: 0">Designed by rawpixel.com / Freepik</p>
+        <p
+          class="text-dark"
+          style="position: absolute; bottom: 0; right: 1"
+        >Designed by rawpixel.com / Freepik</p>
       </div>
     </section>
 

@@ -22,12 +22,22 @@ import Test from "./views/Test.vue"
 import NoticiasCadastro from './views/noticias/Cadastro.vue'
 import NoticiasLista from './views/noticias/Lista.vue'
 import EsqueceuSenha from './views/usuario/EsqueceuSenha.vue'
+import Sobre from './views/Sobre.vue'
 
 Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
   routes: [
+    {
+      path: "/sobre",
+      name: "sobre",
+      components: {
+        header: AppHeader,
+        default: Sobre,
+        footer: AppFooter
+      }
+    },
     {
       path: "/noticias_cadastro",
       name: "noticias_cadastro",

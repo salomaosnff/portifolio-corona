@@ -12,7 +12,7 @@
           <nav class="d-flex justify-content-end">
             <ul class="row justify-content-center pl-0">
               <li>
-                <a class="menu-text" href="#/desenvolvimento">
+                <a class="menu-text" href="#/sobre">
                   {{$t('Sobre o')}}
                   <br />REVIVE
                 </a>

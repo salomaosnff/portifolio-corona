@@ -47,20 +47,29 @@
                   v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Nome da Ideia')"
-                  v-model="$v.solucao.nome.$model"
+                  v-model="$v.br.solucao.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
                 <base-input
                   v-else
                   class="mb-3"
                   :placeholder="$t('Nome da Ideia')"
-                  v-model="solucao.en_nome"
+                  v-model="$v.en.solucao.nome.$model"
+                  :valid="valido.nome"
                 ></base-input>
 
                 <base-input
+                  v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Instituição ou Empresa')"
-                  v-model="$v.solucao.instituicao.$model"
+                  v-model="$v.br.solucao.instituicao.$model"
+                  :valid="valido.instituicao"
+                ></base-input>
+                <base-input
+                  v-else
+                  class="mb-3"
+                  :placeholder="$t('Instituição ou Empresa')"
+                  v-model="$v.en.solucao.instituicao.$model"
                   :valid="valido.instituicao"
                 ></base-input>
 
@@ -76,7 +85,7 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
-                <div class="button-group mb-3 p-1 card" :class="valido.cidade.block">
+                <div class="button-group mb-3 p-1 card" :class="valido.cidade">
                   <dropdown>
                     <base-button
                       name="b-state"
@@ -84,29 +93,29 @@
                       type="warning"
                       class="dropdown-toggle text-capitalize m-1"
                     >
-                      <strong>{{estado.nome || $t('Selecione seu Estado')}}</strong>
+                      <strong>{{local.estado.nome || $t('Selecione seu Estado')}}</strong>
                     </base-button>
                     <a
-                      v-for="(item, index) in estados"
+                      v-for="(item, index) in local.estados"
                       :key="index"
                       class="dropdown-item"
-                      @click="estado = item; buscar_cidades(true);"
+                      @click="$v.local.estado.$model = item; buscar_cidades(true);"
                     >{{item.nome}}</a>
                   </dropdown>
-                  <div class="mb3" v-show="solucao.cidade && solucao.cidade._id">
+                  <div class="mb3" v-show="local.cidade && local.cidade._id">
                     <dropdown>
                       <base-button
                         slot="title"
                         type="warning"
                         class="dropdown-toggle text-capitalize m-1"
                       >
-                        <strong>{{solucao.cidade.nome || $t('Selecione sua Cidade')}}</strong>
+                        <strong>{{local.cidade.nome || $t('Selecione sua Cidade')}}</strong>
                       </base-button>
                       <a
-                        v-for="(item, index) in cidades"
+                        v-for="(item, index) in local.cidades"
                         :key="index"
                         class="dropdown-item"
-                        @click="solucao.cidade = item; "
+                        @click="$v.local.cidade.$model = item; "
                       >{{item.nome}}</a>
                     </dropdown>
                   </div>
@@ -115,15 +124,16 @@
                 <textarea
                   v-if="$i18n.locale == 'pt_BR'"
                   class="form-control mb-3"
-                  :class="valido.descricao"
                   :placeholder="$t('Descrição')"
-                  v-model="$v.solucao.descricao.$model"
+                  v-model="$v.br.solucao.descricao.$model"
+                  :class="valido.descricao"
                 ></textarea>
                 <textarea
                   v-else
                   class="form-control mb-3"
                   :placeholder="$t('Descrição')"
-                  v-model="solucao.en_descricao"
+                  v-model="$v.en.solucao.descricao.$model"
+                  :class="valido.descricao"
                 ></textarea>
 
                 <div class="card mb-3 p-2" :class="valido.area_aplicacao">
@@ -250,6 +260,26 @@ export default {
   data() {
     return {
       http: new http(),
+      br: {
+        solucao: {
+          nome: "",
+          instituicao: "",
+          descricao: ""
+        }
+      },
+      en: {
+        solucao: {
+          nome: "",
+          instituicao: "",
+          descricao: ""
+        }
+      },
+      local: {
+        estado: { _id: undefined },
+        estados: [],
+        cidade: { _id: undefined },
+        cidades: []
+      },            
       solucao: {
         nome: "",
         en_nome: "",
@@ -265,111 +295,170 @@ export default {
         responsavel: { _id: "" },
         cidade: { _id: "" }
       },
-      estado: { _id: undefined },
-      estados: [],
-      cidades: [],
 
       valido: {
         nome: null,
         instituicao: null,
-        cidade: { block: "border-valid" },
+        cidade: "border-valid",
         descricao: "border-valid",
-        area_aplicacao: "border-valid",
-        status: "border-valid"
       },
       error: false
     };
   },
   async mounted() {
     await this.buscar_estados();
-    if (!this.$route.query.solucao) await this.buscar_cidades(true);
+    if (!this.$route.query.solucao) 
+      await this.buscar_cidades(true);
     else {
       this.solucao = await this.$route.query.solucao;
+      
+      this.br.solucao.nome        = this.solucao.nome;
+      this.br.solucao.instituicao = this.solucao.instituicao;
+      this.br.solucao.descricao   = this.solucao.descricao;
+      
+      this.en.solucao.nome        = this.solucao.en_nome;
+      this.en.solucao.instituicao = this.solucao.instituicao;
+      this.en.solucao.descricao   = this.solucao.en_descricao;
+        
       await this.http
         .getId("estado", this.solucao.cidade.estado)
         .then(async data => {
-          this.estado = await data;
+          this.local.estado = await data;
           await this.buscar_cidades(false);
-          this.solucao.cidade = await this.$route.query.solucao.cidade;
+          this.local.cidade = await this.$route.query.solucao.cidade;
         });
     }
   },
 
   validations: {
-    solucao: {
-      nome: { required, maxLength: maxLength(100) },
-      instituicao: {
-        required,
-        maxLength: maxLength(100)
-      },
-      cidade: {
+    br: {
+      solucao: {
+        nome: { required, maxLength: maxLength(100) },
+        instituicao: { required, maxLength: maxLength(100) },
+        descricao: { required, maxLength: maxLength(500) }
+      }
+    },
+    en: {
+      solucao: {
+        nome: { required, maxLength: maxLength(100) },
+        instituicao: { required, maxLength: maxLength(100) },
+        descricao: { required, maxLength: maxLength(500) }
+      }
+    },
+    local: {
+      estado: { required },
+      cidade: {  
         isCidadeSelected(value) {
-          if (value._id === "") return false;
-
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve(typeof value._id === "string" && value._id !== "");
-            }, 350 + Math.random() * 300);
-          });
+          console.log("value.id: "+value._id);
+          console.log("value.nome: "+value.nome);
+          if (typeof value._id === "undefined" && typeof value.nome === "undefined"){ 
+            console.log("isCidadeSelected: return false");
+            return false;
+          }
+          console.log("isCidadeSelected: return true");
+          return true;
         }
-      },
-      descricao: { required, maxLength: maxLength(500) }
+      },        
     }
   },
 
   methods: {
     onSubmit() {
-      this.resetaCamposValidos();
-      this.$v.solucao.$touch();
+      this.resetaCamposValidos();      
+      this.$v.local.$touch();
 
-      if (this.$v.solucao.$anyError) {
-        this.error = true;
-        if (this.$v.solucao.nome.$invalid)
-          this.valido.nome = !this.$v.solucao.nome.$invalid;
-        if (this.$v.solucao.instituicao.$invalid)
-          this.valido.instituicao = !this.$v.solucao.instituicao.$invalid;
-        if (this.$v.solucao.descricao.$invalid)
-          this.valido.descricao = "border-danger";
-        if (this.$v.solucao.cidade.$invalid)
-          this.valido.cidade.block = "border-danger";
-        return;
+      if ( this.$i18n.locale == 'pt_BR' ){
+        this.$v.br.solucao.$touch();
+        if ( this.$v.br.solucao.$anyError || this.$v.local.$anyError ) {
+          this.error = true;
+          if (this.$v.br.solucao.nome.$invalid)
+            this.valido.nome = !this.$v.br.solucao.nome.$invalid;
+          if (this.$v.br.solucao.instituicao.$invalid)
+            this.valido.instituicao = !this.$v.br.solucao.instituicao.$invalid;
+          if (this.$v.br.solucao.descricao.$invalid)
+            this.valido.descricao = "border-danger";
+          if (this.$v.local.$invalid)
+            this.valido.cidade = "border-danger";
+          return;
+        }        
+      } else {
+        this.$v.en.solucao.$touch();
+        if ( this.$v.en.solucao.$anyError || this.$v.local.$anyError ) {
+          this.error = true;
+          if (this.$v.en.solucao.nome.$invalid)
+            this.valido.nome = !this.$v.en.solucao.nome.$invalid;
+          if (this.$v.en.solucao.instituicao.$invalid)
+            this.valido.instituicao = !this.$v.en.solucao.instituicao.$invalid;
+          if (this.$v.en.solucao.descricao.$invalid)
+            this.valido.descricao = "border-danger";
+          if (this.$v.local.$invalid)
+            this.valido.cidade = "border-danger";          
+          return;
+        }
       }
-      // Salvar apos insenção de erros
+
       this.resetaCamposValidos();
       this.salvar();
     },
 
-    resetaCamposValidos() {
+    resetaCamposValidos() {      
       this.error = false;
+
+      this.$v.br.solucao.$reset();
+      this.$v.en.solucao.$reset();
+      this.$v.local.$reset();
 
       this.valido.nome = null;
       this.valido.instituicao = null;
-      this.valido.cidade.block = "border-valid";
+      this.valido.cidade = "border-valid";
       this.valido.descricao = "border-valid";
     },
 
     async buscar_estados() {
       await this.http.get("estado", 0).then(async data => {
-        this.estados = await data;
+        this.local.estados = await data;
       });
     },
 
     async buscar_cidades(definir_cidade) {
-      if (this.estado && this.estado._id)
-        await this.http.cidadesByEstado(this.estado._id).then(async data => {
-          this.cidades = await data.cidades;
-          if (definir_cidade && this.cidades[0] && this.cidades[0]._id)
-            this.solucao.cidade = this.cidades[0];
-        });
+      if (this.local.estado && this.local.estado._id)
+        await this.http
+          .cidadesByEstado(this.local.estado._id)
+          .then(async data => {
+            this.local.cidades = await data.cidades;
+            if ( definir_cidade && 
+                  this.local.cidades[0] && 
+                  this.local.cidades[0]._id )
+              this.local.cidade = this.local.cidades[0];
+          });
     },
 
     async salvar() {
       console.log("Enter Salve");
+      if ( this.$i18n.locale == 'pt_BR' ){
+        this.solucao.nome         = this.br.solucao.nome;
+        this.solucao.instituicao  = this.br.solucao.instituicao;
+        this.solucao.descricao    = this.br.solucao.descricao;
+        this.solucao.cidade       = this.local.cidade;
+      } else {
+        this.solucao.en_nome      = this.en.solucao.nome;
+        this.solucao.instituicao  = this.en.solucao.instituicao;
+        this.solucao.en_descricao = this.en.solucao.descricao;
+        this.solucao.cidade       = this.local.cidade;
+      }
+      for (const key in this.solucao) {
+        if (this.solucao.hasOwnProperty(key)) {
+          const element = this.solucao[key];
+          console.log(key+": "+element);
+        }
+      }
       if (this.$route.query.solucao && this.solucao._id) {
-        this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
-          if (resp.message == "Editado com sucesso!")
-            this.$router.push("usuario_solucoes_lista");
-        });
+        this.http
+          .put("solucao", this.solucao._id, this.solucao)
+          .then(resp => {
+            if (resp.message == "Editado com sucesso!")
+              this.$router.push("usuario_solucoes_lista");
+            });
       } else {
         let pessoa = localStorage.getItem("pessoa");
         if (pessoa) pessoa = JSON.parse(pessoa);

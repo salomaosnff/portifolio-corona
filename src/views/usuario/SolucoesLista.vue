@@ -84,7 +84,6 @@
                   class="description mt-3"
                 >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
 
-                <badge v-if="solucao.tipo" type="warning text-normal" rounded>#{{$t(solucao.tipo)}}</badge>
                 <badge
                   v-if="solucao.area_aplicacao"
                   type="warning text-normal"
@@ -95,6 +94,12 @@
                   type="warning text-normal"
                   rounded
                 >#{{$t(solucao.status)}}</badge>
+                <badge
+                  v-if="solucao.negocio"
+                  type="warning text-normal"
+                  rounded
+                >#{{$t(solucao.negocio)}}</badge>
+                <badge v-if="solucao.tipo" type="warning text-normal" rounded>#{{$t(solucao.tipo)}}</badge>
                 <badge
                   v-if="solucao.cidade && solucao.cidade.nome"
                   type="warning text-normal"

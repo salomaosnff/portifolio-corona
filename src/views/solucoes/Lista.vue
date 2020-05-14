@@ -63,7 +63,7 @@
               v-for="(area, index) in areas_aplicacao"
               :key="index"
               class="dropdown-item"
-              @click="area_aplicacao = area == 'Todos' ? '': area; buscar()"
+              @click="area_aplicacao = area; buscar()"
             >{{$t(area)}}</a>
           </dropdown>
 
@@ -74,10 +74,10 @@
               class="dropdown-toggle mb-1 text-normal"
             >{{$t(status) || $t('Status da Ideia')}}</base-button>
             <a
-              v-for="(s, index) in states"
+              v-for="(s, index) in statuss"
               :key="index"
               class="dropdown-item"
-              @click="status = s == 'Todos' ? '': s; buscar()"
+              @click="status = s; buscar()"
             >{{$t(s)}}</a>
           </dropdown>
 
@@ -91,7 +91,7 @@
               v-for="(n, index) in negocios"
               :key="index"
               class="dropdown-item"
-              @click="negocio = n == 'Todos' ? '': n; buscar()"
+              @click="negocio = n; buscar()"
             >{{$t(n)}}</a>
           </dropdown>
         </div>
@@ -139,7 +139,6 @@
                   class="description mt-3"
                 >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
 
-                <badge v-if="solucao.tipo" type="warning text-normal" rounded>#{{$t(solucao.tipo)}}</badge>
                 <badge
                   v-if="solucao.area_aplicacao"
                   type="warning text-normal"
@@ -150,6 +149,12 @@
                   type="warning text-normal"
                   rounded
                 >#{{$t(solucao.status)}}</badge>
+                <badge
+                  v-if="solucao.negocio"
+                  type="warning text-normal"
+                  rounded
+                >#{{$t(solucao.negocio)}}</badge>
+                <badge v-if="solucao.tipo" type="warning text-normal" rounded>#{{$t(solucao.tipo)}}</badge>
                 <badge
                   v-if="solucao.cidade && solucao.cidade.nome"
                   type="warning text-normal"
@@ -204,15 +209,15 @@
           <h5 class="text-white text-normal">{{$t(solucoes[index_modal].status)}}</h5>
         </div>
 
+        <div v-if="solucoes[index_modal].negocio">
+          <p class="mt-4">{{$t('Negócio')}}</p>
+          <h5 class="text-white text-normal">{{$t(solucoes[index_modal].negocio)}}</h5>
+        </div>
+
         <div v-if="solucoes[index_modal].link_web || solucoes[index_modal].link_youtube">
           <p class="mt-4">{{$t('Disponível em')}}</p>
           <h5 class="text-white text-lowercase">{{solucoes[index_modal].link_web}}</h5>
           <h5 class="text-white text-lowercase mt-4">{{solucoes[index_modal].link_youtube}}</h5>
-        </div>
-
-        <div v-if="solucoes[index_modal].negocio">
-          <p class="mt-4">{{$t('Negócio')}}</p>
-          <h5 class="text-white text-normal">{{$t(solucoes[index_modal].negocio)}}</h5>
         </div>
 
         <div v-if="solucoes[index_modal].cidade && solucoes[index_modal].cidade.nome">
@@ -339,7 +344,7 @@ export default {
       area_aplicacao: "",
       status: "",
       negocio: "",
-      states: [
+      statuss: [
         "Todos",
         "Produto Comercializado",
         "Produto Lançado",
@@ -356,11 +361,10 @@ export default {
         "Serviços de Informação",
         "Ação Social",
         "Mobilidade / Transporte",
-        "Meio ambiente / Urbanismo"
+        "Meio Ambiente / Urbanismo"
       ],
       negocios: [
         "Todos",
-        "Produto Comercializado",
         "Grátis",
         "Com Restrições",
         "Pago",
@@ -392,26 +396,32 @@ export default {
       this.buscar();
     },
 
-    buscar() {
+    async buscar() {
       if (this.busca || this.area_aplicacao || this.status || this.negocio) {
-        let params = JSON.stringify({
-          busca: this.busca,
-          area_aplicacao: this.area_aplicacao,
-          status: this.status,
-          negocio: this.negocio
-        });
+        if (this.area_aplicacao == "Todos") this.area_aplicacao = await "";
+        if (this.status == "Todos") this.status = await "";
+        if (this.negocio == "Todos") this.negocio = await "";
         axios
           .get(
-            // "http://localhost:3000/solucao/busca/" +
-            "https://portifolio-corona-api.herokuapp.com/solucao/busca/" +
-              params
+            "https://portifolio-corona-api.herokuapp.com/solucao/busca/",
+            // "http://localhost:3000/solucao/busca/",
+            {
+              params: {
+                busca: this.busca,
+                area_aplicacao: this.area_aplicacao,
+                status: this.status,
+                negocio: this.negocio
+              }
+            }
           )
           .then(response => {
             this.solucoes = response.data.solucoes;
-            if (this.solucoes[0]) this.busca_nao_encontrada = false;
+            if (response.data.solucoes[0]) this.busca_nao_encontrada = false;
             else this.busca_nao_encontrada = true;
           })
           .catch(error => {
+            this.solucoes = [];
+            this.busca_nao_encontrada = true;
             console.error(error);
           });
       } else {

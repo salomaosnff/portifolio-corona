@@ -1,59 +1,68 @@
 <template>
   <div>
     <section class="section-shaped my-0">
-      <div class="row p-5">
-        <div class="col-lg-6">
+      <div class="row p-5 justify-content-center">
+        <div class="mb-3 col-12 col-lg-6">
           <img id="logo" :src="'img/logo_' + $i18n.locale + '.png'" />
         </div>
 
-        <div class="col-lg-6 my-4">
-          <ul class="row" style="align-itens: center;">
-            <a class="menu-text" href="#/desenvolvimento">
-              {{$t('Sobre o')}}
-              <br />REVIVE
-            </a>
+        <div class="d-flex" style="flex: 1"></div>
 
-            <!-- <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/noticias_lista"> -->
-            <a
-              v-if="$i18n.locale == 'pt_BR'"
-              class="menu-text"
-              target="_blank"
-              href="https://www.bbc.com/portuguese/topics/clmq8rgyyvjt"
-            >
-              Notícias
-              <br />COVID-19
-            </a>
-            <!-- <a v-else class="menu-text" href="#/noticias_lista"> -->
-            <a v-else class="menu-text" target="_blank" href="https://www.bbc.com/news/coronavirus">
-              COVID-19
-              <br />News
-            </a>
+        <div class="d-flex flex-wrap justify-content-center">
+          <nav class="d-flex justify-content-end">
+            <ul class="row justify-content-center pl-0">
+              <li>
+                <a class="menu-text" href="#/desenvolvimento">
+                  {{$t('Sobre o')}}
+                  <br />REVIVE
+                </a>
+              </li>
+              <li>
+                <a
+                  v-if="$i18n.locale == 'pt_BR'"
+                  class="menu-text"
+                  target="_blank"
+                  href="https://www.bbc.com/portuguese/topics/clmq8rgyyvjt"
+                >
+                  Notícias
+                  <br />COVID-19
+                </a>
+                <a
+                  v-else
+                  class="menu-text"
+                  target="_blank"
+                  href="https://www.bbc.com/news/coronavirus"
+                >
+                  COVID-19
+                  <br />News
+                </a>
+              </li>
 
-            <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/desenvolvimento">
-              Fale com
-              <br />A GENTE
-            </a>
-            <a v-else class="menu-text" href="#/desenvolvimento">
-              Contact
-              <br />US
-            </a>
-            <img
-              v-for="(idioma) in idiomas"
-              :key="idioma"
-              :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag mt-2']"
-              :src="'img/home/' + idioma + '.png'"
-              @click="$i18n.locale = idioma"
-            />
+              <li>
+                <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/desenvolvimento">
+                  Fale com
+                  <br />A GENTE
+                </a>
+                <a v-else class="menu-text" href="#/desenvolvimento">
+                  Contact
+                  <br />US
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <ul class="d-flex justify-content-center pl-0">
+            <li v-for="(idioma) in idiomas" :key="idioma">
+              <img
+                :class="[$i18n.locale == idioma? 'flag-selected' : '', 'flag mt-2']"
+                :src="'img/home/' + idioma + '.png'"
+                @click="$i18n.locale = idioma"
+              />
+            </li>
           </ul>
         </div>
       </div>
 
-      <div class="shape shape-style-1">
-        <img
-          v-lazy="'img/equipe.jpg'"
-          class="card-img-top"
-          style="margin-top: -100px; height: 800px;"
-        />
+      <div id="page-background" class="shape shape-style-1">
         <span></span>
         <span></span>
         <span></span>
@@ -65,41 +74,37 @@
         <span></span>
       </div>
 
-      <div class="p-5">
-        <div class="row pt-5">
-          <div class="col-lg-6">
-            <div class="col-lg-4">
-              <base-button
-                href="http://lapisco.fortaleza.ifce.edu.br/covid19"
-                type="warning text-normal"
-                style="font-size: 16px"
-                tag="a"
-                target="_blank"
-              >{{$t('Home.Monitor do COVID-19')}}</base-button>
+      <div class="row px-5 justify-content-between">
+        <div class="col-lg-3 botoes mb-4">
+          <base-button
+            href="http://lapisco.fortaleza.ifce.edu.br/covid19"
+            type="warning text-normal"
+            style="font-size: 16px"
+            tag="a"
+            target="_blank"
+          >{{$t('Home.Monitor do COVID-19')}}</base-button>
 
-              <base-button
-                class="mt-4"
-                href="http://www.fiquenolar.ifce.edu.br/#/"
-                type="warning text-normal"
-                style="font-size: 16px"
-                tag="a"
-                target="_blank"
-              >FiqueNoLar</base-button>
+          <base-button
+            class="mt-4"
+            href="http://www.fiquenolar.ifce.edu.br/#/"
+            type="warning text-normal"
+            style="font-size: 16px"
+            tag="a"
+            target="_blank"
+          >FiqueNoLar</base-button>
 
-              <base-button
-                v-if="$i18n.locale == 'pt_BR'"
-                class="mt-4"
-                href="https://perfilcovid.saude.ce.gov.br/"
-                type="warning text-normal"
-                style="font-size: 16px"
-                tag="a"
-                target="_blank"
-              >COVID-19 no Ceará</base-button>
-              <br />
-            </div>
-          </div>
-
-          <!-- <modal
+          <base-button
+            v-if="$i18n.locale == 'pt_BR'"
+            class="mt-4"
+            href="https://perfilcovid.saude.ce.gov.br/"
+            type="warning text-normal"
+            style="font-size: 16px"
+            tag="a"
+            target="_blank"
+          >COVID-19 no Ceará</base-button>
+          <br />
+        </div>
+        <!-- <modal
               v-if="noticias_corona"
               :show.sync="modal_covid"
               gradient="warning"
@@ -173,48 +178,35 @@
                   @click="modal_covid = false"
                 >{{$t('Fechar')}}</base-button>
               </template>
-          </modal>-->
+        </modal>-->
 
-          <div class="col-lg-5 text-center">
-            <card style="background-color: #fb8640ee;" shadow>
-              <h4
-                v-if="$i18n.locale == 'pt_BR'"
-                class="m-2 text-white font-weight-bold"
-                style="line-height: 150%"
-              >
-                REVIVE, um ponto de encontro de
-                <br />PESSOAS, IDEIAS e SOLUÇÕES
-                <br />no enfrentamento ao CORONAVÍRUS
-              </h4>
-              <h4 v-else class="m-2 text-white font-weight-bold" style="line-height: 150%">
-                REVIVE, a meeting point for
-                <br />PEOPLE, IDEAS and SOLUTIONS
-                <br />in the fight against CORONAVIRUS
-              </h4>
-            </card>
-          </div>
+        <div class="col-lg-5 text-center">
+          <card style="background-color: #fb8640ee;" shadow>
+            <h4
+              v-if="$i18n.locale == 'pt_BR'"
+              class="m-2 text-white font-weight-bold"
+              style="line-height: 150%"
+            >
+              REVIVE, um ponto de encontro de
+              <br />PESSOAS, IDEIAS e SOLUÇÕES
+              <br />no enfrentamento ao CORONAVÍRUS
+            </h4>
+            <h4 v-else class="m-2 text-white font-weight-bold" style="line-height: 150%">
+              REVIVE, a meeting point for
+              <br />PEOPLE, IDEAS and SOLUTIONS
+              <br />in the fight against CORONAVIRUS
+            </h4>
+          </card>
         </div>
+      </div>
+      <div class="d-flex flex-wrap justify-content-center mt-5 pt-4">
+        <img class="logos" src="img/if.png" />
+        <img class="logos" src="img/home/iracema.png" />
+        <img class="logos" src="img/home/citinova.jpg" />
+        <img class="logos" src="img/estado.jpg" />
+        <p class="text-dark" style="position: absolute; bottom: 0; right: 0">Designed by rawpixel.com / Freepik</p>
       </div>
     </section>
-
-    <div class="row" style="background-color: #00000000">
-      <div class="col-lg-5 pl-4" style="background-color: #00000000">
-        <img class="logos ml-5" src="img/if.png" />
-      </div>
-      <div class="col-lg-2" style="background-color: #00000000">
-        <img class="logos ml-5 mr-5" src="img/home/iracema.png" />
-      </div>
-      <div class="col-lg-5 pl-5" style="background-color: #00000000">
-        <img class="logos ml-5" src="img/home/citinova.jpg" />
-        <img class="logos ml-5" src="img/estado.jpg" />
-        <div class="text-right pt-4 pr-5" style="background-color: #00000000">
-          <p
-            style="background-color: #00000000"
-            class="text-white"
-          >Designed by rawpixel.com / Freepik</p>
-        </div>
-      </div>
-    </div>
 
     <section class="container" style="margin-top: 90px">
       <div class="row justify-content-center">
@@ -222,17 +214,19 @@
           <div class="row row-grid">
             <div v-for="(card, index) in cards" :key="index" class="col-lg-4 mb-5">
               <card class="border-0 text-center" shadow body-classes="py-5">
-                <div class="row" style="margin-left: 1px">
-                  <icon :name="card.icone" gradient="warning" color="white" shadow rounded></icon>
-                  <h4
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >{{$t('Home.Cards[' + index + '].Título')}}</h4>
-                </div>
+                <icon
+                  :name="card.icone"
+                  class="mb-3"
+                  gradient="warning"
+                  color="white"
+                  shadow
+                  rounded
+                ></icon>
+                <h4 class="text-default">{{$t('Home.Cards[' + index + '].Título')}}</h4>
                 <p v-if="index < 3" class="mt-3">{{$t('Home.Cards[' + index + '].Descrição')}}</p>
                 <div class="text-center">
                   <base-button
-                    class="mt-4"
+                    class="mt-4 btn-block"
                     type="warning text-normal"
                     style="font-size: 16px"
                     @click="$router.push({ name: card.link, 
@@ -242,86 +236,58 @@
               </card>
             </div>
             <div class="col-lg-4 mb-5">
-              <card class="border-0" shadow body-classes="py-5">
-                <div class="row" style="margin-left: 1px">
-                  <icon name="ni ni-chat-round" gradient="warning" color="white" shadow rounded></icon>
-                  <h4
-                    v-show="$i18n.locale == 'pt_BR'"
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >Fóruns de</h4>
-                  <h4
-                    v-show="$i18n.locale == 'pt_BR'"
-                    style="margin-left: 66px"
-                    class="text-default"
-                  >Discussão</h4>
-                  <h4
-                    v-show="$i18n.locale == 'en'"
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >Discussion</h4>
-                  <h4
-                    v-show="$i18n.locale == 'en'"
-                    style="margin-left: 66px"
-                    class="text-default"
-                  >Forums</h4>
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="ni ni-chat-round"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Fóruns de Discussão</h4>
                 </div>
-                <div class="text-center">
+                <div>
                   <img
                     style="height: 160px; margin: 5px; border-radius: 20px"
                     src="img/forum.jpg"
                     lazy="loaded"
                     alt="Smiley face"
                   />
-                  <base-button
-                    class="mt-4"
-                    type="warning text-normal"
-                    style="font-size: 16px"
-                    @click="$router.push({ name: 'login', 
-                      query: { rota: 'forum_lista' }})"
-                  >{{$t('Entrar')}}</base-button>
                 </div>
+                <base-button
+                  class="mt-4 btn-block btn-block"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  @click="$router.push({ name: 'login', 
+                      query: { rota: 'forum_lista' }})"
+                >{{$t('Entrar')}}</base-button>
               </card>
             </div>
             <div class="col-lg-4 mb-5">
-              <card class="border-0" shadow body-classes="py-5">
-                <div class="row" style="margin-left: 1px">
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
                   <icon
+                    class="mb-3"
                     name="ni ni-settings-gear-65"
                     gradient="warning"
                     color="white"
                     shadow
                     rounded
                   ></icon>
-                  <h4
-                    v-show="$i18n.locale == 'pt_BR'"
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >Aconselhamento</h4>
-                  <h4
-                    v-show="$i18n.locale == 'pt_BR'"
-                    style="margin-left: 66px"
-                    class="text-default"
-                  >Tecnológico</h4>
-                  <h4
-                    v-show="$i18n.locale == 'en'"
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >Technological</h4>
-                  <h4
-                    v-show="$i18n.locale == 'en'"
-                    style="margin-left: 66px"
-                    class="text-default"
-                  >Advice</h4>
+                  <h4 class="text-default">Aconselhamento Tecnológico</h4>
                 </div>
                 <div class="text-center">
-                  <img
-                    style="height: 160px; margin: 5px; border-radius: 20px"
-                    src="img/tecnologico.jpg"
-                    lazy="loaded"
-                  />
+                  <div>
+                    <img
+                      style="height: 160px; margin: 5px; border-radius: 20px"
+                      src="img/tecnologico.jpg"
+                      lazy="loaded"
+                    />
+                  </div>
                   <base-button
-                    class="mt-4"
+                    class="mt-4 btn-block"
                     href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/formResponse"
                     type="warning text-normal"
                     style="font-size: 16px"
@@ -332,38 +298,28 @@
               </card>
             </div>
             <div class="col-lg-4 mb-5">
-              <card class="border-0" shadow body-classes="py-5">
-                <div class="row" style="margin-left: 1px">
-                  <icon name="ni ni-money-coins" gradient="warning" color="white" shadow rounded></icon>
-                  <h4
-                    v-show="$i18n.locale == 'pt_BR'"
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >Aconselhamento</h4>
-                  <h4
-                    v-show="$i18n.locale == 'pt_BR'"
-                    style="margin-left: 66px"
-                    class="text-default"
-                  >Econômico</h4>
-                  <h4
-                    v-show="$i18n.locale == 'en'"
-                    style="margin-top: 10px; margin-left: 20px"
-                    class="text-default"
-                  >Economic</h4>
-                  <h4
-                    v-show="$i18n.locale == 'en'"
-                    style="margin-left: 66px"
-                    class="text-default"
-                  >Advice</h4>
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="ni ni-money-coins"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Aconselhamento</h4>
                 </div>
                 <div class="text-center">
-                  <img
-                    style="height: 160px; margin: 5px; border-radius: 20px"
-                    src="img/economico.jpg"
-                    lazy="loaded"
-                  />
+                  <div>
+                    <img
+                      style="height: 160px; margin: 5px; border-radius: 20px"
+                      src="img/economico.jpg"
+                      lazy="loaded"
+                    />
+                  </div>
                   <base-button
-                    class="mt-4"
+                    class="mt-4 btn-block"
                     href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/formResponse"
                     type="warning text-normal"
                     style="font-size: 16px"
@@ -381,8 +337,8 @@
     <h2 class="text-center mt-5">{{$t('Realização')}}</h2>
     <hr class="listinha mt-4" />
     <section class="text-center m-5">
-      <img class="mx-5" style="height: 60px" src="img/lar.png" lazy="loaded" />
-      <img class="mx-5" style="height: 60px" src="img/ifce.png" lazy="loaded" />
+      <img class="m-4" style="height: 60px" src="img/lar.png" lazy="loaded" />
+      <img class="m-4" style="height: 60px" src="img/ifce.png" lazy="loaded" />
     </section>
 
     <h2 class="text-center mt-0">{{$t('Promoção')}}</h2>
@@ -469,6 +425,18 @@ export default {
 </script>
 
 <style scoped>
+ul {
+  list-style: none;
+}
+
+#page-background {
+  background: url("./assets/img/equipe.jpg") no-repeat;
+  background-size: cover;
+}
+
+.botoes .btn {
+  width: 100%;
+}
 @media (min-width: 320px) {
   #logo {
     width: 100%;

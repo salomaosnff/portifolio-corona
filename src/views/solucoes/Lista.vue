@@ -16,23 +16,6 @@
         <div class="col-lg-6">
           <h2 class="text-white mb-5">{{$t('Soluções')}}</h2>
         </div>
-        <div class="col-lg-6 text-right">
-          <badge
-            v-if="solucoes && solucoes.length"
-            rounded
-            class="mt-2 text-warning text-normal"
-            type="white"
-            style="font-size: medium"
-          >{{$t('Quantidade')}}: {{solucoes.length}}</badge>
-
-          <badge
-            v-if="acessos"
-            rounded
-            class="mt-2 ml-4 text-warning text-normal"
-            type="white"
-            style="font-size: medium"
-          >{{$t('Acessos')}}: {{acessos}}</badge>
-        </div>
       </div>
       <div class="row">
         <div class="col-md-3 row ml-0">
@@ -50,7 +33,7 @@
           >{{$t('Voltar')}}</base-button>
         </div>
 
-        <div class="col-md-9 pr-0">
+        <div class="col-md-9">
           <div class="input-group input-group-alternative mb-4 bg-gradient-warning">
             <input
               @input="value => buscar()"
@@ -114,7 +97,25 @@
         </div>
       </div>
 
-      <div class="row justify-content-center">
+      <div class="col-12 text-right">
+        <badge
+          v-if="solucoes && solucoes.length"
+          rounded
+          class="mt-2 text-warning text-normal"
+          type="white"
+          style="font-size: medium"
+        >{{$t('Quantidade')}}: {{solucoes.length}}</badge>
+
+        <badge
+          v-if="acessos"
+          rounded
+          class="mt-2 ml-4 text-warning text-normal"
+          type="white"
+          style="font-size: medium"
+        >{{$t('Acessos')}}: {{acessos}}</badge>
+      </div>
+
+      <div class="row justify-content-center pr-3">
         <div class="col-lg-12 my-3">
           <div class="row row-grid">
             <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">

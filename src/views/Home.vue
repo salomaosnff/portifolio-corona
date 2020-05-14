@@ -206,7 +206,7 @@
         <img class="logos" src="img/estado.jpg" />
         <p
           class="text-dark"
-          style="position: absolute; bottom: 0; right: 1"
+          style="position: absolute; bottom: 0; right: 1cm"
         >Designed by rawpixel.com / Freepik</p>
       </div>
     </section>

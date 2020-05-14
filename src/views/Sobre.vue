@@ -11,15 +11,9 @@
       <span></span>
     </div>
     <div class="container pt-lg-md">
-      <h2 class="text-white mb-5">{{tipo_forum == 'todos'? 'Fóruns' : $t('Meus Fóruns')}}</h2>
+      <h2 class="text-white mb-5">{{$t('Sobre o')}} REVIVE</h2>
       <div class="row">
         <div class="col-md-4 row ml-0">
-          <base-button
-            icon="fa fa-home"
-            class="mb-5 text-warning text-capitalize"
-            type="white"
-            @click="$router.push('/')"
-          ></base-button>
           <base-button
             icon="ni ni-bold-left"
             class="mb-5 text-warning text-capitalize"
@@ -27,29 +21,173 @@
             @click="$router.go(-1)"
           >{{$t("Voltar")}}</base-button>
         </div>
+      </div>
+    </div>
 
-        <div class="col-md-8 text-right pr-0">
-          <base-button
-            v-if="tipo_forum == 'meus'"
-            icon="ni ni-chat-round"
-            class="mb-5"
-            type="primary text-capitalize"
-            @click="mudar_tipo_forum('todos')"
-          >{{$t("forum.Lista.complemento.nav_buttons.filter_all")}}</base-button>
-          <base-button
-            v-if="tipo_forum == 'todos'"
-            icon="ni ni-chat-round"
-            class="mb-5"
-            type="primary text-capitalize"
-            @click="mudar_tipo_forum('meus')"
-          >{{$t("forum.Lista.complemento.nav_buttons.filter_my")}}</base-button>
-          <base-button
-            href="memorando.pdf"
-            type="warning text-normal"
-            style="font-size: 16px"
-            tag="a"
-            target="_blank"
-          >Memorando</base-button>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row row-grid">
+            <div class="col-lg-4 mb-5">
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="fa fa-file"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Créditos</h4>
+                </div>
+                <!-- <div>
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/forum.jpg"
+                    lazy="loaded"
+                    alt="Smiley face"
+                  />
+                </div>-->
+                <base-button
+                  class="mt-4 btn-block btn-block"
+                  href="./creditos.pdf"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Acessar')}}</base-button>
+              </card>
+            </div>
+
+            <div class="col-lg-4 mb-5">
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="fa fa-file"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Memorando</h4>
+                </div>
+                <!-- <div>
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/forum.jpg"
+                    lazy="loaded"
+                    alt="Smiley face"
+                  />
+                </div>-->
+                <base-button
+                  class="mt-4 btn-block btn-block"
+                  href="./memorando.pdf"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Acessar')}}</base-button>
+              </card>
+            </div>
+
+            <div class="col-lg-4 mb-5">
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="fa fa-file"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Hackathon</h4>
+                </div>
+                <!-- <div>
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/forum.jpg"
+                    lazy="loaded"
+                    alt="Smiley face"
+                  />
+                </div>-->
+                <base-button
+                  class="mt-4 btn-block btn-block"
+                  href="./hackathon.pdf"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Acessar')}}</base-button>
+              </card>
+            </div>
+
+            <div class="col-lg-4 mb-5">
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="fa fa-file"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Memorando (Anexo 1)</h4>
+                </div>
+                <!-- <div>
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/forum.jpg"
+                    lazy="loaded"
+                    alt="Smiley face"
+                  />
+                </div>-->
+                <base-button
+                  class="mt-4 btn-block btn-block"
+                  href="./memorando_anexo_1.pdf"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Acessar')}}</base-button>
+              </card>
+            </div>
+
+            <div class="col-lg-4 mb-5">
+              <card class="border-0 text-center" shadow body-classes="py-5">
+                <div style="height: 126px" class="mb-3">
+                  <icon
+                    class="mb-3"
+                    name="fa fa-file"
+                    gradient="warning"
+                    color="white"
+                    shadow
+                    rounded
+                  ></icon>
+                  <h4 class="text-default">Memorando (Anexo 2)</h4>
+                </div>
+                <!-- <div>
+                  <img
+                    style="height: 160px; margin: 5px; border-radius: 20px"
+                    src="img/forum.jpg"
+                    lazy="loaded"
+                    alt="Smiley face"
+                  />
+                </div>-->
+                <base-button
+                  class="mt-4 btn-block btn-block"
+                  href="./memorando_anexo_2.pdf"
+                  type="warning text-normal"
+                  style="font-size: 16px"
+                  tag="a"
+                  target="_blank"
+                >{{$t('Acessar')}}</base-button>
+              </card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

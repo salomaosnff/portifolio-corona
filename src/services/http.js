@@ -89,5 +89,19 @@ export default class Http {
             return 'Não foi possível excluir'
         }
     }
+    
+    async esqueceuSenha(entidade, dados) {
+        return await axios
+            .post(baseUrl[0] + entidade, dados)
+            .then(resp => {
+                return resp.data
+            })
+            .catch(err => {
+                return {}
+            })
+    }
+    
+    
+    
 }
 

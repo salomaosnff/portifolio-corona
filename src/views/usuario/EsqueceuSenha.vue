@@ -89,7 +89,7 @@ export default {
         
       },
       error: false,
-      passwordVisible: false
+      
     };
   },
   validations: {
@@ -103,6 +103,7 @@ export default {
   async mounted() {},
 
   methods: {
+
     onSubmit() {
       this.resetaCamposValidos();
       this.$v.pessoa.$touch();
@@ -127,18 +128,21 @@ export default {
       
     },
 
-    async recuperarDesativado() {
-      await this.http
-        .post("pessoa", this.pessoa)
-        .then(async resp_pessoa => {
-          if (resp_pessoa._id) {
-            this.pessoa._id = resp_pessoa._id;
-            await localStorage.setItem("pessoa", JSON.stringify(this.pessoa));
-            this.$router.push("solucoes_cadastro");
+    async recuperar() {
+    
+      await this.http   
+        .esqueceuSenha("enviarEmail/forgotPassword/", {email: this.pessoa.email})
+        .then(async resp => {
+          if (resp.message == "E-mail encontrado!"){
+            alert("Sua senha foi enviada para o endereço de e-mail: " + this.pessoa.email);
+            this.$router.push("login");
+          }else {
+            alert("Não foi possível localizar este endereço de e-mail. Tente novamente.");
           }
+          
         })
         .catch(err => {
-          console.log("Erro ao Salvar a Pessoa");
+          console.log("Erro. Não foi possível recuperar sua senha.");
           console.error(err);
         });
     }

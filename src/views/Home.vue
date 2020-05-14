@@ -3,6 +3,7 @@
     <section class="section-shaped my-0">
       <div class="row p-5 justify-content-center">
         <div class="mb-3 col-12 col-lg-6">
+          <img id="icon_logo" src="/images/icons/icon-512x512.png" />
           <img id="logo" :src="'img/logo_' + $i18n.locale + '.png'" />
         </div>
 
@@ -199,15 +200,14 @@
           </card>
         </div>
       </div>
-      <div class="d-flex flex-wrap justify-content-center mt-5 pt-4">
+      <div class="d-flex flex-wrap pr-5" style="justify-content: right">
         <img class="logos" src="img/if.png" />
         <img class="logos" src="img/home/iracema.png" />
         <img class="logos" src="img/home/citinova.jpg" />
         <img class="logos" src="img/estado.jpg" />
-        <p
-          class="text-dark"
-          style="position: absolute; bottom: 0; right: 1cm"
-        >Designed by rawpixel.com / Freepik</p>
+      </div>
+      <div class="d-flex flex-wrap pr-5 mr-3" style="justify-content: right">
+        <p class="text-dark">Designed by rawpixel.com / Freepik</p>
       </div>
     </section>
 
@@ -478,6 +478,13 @@ ul {
     border-radius: 20px;
     padding: 15px;
   }
+}
+
+#icon_logo {
+  width: 150px;
+  height: auto;
+  border-radius: 20px;
+  padding: 15px;
 }
 
 hr.listinha {

@@ -25,12 +25,12 @@
     </div>
 
     <div class="container">
-        <card shadow class="card-profile mt--300" no-body>
+        <card shadow class="card-profile" no-body>
           <div class="px-4">
             <div class="row justify-content-center">
                 <div class="col-lg-3 order-lg-2">
                     <div class="card-profile-image text-center mt-5">
-                      <img v-lazy="'img/perfil-mauro-152x152.png'" class="rounded-circle" width="50%" height="50%" alt="icon-Revive">
+                      <img v-lazy="'img/perfil-mauro-152x152.png'" class="rounded-circle" width="75%" height="75%" alt="icon-Revive">
                     </div>
                 </div>
             </div>

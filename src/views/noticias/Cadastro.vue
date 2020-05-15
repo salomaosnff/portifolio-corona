@@ -46,42 +46,45 @@
                   v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Noticias.Título')"
-                  v-model="$v.noticia.titulo.$model"
+                  v-model="$v.br.noticia.titulo.$model"
                   :valid="valido.titulo"
                 ></base-input>
                 <base-input
                   v-else
                   class="mb-3"
                   :placeholder="$t('Noticias.Título')"
-                  v-model="noticia.en_titulo"
+                  v-model="$v.en.noticia.titulo.$model"
+                  :valid="valido.titulo"
                 ></base-input>
 
                 <base-input
                   v-if="$i18n.locale == 'pt_BR'"
                   class="mb-3"
                   :placeholder="$t('Noticias.Subtítulo')"
-                  v-model="$v.noticia.subtitulo.$model"
+                  v-model="$v.br.noticia.subtitulo.$model"
                   :valid="valido.subtitulo"
                 ></base-input>
                 <base-input
                   v-else
                   class="mb-3"
                   :placeholder="$t('Noticias.Subtítulo')"
-                  v-model="noticia.en_subtitulo"
+                  v-model="$v.en.noticia.subtitulo.$model"
+                  :valid="valido.subtitulo"
                 ></base-input>
 
                 <textarea
                   v-if="$i18n.locale == 'pt_BR'"
                   class="form-control mb-3 card"
                   :placeholder="$t('Descrição')"
-                  v-model="$v.noticia.descricao.$model"
+                  v-model="$v.br.noticia.descricao.$model"
                   :class="valido.descricao"
                 ></textarea>
                 <textarea
                   v-else
                   class="form-control mb-3 card"
                   :placeholder="$t('Descrição')"
-                  v-model="noticia.en_descricao"
+                  v-model="$v.en.noticia.descricao.$model"
+                  :class="valido.descricao"
                 ></textarea>
 
                 <div class="text-center">
@@ -101,22 +104,36 @@
 </template>
 <script>
 import http from "../../services/http";
-import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
       http: new http(),
+      br: {
+        noticia:{
+          titulo: "",
+          subtitulo: "",
+          descricao: "",
+        }
+      },
+      en: {
+        noticia: {
+          titulo: "",
+          subtitulo: "",
+          descricao: "",
+        }
+      },
       noticia: {
         titulo: "",
-        en_titulo: "",
         subtitulo: "",
-        en_subtitulo: "",
         descricao: "",
-        en_descricao: "",
         data_publicacao: Date,
         data_atualizacao: Date,
-        responsavel: { _id: "" }
+        responsavel: { _id: "" },
+        en_titulo: "",
+        en_subtitulo: "",
+        en_descricao: ""
       },
 
       valido: {
@@ -129,36 +146,75 @@ export default {
   },
 
   async mounted() {
-    if (this.$route.query.noticias)
+    if (this.$route.query.noticias) {
       this.noticia = await this.$route.query.noticias;
+
+      this.br.noticia.titulo     = this.noticia.titulo;
+      this.br.noticia.subtitulo  = this.noticia.subtitulo;
+      this.br.noticia.descricao  = this.noticia.descricao;
+      
+      this.en.noticia.titulo     = this.noticia.en_titulo;
+      this.en.noticia.subtitulo  = this.noticia.en_subtitulo;
+      this.en.noticia.descricao  = this.noticia.en_descricao;      
+    }
   },
 
   validations: {
-    noticia: {
-      titulo: { required, maxLength: maxLength(60) },
-      subtitulo: {
-        required,
-        minLength: minLength(5),
-        maxLength: maxLength(60)
-      },
-      descricao: { required, maxLength: maxLength(300) }
+    br: {
+      noticia:{
+        titulo: {
+          required,
+          maxLength: maxLength(100)            
+        },
+        subtitulo: { 
+          required,
+          maxLength: maxLength(200)            
+          },
+        descricao: { required, maxLength: maxLength(500) }
+      }
+    },
+    en: {
+      noticia: {
+        titulo: {
+          required,
+          maxLength: maxLength(100)            
+        },
+        subtitulo: { 
+          required,
+          maxLength: maxLength(200)            
+          },
+        descricao: { required, maxLength: maxLength(500) }
+      }
     }
   },
 
   methods: {
     onSubmit() {
       this.resetaCamposValidos();
-      this.$v.noticia.$touch();
-
-      if (this.$v.noticia.$anyError) {
-        this.error = true;
-        if (this.$v.noticia.titulo.$invalid)
-          this.valido.titulo = !this.$v.noticia.titulo.$invalid;
-        if (this.$v.noticia.subtitulo.$invalid)
-          this.valido.subtitulo = !this.$v.noticia.subtitulo.$invalid;
-        if (this.$v.noticia.descricao.$invalid)
-          this.valido.descricao = "border-danger";
-        return;
+      if (this.$i18n.locale == "pt_BR") {
+        this.$v.br.noticia.$touch();
+        if (this.$v.br.noticia.$anyError) {
+          this.error = true;
+          if (this.$v.br.noticia.titulo.$invalid)
+            this.valido.titulo = !this.$v.br.noticia.titulo.$invalid;
+          if (this.$v.br.noticia.subtitulo.$invalid)
+            this.valido.subtitulo = !this.$v.br.noticia.subtitulo.$invalid;
+          if (this.$v.br.noticia.descricao.$invalid)
+            this.valido.descricao = "border-danger";
+          return;
+        }
+      } else {
+        this.$v.en.noticia.$touch();
+        if (this.$v.en.noticia.$anyError) {
+          this.error = true;
+          if (this.$v.en.noticia.titulo.$invalid)
+            this.valido.titulo = !this.$v.en.noticia.titulo.$invalid;
+          if (this.$v.en.noticia.subtitulo.$invalid)
+            this.valido.subtitulo = !this.$v.en.noticia.subtitulo.$invalid;
+          if (this.$v.en.noticia.descricao.$invalid)
+            this.valido.descricao = "border-danger";
+          return;
+        }        
       }
       this.resetaCamposValidos();
       this.salvar();
@@ -166,13 +222,26 @@ export default {
 
     resetaCamposValidos() {
       this.error = false;
+
+      this.$v.br.noticia.$reset();
+      this.$v.en.noticia.$reset();
+
       this.valido.titulo = null;
       this.valido.subtitulo = null;
       this.valido.descricao = "border-valid";
     },
 
     async salvar() {
-      if (this.$route.query.noticias && this.noticia._id) {
+      if (this.$i18n.locale == "pt_BR") {
+        this.noticia.titulo     = this.br.noticia.titulo;
+        this.noticia.subtitulo  = this.br.noticia.subtitulo;
+        this.noticia.descricao  = this.br.noticia.descricao;
+      } else {
+        this.noticia.en_titulo    = this.en.noticia.titulo;
+        this.noticia.en_subtitulo = this.en.noticia.subtitulo;
+        this.noticia.en_descricao = this.en.noticia.descricao;
+      }
+      if (this.$route.query.noticias && this.noticias._id) {
         this.noticia.data_atualizacao = Date.now();
         this.http.put("noticia", this.noticia._id, this.noticia).then(resp => {
           if (resp.message == "Editado com sucesso!")

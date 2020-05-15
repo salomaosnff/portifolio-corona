@@ -12,13 +12,13 @@
         <div class="d-flex flex-wrap justify-content-center">
           <nav class="d-flex justify-content-end">
             <ul class="row justify-content-center pl-0">
-              <li>
+              <li class="mx-4">
                 <a class="menu-text" href="#/sobre">
                   {{$t('Sobre o')}}
                   <br />REVIVE
                 </a>
               </li>
-              <li>
+              <li class="mx-4">
                 <a
                   v-if="$i18n.locale == 'pt_BR'"
                   class="menu-text"
@@ -39,7 +39,7 @@
                 </a>
               </li>
 
-              <li>
+              <li class="mx-4">
                 <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/desenvolvimento">
                   Fale com
                   <br />A GENTE

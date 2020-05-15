@@ -32,7 +32,7 @@
 
               <li class="mx-4">
                 <a class="menu-text" href="#/contato">
-                  Fale com A GENTE
+                  {{$t('Fale com A GENTE')}}
                 </a>
               </li>
             </ul>

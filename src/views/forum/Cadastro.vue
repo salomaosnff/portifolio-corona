@@ -53,7 +53,7 @@
                   v-else
                   class="mb-3"
                   :placeholder="$t('forum.Cadastro.ph_forum_name')"
-                  v-model="$v.br.forum.nome.$model"
+                  v-model="$v.en.forum.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
 

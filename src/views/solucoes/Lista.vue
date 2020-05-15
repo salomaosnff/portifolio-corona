@@ -354,7 +354,6 @@ export default {
       ],
       areas_aplicacao: [
         "Todos",
-        "Produto Comercializado",
         "Projeto de Saúde",
         "Trabalho / Renda",
         "Educação / Cursos",

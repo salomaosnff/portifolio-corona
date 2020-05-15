@@ -78,6 +78,7 @@
       <div class="row px-5 justify-content-between">
         <div class="col-lg-3 botoes mb-4">
           <base-button
+            v-if="$i18n.locale == 'pt_BR'"
             href="http://lapisco.fortaleza.ifce.edu.br/covid19"
             type="warning text-normal"
             style="font-size: 16px"
@@ -86,6 +87,7 @@
           >{{$t('Home.Monitor do COVID-19')}}</base-button>
 
           <base-button
+            v-if="$i18n.locale == 'pt_BR'"
             class="mt-4"
             href="http://www.fiquenolar.ifce.edu.br/#/"
             type="warning text-normal"
@@ -456,7 +458,7 @@ ul {
     padding: 15px;
   }
 
-  #top_logo{
+  #top_logo {
     text-align: center;
   }
 }
@@ -477,7 +479,7 @@ ul {
     padding: 15px;
   }
 
-  #top_logo{
+  #top_logo {
     text-align: center;
   }
 }
@@ -498,7 +500,7 @@ ul {
     padding: 15px;
   }
 
-  #top_logo{
+  #top_logo {
     text-align: center;
   }
 }
@@ -511,7 +513,7 @@ ul {
     border-radius: 20px;
     padding: 15px;
   }
-  
+
   #icon_logo {
     width: 150px;
     height: auto;
@@ -519,11 +521,10 @@ ul {
     padding: 15px;
   }
 
-  #top_logo{
+  #top_logo {
     text-align: left;
   }
 }
-
 
 hr.listinha {
   max-width: 3.25rem;

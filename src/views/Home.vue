@@ -40,11 +40,11 @@
               </li>
 
               <li class="mx-4">
-                <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/desenvolvimento">
+                <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/contato">
                   Fale com
                   <br />A GENTE
                 </a>
-                <a v-else class="menu-text" href="#/desenvolvimento">
+                <a v-else class="menu-text" href="#/contato">
                   Contact
                   <br />US
                 </a>

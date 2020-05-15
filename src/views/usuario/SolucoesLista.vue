@@ -74,15 +74,15 @@
               <card v-if="!solucao.base" class="border-0" shadow body-classes="py-5">
                 <h4
                   class="text-default"
-                >{{$i18n.locale == 'en' && solucao.en_nome? solucao.en_nome : solucao.nome}}</h4>
+                >{{$i18n.locale == 'en'? solucao.en_nome || solucao.nome : solucao.nome || solucao.en_nome}}</h4>
                 <p
-                  v-if="$i18n.locale == 'en' && solucao.en_descricao"
+                  v-if="$i18n.locale == 'en'"
                   class="description mt-3"
-                >{{solucao.en_descricao.slice(0,100)}} {{solucao.en_descricao.length > 100? '...' : ''}}</p>
+                >{{(solucao.en_descricao || solucao.descricao).slice(0,100)}} {{(solucao.en_descricao.length || solucao.descricao.length) > 100? '...' : ''}}</p>
                 <p
                   v-else
                   class="description mt-3"
-                >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
+                >{{(solucao.descricao || solucao.en_descricao).slice(0,100)}} {{(solucao.descricao.length || solucao.en_descricao.length) > 100? '...' : ''}}</p>
 
                 <badge
                   v-if="solucao.area_aplicacao"
@@ -138,11 +138,10 @@
       modal-classes="modal-danger modal-dialog-centered"
     >
       <h4
-        v-if="solucoes[index_modal] && solucoes[index_modal].nome"
         slot="header"
         class="modal-title"
         id="modal-title-notification"
-      >{{$i18n.locale == 'en' && solucoes[index_modal].en_nome? solucoes[index_modal].en_nome : solucoes[index_modal].nome}}</h4>
+      >{{$i18n.locale == 'en'? solucoes[index_modal].en_nome || solucoes[index_modal].nome : solucoes[index_modal].nome || solucoes[index_modal].en_nome}}</h4>
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
@@ -183,10 +182,10 @@
       </div>
 
       <div v-if="pagina_modal == 'descricao'">
-        <div v-if="solucoes[index_modal].descricao">
+        <div>
           <h5
             class="text-white"
-          >{{$i18n.locale == 'en' && solucoes[index_modal].en_descricao? solucoes[index_modal].en_descricao : solucoes[index_modal].descricao}}</h5>
+          >{{$i18n.locale == 'en'? solucoes[index_modal].en_descricao || solucoes[index_modal].descricao : solucoes[index_modal].descricao || solucoes[index_modal].en_descricao}}</h5>
         </div>
       </div>
 
@@ -247,7 +246,7 @@
         slot="header"
         class="modal-title"
         id="modal-title-notification"
-      >{{$i18n.locale == 'en' && solucao_excluir.en_nome? solucao_excluir.en_nome : solucao_excluir.nome}}</h6>
+      >{{$i18n.locale == 'en'? solucao_excluir.en_nome || solucao_excluir.nome : solucao_excluir.nome || solucao_excluir.en_nome}}</h6>
 
       <div class="py-3 text-center">
         <i class="ni ni-bell-55 ni-3x"></i>

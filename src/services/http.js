@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const baseUrl = [
-    'https://portifolio-corona-api.herokuapp.com/',
     'http://localhost:3000/',
+    'https://portifolio-corona-api.herokuapp.com/',
 ]
 
 export default class Http {
@@ -89,7 +89,7 @@ export default class Http {
             return 'Não foi possível excluir'
         }
     }
-    
+
     async esqueceuSenha(entidade, dados) {
         return await axios
             .post(baseUrl[0] + entidade, dados)
@@ -100,8 +100,8 @@ export default class Http {
                 return {}
             })
     }
-    
-    
-    
+
+
+
 }
 

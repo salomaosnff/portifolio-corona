@@ -33,7 +33,7 @@
           >{{$t('Voltar')}}</base-button>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 pr-0">
           <div class="input-group input-group-alternative mb-4 bg-gradient-warning">
             <input
               @input="value => buscar()"
@@ -52,7 +52,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-8">
           <dropdown>
             <base-button
               slot="title"
@@ -95,27 +95,27 @@
             >{{$t(n)}}</a>
           </dropdown>
         </div>
+
+        <div class="col-lg-4 text-right pr-3">
+          <badge
+            v-if="solucoes && solucoes.length"
+            rounded
+            class="mt-2 text-warning text-normal"
+            type="white"
+            style="font-size: medium"
+          >{{$t('Quantidade')}}: {{solucoes.length}}</badge>
+
+          <badge
+            v-if="acessos"
+            rounded
+            class="mt-2 ml-4 text-warning text-normal"
+            type="white"
+            style="font-size: medium"
+          >{{$t('Acessos')}}: {{acessos}}</badge>
+        </div>
       </div>
 
-      <div class="col-12 text-right">
-        <badge
-          v-if="solucoes && solucoes.length"
-          rounded
-          class="mt-2 text-warning text-normal"
-          type="white"
-          style="font-size: medium"
-        >{{$t('Quantidade')}}: {{solucoes.length}}</badge>
-
-        <badge
-          v-if="acessos"
-          rounded
-          class="mt-2 ml-4 text-warning text-normal"
-          type="white"
-          style="font-size: medium"
-        >{{$t('Acessos')}}: {{acessos}}</badge>
-      </div>
-
-      <div class="row justify-content-center pr-3">
+      <div class="row justify-content-center">
         <div class="col-lg-12 my-3">
           <div class="row row-grid">
             <div v-for="(solucao, index) in solucoes" :key="solucao + index" class="col-lg-4 mb-5">
@@ -129,15 +129,15 @@
 
                 <h4
                   class="text-default"
-                >{{$i18n.locale == 'en' && solucao.en_nome? solucao.en_nome : solucao.nome}}</h4>
+                >{{$i18n.locale == 'en' && solucao.en_nome || solucao.nome? solucao.en_nome || solucao.nome : solucao.nome || solucao.en_nome}}</h4>
                 <p
                   v-if="$i18n.locale == 'en' && solucao.en_descricao"
                   class="description mt-3"
-                >{{solucao.en_descricao.slice(0,100)}} {{solucao.en_descricao.length > 100? '...' : ''}}</p>
+                >{{(solucao.en_descricao || solucao.descricao).slice(0,100)}} {{(solucao.en_descricao.length || solucao.descricao.length) > 100? '...' : ''}}</p>
                 <p
-                  v-else
+                  v-if="$i18n.locale == 'pt_BR' && solucao.descricao"
                   class="description mt-3"
-                >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
+                >{{(solucao.descricao || solucao.en_descricao).slice(0,100)}} {{(solucao.descricao.length || solucao.en_descricao.length) > 100? '...' : ''}}</p>
 
                 <badge
                   v-if="solucao.area_aplicacao"
@@ -182,11 +182,10 @@
       modal-classes="modal-danger modal-dialog-centered"
     >
       <h4
-        v-if="solucoes[index_modal] && solucoes[index_modal].nome"
         slot="header"
         class="modal-title"
         id="modal-title-notification"
-      >{{$i18n.locale == 'en' && solucoes[index_modal].en_nome? solucoes[index_modal].en_nome : solucoes[index_modal].nome}}</h4>
+      >{{$i18n.locale == 'en' && solucoes[index_modal].en_nome || solucoes[index_modal].nome? solucoes[index_modal].en_nome || solucoes[index_modal].nome : solucoes[index_modal].nome || solucoes[index_modal].en_nome}}</h4>
 
       <div v-if="pagina_modal == 'geral'">
         <div v-if="solucoes[index_modal].tipo">
@@ -227,10 +226,10 @@
       </div>
 
       <div v-if="pagina_modal == 'descricao'">
-        <div v-if="solucoes[index_modal].descricao">
+        <div>
           <h5
             class="text-white"
-          >{{$i18n.locale == 'en' && solucoes[index_modal].en_descricao? solucoes[index_modal].en_descricao : solucoes[index_modal].descricao}}</h5>
+          >{{$i18n.locale == 'en' && solucoes[index_modal].en_descricao || solucoes[index_modal].descricao? solucoes[index_modal].en_descricao || solucoes[index_modal].descricao : solucoes[index_modal].descricao || solucoes[index_modal].en_descricao}}</h5>
         </div>
       </div>
 

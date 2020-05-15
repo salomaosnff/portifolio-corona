@@ -57,6 +57,9 @@
                   v-model="$v.en.solucao.nome.$model"
                   :valid="valido.nome"
                 ></base-input>
+                <p
+                  class="text-right text-italic small"
+                >{{$i18n.locale == 'pt_BR'? solucao.en_nome : solucao.nome}}</p>
 
                 <base-input
                   v-if="$i18n.locale == 'pt_BR'"
@@ -85,7 +88,11 @@
                   v-model="solucao.link_youtube"
                 ></base-input>
 
-                <div class="button-group mb-3 p-1 card" :class="valido.cidade">
+                <div
+                  v-if="$i18n.locale == 'pt_BR'"
+                  class="button-group mb-3 p-1 card"
+                  :class="valido.cidade"
+                >
                   <dropdown>
                     <base-button
                       name="b-state"
@@ -93,32 +100,52 @@
                       type="warning"
                       class="dropdown-toggle text-capitalize m-1"
                     >
-                      <strong>{{local.estado.nome || $t('Selecione seu Estado')}}</strong>
+                      <strong>{{br.local.estado.nome || $t('Selecione seu Estado')}}</strong>
                     </base-button>
                     <a
-                      v-for="(item, index) in local.estados"
+                      v-for="(item, index) in br.local.estados"
                       :key="index"
                       class="dropdown-item"
-                      @click="$v.local.estado.$model = item; buscar_cidades(true);"
+                      @click="$v.br.local.estado.$model = item; buscar_cidades(true);"
                     >{{item.nome}}</a>
                   </dropdown>
-                  <div class="mb3" v-show="local.cidade && local.cidade._id">
+                  <div class="mb3" v-show="br.local.cidade && br.local.cidade._id">
                     <dropdown>
                       <base-button
                         slot="title"
                         type="warning"
                         class="dropdown-toggle text-capitalize m-1"
                       >
-                        <strong>{{local.cidade.nome || $t('Selecione sua Cidade')}}</strong>
+                        <strong>{{br.local.cidade.nome || $t('Selecione sua Cidade')}}</strong>
                       </base-button>
                       <a
-                        v-for="(item, index) in local.cidades"
+                        v-for="(item, index) in br.local.cidades"
                         :key="index"
                         class="dropdown-item"
-                        @click="$v.local.cidade.$model = item; "
+                        @click="$v.br.local.cidade.$model = item"
                       >{{item.nome}}</a>
                     </dropdown>
                   </div>
+                </div>
+
+                <div v-else class="button-group mb-3 p-1 card" :class="valido.pais">
+                  <dropdown>
+                    <base-button
+                      name="b-state"
+                      slot="title"
+                      type="warning"
+                      class="dropdown-toggle text-capitalize m-1"
+                    >
+                      <strong>{{en.local.pais || $t('Select your Country')}}</strong>
+                    </base-button>
+                    <a
+                      v-for="(item, index) in en.local.paises"
+                      :key="index"
+                      class="dropdown-item"
+                      @click="$v.en.local.pais.$model = item"
+                      v-show="item"
+                    >{{item}}</a>
+                  </dropdown>
                 </div>
 
                 <textarea
@@ -135,6 +162,9 @@
                   v-model="$v.en.solucao.descricao.$model"
                   :class="valido.descricao"
                 ></textarea>
+                <p
+                  class="text-right text-italic small"
+                >{{$i18n.locale == 'pt_BR'? solucao.en_descricao : solucao.descricao}}</p>
 
                 <div class="card mb-3 p-2" :class="valido.area_aplicacao">
                   <h6 class="mb-3 text-warning font-weight-bold">{{$t('Área de Aplicação')}}</h6>
@@ -265,6 +295,12 @@ export default {
           nome: "",
           instituicao: "",
           descricao: ""
+        },
+        local: {
+          estado: { _id: undefined },
+          estados: [],
+          cidade: { _id: undefined },
+          cidades: []
         }
       },
       en: {
@@ -272,14 +308,39 @@ export default {
           nome: "",
           instituicao: "",
           descricao: ""
+        },
+        local: {
+          pais: "",
+          paises: [
+            "Argentina",
+            "Brazil",
+            "Canada",
+            "Chile",
+            "China",
+            "Colombia",
+            "Spain",
+            "France",
+            "Germany",
+            "Netherlands",
+            "India",
+            "Israel",
+            "Italy",
+            "Japan",
+            "Mexico",
+            "Portugal",
+            "Russia",
+            "Singapore",
+            "Switzerland",
+            "Uruguay",
+            "United Kingdom",
+            "USA",
+            "Asian continent",
+            "Australian continent",
+            "European continent",
+            "Latin American"
+          ]
         }
       },
-      local: {
-        estado: { _id: undefined },
-        estados: [],
-        cidade: { _id: undefined },
-        cidades: []
-      },            
       solucao: {
         nome: "",
         en_nome: "",
@@ -293,39 +354,40 @@ export default {
         status: "Produto em Desenvolvimento",
         negocio: "Grátis",
         responsavel: { _id: "" },
-        cidade: { _id: "" }
+        cidade: { _id: "" },
+        en_pais: ""
       },
 
       valido: {
         nome: null,
         instituicao: null,
+        pais: "border-valid",
         cidade: "border-valid",
-        descricao: "border-valid",
+        descricao: "border-valid"
       },
       error: false
     };
   },
   async mounted() {
     await this.buscar_estados();
-    if (!this.$route.query.solucao) 
-      await this.buscar_cidades(true);
+    if (!this.$route.query.solucao) await this.buscar_cidades(true);
     else {
       this.solucao = await this.$route.query.solucao;
-      
-      this.br.solucao.nome        = this.solucao.nome;
+
+      this.br.solucao.nome = this.solucao.nome;
       this.br.solucao.instituicao = this.solucao.instituicao;
-      this.br.solucao.descricao   = this.solucao.descricao;
-      
-      this.en.solucao.nome        = this.solucao.en_nome;
+      this.br.solucao.descricao = this.solucao.descricao;
+
+      this.en.solucao.nome = this.solucao.en_nome;
       this.en.solucao.instituicao = this.solucao.instituicao;
-      this.en.solucao.descricao   = this.solucao.en_descricao;
-        
+      this.en.solucao.descricao = this.solucao.en_descricao;
+
       await this.http
         .getId("estado", this.solucao.cidade.estado)
         .then(async data => {
-          this.local.estado = await data;
+          this.br.local.estado = await data;
           await this.buscar_cidades(false);
-          this.local.cidade = await this.$route.query.solucao.cidade;
+          this.br.local.cidade = await this.$route.query.solucao.cidade;
         });
     }
   },
@@ -336,6 +398,20 @@ export default {
         nome: { required, maxLength: maxLength(100) },
         instituicao: { required, maxLength: maxLength(100) },
         descricao: { required, maxLength: maxLength(500) }
+      },
+      local: {
+        estado: {},
+        cidade: {
+          isCidadeSelected(value) {
+            if (
+              typeof value._id === "undefined" &&
+              typeof value.nome === "undefined"
+            ) {
+              return false;
+            }
+            return true;
+          }
+        }
       }
     },
     en: {
@@ -343,33 +419,28 @@ export default {
         nome: { required, maxLength: maxLength(100) },
         instituicao: { required, maxLength: maxLength(100) },
         descricao: { required, maxLength: maxLength(500) }
-      }
-    },
-    local: {
-      estado: { required },
-      cidade: {  
-        isCidadeSelected(value) {
-          console.log("value.id: "+value._id);
-          console.log("value.nome: "+value.nome);
-          if (typeof value._id === "undefined" && typeof value.nome === "undefined"){ 
-            console.log("isCidadeSelected: return false");
-            return false;
+      },
+      local: {
+        pais: {
+          isPaisSelected(value) {
+            if (typeof value.nome === "undefined") {
+              return false;
+            }
+            return true;
           }
-          console.log("isCidadeSelected: return true");
-          return true;
         }
-      },        
+      }
     }
   },
 
   methods: {
     onSubmit() {
-      this.resetaCamposValidos();      
-      this.$v.local.$touch();
+      this.resetaCamposValidos();
+      // this.$v.local_br.$touch(); COMENTEI ISSO
 
-      if ( this.$i18n.locale == 'pt_BR' ){
+      if (this.$i18n.locale == "pt_BR") {
         this.$v.br.solucao.$touch();
-        if ( this.$v.br.solucao.$anyError || this.$v.local.$anyError ) {
+        if (this.$v.br.solucao.$anyError || this.$v.br.local.$anyError) {
           this.error = true;
           if (this.$v.br.solucao.nome.$invalid)
             this.valido.nome = !this.$v.br.solucao.nome.$invalid;
@@ -377,13 +448,12 @@ export default {
             this.valido.instituicao = !this.$v.br.solucao.instituicao.$invalid;
           if (this.$v.br.solucao.descricao.$invalid)
             this.valido.descricao = "border-danger";
-          if (this.$v.local.$invalid)
-            this.valido.cidade = "border-danger";
+          if (this.$v.br.local.$invalid) this.valido.cidade = "border-danger";
           return;
-        }        
+        }
       } else {
         this.$v.en.solucao.$touch();
-        if ( this.$v.en.solucao.$anyError || this.$v.local.$anyError ) {
+        if (this.$v.en.solucao.$anyError || this.$v.en.local.$anyError) {
           this.error = true;
           if (this.$v.en.solucao.nome.$invalid)
             this.valido.nome = !this.$v.en.solucao.nome.$invalid;
@@ -391,8 +461,7 @@ export default {
             this.valido.instituicao = !this.$v.en.solucao.instituicao.$invalid;
           if (this.$v.en.solucao.descricao.$invalid)
             this.valido.descricao = "border-danger";
-          if (this.$v.local.$invalid)
-            this.valido.cidade = "border-danger";          
+          if (this.$v.en.local.$invalid) this.valido.pais = "border-danger";
           return;
         }
       }
@@ -401,64 +470,66 @@ export default {
       this.salvar();
     },
 
-    resetaCamposValidos() {      
+    resetaCamposValidos() {
       this.error = false;
 
       this.$v.br.solucao.$reset();
       this.$v.en.solucao.$reset();
-      this.$v.local.$reset();
+      this.$v.br.local.$reset();
+      this.$v.en.local.$reset();
 
       this.valido.nome = null;
       this.valido.instituicao = null;
       this.valido.cidade = "border-valid";
+      this.valido.pais = "border-valid";
       this.valido.descricao = "border-valid";
     },
 
     async buscar_estados() {
       await this.http.get("estado", 0).then(async data => {
-        this.local.estados = await data;
+        this.br.local.estados = await data;
       });
     },
 
     async buscar_cidades(definir_cidade) {
-      if (this.local.estado && this.local.estado._id)
+      if (this.br.local.estado && this.br.local.estado._id)
         await this.http
-          .cidadesByEstado(this.local.estado._id)
+          .cidadesByEstado(this.br.local.estado._id)
           .then(async data => {
-            this.local.cidades = await data.cidades;
-            if ( definir_cidade && 
-                  this.local.cidades[0] && 
-                  this.local.cidades[0]._id )
-              this.local.cidade = this.local.cidades[0];
+            this.br.local.cidades = await data.cidades;
+            if (
+              definir_cidade &&
+              this.br.local.cidades[0] &&
+              this.br.local.cidades[0]._id
+            )
+              this.br.local.cidade = this.br.local.cidades[0];
           });
     },
 
     async salvar() {
-      console.log("Enter Salve");
-      if ( this.$i18n.locale == 'pt_BR' ){
-        this.solucao.nome         = this.br.solucao.nome;
-        this.solucao.instituicao  = this.br.solucao.instituicao;
-        this.solucao.descricao    = this.br.solucao.descricao;
-        this.solucao.cidade       = this.local.cidade;
+      if (this.$i18n.locale == "pt_BR") {
+        this.solucao.nome = await this.br.solucao.nome;
+        this.solucao.descricao = await this.br.solucao.descricao;
+        this.solucao.instituicao = await this.br.solucao.instituicao;
+        this.solucao.cidade = await this.br.local.cidade;
       } else {
-        this.solucao.en_nome      = this.en.solucao.nome;
-        this.solucao.instituicao  = this.en.solucao.instituicao;
-        this.solucao.en_descricao = this.en.solucao.descricao;
-        this.solucao.cidade       = this.local.cidade;
+        this.solucao.en_nome = await this.en.solucao.nome;
+        this.solucao.en_descricao = await this.en.solucao.descricao;
+        this.solucao.instituicao = await this.en.solucao.instituicao;
+        this.solucao.en_pais = await this.en.local.pais;
+        if (this.solucao.cidade._id == "")
+          this.solucao.cidade._id = await "5e8cebee28d08919d4363345";
       }
       for (const key in this.solucao) {
         if (this.solucao.hasOwnProperty(key)) {
           const element = this.solucao[key];
-          console.log(key+": "+element);
         }
       }
       if (this.$route.query.solucao && this.solucao._id) {
-        this.http
-          .put("solucao", this.solucao._id, this.solucao)
-          .then(resp => {
-            if (resp.message == "Editado com sucesso!")
-              this.$router.push("usuario_solucoes_lista");
-            });
+        this.http.put("solucao", this.solucao._id, this.solucao).then(resp => {
+          if (resp.message == "Editado com sucesso!")
+            this.$router.push("usuario_solucoes_lista");
+        });
       } else {
         let pessoa = localStorage.getItem("pessoa");
         if (pessoa) pessoa = JSON.parse(pessoa);

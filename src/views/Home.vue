@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section-shaped my-0">
-      <div class="row p-5 justify-content-center">
+      <div class="row pt-2 px-4 pb-3 justify-content-center align-items-center">
         <div class="mb-3 col-12 col-lg-6 pt-0" id="top_logo">
           <img id="icon_logo" src="/images/icons/icon-512x512.png" />
           <img id="logo" :src="'img/logo_' + $i18n.locale + '.png'" />
@@ -9,14 +9,11 @@
 
         <div class="d-flex" style="flex: 1"></div>
 
-        <div class="d-flex flex-wrap justify-content-center">
+        <div class="d-block text-center d-md-flex flex-wrap justify-content-center" style="flex: 0 auto">
           <nav class="d-flex justify-content-end">
-            <ul class="row justify-content-center pl-0">
+            <ul class="d-md-flex justify-content-center pl-0">
               <li class="mx-4">
-                <a class="menu-text" href="#/sobre">
-                  {{$t('Sobre o')}}
-                  <br />REVIVE
-                </a>
+                <a class="menu-text" href="#/sobre">{{$t('Sobre o')}} REVIVE</a>
               </li>
               <li class="mx-4">
                 <a
@@ -24,29 +21,18 @@
                   class="menu-text"
                   target="_blank"
                   href="https://www.bbc.com/portuguese/topics/clmq8rgyyvjt"
-                >
-                  Notícias
-                  <br />COVID-19
-                </a>
+                >Notícias COVID-19</a>
                 <a
                   v-else
                   class="menu-text"
                   target="_blank"
                   href="https://www.bbc.com/news/coronavirus"
-                >
-                  COVID-19
-                  <br />News
-                </a>
+                >COVID-19 News</a>
               </li>
 
               <li class="mx-4">
-                <a v-if="$i18n.locale == 'pt_BR'" class="menu-text" href="#/contato">
-                  Fale com
-                  <br />A GENTE
-                </a>
-                <a v-else class="menu-text" href="#/contato">
-                  Contact
-                  <br />US
+                <a class="menu-text" href="#/contato">
+                  Fale com A GENTE
                 </a>
               </li>
             </ul>

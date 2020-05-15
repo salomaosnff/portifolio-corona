@@ -2,7 +2,7 @@
   <div>
     <section class="section-shaped my-0">
       <div class="row p-5 justify-content-center">
-        <div class="mb-3 col-12 col-lg-6">
+        <div class="mb-3 col-12 col-lg-6 pt-0" id="top_logo">
           <img id="icon_logo" src="/images/icons/icon-512x512.png" />
           <img id="logo" :src="'img/logo_' + $i18n.locale + '.png'" />
         </div>
@@ -200,10 +200,10 @@
           </card>
         </div>
       </div>
-      <div class="d-flex flex-wrap pr-5" style="justify-content: right">
+      <div class="d-flex flex-wrap justify-content-center mt-5 pt-4">
         <img class="logos" src="img/if.png" />
         <img class="logos" src="img/home/iracema.png" />
-        <img class="logos" src="img/home/citinova.jpg" />
+        <img class="logos" src="img/citinova.jpg" />
         <img class="logos" src="img/estado.jpg" />
       </div>
       <div class="d-flex flex-wrap pr-5 mr-3" style="justify-content: right">
@@ -249,7 +249,7 @@
                     shadow
                     rounded
                   ></icon>
-                  <h4 class="text-default">Fóruns de Discussão</h4>
+                  <h4 class="text-default">{{$t('Fóruns de Discussão')}}</h4>
                 </div>
                 <div>
                   <img
@@ -279,7 +279,7 @@
                     shadow
                     rounded
                   ></icon>
-                  <h4 class="text-default">Aconselhamento Tecnológico</h4>
+                  <h4 class="text-default">{{$t('Aconselhamento Tecnológico')}}</h4>
                 </div>
                 <div class="text-center">
                   <div>
@@ -311,7 +311,7 @@
                     shadow
                     rounded
                   ></icon>
-                  <h4 class="text-default">Aconselhamento</h4>
+                  <h4 class="text-default">{{$t('Aconselhamento Econômico')}}</h4>
                 </div>
                 <div class="text-center">
                   <div>
@@ -349,7 +349,7 @@
     <section class="text-center m-5">
       <img class="mx-5" style="height: 130px" src="img/sedet.png" lazy="loaded" />
       <img class="mx-5" style="height: 130px" src="img/home/iracema.png" lazy="loaded" />
-      <img class="mx-5" style="height: 130px" src="img/citinova.jpg" lazy="loaded" />
+      <img class="mx-5" style="height: 70px" src="img/citinova.jpg" lazy="loaded" />
     </section>
 
     <h2 class="text-center mt-0">{{$t('Colaboradores')}}</h2>
@@ -448,6 +448,17 @@ ul {
     border-radius: 20px;
     padding: 15px;
   }
+
+  #icon_logo {
+    width: 150px;
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
+  #top_logo{
+    text-align: center;
+  }
 }
 
 @media (min-width: 480px) {
@@ -457,6 +468,17 @@ ul {
     background-color: #008ecd;
     border-radius: 20px;
     padding: 15px;
+  }
+
+  #icon_logo {
+    width: 150px;
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
+  #top_logo{
+    text-align: center;
   }
 }
 
@@ -468,6 +490,17 @@ ul {
     border-radius: 20px;
     padding: 15px;
   }
+
+  #icon_logo {
+    width: 150px;
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
+  #top_logo{
+    text-align: center;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -478,14 +511,19 @@ ul {
     border-radius: 20px;
     padding: 15px;
   }
+  
+  #icon_logo {
+    width: 150px;
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
+  #top_logo{
+    text-align: left;
+  }
 }
 
-#icon_logo {
-  width: 150px;
-  height: auto;
-  border-radius: 20px;
-  padding: 15px;
-}
 
 hr.listinha {
   max-width: 3.25rem;

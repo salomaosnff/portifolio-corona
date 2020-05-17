@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const baseUrl = [
-    'https://portifolio-corona-api.herokuapp.com/',
-    'http://localhost:3000/',
+    'http://ec2-3-234-1-164.compute-1.amazonaws.com:3000/',
+    'http://ec2-3-234-1-164.compute-1.amazonaws.com:3000/',
 ]
 
 export default class Http {

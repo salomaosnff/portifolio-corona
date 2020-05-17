@@ -9,7 +9,10 @@
 
         <div class="d-flex" style="flex: 1"></div>
 
-        <div class="d-block text-center d-md-flex flex-wrap justify-content-center" style="flex: 0 auto">
+        <div
+          class="d-block text-center d-md-flex flex-wrap justify-content-center"
+          style="flex: 0 auto"
+        >
           <nav class="d-flex justify-content-end">
             <ul class="d-md-flex justify-content-center pl-0">
               <li class="mx-4">
@@ -31,9 +34,7 @@
               </li>
 
               <li class="mx-4">
-                <a class="menu-text" href="#/contato">
-                  {{$t('Fale com A GENTE')}}
-                </a>
+                <a class="menu-text" href="#/contato">{{$t('Fale com A GENTE')}}</a>
               </li>
             </ul>
           </nav>
@@ -93,81 +94,6 @@
           >COVID-19 no Ceará</base-button>
           <br />
         </div>
-        <!-- <modal
-              v-if="noticias_corona"
-              :show.sync="modal_covid"
-              gradient="warning"
-              modal-classes="modal-warning modal-dialog-centered"
-            >
-              <h4 class="modal-title" slot="header">{{$t('Home.Estatísticas do COVID-19')}} (Brasil)</h4>
-              <div class="col" style="justify-content: center">
-                <div class="row" style="justify-content: center">
-                  <div class="m-4" v-if="noticias_corona.posicao">
-                    <p class="text-white">Ranking</p>
-                    <h4 class="text-white">{{noticias_corona.posicao}}</h4>
-                  </div>
-
-                  <div class="m-4" v-if="noticias_corona.casos">
-                    <p class="text-white">{{$t('Casos')}}</p>
-                    <h4 class="text-white">{{noticias_corona.casos}}</h4>
-                  </div>
-
-                  <div class="m-4" v-if="noticias_corona.curas">
-                    <p class="text-white">{{$t('Curas')}}</p>
-                    <h4 class="text-white">{{noticias_corona.curas}}</h4>
-                  </div>
-
-                  <div class="m-4" v-if="noticias_corona.mortes">
-                    <p class="text-white">{{$t('Mortes')}}</p>
-                    <h4 class="text-white">{{noticias_corona.mortes}}</h4>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col" style="justify-content: center">
-                <div class="row" style="justify-content: center">
-                  <p
-                    class="text-white"
-                    style="align-self: center"
-                  >. . . . . . . {{$t('Hoje')}} . . . . . . .</p>
-                </div>
-
-                <div class="row" style="justify-content: center">
-                  <div class="m-4" v-if="noticias_corona.novos_casos_hoje">
-                    <p class="text-white">{{$t('Novos Casos')}}</p>
-                    <h4 class="text-white">{{noticias_corona.novos_casos_hoje}}</h4>
-                  </div>
-
-                  <div class="m-4" v-if="noticias_corona.novas_mortes_hoje">
-                    <p class="text-white">{{$t('Novas Mortes')}}</p>
-                    <h4 class="text-white">{{noticias_corona.novas_mortes_hoje}}</h4>
-                  </div>
-                </div>
-
-                <div class="row" style="justify-content: center">
-                  <div class="m-4" v-if="noticias_corona.casos_ativos">
-                    <p class="text-white">{{$t('Casos Ativos')}}</p>
-                    <h4 class="text-white">{{noticias_corona.casos_ativos}}</h4>
-                  </div>
-
-                  <div class="m-4" v-if="noticias_corona.casos_graves">
-                    <p class="text-white">{{$t('Casos Graves')}}</p>
-                    <h4 class="text-white">{{noticias_corona.casos_graves}}</h4>
-                  </div>
-                </div>
-              </div>
-              <p
-                class="small text-right mr-5 text-thin text-white"
-              >{{$t('Fonte')}}: {{noticias_corona.fonte}}</p>
-              <template slot="footer">
-                <base-button
-                  type="link"
-                  text-color="white"
-                  class="text-normal"
-                  @click="modal_covid = false"
-                >{{$t('Fechar')}}</base-button>
-              </template>
-        </modal>-->
 
         <div class="col-lg-5 text-center">
           <card style="background-color: #fb8640ee;" shadow>
@@ -330,6 +256,18 @@
     <section class="text-center m-5">
       <img class="m-4" style="height: 60px" src="img/lar.png" lazy="loaded" />
       <img class="m-4" style="height: 60px" src="img/ifce.png" lazy="loaded" />
+      <base-button
+        class="m-4 col-1"
+        type="warning text-normal"
+        style="font-size: 16px"
+        @click="modal_desenvolvedores = false; modal_visivel = true; modal_autores = true"
+      >Autores</base-button>
+      <base-button
+        class="m-4 col-2"
+        type="warning text-normal"
+        style="font-size: 16px"
+        @click="modal_autores = false; modal_visivel = true; modal_desenvolvedores = true"
+      >Desenvolvedores</base-button>
     </section>
 
     <h2 class="text-center mt-0">{{$t('Promoção')}}</h2>
@@ -346,6 +284,49 @@
       <img class="mx-5" style="height: 70px" src="img/ppgcc.png" lazy="loaded" />
       <img class="mx-5" style="height: 70px" src="img/lapisco.png" lazy="loaded" />
     </section>
+
+    <modal
+      v-if="noticias_corona"
+      :show.sync="modal_visivel"
+      gradient="warning"
+      modal-classes="modal-warning modal-dialog-centered"
+    >
+      <h4
+        class="modal-title"
+        slot="header"
+      >{{modal_autores? 'Autores do REVIVE' : modal_desenvolvedores? 'Desenvolvedores do REVIVE':'' }}</h4>
+      <div class="col" style="justify-content: center">
+        <div class="row" style="justify-content: center">
+          <h5 v-if="modal_autores" class="text-white" style="line-height: 200%">
+            Mauro Oliveira
+            <br />Renato Alves de Oliveira
+            <br />Renato Alexandre Costa Freitas
+          </h5>
+          <h5 v-else class="text-white" style="line-height: 200%">
+            Renato Alves de Oliveira
+            <br />Renato Alexandre Costa Freitas
+            <br />Edgar dos Santos Oliveira
+            <br />Fernando Ericales da Silva Lima
+            <br />Francisco de Sousa Junior
+            <br />Ruan dos Santos Gondim
+            <br />Salomão Neto Fernandes de Freitas
+            <br />Joyce Quintino Alves
+            <br />Matheus Ferreira de Oliveira
+            <br />Paulo Ericson Valentin Silva
+            <br />Rui Guerra Moreno
+            <br />Vinicius Nunes Barbosa
+          </h5>
+        </div>
+      </div>
+      <template slot="footer">
+        <base-button
+          type="link"
+          text-color="white"
+          class="text-normal"
+          @click="modal_visivel = false"
+        >{{$t('Fechar')}}</base-button>
+      </template>
+    </modal>
   </div>
 </template>
 
@@ -363,8 +344,9 @@ export default {
       carousels: ["COVID-19", "Introdução"],
       noticias_corona: {},
       idiomas: ["pt_BR", "en"],
-      modal_covid: false,
-      creditos: false,
+      modal_visivel: false,
+      modal_autores: false,
+      modal_desenvolvedores: false,
       cards: [
         {
           icone: "ni ni-bulb-61",

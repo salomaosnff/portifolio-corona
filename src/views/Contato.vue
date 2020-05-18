@@ -47,7 +47,11 @@
             <div class="mt-5 py-5 border-top text-center">
               <div class="row justify-content-center">
                 <div class="col-lg-9">
-                  <p>{{ $t("Bio") }}</p>         
+                  <p>{{ $t("Bio") }}</p>
+                  <div>
+                    <img v-lazy="'images/icons/icon-lattes-300x300.ico'" width="30px" height="30px">
+                    <a href="http://lattes.cnpq.br/1357467185030086"> lattes.cnpq.br/</a>
+                  </div>
                 </div>
               </div>
             </div>

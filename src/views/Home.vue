@@ -36,6 +36,9 @@
               <li class="mx-4">
                 <a class="menu-text" href="#/contato">{{$t('Fale com A GENTE')}}</a>
               </li>
+              <li class="mx-4">
+                <a class="menu-text" href="#/login">Login</a>
+              </li>
             </ul>
           </nav>
           <ul class="d-flex justify-content-center pl-0">
@@ -146,8 +149,8 @@
                     class="mt-4 btn-block"
                     type="warning text-normal"
                     style="font-size: 16px"
-                    @click="$router.push({ name: card.link, 
-                      query: { rota: card.props_to_link }})"
+                    @click="card.login && pessoa._id == ''? $router.push({ name: 'login', 
+                      query: { rota: card.link }}) : $router.push(card.link)"
                   >{{$t('Home.Cards[' + index + '].Botão')}}</base-button>
                 </div>
               </card>
@@ -177,8 +180,8 @@
                   class="mt-4 btn-block btn-block"
                   type="warning text-normal"
                   style="font-size: 16px"
-                  @click="$router.push({ name: 'login', 
-                      query: { rota: 'forum_lista' }})"
+                  @click="pessoa._id == ''? $router.push({ name: 'login', 
+                      query: { rota: 'forum_lista' }}) : $router.push('forum_lista')"
                 >{{$t('Entrar')}}</base-button>
               </card>
             </div>
@@ -340,6 +343,7 @@ export default {
   data() {
     return {
       http: new http(),
+      pessoa: { _id: "" },
       carousel: 0,
       carousels: ["COVID-19", "Introdução"],
       noticias_corona: {},
@@ -350,23 +354,27 @@ export default {
       cards: [
         {
           icone: "ni ni-bulb-61",
-          link: "login",
-          props_to_link: "usuario_solucoes_lista"
+          link: "usuario_solucoes_lista",
+          login: true
         },
         {
           icone: "ni ni-settings",
           link: "solucoes_lista",
-          props_to_link: ""
+          login: false
         },
         {
           icone: "ni ni-money-coins",
           link: "dashboard_investimento",
-          props_to_link: ""
+          login: false
         }
       ]
     };
   },
   async mounted() {
+    let pessoa = {};
+    pessoa = await localStorage.getItem("pessoa");
+    pessoa = await JSON.parse(pessoa);
+    if (pessoa && pessoa._id) this.pessoa = pessoa;
     // await this.corona_noticias();
     // this.change_carousel(0);
   },

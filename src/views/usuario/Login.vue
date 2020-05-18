@@ -45,9 +45,7 @@
                   addon-left-icon="ni ni-lock-circle-open"
                   v-model="login.senha"
                 ></base-input>
-                <base-checkbox
-                  v-model="passwordVisible"
-                >{{$t("Login.Mostrar Senha")}}</base-checkbox>
+                <base-checkbox v-model="passwordVisible">{{$t("Login.Mostrar Senha")}}</base-checkbox>
                 <div class="text-center">
                   <base-button type="warning" class="my-4 text-capitalize" @click="entrar()">Login</base-button>
                   <base-button
@@ -138,7 +136,7 @@ export default {
         this.login.email = this.pessoa.email;
         this.login.senha = this.pessoa.senha;
       }
-    },
+    }
   }
 };
 </script>

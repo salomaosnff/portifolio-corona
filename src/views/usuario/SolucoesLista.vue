@@ -75,14 +75,23 @@
                 <h4
                   class="text-default"
                 >{{$i18n.locale == 'en'? solucao.en_nome || solucao.nome : solucao.nome || solucao.en_nome}}</h4>
+                <!-- SIM isso é realmente necessário -->
                 <p
-                  v-if="$i18n.locale == 'en'"
+                  v-if="$i18n.locale == 'en' && solucao.en_descricao"
                   class="description mt-3"
-                >{{(solucao.en_descricao || solucao.descricao).slice(0,100)}} {{(solucao.en_descricao.length || solucao.descricao.length) > 100? '...' : ''}}</p>
+                >{{solucao.en_descricao.slice(0,100)}} {{solucao.en_descricao.length > 100? '...' : ''}}</p>
                 <p
-                  v-else
+                  v-else-if="$i18n.locale == 'en' && solucao.descricao"
                   class="description mt-3"
-                >{{(solucao.descricao || solucao.en_descricao).slice(0,100)}} {{(solucao.descricao.length || solucao.en_descricao.length) > 100? '...' : ''}}</p>
+                >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
+                <p
+                  v-else-if="$i18n.locale == 'pt_BR' && solucao.descricao"
+                  class="description mt-3"
+                >{{solucao.descricao.slice(0,100)}} {{solucao.descricao.length > 100? '...' : ''}}</p>
+                <p
+                  v-else-if="$i18n.locale == 'pt_BR' && solucao.en_descricao"
+                  class="description mt-3"
+                >{{solucao.en_descricao.slice(0,100)}} {{solucao.en_descricao.length > 100? '...' : ''}}</p>
 
                 <badge
                   v-if="solucao.area_aplicacao"

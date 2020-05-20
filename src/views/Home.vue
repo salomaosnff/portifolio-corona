@@ -301,9 +301,11 @@
       <div class="col" style="justify-content: center">
         <div class="row" style="justify-content: center">
           <h5 v-if="modal_autores" class="text-white" style="line-height: 200%">
-            Mauro Oliveira
-            <br />Renato Alves de Oliveira
+            Antonio Mauro Barbosa de Oliveira
+            <br />Carina Teixeira de Oliveira
+            <br />Reinaldo Bezerra Braga
             <br />Renato Alexandre Costa Freitas
+            <br />Renato Alves de Oliveira
           </h5>
           <h5 v-else class="text-white" style="line-height: 200%">
             Renato Alves de Oliveira

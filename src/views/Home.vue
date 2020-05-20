@@ -258,6 +258,7 @@
     <hr class="listinha mt-4" />
     <section class="text-center m-5">
       <img class="m-4" style="height: 60px" src="img/lar.png" lazy="loaded" />
+      <img class="mx-5" style="height: 70px" src="img/prpi.jpeg" lazy="loaded" />
       <img class="m-4" style="height: 60px" src="img/ifce.png" lazy="loaded" />
       <base-button
         class="m-4 col-1"

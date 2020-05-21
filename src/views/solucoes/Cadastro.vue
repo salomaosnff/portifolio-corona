@@ -147,21 +147,18 @@
                     >{{item}}</a>
                   </dropdown>
                 </div>
-
                 <textarea
-                  v-if="$i18n.locale == 'pt_BR'"
                   class="form-control mb-3"
                   :placeholder="$t('Descrição')"
-                  v-model="$v.br.solucao.descricao.$model"
+                  v-model="$v[lang].solucao.descricao.$model"
                   :class="valido.descricao"
+                  maxlength="500"
                 ></textarea>
-                <textarea
+                <p v-if="caracteresRestantes('descricao') > -1">{{caracteresRestantesDescricao}}</p>
+                <p
                   v-else
-                  class="form-control mb-3"
-                  :placeholder="$t('Descrição')"
-                  v-model="$v.en.solucao.descricao.$model"
-                  :class="valido.descricao"
-                ></textarea>
+                  style="color:red"
+                >{{$t("solucoes.Cadastro.Quantidade máxima de caracteres excedida! Por favor seja mais conciso")}}</p>
                 <p
                   class="text-right text-italic small"
                 >{{$i18n.locale == 'pt_BR'? solucao.en_descricao : solucao.descricao}}</p>
@@ -368,6 +365,20 @@ export default {
       error: false
     };
   },
+  computed: {
+    caracteresRestantesDescricao() {
+      let lang = this.lang;
+      let { descricao } = this[lang].solucao;
+      let caracteresRestantes = this.caracteresRestantes("descricao");
+      return (
+        caracteresRestantes + "/500 " + this.$t("solucoes.Cadastro.caracteres")
+      );
+    },
+    lang() {
+      return this.$i18n.locale == "pt_BR" ? "br" : "en";
+    }
+  },
+
   async mounted() {
     await this.buscar_estados();
     if (!this.$route.query.solucao) await this.buscar_cidades(true);
@@ -539,6 +550,13 @@ export default {
           if (resp._id) this.$router.push("usuario_solucoes_lista");
         });
       }
+    },
+    caracteresRestantes(campo) {
+      let lang = this.$i18n.locale == "pt_BR" ? "br" : "en";
+      campo = this[lang].solucao[campo];
+      //numero magico '500' -> TODO: criar uma variavel MaxDescricaoLen
+      let caracteresRestantes = 500 - campo.length;
+      return caracteresRestantes;
     }
   }
 };

@@ -276,5 +276,11 @@
     "Em Desenvolvimento": {
         "title": "Página em Desenvolvimento",
         "lead": "Estamos trabalhando no desenvolvimento desta página, em breve você poderá disfrutar de seus maravilhosos recursos ;)"
+    },
+    "solucoes":{
+        "Cadastro":{
+            "caracteres":"caracteres.",
+            "Quantidade máxima de caracteres excedida! Por favor seja mais conciso":"Quantidade máxima de caracteres excedida! Por favor seja mais conciso."
+        }
     }
 }

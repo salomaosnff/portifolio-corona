@@ -392,6 +392,7 @@ export default {
       this.en.solucao.nome = this.solucao.en_nome;
       this.en.solucao.instituicao = this.solucao.instituicao;
       this.en.solucao.descricao = this.solucao.en_descricao;
+      this.en.local.pais = this.solucao.en_pais;
 
       await this.http
         .getId("estado", this.solucao.cidade.estado)

@@ -36,6 +36,9 @@
               <li class="mx-4">
                 <a class="menu-text" href="#/contato">{{$t('Fale com A GENTE')}}</a>
               </li>
+              <li class="mx-4">
+                <a class="menu-text" href="#/login">Login</a>
+              </li>
             </ul>
           </nav>
           <ul class="d-flex justify-content-center pl-0">
@@ -146,8 +149,8 @@
                     class="mt-4 btn-block"
                     type="warning text-normal"
                     style="font-size: 16px"
-                    @click="$router.push({ name: card.link, 
-                      query: { rota: card.props_to_link }})"
+                    @click="card.login && pessoa._id == ''? $router.push({ name: 'login', 
+                      query: { rota: card.link }}) : $router.push(card.link)"
                   >{{$t('Home.Cards[' + index + '].Botão')}}</base-button>
                 </div>
               </card>
@@ -177,8 +180,8 @@
                   class="mt-4 btn-block btn-block"
                   type="warning text-normal"
                   style="font-size: 16px"
-                  @click="$router.push({ name: 'login', 
-                      query: { rota: 'forum_lista' }})"
+                  @click="pessoa._id == ''? $router.push({ name: 'login', 
+                      query: { rota: 'forum_lista' }}) : $router.push('forum_lista')"
                 >{{$t('Entrar')}}</base-button>
               </card>
             </div>
@@ -255,6 +258,7 @@
     <hr class="listinha mt-4" />
     <section class="text-center m-5">
       <img class="m-4" style="height: 60px" src="img/lar.png" lazy="loaded" />
+      <img class="mx-5" style="height: 70px" src="img/prpi.jpeg" lazy="loaded" />
       <img class="m-4" style="height: 60px" src="img/ifce.png" lazy="loaded" />
       <base-button
         class="m-4 col-1"
@@ -298,9 +302,11 @@
       <div class="col" style="justify-content: center">
         <div class="row" style="justify-content: center">
           <h5 v-if="modal_autores" class="text-white" style="line-height: 200%">
-            Mauro Oliveira
-            <br />Renato Alves de Oliveira
+            Antonio Mauro Barbosa de Oliveira
+            <br />Carina Teixeira de Oliveira
+            <br />Reinaldo Bezerra Braga
             <br />Renato Alexandre Costa Freitas
+            <br />Renato Alves de Oliveira
           </h5>
           <h5 v-else class="text-white" style="line-height: 200%">
             Renato Alves de Oliveira
@@ -340,6 +346,7 @@ export default {
   data() {
     return {
       http: new http(),
+      pessoa: { _id: "" },
       carousel: 0,
       carousels: ["COVID-19", "Introdução"],
       noticias_corona: {},
@@ -350,23 +357,27 @@ export default {
       cards: [
         {
           icone: "ni ni-bulb-61",
-          link: "login",
-          props_to_link: "usuario_solucoes_lista"
+          link: "usuario_solucoes_lista",
+          login: true
         },
         {
           icone: "ni ni-settings",
           link: "solucoes_lista",
-          props_to_link: ""
+          login: false
         },
         {
           icone: "ni ni-money-coins",
           link: "dashboard_investimento",
-          props_to_link: ""
+          login: false
         }
       ]
     };
   },
   async mounted() {
+    let pessoa = {};
+    pessoa = await localStorage.getItem("pessoa");
+    pessoa = await JSON.parse(pessoa);
+    if (pessoa && pessoa._id) this.pessoa = pessoa;
     // await this.corona_noticias();
     // this.change_carousel(0);
   },

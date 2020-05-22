@@ -280,13 +280,13 @@
           @click="pagina_modal = 'descricao'"
         >{{$t('Descrição')}}</base-button>
 
-        <base-button
+        <!-- <base-button
           v-if="solucoes[index_modal].responsavel"
           :type="pagina_modal == 'responsavel'? 'white' : 'link'"
           :text-color="pagina_modal == 'responsavel'? 'warning' : 'white'"
           class="ml-auto text-normal"
           @click="pagina_modal = 'responsavel'"
-        >{{$t('Responsável')}}</base-button>
+        >{{$t('Responsável')}}</base-button> -->
       </template>
     </modal>
 

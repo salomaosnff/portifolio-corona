@@ -208,7 +208,7 @@
                   </div>
                   <base-button
                     class="mt-4 btn-block"
-                    href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/formResponse"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdOXMzVslwcmCE_k8OG4BHBoNINWaurJtp2yH4s449L_xaOMg/viewform"
                     type="warning text-normal"
                     style="font-size: 16px"
                     tag="a"
@@ -240,7 +240,7 @@
                   </div>
                   <base-button
                     class="mt-4 btn-block"
-                    href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/formResponse"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdBTiVxsNkxH6nX4DOASHYZqeITv6XBWBccb_-tZr0QJBxDeA/viewform"
                     type="warning text-normal"
                     style="font-size: 16px"
                     tag="a"

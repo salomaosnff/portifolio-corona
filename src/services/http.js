@@ -1,5 +1,14 @@
 import axios from 'axios'
 import { API_BASE } from '../config'
+import { OAuth } from './oauth'
+
+// Obtem um token de acesso
+axios.interceptors.request.use(async (req) => {
+    if (OAuth.isLogged) {
+        req.headers['Authorization'] = await OAuth.getValidAccessToken()
+    }
+    return req
+})
 
 export default class Http {
     async novo_acesso_solucoes() {

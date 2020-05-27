@@ -1,49 +1,45 @@
 import axios from 'axios'
-
-const baseUrl = [
-    'http://ec2-3-234-1-164.compute-1.amazonaws.com:3000/',
-    'http://ec2-3-234-1-164.compute-1.amazonaws.com:3000/',
-]
+import { API_BASE } from '../config'
 
 export default class Http {
     async novo_acesso_solucoes() {
         return await axios
-            .get(baseUrl[0] + 'acesso/novo')
+            .get(API_BASE + 'acesso/novo')
             .then(data => { return data.data.solucoes })
             .catch(() => { return {} })
     }
 
     async logar(dados) {
         return await axios
-            .get(baseUrl[0] + 'pessoa/logar', { params: { email: dados.email, senha: dados.senha } })
+            .get(API_BASE + 'pessoa/logar', { params: { email: dados.email, senha: dados.senha } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }
 
     async solucoesPorPessoa(dados) {
         return await axios
-            .get(baseUrl[0] + 'solucao/buscarPorPessoa', { params: { pessoaId: dados } })
+            .get(API_BASE + 'solucao/buscarPorPessoa', { params: { pessoaId: dados } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }
 
     async noticiasPorPessoa(dados) {
         return await axios
-            .get(baseUrl[0] + 'noticia/buscarPorPessoa', { params: { pessoaId: dados } })
+            .get(API_BASE + 'noticia/buscarPorPessoa', { params: { pessoaId: dados } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }
 
     async forunsPorPessoa(dados) {
         return await axios
-            .get(baseUrl[0] + 'forum/buscarPorPessoa', { params: { pessoaId: dados } })
+            .get(API_BASE + 'forum/buscarPorPessoa', { params: { pessoaId: dados } })
             .then((data) => { return data.data })
             .catch(() => { return {} })
     }
 
     async cidadesByEstado(dados) {
         return await axios
-            .get(baseUrl[0] + 'cidade/estado/' + dados)
+            .get(API_BASE + 'cidade/estado/' + dados)
             .then(data => {
                 return data.data
             })
@@ -54,28 +50,28 @@ export default class Http {
 
     async get(entidade) {
         return await axios
-            .get(baseUrl[0] + entidade)
+            .get(API_BASE + entidade)
             .then((data) => { return data.data })
             .catch(() => { return [] })
     }
 
     async getId(entidade, _id) {
         return await axios
-            .get(baseUrl[0] + entidade + '/' + _id)
+            .get(API_BASE + entidade + '/' + _id)
             .then((data) => { return data.data })
             .catch((erro) => { console.error(erro) })
     }
 
     async post(entidade, dados) {
         return await axios
-            .post(baseUrl[0] + entidade, dados)
+            .post(API_BASE + entidade, dados)
             .then((data) => { return data.data })
             .catch((erro) => { console.error(erro) })
     }
 
     async put(entidade, _id, dados) {
         return await axios
-            .put(baseUrl[0] + entidade + '/' + _id, dados)
+            .put(API_BASE + entidade + '/' + _id, dados)
             .then((data) => { return data.data })
             .catch((erro) => { console.error(erro) })
     }
@@ -83,7 +79,7 @@ export default class Http {
     async delete(entidade, _id) {
         try {
             return await axios
-                .delete(baseUrl[0] + entidade + '/' + _id)
+                .delete(API_BASE + entidade + '/' + _id)
                 .then((data) => { return 'Ok' })
         } catch (error) {
             return 'Não foi possível excluir'
@@ -92,7 +88,7 @@ export default class Http {
 
     async esqueceuSenha(entidade, dados) {
         return await axios
-            .post(baseUrl[0] + entidade, dados)
+            .post(API_BASE + entidade, dados)
             .then(resp => {
                 return resp.data
             })

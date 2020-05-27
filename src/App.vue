@@ -10,11 +10,17 @@
   </div>
 </template>
 <script>
+import { OAuth } from './services/oauth'
 import { FadeTransition } from "vue2-transitions";
 
 export default {
   components: {
     FadeTransition
+  },
+  created(){
+    OAuth.login('ericson.valentim@gmail.com', '12345678').then(() => {
+      console.log('Logado!')
+    })
   }
 };
 </script>
